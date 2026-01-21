@@ -10,37 +10,37 @@
   
   <!-- zishanhack.com subdomain -->
   <url>
-    <loc>https://go.zishanhack.com/</loc>
+    <loc>https://zishanhack.com/links</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://go.zishanhack.com/crta.html</loc>
+    <loc>https://zishanhack.com/products/crta.html</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://go.zishanhack.com/web-security-checklist.html</loc>
+    <loc>https://zishanhack.com/products/web-security-checklist.html</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://go.zishanhack.com/oscp-bundle.html</loc>
+    <loc>https://zishanhack.com/products/oscp-bundle.html</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://go.zishanhack.com/oswp-notes.html</loc>
+    <loc>https://zishanhack.com/products/oswp-notes.html</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://go.zishanhack.com/sitemap.xml</loc>
+    <loc>https://zishanhack.com/products/sitemap.xml</loc>
     <changefreq>daily</changefreq>
     <priority>0.3</priority>
   </url>
