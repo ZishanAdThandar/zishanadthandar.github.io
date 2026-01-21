@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Main Domain -->
+  <url>
+    <loc>https://zishanhack.com</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- zishanhack.com subdomain -->
+  <url>
+    <loc>https://go.zishanhack.com/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://go.zishanhack.com/crta.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://go.zishanhack.com/web-security-checklist.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://go.zishanhack.com/oscp-bundle.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://go.zishanhack.com/oswp-notes.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://go.zishanhack.com/sitemap.xml</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <!-- Blog subdomain -->
+  <url>
+    <loc>https://blog.zishanhack.com/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/posts/bugbounty/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/posts/tryhackme/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/posts/vulnhub/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/posts/offsec/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/posts/blog/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/posts/hackthebox/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Blog posts -->
+  <url>
+    <loc>https://blog.zishanhack.com/bug%20bounty/2019/03/13/My-First-Stored-XSS/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/bug%20bounty/2019/04/15/Just-5-Minute-For-my-2nd-Stored-XSS-on-Edmodo/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2023/02/12/popcorn/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2023/03/10/legacy/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2023/03/21/devel/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2023/04/12/lame/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2023/07/28/Imaginary-CTF/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/offsec/2024/01/01/algernon/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/offsec/2024/01/01/authby/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/02/01/attacktivedirectory/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/03/01/blue/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/04/01/crackthehash/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/05/15/kioptrix12/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/05/17/escalate-my-privileges-1/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/05/18/hacklab-vulnix/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/05/20/fristileaks13/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/07/01/kenobi/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/08/01/ffuf/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/09/01/dailybugle/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/09/01/overpass2hacked/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/09/01/owasptop10/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/12/01/theimpossiblechallenge/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/12/01/tutorial/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2024/12/01/vulnversity/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2025/03/12/crta-notes/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2025/11/12/web-security-checklist/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2025/12/15/oswp-notes/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zishanhack.com/2025/12/24/oscp-commands-obsidian/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Portfolio subdomain -->
+  <url>
+    <loc>https://portfolio.zishanhack.com/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://portfolio.zishanhack.com/CV.pdf</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+</urlset>

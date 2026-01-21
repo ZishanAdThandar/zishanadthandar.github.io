@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal - ZishanHack | Terms of Service & Privacy Policy</title>
+    <meta name="description" content="Terms of Service, Privacy Policy, and Refund Policy for ZishanHack">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/svgs/solid/shield-halved.svg">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --success: #10b981;
+            --dark: #0f172a;
+            --darker: #0a0e17;
+            --light: #ffffff;
+            --gray: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navbar - Exactly like index.html */
+        .trust-bar {
+            background: linear-gradient(90deg, #ef4444, #f97316, #f59e0b);
+            color: white;
+            padding: 12px 0;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        
+        .header {
+            position: fixed;
+            top: 46px;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 999;
+            padding: 15px 0;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-brand .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: white;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .nav-brand .logo i {
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        .logo-highlight {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-link:hover,
+        .nav-link:focus {
+            color: var(--light);
+            outline: none;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link:focus::after {
+            width: 100%;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover,
+        .btn-outline:focus {
+            background: var(--primary);
+            color: white;
+            outline: none;
+        }
+        
+        /* Legal Content */
+        .legal-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 140px 20px 60px;
+        }
+        
+        .legal-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        .legal-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .legal-nav a {
+            color: var(--gray);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            font-weight: 600;
+        }
+        
+        .legal-nav a:hover,
+        .legal-nav a.active {
+            color: var(--primary);
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .legal-section {
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        
+        .legal-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.8rem;
+        }
+        
+        .legal-section h3 {
+            color: white;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .legal-section p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .legal-section ul, .legal-section ol {
+            color: var(--gray);
+            margin: 1rem 0 1rem 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .legal-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .highlight-box h4 {
+            color: var(--danger);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-info {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .back-to-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-home:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            padding: 40px 0 20px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .copyright {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-note {
+            color: var(--gray);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .trust-bar {
+                font-size: 13px;
+                padding: 10px 0;
+            }
+            
+            .header {
+                top: 42px;
+                padding: 12px 0;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .legal-container {
+                padding: 120px 15px 40px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .legal-section {
+                padding: 1.5rem;
+            }
+            
+            .legal-nav {
+                gap: 0.5rem;
+            }
+            
+            .legal-nav a {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .legal-container {
+                padding: 100px 15px 30px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .legal-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .legal-nav a {
+                width: 200px;
+                text-align: center;
+            }
+            
+            .legal-section {
+                padding: 1rem;
+            }
+            
+            .legal-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <i class="fas fa-bolt"></i>
+            ⚡ ZishanHack Legal Information • Terms of Service • Privacy Policy • Refund Policy
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <a href="/" class="logo">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>ZISHAN<span class="logo-highlight">HACK</span></span>
+                    </a>
+                </div>
+                
+                <div class="nav-menu">
+                    <a href="/" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
+                    <a href="/#resources" class="nav-link">
+                        <i class="fas fa-box"></i>
+                        Resources
+                    </a>
+                    <a href="#terms" class="nav-link">
+                        <i class="fas fa-file-contract"></i>
+                        Terms
+                    </a>
+                    <a href="#privacy" class="nav-link">
+                        <i class="fas fa-user-shield"></i>
+                        Privacy
+                    </a>
+                </div>
+                
+                <a href="/" class="btn btn-outline">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Home
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Legal Content -->
+    <div class="legal-container">
+        <div class="legal-header">
+            <h1 class="section-title">Legal Information</h1>
+            <p class="section-subtitle">Terms of Service, Privacy Policy, and Refund Policy</p>
+            
+            <div class="legal-nav">
+                <a href="#terms" class="active">Terms of Service</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#refund">Refund Policy</a>
+            </div>
+        </div>
+
+        <!-- Terms of Service -->
+        <section id="terms" class="legal-section">
+            <h2><i class="fas fa-file-contract"></i> Terms of Service</h2>
+            <p><strong>Last Updated:</strong> December 15, 2024</p>
+            
+            <h3>1. Acceptance of Terms</h3>
+            <p>By accessing and using ZishanHack, you accept and agree to be bound by these terms.</p>
+            
+            <h3>2. Description of Service</h3>
+            <p>ZishanHack provides digital cybersecurity resources including study notes, checklists, guides, and educational materials.</p>
+            
+            <h3>3. User Account and Security</h3>
+            <p>You are responsible for maintaining the confidentiality of your account and password.</p>
+            
+            <h3>4. Product License</h3>
+            <p>Upon purchase, you are granted a non-exclusive, non-transferable license for personal use only. You may not:</p>
+            <ul>
+                <li>Distribute, share, or resell the Products</li>
+                <li>Use for commercial training without authorization</li>
+                <li>Reverse engineer any digital content</li>
+                <li>Share your login credentials</li>
+            </ul>
+            
+            <h3>5. Intellectual Property</h3>
+            <p>All Products and content are protected by copyright and intellectual property laws.</p>
+            
+            <h3>6. Prohibited Activities</h3>
+            <p>You agree not to use the Service to violate laws, infringe intellectual property rights, or attempt unauthorized access.</p>
+            
+            <h3>7. Limitation of Liability</h3>
+            <p>ZishanHack shall not be liable for any indirect or consequential damages.</p>
+            
+            <h3>8. Changes to Terms</h3>
+            <p>We reserve the right to modify these terms at any time.</p>
+        </section>
+
+        <!-- Privacy Policy -->
+        <section id="privacy" class="legal-section">
+            <h2><i class="fas fa-user-shield"></i> Privacy Policy</h2>
+            
+            <h3>1. Information We Collect</h3>
+            <p>We collect:</p>
+            <ul>
+                <li>Email address for authentication</li>
+                <li>Product purchases and download history</li>
+                <li>IP address, browser type, device information</li>
+                <li>Support communications</li>
+            </ul>
+            
+            <h3>2. How We Use Your Information</h3>
+            <p>We use your information to:</p>
+            <ul>
+                <li>Provide and maintain the Service</li>
+                <li>Process transactions and deliver Products</li>
+                <li>Send important updates</li>
+                <li>Prevent fraud and unauthorized access</li>
+            </ul>
+            
+            <h3>3. Data Security</h3>
+            <p>We implement appropriate security measures to protect your information.</p>
+            
+            <h3>4. Third-Party Services</h3>
+            <p>We use:</p>
+            <ul>
+                <li>Razorpay for payment processing</li>
+                <li>Cloudflare for security and delivery</li>
+                <li>Brevo for email delivery</li>
+            </ul>
+            
+            <h3>5. Your Rights</h3>
+            <p>You have the right to access, delete, or opt-out of communications.</p>
+            
+            <h3>6. Data Retention</h3>
+            <p>We retain your information while your account is active.</p>
+        </section>
+
+        <!-- Refund Policy -->
+        <section id="refund" class="legal-section">
+            <h2><i class="fas fa-exchange-alt"></i> Refund Policy</h2>
+            
+            <div class="highlight-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> Important Notice</h4>
+                <p><strong>ALL SALES ARE FINAL. NO REFUNDS FOR DIGITAL PRODUCTS.</strong></p>
+                <p>All payments must be made in USD using international cards only.</p>
+            </div>
+            
+            <h3>1. No Refund Policy</h3>
+            <p>ZishanHack does not offer refunds for any purchased Products.</p>
+            
+            <h3>2. Digital Product Nature</h3>
+            <p>Products are delivered instantly. Once downloaded or accessed, no refunds are provided.</p>
+            
+            <h3>3. Payment Terms</h3>
+            <p>All transactions are in USD only. We accept international credit/debit cards only.</p>
+            
+            <h3>4. Before You Purchase</h3>
+            <p>Review product descriptions carefully and ensure your card supports USD payments.</p>
+            
+            <h3>5. Defective Products</h3>
+            <p>We will replace defective files within 7 days of purchase.</p>
+            
+            <h3>6. Technical Support</h3>
+            <p>Contact us at <a href="mailto:support@zishanhack.com" style="color: var(--primary);">support@zishanhack.com</a> for technical issues.</p>
+            
+            <h3>7. Chargeback Policy</h3>
+            <p>Chargebacks will result in account suspension and loss of access to all Products.</p>
+            
+            <h3>8. Satisfaction Guarantee</h3>
+            <p>We stand by the quality of our Products with detailed descriptions and samples.</p>
+            
+            <h3>9. Payment Currency</h3>
+            <p>All purchases must be made in USD. We do not support other currencies.</p>
+        </section>
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h3><i class="fas fa-envelope"></i> Contact Us</h3>
+            <p>For questions about our legal policies:</p>
+            <p><strong>Email:</strong> <a href="mailto:support@zishanhack.com" style="color: var(--primary);">support@zishanhack.com</a></p>
+            <p><strong>Response Time:</strong> 24-48 hours</p>
+            
+            <a href="/" class="back-to-home">
+                <i class="fas fa-home"></i>
+                Back to Home
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 ZishanHack. All rights reserved.</p>
+                <p class="footer-note">
+                    <i class="fas fa-balance-scale"></i>
+                    <a href="/legal.html" style="color: var(--gray); text-decoration: none;">Legal Information</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scroll for anchor links
+            document.querySelectorAll('.legal-nav a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    // Update active nav
+                    document.querySelectorAll('.legal-nav a').forEach(a => a.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    // Scroll to section
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
