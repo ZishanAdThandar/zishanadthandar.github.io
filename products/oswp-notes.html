@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OSWP Exam Notes & Cheatsheet | Wireless Penetration Testing Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="author" content="Zishan Ahamed Thandar">
+  <meta name="description" content="OSWP Exam Notes & Cheatsheet - Wireless penetration testing guide with copy-paste commands for WEP, WPA-PSK, WPA-Enterprise attacks. 90% OFF limited offer.">
+  <meta name="keywords" content="OSWP, wireless security, WiFi hacking, WPA2, WEP, aircrack-ng, hashcat, penetration testing, Offensive Security">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="OSWP Exam Notes & Cheatsheet | Wireless Penetration Testing Guide">
+  <meta property="og:description" content="Complete wireless pentesting guide with ready-to-use commands for OSWP exam and real-world WiFi security assessments.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://zishanhack.com/assets/oswp-og.jpg">
+  <meta property="og:url" content="https://go.zishanhack.com/oswp-notes">
+  
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OSWP Exam Notes & Cheatsheet | 90% OFF">
+  <meta name="twitter:description" content="Wireless pentesting guide with copy-paste commands for WEP, WPA-PSK, and WPA-Enterprise attacks.">
+  <meta name="twitter:image" content="https://zishanhack.com/assets/oswp-twitter.jpg">
+  <meta name="twitter:site" content="@zishanadthandar">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📶</text></svg>">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #111827;
+      --bg-card: #1f2937;
+      --accent-primary: #3b82f6;
+      --accent-secondary: #10b981;
+      --accent-warning: #f59e0b;
+      --accent-danger: #ef4444;
+      --accent-purple: #8b5cf6;
+      --accent-wifi: #06b6d4;
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-muted: #94a3af;
+      --border-light: #374151;
+      --shadow-xl: 0 20px 50px -12px rgba(0, 0, 0, 0.6);
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+        var(--bg-primary);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Back Button */
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-light);
+      background: rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--accent-wifi);
+      border-color: var(--accent-wifi);
+      transform: translateX(-3px);
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 4rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .certification-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, var(--accent-wifi), #0891b2);
+      color: white;
+      padding: 0.75rem 2rem;
+      border-radius: var(--radius-full);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      border: 3px solid rgba(6, 182, 212, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--accent-wifi), var(--accent-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      font-weight: 300;
+    }
+
+    /* Price Section */
+    .price-section {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(59, 130, 246, 0.15));
+      border-radius: var(--radius-lg);
+      padding: 3rem 2rem;
+      margin: 2rem 0;
+      text-align: center;
+      border: 3px solid rgba(6, 182, 212, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .original-price {
+      font-size: 2.5rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+
+    .discount-price {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #10b981;
+      text-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+    }
+
+    .discount-badge {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: var(--radius-full);
+      font-size: 1.5rem;
+      font-weight: 800;
+      animation: pulse 2s infinite;
+      border: 3px solid rgba(239, 68, 68, 0.3);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    /* Primary CTA Button */
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background: linear-gradient(135deg, var(--accent-wifi), var(--accent-primary));
+      color: white;
+      padding: 1.5rem 4rem;
+      border-radius: var(--radius-lg);
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      max-width: 500px;
+      margin: 2rem auto;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 30px 70px -15px rgba(6, 182, 212, 0.5);
+    }
+
+    /* Features Section */
+    .features-section {
+      margin: 5rem 0;
+    }
+
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem;
+      margin-bottom: 3rem;
+      color: white;
+      text-align: center;
+      position: relative;
+      padding-bottom: 1.5rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-wifi), var(--accent-primary));
+      border-radius: var(--radius-full);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent-wifi), var(--accent-primary));
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent-wifi);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--accent-wifi), #0891b2);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 1.8rem;
+      color: white;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .feature-list li::before {
+      content: '✓';
+      color: var(--accent-secondary);
+      font-weight: bold;
+      font-size: 1rem;
+      margin-top: 0.1rem;
+    }
+
+    /* Commands Preview */
+    .commands-preview {
+      background: linear-gradient(135deg, rgba(30, 30, 40, 0.9), rgba(20, 20, 30, 0.9));
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      margin: 4rem 0;
+      border: 2px solid rgba(6, 182, 212, 0.3);
+      font-family: 'JetBrains Mono', monospace;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .commands-preview::before {
+      content: 'COPY-PASTE COMMANDS';
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--accent-wifi);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .preview-header i {
+      color: var(--accent-wifi);
+      font-size: 1.5rem;
+    }
+
+    .code-block {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-left: 4px solid var(--accent-primary);
+      overflow-x: auto;
+    }
+
+    .code-block pre {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .code-comment {
+      color: #6b7280;
+    }
+
+    .code-string {
+      color: #10b981;
+    }
+
+    .code-function {
+      color: #3b82f6;
+    }
+
+    .code-variable {
+      color: #f59e0b;
+    }
+
+    /* Protocols Coverage */
+    .protocols-section {
+      margin: 5rem 0;
+    }
+
+    .protocols-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .protocol-card {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1));
+      border: 2px solid rgba(59, 130, 246, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .protocol-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-wifi);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .protocol-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent-wifi);
+    }
+
+    .protocol-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    /* Tools Coverage */
+    .tools-section {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), rgba(139, 92, 246, 0.05));
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin: 3rem 0;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .tool-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      transition: all 0.3s ease;
+    }
+
+    .tool-item:hover {
+      background: rgba(6, 182, 212, 0.1);
+      border-color: var(--accent-wifi);
+      transform: translateY(-2px);
+    }
+
+    .tool-icon {
+      font-size: 1.2rem;
+      color: var(--accent-wifi);
+    }
+
+    /* Testimonial */
+    .testimonial {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .testimonial::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      font-size: 4rem;
+      color: var(--accent-purple);
+      font-family: Georgia, serif;
+    }
+
+    .testimonial p {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text-primary);
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .testimonial-author img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-purple));
+    }
+
+    /* Guarantee */
+    .guarantee-section {
+      text-align: center;
+      margin: 4rem 0;
+      padding: 3rem;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(34, 197, 94, 0.1));
+      border-radius: var(--radius-lg);
+      border: 2px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .guarantee-icon {
+      font-size: 4rem;
+      color: var(--accent-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 4rem 0 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 4rem;
+    }
+
+    .footer-note {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+
+    .copyright {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem 1rem;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .discount-price {
+        font-size: 2.8rem;
+      }
+      
+      .original-price {
+        font-size: 2rem;
+      }
+      
+      .price-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .protocols-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .cta-button {
+        padding: 1.2rem 2rem;
+        font-size: 1.2rem;
+      }
+      
+      .commands-preview {
+        padding: 2rem 1.5rem;
+      }
+      
+      .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .certification-badge {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.5rem;
+      }
+      
+      .discount-badge {
+        font-size: 1.2rem;
+        padding: 0.8rem 1.5rem;
+      }
+      
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Back to Main Link -->
+    <a href="https://go.zishanhack.com" class="back-button">
+      <i class="fas fa-arrow-left"></i>
+      Back to Main Page
+    </a>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="certification-badge">
+        <i class="fas fa-wifi"></i>
+        Offensive Security Wireless Professional
+      </div>
+      
+      <h1>OSWP Exam Notes & Cheatsheet</h1>
+      <p class="subtitle">Wireless penetration testing guide with copy-paste commands for WEP, WPA-PSK, and WPA-Enterprise attacks</p>
+
+      <!-- Price Section -->
+      <div class="price-section">
+        <div class="price-container">
+          <span class="original-price">$270</span>
+          <span class="discount-price">$27</span>
+          <span class="discount-badge">90% OFF</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 1rem;">
+          <i class="fas fa-bolt"></i> Limited-time offer - Save $243
+        </p>
+      </div>
+
+      <!-- Primary CTA -->
+      <a href="https://zishanhack.com" class="cta-button" onclick="trackPurchase('oswp_notes')">
+        <i class="fas fa-download"></i>
+        Get Instant Access Now - $27
+      </a>
+    </header>
+
+    <!-- Features -->
+    <div class="features-section">
+      <h2 class="section-title">What's Inside the Pack</h2>
+      
+      <div class="features-grid">
+        <!-- Feature 1: Copy-Paste Commands -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-terminal"></i>
+          </div>
+          <h3>Clean Copy-Paste Commands</h3>
+          <ul class="feature-list">
+            <li>Ready-to-use aircrack-ng commands</li>
+            <li>Hashcat cracking workflows</li>
+            <li>wpa_supplicant configurations</li>
+            <li>One-click copy functionality</li>
+            <li>Error-free execution</li>
+            <li>Time-saving during exams</li>
+          </ul>
+        </div>
+        
+        <!-- Feature 2: Attack Workflows -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-broadcast-tower"></i>
+          </div>
+          <h3>Complete Attack Workflows</h3>
+          <ul class="feature-list">
+            <li>WEP cracking methodology</li>
+            <li>WPA-PSK attack chains</li>
+            <li>WPA-Enterprise (WPA-MGT) setup</li>
+            <li>Rogue AP configuration</li>
+            <li>Step-by-step procedures</li>
+            <li>Troubleshooting guides</li>
+          </ul>
+        </div>
+        
+        <!-- Feature 3: Organization -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-clipboard-check"></i>
+          </div>
+          <h3>Exam-Focused Organization</h3>
+          <ul class="feature-list">
+            <li>Standardized file naming</li>
+            <li>One-page quick cheatsheet</li>
+            <li>Proof.txt retrieval checklist</li>
+            <li>Report preparation guide</li>
+            <li>Time management tips</li>
+            <li>Common pitfalls to avoid</li>
+          </ul>
+        </div>
+        
+        <!-- Feature 4: Rogue AP Setup -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-server"></i>
+          </div>
+          <h3>Rogue AP Configuration</h3>
+          <ul class="feature-list">
+            <li>airbase-ng setup scripts</li>
+            <li>NAT configuration snippets</li>
+            <li>DHCP server setup</li>
+            <li>Network bridge creation</li>
+            <li>Enterprise AP simulation</li>
+            <li>Client isolation bypass</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Commands Preview -->
+    <div class="commands-preview">
+      <div class="preview-header">
+        <i class="fas fa-code"></i>
+        <h3 style="color: white; margin: 0;">Sample Copy-Paste Commands</h3>
+      </div>
+      
+      <div class="code-block">
+        <pre>
+<span class="code-comment"># Monitor mode setup</span>
+<span class="code-variable">sudo</span> airmon-ng start wlan0
+<span class="code-variable">sudo</span> airodump-ng wlan0mon
+
+<span class="code-comment"># WEP Attack - Fake authentication</span>
+<span class="code-variable">sudo</span> aireplay-ng --fakeauth 0 -a <span class="code-string">[BSSID]</span> -h <span class="code-string">[CLIENT_MAC]</span> wlan0mon
+<span class="code-variable">sudo</span> aireplay-ng --arpreplay -b <span class="code-string">[BSSID]</span> -h <span class="code-string">[CLIENT_MAC]</span> wlan0mon
+
+<span class="code-comment"># WPA Handshake capture</span>
+<span class="code-variable">sudo</span> airodump-ng -c <span class="code-string">[CHANNEL]</span> --bssid <span class="code-string">[BSSID]</span> -w capture wlan0mon
+<span class="code-variable">sudo</span> aireplay-ng --deauth 10 -a <span class="code-string">[BSSID]</span> -c <span class="code-string">[CLIENT_MAC]</span> wlan0mon
+
+<span class="code-comment"># Hashcat cracking</span>
+<span class="code-variable">hashcat</span> -m 2500 capture.hccapx /usr/share/wordlists/rockyou.txt
+<span class="code-variable">hashcat</span> -m 2500 capture.hccapx --show
+        </pre>
+      </div>
+      
+      <div style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 1rem;">
+        <i class="fas fa-clipboard"></i> Ready to copy and paste during your exam
+      </div>
+    </div>
+
+    <!-- Protocols Coverage -->
+    <div class="protocols-section">
+      <h2 class="section-title">Wireless Protocols Covered</h2>
+      
+      <div class="protocols-grid">
+        <div class="protocol-card">
+          <div class="protocol-icon">🔓</div>
+          <h3>WEP Attacks</h3>
+          <p>Complete WEP cracking methodology with ARP replay, chop-chop, and fragmentation attacks</p>
+        </div>
+        
+        <div class="protocol-card">
+          <div class="protocol-icon">🔐</div>
+          <h3>WPA-PSK</h3>
+          <p>Handshake capture, PMKID attacks, wordlist cracking, and optimized hashcat commands</p>
+        </div>
+        
+        <div class="protocol-card">
+          <div class="protocol-icon">🏢</div>
+          <h3>WPA-Enterprise</h3>
+          <p>Enterprise setup, certificate attacks, EAP methods, and rogue access point configuration</p>
+        </div>
+        
+        <div class="protocol-card">
+          <div class="protocol-icon">📋</div>
+          <h3>Exam Checklist</h3>
+          <p>Complete workflow checklist from reconnaissance to proof.txt retrieval and reporting</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tools Coverage -->
+    <div class="tools-section">
+      <h2 class="section-title">Tools & Software Covered</h2>
+      <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+        Master the essential wireless pentesting tools with practical examples
+      </p>
+      
+      <div class="tools-grid">
+        <div class="tool-item">
+          <div class="tool-icon"><i class="fas fa-wifi"></i></div>
+          <span>aircrack-ng Suite</span>
+        </div>
+        
+        <div class="tool-item">
+          <div class="tool-icon"><i class="fas fa-hammer"></i></div>
+          <span>hashcat</span>
+        </div>
+        
+        <div class="tool-item">
+          <div class="tool-icon"><i class="fas fa-shield-alt"></i></div>
+          <span>wpa_supplicant</span>
+        </div>
+        
+        <div class="tool-item">
+          <div class="tool-icon"><i class="fas fa-server"></i></div>
+          <span>airbase-ng</span>
+        </div>
+        
+        <div class="tool-item">
+          <div class="tool-icon"><i class="fas fa-network-wired"></i></div>
+          <span>hostapd</span>
+        </div>
+        
+        <div class="tool-item">
+          <div class="tool-icon"><i class="fas fa-desktop"></i></div>
+          <span>Wireshark</span>
+        </div>
+        
+        <div class="tool-item">
+          <div class="tool-icon"><i class="fas fa-code"></i></div>
+          <span>Custom Scripts</span>
+        </div>
+        
+        <div class="tool-item">
+          <div class="tool-icon"><i class="fas fa-terminal"></i></div>
+          <span>Linux Networking</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial -->
+    <div class="testimonial">
+      <p>"The OSWP cheatsheet saved me during the exam. Having all commands organized and ready to copy-paste was invaluable. The WPA-Enterprise section was particularly helpful - it covered exactly what was needed for the exam scenarios. Passed on first attempt!"</p>
+      <div class="testimonial-author">
+        <div style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-purple)); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+          KW
+        </div>
+        <div>
+          <strong>Wireless Security Specialist</strong><br>
+          <span style="color: var(--text-muted); font-size: 0.9rem;">OSWP Certified, Security Consultant</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guarantee -->
+    <div class="guarantee-section">
+      <div class="guarantee-icon">
+        <i class="fas fa-shield-check"></i>
+      </div>
+      <h3 style="margin-bottom: 1rem; color: white; font-size: 1.8rem;">30-Day Money-Back Guarantee</h3>
+      <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 2rem; font-size: 1.1rem;">
+        If these notes don't help you pass OSWP or significantly improve your wireless pentesting skills within 30 days, 
+        I'll refund 100% of your payment. No questions asked.
+      </p>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; color: var(--text-muted); flex-wrap: wrap;">
+        <div><i class="fas fa-lock"></i> Secure Payment</div>
+        <div><i class="fas fa-download"></i> Instant PDF Download</div>
+        <div><i class="fas fa-sync-alt"></i> Free Updates</div>
+      </div>
+    </div>
+
+    <!-- Final CTA -->
+    <div class="price-section" style="margin-top: 4rem;">
+      <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: white; position: relative; z-index: 1;">
+        Master Wireless Pentesting Today
+      </h2>
+      <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.2rem; position: relative; z-index: 1;">
+        Get the complete OSWP cheatsheet with copy-paste commands and attack workflows
+      </p>
+      
+      <div class="price-container">
+        <span class="original-price">$270</span>
+        <span class="discount-price">$27</span>
+        <span class="discount-badge">90% OFF</span>
+      </div>
+      
+      <a href="https://zishanhack.com" class="cta-button" onclick="trackPurchase('oswp_notes_final')" style="position: relative; z-index: 1;">
+        <i class="fas fa-wifi"></i>
+        Get OSWP Notes Now - Only $27
+      </a>
+      
+      <p style="font-size: 1rem; color: var(--text-muted); margin-top: 1.5rem; position: relative; z-index: 1;">
+        <i class="fas fa-file-pdf"></i> PDF format · Mobile ready · Print friendly
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p class="footer-note">
+        <strong>Note:</strong> This is a collection of my personal study notes and not official Offensive Security material. 
+        I am the copyright owner. These notes are designed to supplement your OSWP preparation journey.
+      </p>
+      <p class="copyright">
+        © 2026 Zishan Ahamed Thandar. All rights reserved.<br>
+        Professional Cybersecurity Resources at <a href="https://zishanhack.com" style="color: var(--accent-wifi); text-decoration: none;">zishanhack.com</a>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // Purchase Tracking
+    function trackPurchase(product) {
+      console.log(`Purchase attempt: ${product}`);
+      // Add your analytics tracking here
+      // gtag('event', 'purchase_click', { 'product': product, 'value': 27 });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add scroll animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeIn 0.8s ease forwards';
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      // Observe elements for animation
+      document.querySelectorAll('.feature-card, .protocol-card, .tool-item').forEach(el => {
+        observer.observe(el);
+      });
+      
+      // Add hover effects
+      document.querySelectorAll('.feature-card, .protocol-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.transition = 'all 0.3s ease';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

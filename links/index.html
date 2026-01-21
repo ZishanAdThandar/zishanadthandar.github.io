@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Zishan | Red Teamer & Bug Hunter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="author" content="Zishan Ahamed Thandar">
+  <meta name="description" content="Red Teamer · Bug Hunter · Security Expert | Premium Pentesting Resources, Tools & Consulting">
+  <meta name="keywords" content="red team, bug bounty, web penetration testing, API security, cybersecurity expert, OSCP notes">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Zishan | Red Teamer & Bug Hunter">
+  <meta property="og:description" content="Premium security resources, pentesting tools, and professional security consulting">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://zishanhack.com/assets/og-image.jpg">
+  <meta property="og:url" content="https://go.zishanhack.com">
+  
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Zishan | Red Teamer & Bug Hunter">
+  <meta name="twitter:description" content="Premium cybersecurity resources and professional penetration testing services">
+  <meta name="twitter:image" content="https://zishanhack.com/assets/twitter-card.jpg">
+  <meta name="twitter:site" content="@zishanadthandar">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+  
+  <!-- Fonts with Preload -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  </noscript>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <style>
+    :root {
+      /* Clean Professional Color Palette */
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #111827;
+      --bg-card: #1f2937;
+      --accent-primary: #3b82f6;
+      --accent-secondary: #10b981;
+      --accent-warning: #f59e0b;
+      --accent-purple: #8b5cf6;
+      --accent-telegram: #0088cc;
+      --accent-discord: #5865f2;
+      --accent-whatsapp: #25d366;
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-muted: #94a3af;
+      --border-light: #374151;
+      --border-dark: #1f2937;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      --shadow-xl: 0 20px 50px -12px rgba(0, 0, 0, 0.6);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-xl: 20px;
+      --radius-full: 9999px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Background Gradient */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-top: 2rem;
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--accent-primary);
+      font-size: 1.2rem;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.3s ease;
+    }
+
+    .scroll-text {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    .profile-image {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      box-shadow: var(--shadow-xl);
+      border: 3px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-image i {
+      font-size: 2.5rem;
+      color: white;
+    }
+
+    h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Role Badges */
+    .role-badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--accent-primary);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .role-badge i {
+      font-size: 0.8rem;
+    }
+
+    /* Credibility Badges */
+    .credibility-badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .credibility-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 500;
+      border: 1px solid;
+    }
+
+    .badge-trusted {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--accent-warning);
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    .badge-premium {
+      background: rgba(139, 92, 246, 0.1);
+      color: var(--accent-purple);
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    .credibility-badge i {
+      font-size: 0.75rem;
+    }
+
+    .domain-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent-secondary);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 1rem;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 2.5rem 0 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid rgba(59, 130, 246, 0.2);
+    }
+
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Link Cards */
+    .links-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+    }
+
+    .link-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+      min-height: 70px;
+    }
+
+    .link-card:nth-child(1) { animation-delay: 0.1s; }
+    .link-card:nth-child(2) { animation-delay: 0.2s; }
+    .link-card:nth-child(3) { animation-delay: 0.3s; }
+    .link-card:nth-child(4) { animation-delay: 0.4s; }
+    .link-card:nth-child(5) { animation-delay: 0.5s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .link-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(16, 185, 129, 0.05));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .link-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-primary);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .link-card:hover::before {
+      opacity: 1;
+    }
+
+    .link-card.premium {
+      border-left: 4px solid var(--accent-warning);
+    }
+
+    .link-card.obsidian {
+      border-left: 4px solid var(--accent-purple);
+    }
+
+    /* Community Card Colors */
+    .link-card.community.discord:hover {
+      border-color: var(--accent-discord);
+      box-shadow: var(--shadow-xl), 0 0 20px rgba(88, 101, 242, 0.2);
+    }
+
+    .link-card.community.telegram:hover {
+      border-color: var(--accent-telegram);
+      box-shadow: var(--shadow-xl), 0 0 20px rgba(0, 136, 204, 0.2);
+    }
+
+    .link-card.community.whatsapp:hover {
+      border-color: var(--accent-whatsapp);
+      box-shadow: var(--shadow-xl), 0 0 20px rgba(37, 211, 102, 0.2);
+    }
+
+    .link-icon {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .link-card.obsidian .link-icon {
+      background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
+    }
+
+    .link-card.community.discord .link-icon {
+      background: linear-gradient(135deg, var(--accent-discord), #4752c4);
+    }
+
+    .link-card.community.telegram .link-icon {
+      background: linear-gradient(135deg, var(--accent-telegram), #0077b5);
+    }
+
+    .link-card.community.whatsapp .link-icon {
+      background: linear-gradient(135deg, var(--accent-whatsapp), #128c7e);
+    }
+
+    .link-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .link-title {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .link-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .discount-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .link-arrow {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .link-card:hover .link-arrow {
+      transform: translateX(4px);
+      color: var(--accent-primary);
+    }
+
+    .link-card.community.discord:hover .link-arrow {
+      color: var(--accent-discord);
+    }
+
+    .link-card.community.telegram:hover .link-arrow {
+      color: var(--accent-telegram);
+    }
+
+    .link-card.community.whatsapp:hover .link-arrow {
+      color: var(--accent-whatsapp);
+    }
+
+    /* Email Button */
+    .email-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-lg);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin: 1.5rem auto;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      max-width: 300px;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+      animation-delay: 0.6s;
+    }
+
+    .email-button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    /* Social Links */
+    .social-section {
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .social-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .social-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+      animation-delay: 0.7s;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      transform: translateY(-2px);
+      color: var(--accent-primary);
+      border-color: var(--accent-primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 0 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+      animation-delay: 0.8s;
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .domain-link {
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .domain-link:hover {
+      color: var(--accent-secondary);
+      text-decoration: underline;
+    }
+
+    .copyright {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.7;
+      margin-top: 0.5rem;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .container {
+        max-width: 100%;
+        padding: 0.5in;
+      }
+      .link-card {
+        border: 1px solid #ccc !important;
+        break-inside: avoid;
+        color: black !important;
+      }
+      .social-section, .scroll-indicator {
+        display: none;
+      }
+      .email-button {
+        background: #333 !important;
+        color: white !important;
+        -webkit-print-color-adjust: exact;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      .header {
+        min-height: 60vh;
+        padding-top: 1rem;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      .link-card {
+        padding: 1rem;
+        min-height: 65px;
+      }
+      
+      .link-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        font-size: 1rem;
+      }
+      
+      .role-badge, .credibility-badge {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .role-badges, .credibility-badges {
+        gap: 0.4rem;
+      }
+      
+      .role-badge, .credibility-badge {
+        font-size: 0.7rem;
+        padding: 0.35rem 0.7rem;
+      }
+      
+      .section-header {
+        margin: 2rem 0 1rem;
+      }
+      
+      .section-title {
+        font-size: 1rem;
+      }
+      
+      .scroll-indicator {
+        bottom: 0.5rem;
+      }
+      
+      .social-link {
+        width: 44px;
+        height: 44px;
+      }
+      
+      .link-card {
+        min-height: 60px;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      
+      .link-card, .email-button, .social-grid, footer {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Main Content -->
+  <div class="container">
+    
+    <!-- Header with Scroll Indicator -->
+    <header class="header">
+      <div class="profile-image">
+        <i class="fas fa-user-secret"></i>
+      </div>
+      
+      <h1>ZISHAN AHAMED THANDAR</h1>
+      
+      <!-- Role Badges -->
+      <div class="role-badges">
+        <span class="role-badge">
+          <i class="fas fa-bug"></i> Red Teamer
+        </span>
+        <span class="role-badge">
+          <i class="fas fa-search-dollar"></i> Bug Hunter
+        </span>
+        <span class="role-badge">
+          <i class="fas fa-calendar-check"></i> since 2018
+        </span>
+      </div>
+      
+      <!-- Credibility Badges -->
+      <div class="credibility-badges">
+        <span class="credibility-badge badge-trusted">
+          <i class="fas fa-shield-alt"></i> Trusted by Professionals
+        </span>
+        <span class="credibility-badge badge-premium">
+          <i class="fas fa-crown"></i> Premium Resources
+        </span>
+      </div>
+      
+      <div class="domain-badge">
+        <i class="fas fa-external-link-alt"></i>
+        go.zishanhack.com
+      </div>
+      
+      <!-- Scroll Down Indicator -->
+      <div class="scroll-indicator" onclick="scrollToContent()">
+        <div class="scroll-text">Scroll to explore</div>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </header>
+
+    <!-- Premium Resources -->
+    <div class="section-header">
+      <div class="section-icon">
+        <i class="fas fa-book"></i>
+      </div>
+      <h2 class="section-title">Premium Security Resources</h2>
+    </div>
+    
+    <div class="links-grid">
+      <!-- OSCP Obsidian Notes -->
+      <a href="https://zishanhack.com" target="_blank" rel="noopener noreferrer" class="link-card premium obsidian">
+        <div class="link-icon">
+          <i class="fas fa-bookmark"></i>
+        </div>
+        <div class="link-content">
+          <div class="link-title">
+            OSCP Obsidian Notes
+            <span class="discount-badge">90% OFF</span>
+          </div>
+          <p class="link-desc">
+            Complete Obsidian vault with organized OSCP notes, methodologies, and exam prep
+          </p>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-up-right-from-square"></i>
+        </div>
+      </a>
+
+      <!-- Bug Bounty Checklist -->
+      <a href="https://zishanhack.com" target="_blank" rel="noopener noreferrer" class="link-card premium">
+        <div class="link-icon">
+          <i class="fas fa-clipboard-check"></i>
+        </div>
+        <div class="link-content">
+          <div class="link-title">
+            Bug Bounty Web Security Checklist
+            <span class="discount-badge">90% OFF</span>
+          </div>
+          <p class="link-desc">
+            Comprehensive checklist for OWASP Top 10, business logic flaws, and advanced web vulnerabilities
+          </p>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-up-right-from-square"></i>
+        </div>
+      </a>
+
+      <!-- OSWP Notes -->
+      <a href="https://zishanhack.com" target="_blank" rel="noopener noreferrer" class="link-card premium">
+        <div class="link-icon">
+          <i class="fas fa-wifi"></i>
+        </div>
+        <div class="link-content">
+          <div class="link-title">
+            OSWP Wireless Security Notes
+            <span class="discount-badge">90% OFF</span>
+          </div>
+          <p class="link-desc">
+            Complete wireless & Wi-Fi exploitation guide with lab setup and practical examples
+          </p>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-up-right-from-square"></i>
+        </div>
+      </a>
+
+      <!-- CRTA Notes -->
+      <a href="https://zishanhack.com" target="_blank" rel="noopener noreferrer" class="link-card premium">
+        <div class="link-icon">
+          <i class="fas fa-user-secret"></i>
+        </div>
+        <div class="link-content">
+          <div class="link-title">
+            CRTA Red Team Notes
+            <span class="discount-badge">90% OFF</span>
+          </div>
+          <p class="link-desc">
+            Advanced red teaming techniques, Active Directory attacks, and infrastructure penetration
+          </p>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-up-right-from-square"></i>
+        </div>
+      </a>
+    </div>
+
+    <!-- Professional Services -->
+    <div class="section-header">
+      <div class="section-icon">
+        <i class="fas fa-briefcase"></i>
+      </div>
+      <h2 class="section-title">Professional Services</h2>
+    </div>
+    
+    <div class="links-grid">
+      <!-- Pentesting Services -->
+      <a href="mailto:advisory@zishanhack.com?subject=Pentesting%20Inquiry&body=Hi%20Zishan%2C%0A%0AI'm%20interested%20in%20discussing%20a%20security%20assessment%20for%3A" class="link-card">
+        <div class="link-icon">
+          <i class="fas fa-search"></i>
+        </div>
+        <div class="link-content">
+          <div class="link-title">Web & API Penetration Testing</div>
+          <p class="link-desc">
+            Professional security assessments for applications, APIs, and infrastructure
+          </p>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-envelope"></i>
+        </div>
+      </a>
+
+      <!-- Security Consulting -->
+      <a href="mailto:advisory@zishanhack.com?subject=Security%20Consulting&body=Hi%20Zishan%2C%0A%0AI'd%20like%20to%20discuss%20security%20consulting%20services%3A" class="link-card">
+        <div class="link-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="link-content">
+          <div class="link-title">Security Architecture Review</div>
+          <p class="link-desc">
+            Expert review of your security architecture and strategic security planning
+          </p>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-envelope"></i>
+        </div>
+      </a>
+
+      <!-- Mentorship -->
+      <a href="mailto:advisory@zishanhack.com?subject=Mentorship%20Inquiry&body=Hi%20Zishan%2C%0A%0AI'm%20interested%20in%20your%20mentorship%20program%20for%3A" class="link-card">
+        <div class="link-icon">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <div class="link-content">
+          <div class="link-title">1:1 Security Mentorship</div>
+          <p class="link-desc">
+            Personalized coaching for bug bounty, red teaming, and career growth
+          </p>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-envelope"></i>
+        </div>
+      </a>
+
+      <!-- Email Button -->
+      <a href="mailto:advisory@zishanhack.com" class="email-button">
+        <i class="fas fa-paper-plane"></i>
+        advisory@zishanhack.com
+      </a>
+    </div>
+
+    <!-- Portfolio & Tools -->
+    <div class="section-header">
+      <div class="section-icon">
+        <i class="fas fa-toolbox"></i>
+      </div>
+      <h2 class="section-title">Portfolio & Tools</h2>
+    </div>
+    
+    <div class="links-grid">
+      <!-- Portfolio -->
+      <a href="https://portfolio.zishanhack.com" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-icon">
+          <i class="fas fa-globe"></i>
+        </div>
+        <div class="link-content">
+          <div class="link-title">Professional Portfolio</div>
+          <p class="link-desc">
+            Complete profile with case studies, Hall of Fame mentions, and testimonials
+          </p>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-up-right-from-square"></i>
+        </div>
+      </a>
+
+      <!-- Resume -->
+      <a href="https://portfolio.zishanhack.com/CV.pdf" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-icon">
+          <i class="fas fa-file-pdf"></i>
+        </div>
+        <div class="link-content">
+          <div class="link-title">Download Resume (PDF)</div>
+          <p class="link-desc">
+            6+ years in penetration testing, bug bounty programs, and offensive security
+          </p>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-up-right-from-square"></i>
+        </div>
+      </a>
+
+      <!-- Community Blog -->
+      <a href="https://blog.zishanhack.com" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-icon">
+          <i class="fas fa-blog"></i>
+        </div>
+        <div class="link-content">
+          <div class="link-title">Security Blog & Writeups</div>
+          <p class="link-desc">
+            Technical articles, bug bounty writeups, and security research
+          </p>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-up-right-from-square"></i>
+        </div>
+      </a>
+    </div>
+
+    <!-- Security Tools & Extensions -->
+    <div class="section-header">
+      <div class="section-icon">
+        <i class="fas fa-code"></i>
+      </div>
+      <h2 class="section-title">Security Tools & Extensions</h2>
+    </div>
+    
+    <div class="links-grid">
+      <!-- WebsiteDorkerPro PyPI -->
+      <a href="https://pypi.org/project/website-dorker-pro/" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-icon">
+          <i class="fab fa-python"></i>
+        </div>
+        <div class="link-content">
+          <div class="link-title">WebsiteDorkerPro (PyPI)</div>
+          <p class="link-desc">
+            Install the OSINT tool via pip for your automation workflows
+          </p>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-up-right-from-square"></i>
+        </div>
+      </a>
+
+      <!-- Hackify -->
+      <a href="https://github.com/ZishanAdThandar/hackify" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-icon">
+          <i class="fas fa-terminal"></i>
+        </div>
+        <div class="link-content">
+          <div class="link-title">Hackify (Bash Toolkit)</div>
+          <p class="link-desc">
+            One-command setup of common pentesting tools and wordlists
+          </p>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-up-right-from-square"></i>
+        </div>
+      </a>
+
+      <!-- Hacker Proxy Pro Firefox -->
+      <a href="https://addons.mozilla.org/en-US/firefox/addon/hackerproxypro/" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-icon">
+          <i class="fab fa-firefox"></i>
+        </div>
+        <div class="link-content">
+          <div class="link-title">Hacker Proxy Pro (Firefox)</div>
+          <p class="link-desc">
+            One-click Burp / TOR proxy toggle extension for Firefox
+          </p>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-up-right-from-square"></i>
+        </div>
+      </a>
+
+      <!-- CyberTerminus Theme -->
+      <a href="https://addons.mozilla.org/en-US/firefox/addon/zishanadthandar-cyberterminus/" target="_blank" rel="noopener noreferrer" class="link-card">
+        <div class="link-icon">
+          <i class="fas fa-palette"></i>
+        </div>
+        <div class="link-content">
+          <div class="link-title">CyberTerminus Firefox Theme</div>
+          <p class="link-desc">
+            Dark, neon-highlighted theme inspired by terminals and cyberpunk
+          </p>
+        </div>
+        <div class="link-arrow">
+          <i class="fas fa-arrow-up-right-from-square"></i>
+        </div>
+      </a>
+    </div>
+
+    <!-- Community & Support -->
+    <div class="social-section">
+      <div class="social-title">Community & Support</div>
+      <div class="social-grid">
+        <a href="https://discord.gg/T47v67eVT4" target="_blank" rel="noopener noreferrer" class="social-link">
+          <i class="fab fa-discord"></i>
+        </a>
+        <a href="https://t.me/BugCrowd" target="_blank" rel="noopener noreferrer" class="social-link">
+          <i class="fab fa-telegram"></i>
+        </a>
+        <a href="https://chat.whatsapp.com/GR2RD11phmy7mTWlGiALNE" target="_blank" rel="noopener noreferrer" class="social-link">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Social Links -->
+    <div class="social-section">
+      <div class="social-title">Connect With Me</div>
+      <div class="social-grid">
+        <a href="https://github.com/ZishanAdThandar" target="_blank" rel="noopener noreferrer" class="social-link">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com/in/ZishanAdThandar" target="_blank" rel="noopener noreferrer" class="social-link">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/ZishanAdThandar" target="_blank" rel="noopener noreferrer" class="social-link">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://app.hackthebox.com/profile/4477" target="_blank" rel="noopener noreferrer" class="social-link">
+          <i class="fas fa-cube"></i>
+        </a>
+        <a href="https://tryhackme.com/p/ZishanAdThandar" target="_blank" rel="noopener noreferrer" class="social-link">
+          <i class="fas fa-terminal"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p class="footer-text">
+        Professional Cybersecurity Services & Premium Resources at 
+        <a href="https://go.zishanhack.com" class="domain-link" target="_blank" rel="noopener noreferrer">go.zishanhack.com</a>
+      </p>
+      <p class="copyright">© 2026 Zishan Ahamed Thandar. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Google Analytics (Uncomment and add your ID)
+    /*
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YOURID');
+    */
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Scroll to content function
+      window.scrollToContent = function() {
+        const firstSection = document.querySelector('.section-header');
+        if (firstSection) {
+          firstSection.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        }
+      };
+
+      // Scroll indicator visibility
+      const scrollIndicator = document.querySelector('.scroll-indicator');
+      if (scrollIndicator) {
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 100) {
+            scrollIndicator.style.opacity = '0';
+            scrollIndicator.style.pointerEvents = 'none';
+          } else {
+            scrollIndicator.style.opacity = '1';
+            scrollIndicator.style.pointerEvents = 'auto';
+          }
+        });
+      }
+
+      // Animate elements on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+          }
+        });
+      }, observerOptions);
+
+      // Observe all animated elements
+      document.querySelectorAll('.link-card, .email-button, .social-grid, footer').forEach(element => {
+        observer.observe(element);
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop - 20,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // Link click tracking (optional)
+      document.querySelectorAll('a[target="_blank"]').forEach(link => {
+        link.addEventListener('click', function() {
+          console.log('External link clicked:', this.href);
+          // Add analytics tracking here
+        });
+      });
+
+      // Add loading class for CSS
+      document.body.classList.add('loaded');
+    });
+
+    // Handle font loading
+    if ('fonts' in document) {
+      document.fonts.ready.then(() => {
+        document.body.classList.add('fonts-loaded');
+      });
+    }
+  </script>
+</body>
+</html>

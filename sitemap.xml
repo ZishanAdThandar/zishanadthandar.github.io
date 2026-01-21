@@ -259,13 +259,13 @@
   
   <!-- Portfolio subdomain -->
   <url>
-    <loc>https://portfolio.zishanhack.com/</loc>
+    <loc>https://zishanhack.com/about/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://portfolio.zishanhack.com/CV.pdf</loc>
+    <loc>https://zishanhack.com/about/CV.pdf</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
