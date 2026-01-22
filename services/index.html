@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zishan Security | Enterprise Cybersecurity & Penetration Testing</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Enterprise-grade cybersecurity consulting, penetration testing, incident response, and threat intelligence. Manual, attacker-mindset security assessments for enterprises.">
+    <meta name="keywords" content="penetration testing, cybersecurity consulting, incident response, threat intelligence, security assessment, red team, SOC services">
+    <meta name="author" content="Zishan Security">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Zishan Security | Cybersecurity Consulting & Penetration Testing">
+    <meta property="og:description" content="Enterprise cybersecurity services including incident response, threat intelligence, and penetration testing.">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ===== PROFESSIONAL CYBERSECURITY THEME ===== */
+        :root {
+            --primary-dark: #0a0f23;
+            --secondary-dark: #121733;
+            --accent-primary: #3b82f6;
+            --accent-primary-dark: #2563eb;
+            --accent-secondary: #0ea5e9;
+            --accent-danger: #ef4444;
+            --accent-success: #10b981;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #2a315a;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #0ea5e9 100%);
+            --gradient-dark: linear-gradient(135deg, #1e3a8a 0%, #0c4a6e 100%);
+            --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.3);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 8px;
+            --border-radius-lg: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+            scroll-margin-top: 80px;
+        }
+
+        /* Typography - Improved font sizing */
+        h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 1.0625rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .lead {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--accent-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation - FIXED NAVBAR BUTTON */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(10, 15, 35, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            padding: 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            font-size: 1.6rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a:not(.nav-btn) {
+            color: var(--text-muted);
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+            font-size: 0.9375rem;
+            white-space: nowrap;
+        }
+
+        .nav-links a:not(.nav-btn):hover {
+            color: var(--accent-primary);
+        }
+
+        .nav-links a.nav-active {
+            color: var(--accent-primary);
+        }
+
+        .nav-links a.nav-active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-primary);
+        }
+
+        /* FIXED NAVBAR BUTTON STYLING - IMPROVED */
+        .nav-btn {
+            padding: 0.75rem 1.5rem !important;
+            background: var(--gradient-primary) !important;
+            border-radius: var(--border-radius) !important;
+            color: white !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            transition: var(--transition) !important;
+            font-size: 0.875rem !important;
+            white-space: nowrap !important;
+            border: none !important;
+            cursor: pointer !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            box-shadow: var(--shadow-sm) !important;
+            margin-left: 1.5rem !important;
+            line-height: 1 !important;
+            height: auto !important;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: var(--shadow-md) !important;
+            background: linear-gradient(135deg, var(--accent-primary-dark) 0%, #0284c7 100%) !important;
+        }
+
+        /* Buttons - Improved visibility */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 1.75rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            background: linear-gradient(135deg, var(--accent-primary-dark) 0%, #0284c7 100%);
+        }
+
+        .btn-danger {
+            background: var(--gradient-danger);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-primary);
+            border: 2px solid var(--accent-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-large {
+            padding: 1rem 2.25rem;
+            font-size: 1.0625rem;
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 10rem 0 5rem;
+            background: radial-gradient(circle at center, rgba(59, 130, 246, 0.15), transparent 70%);
+            position: relative;
+            overflow: hidden;
+            scroll-margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-primary);
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        /* Trust Section */
+        .trust {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .trust-box {
+            background: var(--card-bg);
+            padding: 1.5rem 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .trust-box:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: var(--shadow-md);
+        }
+
+        .trust-box div:first-child {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .trust-box div:last-child {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.125rem;
+            line-height: 1.6;
+        }
+
+        /* Cards - Improved card styling */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-icon {
+            font-size: 2.25rem;
+            margin-bottom: 1.25rem;
+            display: inline-block;
+        }
+
+        .card-icon.security { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-icon.threat { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-icon.incident { background: var(--gradient-danger); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-icon.soc { background: linear-gradient(135deg, #10b981 0%, #059669 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-icon.compliance { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-icon.cloud { background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-icon.fintech { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-icon.healthcare { background: linear-gradient(135deg, #10b981 0%, #047857 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-icon.tech { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .card-content {
+            flex: 1;
+        }
+
+        .card-content p {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .card-footer .btn {
+            padding: 0.625rem 1.25rem;
+            font-size: 0.875rem;
+        }
+
+        /* Process Section */
+        .steps {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1.5rem;
+            align-items: start;
+            padding: 1.75rem;
+            background: var(--card-bg);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .step:hover {
+            transform: translateX(6px);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .step span {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .step h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step p {
+            font-size: 0.9375rem;
+            margin-bottom: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-dark);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233b82f6' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Emergency Section */
+        .emergency-section {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .emergency-section h3 {
+            color: #ef4444;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .emergency-section p {
+            font-size: 1.0625rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Contact Form */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            margin-bottom: 1.25rem;
+            padding: 0.875rem;
+            background: rgba(31, 41, 55, 0.7);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+            transition: var(--transition);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+            background: rgba(31, 41, 55, 0.9);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        select {
+            color: var(--text-muted);
+        }
+
+        select option {
+            background: var(--primary-dark);
+            color: var(--text-primary);
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-dark);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-heading {
+            font-size: 1.125rem;
+            margin-bottom: 1.25rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9375rem;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            font-size: 0.8125rem;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design - UPDATED FOR NAVBAR */
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 1.75rem;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .nav-btn {
+                padding: 0.625rem 1rem !important;
+                font-size: 0.8125rem !important;
+                margin-left: 1rem !important;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+            
+            /* Mobile menu button */
+            .mobile-menu-btn {
+                display: block;
+                background: transparent;
+                border: none;
+                color: var(--text-muted);
+                font-size: 1.5rem;
+                cursor: pointer;
+                padding: 0.5rem;
+            }
+            
+            .mobile-menu-btn:hover {
+                color: var(--accent-primary);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2.25rem;
+            }
+            
+            h2 {
+                font-size: 1.875rem;
+            }
+            
+            section {
+                padding: 3rem 0;
+                scroll-margin-top: 80px;
+            }
+            
+            .hero {
+                padding: 8rem 0 4rem;
+                scroll-margin-top: 80px;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            
+            .hero-actions .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .trust {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            
+            .step {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .step span {
+                width: 40px;
+                height: 40px;
+                font-size: 1.125rem;
+            }
+            
+            .emergency-section {
+                padding: 2rem;
+                margin: 2rem 0;
+            }
+            
+            form {
+                padding: 2rem;
+            }
+            
+            .card {
+                padding: 1.75rem;
+            }
+            
+            .btn-large {
+                padding: 0.875rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            h3 {
+                font-size: 1.25rem;
+            }
+            
+            .container {
+                padding: 0 1.25rem;
+            }
+            
+            .hero {
+                padding: 7rem 0 3rem;
+            }
+            
+            .trust {
+                grid-template-columns: 1fr;
+            }
+            
+            .lead {
+                font-size: 1.0625rem;
+                padding: 0 0.5rem;
+            }
+            
+            .section-sub {
+                font-size: 1rem;
+                padding: 0 0.5rem;
+            }
+            
+            .hero-actions .btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9375rem;
+            }
+            
+            form {
+                padding: 1.5rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .emergency-section {
+                padding: 1.5rem;
+            }
+            
+            .nav-inner {
+                height: 70px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            h1 {
+                font-size: 1.875rem;
+            }
+            
+            h2 {
+                font-size: 1.625rem;
+            }
+            
+            .hero-tag {
+                font-size: 0.75rem;
+                padding: 0.375rem 1rem;
+            }
+            
+            .btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR - WITH FIXED BUTTON -->
+    <div class="navbar">
+        <div class="container nav-inner">
+            <a href="#hero" class="brand">
+                <span class="brand-icon">🛡️</span>
+                ZISHAN SECURITY
+            </a>
+            <div class="nav-links">
+                <a href="#services" class="nav-active">Services</a>
+                <a href="#process">Process</a>
+                <a href="#industries">Industries</a>
+                <a href="#contact">Contact</a>
+                <a href="#contact" class="nav-btn">Professional Assessment</a>
+            </div>
+            <!-- Mobile menu button (hidden by default) -->
+            <button class="mobile-menu-btn" style="display: none;">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-tag">🔐 Enterprise Cybersecurity Specialists</span>
+                <h1>Stop Attacks Before They Impact Your Business</h1>
+                <p class="lead">
+                    Enterprise-grade cybersecurity consulting, penetration testing, incident response,
+                    and threat intelligence services. Manual, attacker-mindset security assessments
+                    for serious companies. Confidential. Legal. Actionable.
+                </p>
+                
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary btn-large">Request Professional Consultation</a>
+                    <a href="#emergency" class="btn btn-danger btn-large">🚨 Emergency Incident Response</a>
+                </div>
+
+                <div class="trust">
+                    <div class="trust-box">
+                        <div>✅</div>
+                        <div>Manual Testing Only</div>
+                    </div>
+                    <div class="trust-box">
+                        <div>📄</div>
+                        <div>NDA Protected</div>
+                    </div>
+                    <div class="trust-box">
+                        <div>🚀</div>
+                        <div>24/7 Response</div>
+                    </div>
+                    <div class="trust-box">
+                        <div>🏢</div>
+                        <div>Enterprise Focus</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EMERGENCY SECTION -->
+    <section id="emergency">
+        <div class="container">
+            <div class="emergency-section">
+                <h3>🚨 Active Security Incident?</h3>
+                <p>
+                    Experiencing a breach, ransomware, or active cyber attack? Our Incident Response team monitors email 24/7.
+                </p>
+                <a href="mailto:incident@zishanhack.com?subject=EMERGENCY%20Security%20Incident&body=URGENT:%20Please%20describe%20the%20security%20incident%20details..." class="btn btn-danger btn-large">
+                    📧 Email Incident Response: incident@zishanhack.com
+                </a>
+                <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.875rem;">
+                    Monitor email 24/7/365 • Emergency response • Containment & recovery
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Enterprise Security Services</h2>
+            <p class="section-sub">
+                Comprehensive cybersecurity solutions for modern enterprises. From proactive defense to incident response.
+            </p>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon security">🛡️</div>
+                    <div class="card-content">
+                        <h3>Security Consultation & Strategy</h3>
+                        <p>
+                            Strategic security assessments, risk analysis, and roadmap development.
+                            Align security with business objectives and regulatory requirements.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#contact" class="btn btn-primary">
+                            Request Consultation →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon threat">📡</div>
+                    <div class="card-content">
+                        <h3>Threat Intelligence</h3>
+                        <p>
+                            Proactive threat monitoring, intelligence gathering, and analysis.
+                            Stay ahead of emerging threats targeting your industry and technology stack.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#contact" class="btn btn-primary">
+                            Learn About Threat Intel →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon incident">🚨</div>
+                    <div class="card-content">
+                        <h3>Incident Response</h3>
+                        <p>
+                            Emergency response to security breaches, ransomware attacks, and data leaks.
+                            Rapid containment, investigation, and recovery services.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#emergency" class="btn btn-danger">
+                            Emergency Response →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon security">⚔️</div>
+                    <div class="card-content">
+                        <h3>Penetration Testing</h3>
+                        <p>
+                            Full-scale simulated attacks across web apps, APIs, mobile, and infrastructure.
+                            Red team exercises and adversary simulation.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#contact" class="btn btn-primary">
+                            Schedule Pen Test →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon soc">🛡️</div>
+                    <div class="card-content">
+                        <h3>SOC Services & Monitoring</h3>
+                        <p>
+                            Security Operations Center services including 24/7 monitoring,
+                            threat detection, and security event management.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#contact" class="btn btn-primary">
+                            SOC Services →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon compliance">📋</div>
+                    <div class="card-content">
+                        <h3>Compliance & Audit Support</h3>
+                        <p>
+                            SOC 2, ISO 27001, PCI DSS, HIPAA, GDPR compliance support.
+                            Audit preparation and gap analysis.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#contact" class="btn btn-primary">
+                            Compliance Support →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPROACH SECTION -->
+    <section id="approach" class="section-alt" style="background: var(--secondary-dark);">
+        <div class="container">
+            <h2 class="section-title">Our Security Methodology</h2>
+            <p class="section-sub">We don't just find vulnerabilities—we build resilient security programs.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-content">
+                        <h3>Risk-Based Approach</h3>
+                        <p>Prioritize security efforts based on actual business risk and threat landscape. Focus resources where they matter most.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">👨‍💻</div>
+                    <div class="card-content">
+                        <h3>Expert-Led Engagements</h3>
+                        <p>Our certified security professionals lead every engagement. No junior analysts, no automated report dumping.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🤝</div>
+                    <div class="card-content">
+                        <h3>Partnership Model</h3>
+                        <p>We work as an extension of your team, not just a vendor. Long-term partnerships for ongoing security improvement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS SECTION -->
+    <section id="process">
+        <div class="container">
+            <h2 class="section-title">Our Engagement Process</h2>
+            <p class="section-sub">Structured, transparent, and results-focused methodology.</p>
+
+            <div class="steps">
+                <div class="step">
+                    <span>1.</span>
+                    <div>
+                        <h3>Discovery & Scoping</h3>
+                        <p>Detailed assessment of your environment, assets, and security requirements. Define clear objectives and success criteria.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <span>2.</span>
+                    <div>
+                        <h3>Legal Authorization & Planning</h3>
+                        <p>Formal engagement agreement with comprehensive rules of engagement. Ensure full legal compliance and risk management.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <span>3.</span>
+                    <div>
+                        <h3>Technical Assessment & Testing</h3>
+                        <p>Expert-led security testing using industry-standard methodologies and custom tools. Manual validation of all findings.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <span>4.</span>
+                    <div>
+                        <h3>Reporting & Remediation Support</h3>
+                        <p>Executive and technical reports with prioritized remediation guidance. Ongoing support for vulnerability resolution.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INDUSTRIES SECTION -->
+    <section id="industries" class="section-alt" style="background: var(--secondary-dark);">
+        <div class="container">
+            <h2 class="section-title">Industries We Protect</h2>
+            <p class="section-sub">Specialized security expertise for high-risk industries.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon fintech">🏦</div>
+                    <div class="card-content">
+                        <h3>Finance & FinTech</h3>
+                        <p>PCI DSS compliance, transaction security, fraud prevention, and regulatory requirement testing for financial institutions and fintech companies.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon healthcare">🏥</div>
+                    <div class="card-content">
+                        <h3>Healthcare</h3>
+                        <p>HIPAA compliance, PHI protection, medical device security, and healthcare application testing for medical organizations and providers.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon tech">☁️</div>
+                    <div class="card-content">
+                        <h3>Technology & SaaS</h3>
+                        <p>Cloud security, application security, API testing, and infrastructure security for technology companies and SaaS providers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Secure Your Enterprise Today</h2>
+                <p class="lead" style="color: rgba(255, 255, 255, 0.95);">
+                    Contact our enterprise security team for a professional consultation.
+                    No automated tools, no junior analysts—just expert security guidance.
+                </p>
+                
+                <div style="margin: 2.5rem 0;">
+                    <a href="#contact" class="btn btn-primary btn-large">
+                        🔒 Request Professional Security Assessment
+                    </a>
+                </div>
+                
+                <p style="color: rgba(255, 255, 255, 0.75); font-size: 0.875rem;">
+                    ⚡ Enterprise-grade security • Expert-led engagements • Confidential consultations
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Our Security Team</h2>
+            <p class="section-sub">
+                All inquiries are confidential and handled by senior security professionals.
+            </p>
+
+            <form action="https://formsubmit.co/secure@zishanhack.com" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="Enterprise Security Inquiry - Zishan Security">
+                <input type="hidden" name="_template" value="table">
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+                    <div>
+                        <input type="text" name="name" placeholder="Full Name *" required>
+                    </div>
+                    <div>
+                        <input type="email" name="email" placeholder="Work Email *" required>
+                    </div>
+                </div>
+
+                <input type="text" name="company" placeholder="Company / Organization *" required>
+                
+                <select name="service_type" required>
+                    <option value="" disabled selected>Select Service Interest *</option>
+                    <option value="consultation">Security Consultation</option>
+                    <option value="pentesting">Penetration Testing</option>
+                    <option value="incident_response">Incident Response</option>
+                    <option value="threat_intelligence">Threat Intelligence</option>
+                    <option value="soc">SOC Services</option>
+                    <option value="compliance">Compliance Support</option>
+                    <option value="other">Other Security Service</option>
+                </select>
+
+                <select name="urgency" required>
+                    <option value="" disabled selected>Urgency Level *</option>
+                    <option value="emergency">🚨 Emergency - Active Incident</option>
+                    <option value="urgent">⚡ Urgent - Need Within 48 Hours</option>
+                    <option value="standard">📅 Standard - Planning Phase</option>
+                </select>
+
+                <textarea name="message" placeholder="Describe your security needs, concerns, or incident details *" required></textarea>
+
+                <button type="submit" class="btn btn-primary btn-full">
+                    🔒 Submit Professional Inquiry
+                </button>
+                
+                <p style="margin-top: 1.5rem; color: var(--text-muted); font-size: 0.875rem; text-align: center;">
+                    All inquiries handled by senior security experts • Strict NDA protection • Enterprise-grade confidentiality
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <span>🛡️</span>
+                        <span style="font-weight: 700;">Zishan Security</span>
+                    </div>
+                    <p>
+                        Enterprise cybersecurity consulting, incident response, threat intelligence,
+                        and penetration testing services for serious organizations.
+                    </p>
+                    <p style="margin-top: 1rem; color: var(--accent-secondary); font-size: 0.875rem;">
+                        📧 Emergency Incident Response: incident@zishanhack.com
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Enterprise Services</h3>
+                    <div class="footer-links">
+                        <a href="#services" class="footer-link">Penetration Testing</a>
+                        <a href="#services" class="footer-link">Incident Response</a>
+                        <a href="#services" class="footer-link">Threat Intelligence</a>
+                        <a href="#services" class="footer-link">SOC Services</a>
+                        <a href="#services" class="footer-link">Compliance Support</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Contact</h3>
+                    <div class="footer-links">
+                        <a href="#contact" class="footer-link">Professional Assessment</a>
+                        <a href="#emergency" class="footer-link">Emergency Response</a>
+                        <span class="footer-link">secure@zishanhack.com</span>
+                        <span class="footer-link">General Inquiries</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                © 2026 Zishan Security • Enterprise Cybersecurity Specialists • Professional Services Only  
+                <br>No testing without authorization • NDA respected • 24/7 Email Monitoring for Emergencies
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Active navbar link updating based on scroll position
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a:not(.nav-btn)');
+            
+            // Function to update active nav link
+            function updateActiveNavLink() {
+                let currentSectionId = '';
+                let scrollPosition = window.scrollY + 100; // Adding offset for navbar height
+                
+                // Find which section is currently in view
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+                
+                // If at the top of the page, highlight the first link (Hero)
+                if (scrollPosition < sections[0].offsetTop) {
+                    currentSectionId = 'hero';
+                }
+                
+                // Update active class on nav links
+                navLinks.forEach(link => {
+                    link.classList.remove('nav-active');
+                    
+                    // Check if link href matches current section
+                    const linkHref = link.getAttribute('href');
+                    if (linkHref === `#${currentSectionId}`) {
+                        link.classList.add('nav-active');
+                    }
+                });
+            }
+            
+            // Update on scroll
+            window.addEventListener('scroll', updateActiveNavLink);
+            
+            // Update on page load
+            updateActiveNavLink();
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, // Offset for navbar
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update active nav link after click
+                        setTimeout(updateActiveNavLink, 100);
+                    }
+                });
+            });
+            
+            // Mobile menu toggle (optional enhancement)
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinksContainer = document.querySelector('.nav-links');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    const isVisible = navLinksContainer.style.display === 'flex';
+                    
+                    if (isVisible) {
+                        navLinksContainer.style.display = 'none';
+                    } else {
+                        navLinksContainer.style.display = 'flex';
+                        navLinksContainer.style.flexDirection = 'column';
+                        navLinksContainer.style.position = 'absolute';
+                        navLinksContainer.style.top = '80px';
+                        navLinksContainer.style.left = '0';
+                        navLinksContainer.style.right = '0';
+                        navLinksContainer.style.background = 'rgba(10, 15, 35, 0.98)';
+                        navLinksContainer.style.backdropFilter = 'blur(20px)';
+                        navLinksContainer.style.padding = '2rem';
+                        navLinksContainer.style.borderBottom = '1px solid var(--border-color)';
+                        navLinksContainer.style.gap = '1.5rem';
+                    }
+                });
+                
+                // Hide menu on window resize if needed
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 900) {
+                        navLinksContainer.style.display = '';
+                        navLinksContainer.style.flexDirection = '';
+                        navLinksContainer.style.position = '';
+                        navLinksContainer.style.top = '';
+                        navLinksContainer.style.left = '';
+                        navLinksContainer.style.right = '';
+                        navLinksContainer.style.background = '';
+                        navLinksContainer.style.backdropFilter = '';
+                        navLinksContainer.style.padding = '';
+                        navLinksContainer.style.borderBottom = '';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
