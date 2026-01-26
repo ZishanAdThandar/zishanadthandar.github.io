@@ -1,4 +1,3 @@
-
 :root {
     --primary: #6366f1;
     --primary-dark: #4f46e5;
@@ -33,13 +32,58 @@ html {
     scroll-padding-top: 120px;
 }
 
+/* Professional Typography & Spacing */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--darker);
     color: var(--light);
-    line-height: 1.7;
+    line-height: 1.6; /* Professional line spacing */
     overflow-x: hidden;
     min-height: 100vh;
+    font-size: 16px; /* Base font size for readability */
+}
+
+/* Heading Hierarchy */
+h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.5px;
+}
+
+h2 {
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    letter-spacing: -0.3px;
+}
+
+h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.1px;
+}
+
+h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+}
+
+/* Paragraph Spacing */
+p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.lead-text {
+    font-size: 1.125rem;
+    line-height: 1.7;
 }
 
 /* Keyboard navigation focus styles */
@@ -61,14 +105,7 @@ body.keyboard-navigation :focus {
     border: 0;
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-    letter-spacing: -0.5px;
-}
-
+/* Gradient Text */
 .text-gradient {
     background: var(--gradient);
     -webkit-background-clip: text;
@@ -85,14 +122,15 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     font-size: 4rem;
     font-weight: 900;
-    letter-spacing: -1px;
+    line-height: 1.1;
     margin-bottom: 0.5rem;
 }
 
 .hero-subtitle {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: var(--gray);
-    font-weight: 600;
+    font-weight: 500;
+    line-height: 1.4;
 }
 
 /* Container */
@@ -107,8 +145,8 @@ h1, h2, h3, h4, h5, h6 {
     background: linear-gradient(90deg, #ef4444, #f97316, #f59e0b);
     color: white;
     padding: 12px 0;
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     text-align: center;
     position: fixed;
     top: 0;
@@ -156,8 +194,8 @@ h1, h2, h3, h4, h5, h6 {
 .nav-brand .logo {
     display: flex;
     align-items: center;
-    font-size: 1.8rem;
-    font-weight: 900;
+    font-size: 1.75rem;
+    font-weight: 800;
     color: white;
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
@@ -166,7 +204,7 @@ h1, h2, h3, h4, h5, h6 {
 .nav-brand .logo i {
     color: var(--primary);
     margin-right: 10px;
-    font-size: 2rem;
+    font-size: 1.875rem;
 }
 
 .logo-highlight {
@@ -184,10 +222,10 @@ h1, h2, h3, h4, h5, h6 {
 .nav-link {
     color: var(--gray);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
+    font-weight: 500;
+    font-size: 0.9375rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     transition: all 0.3s ease;
     position: relative;
     padding: 0.5rem 0;
@@ -271,20 +309,22 @@ h1, h2, h3, h4, h5, h6 {
 
 .dropdown-header {
     padding: 0.5rem 0;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     border-bottom: 1px solid var(--border);
 }
 
 .dropdown-header strong {
     color: var(--light);
     font-size: 1rem;
+    font-weight: 600;
 }
 
 .dropdown-email {
     color: var(--gray);
-    font-size: 0.85rem;
+    font-size: 0.8125rem;
     margin-top: 0.25rem;
     word-break: break-all;
+    line-height: 1.4;
 }
 
 .dropdown-item {
@@ -299,8 +339,9 @@ h1, h2, h3, h4, h5, h6 {
     cursor: pointer;
     border-radius: 8px;
     transition: all 0.3s ease;
-    font-size: 0.95rem;
+    font-size: 0.9375rem;
     text-align: left;
+    line-height: 1.4;
 }
 
 .dropdown-item:hover,
@@ -359,9 +400,9 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 .hero-title {
@@ -369,16 +410,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-description {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     color: var(--gray);
     max-width: 700px;
     margin: 0 auto 3rem;
-    line-height: 1.8;
+    line-height: 1.7;
 }
 
 .hero-description strong {
     color: var(--light);
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .hero-cta {
@@ -392,7 +433,8 @@ h1, h2, h3, h4, h5, h6 {
     gap: 0.75rem;
     margin-top: 1.5rem;
     color: var(--gray);
-    font-size: 0.95rem;
+    font-size: 0.9375rem;
+    line-height: 1.4;
 }
 
 .hero-guarantee i {
@@ -419,13 +461,15 @@ h1, h2, h3, h4, h5, h6 {
     background-clip: text;
     color: transparent;
     margin-bottom: 0.5rem;
+    line-height: 1;
 }
 
 .stat-label {
     color: var(--gray);
-    font-size: 0.95rem;
+    font-size: 0.875rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
 }
 
 /* Sections */
@@ -447,9 +491,9 @@ section {
     color: white;
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
     margin-bottom: 1.5rem;
     text-transform: uppercase;
 }
@@ -459,13 +503,15 @@ section {
     font-weight: 900;
     margin-bottom: 1rem;
     color: white;
+    line-height: 1.2;
 }
 
 .section-subtitle {
     color: var(--gray);
-    font-size: 1.1rem;
+    font-size: 1.125rem;
     max-width: 600px;
     margin: 0 auto;
+    line-height: 1.6;
 }
 
 /* Buttons */
@@ -474,7 +520,7 @@ section {
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    font-weight: 700;
+    font-weight: 600;
     padding: 1rem 2rem;
     border-radius: 12px;
     transition: all 0.3s ease;
@@ -484,6 +530,7 @@ section {
     font-size: 1rem;
     position: relative;
     overflow: hidden;
+    line-height: 1.4;
 }
 
 .btn::before {
@@ -538,7 +585,7 @@ section {
 
 .btn-large {
     padding: 1.25rem 2.5rem;
-    font-size: 1.1rem;
+    font-size: 1.125rem;
 }
 
 .btn-block {
@@ -629,9 +676,10 @@ section {
     color: white;
     padding: 0.4rem 0.8rem;
     border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 700;
+    font-size: 0.75rem;
+    font-weight: 600;
     letter-spacing: 0.5px;
+    line-height: 1.4;
 }
 
 .product-icon {
@@ -648,10 +696,11 @@ section {
 }
 
 .product-title {
-    font-size: 1.8rem;
+    font-size: 1.75rem;
     font-weight: 800;
     margin-bottom: 1rem;
     color: white;
+    line-height: 1.3;
 }
 
 .product-description {
@@ -670,6 +719,7 @@ section {
     padding: 0.5rem 0;
     padding-left: 2rem;
     position: relative;
+    line-height: 1.6;
 }
 
 .product-features li i {
@@ -693,6 +743,7 @@ section {
     font-size: 1rem;
     display: block;
     margin-bottom: 0.5rem;
+    line-height: 1.4;
 }
 
 .current-price {
@@ -704,6 +755,7 @@ section {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    line-height: 1;
 }
 
 .discount-badge {
@@ -711,20 +763,22 @@ section {
     color: white;
     padding: 0.4rem 1rem;
     border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 700;
+    font-size: 0.875rem;
+    font-weight: 600;
     display: inline-block;
     margin-top: 0.5rem;
+    line-height: 1.4;
 }
 
 .sales-count {
     color: var(--gray);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     margin-top: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    line-height: 1.4;
 }
 
 .international-support {
@@ -733,12 +787,13 @@ section {
     justify-content: center;
     gap: 0.5rem;
     color: var(--gray);
-    font-size: 0.85rem;
+    font-size: 0.8125rem;
     margin-top: 0.5rem;
     padding: 0.5rem;
     background: rgba(16, 185, 129, 0.1);
     border-radius: 6px;
     border: 1px solid rgba(16, 185, 129, 0.2);
+    line-height: 1.4;
 }
 
 .international-support i {
@@ -752,7 +807,7 @@ section {
 .purchase-note {
     text-align: center;
     color: var(--gray);
-    font-size: 0.85rem;
+    font-size: 0.8125rem;
     margin-top: 0.5rem;
     line-height: 1.4;
 }
@@ -765,7 +820,8 @@ section {
     padding-top: 1.5rem;
     border-top: 1px solid var(--border);
     color: var(--gray);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
 }
 
 .product-guarantee i {
@@ -811,7 +867,7 @@ section {
 .testimonial-text {
     color: var(--light);
     font-style: italic;
-    line-height: 1.8;
+    line-height: 1.6;
     margin-bottom: 1.5rem;
     position: relative;
     z-index: 1;
@@ -823,14 +879,16 @@ section {
 }
 
 .author-name {
-    font-weight: 700;
+    font-weight: 600;
     color: white;
-    font-size: 1.1rem;
+    font-size: 1.125rem;
+    line-height: 1.4;
 }
 
 .author-title {
     color: var(--gray);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
 }
 
 /* FAQ */
@@ -860,6 +918,8 @@ section {
     border: none;
     width: 100%;
     text-align: left;
+    font-size: 1rem;
+    line-height: 1.4;
 }
 
 .faq-question:hover,
@@ -883,10 +943,12 @@ section {
 .faq-answer p {
     color: var(--gray);
     line-height: 1.6;
+    margin-bottom: 0.5rem;
 }
 
 .faq-answer strong {
     color: var(--light);
+    font-weight: 600;
 }
 
 /* CTA Section */
@@ -922,27 +984,30 @@ section {
     color: white;
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
     margin-bottom: 2rem;
     animation: pulse 2s infinite;
+    line-height: 1.4;
 }
 
 .cta-title {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 900;
     margin-bottom: 1rem;
     color: white;
+    line-height: 1.2;
 }
 
 .cta-subtitle {
     color: var(--gray);
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     margin-bottom: 3rem;
+    line-height: 1.6;
 }
 
 .cta-guarantee {
@@ -952,7 +1017,8 @@ section {
     gap: 0.75rem;
     margin-top: 2rem;
     color: var(--gray);
-    font-size: 0.95rem;
+    font-size: 0.9375rem;
+    line-height: 1.4;
 }
 
 .cta-guarantee i {
@@ -977,11 +1043,12 @@ section {
     display: flex;
     align-items: center;
     font-size: 2rem;
-    font-weight: 900;
+    font-weight: 800;
     color: white;
     margin-bottom: 1.5rem;
     font-family: 'Poppins', sans-serif;
     text-decoration: none;
+    line-height: 1.2;
 }
 
 .footer-brand .logo i {
@@ -1024,9 +1091,10 @@ section {
 
 .footer-links h3 {
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.125rem;
     margin-bottom: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
+    line-height: 1.4;
 }
 
 .footer-links {
@@ -1042,6 +1110,8 @@ section {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-size: 0.9375rem;
+    line-height: 1.4;
 }
 
 .footer-link:hover,
@@ -1071,16 +1141,18 @@ section {
     color: var(--gray);
     padding: 0.5rem 1rem;
     border-radius: 50px;
-    font-size: 0.85rem;
+    font-size: 0.8125rem;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    line-height: 1.4;
 }
 
 .copyright {
     color: var(--gray);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
 }
 
 /* Modal */
@@ -1170,10 +1242,14 @@ section {
 .auth-header h3 {
     color: white;
     margin-bottom: 0.5rem;
+    font-size: 1.75rem;
+    line-height: 1.3;
 }
 
 .auth-header p {
     color: var(--gray);
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
 .auth-form {
@@ -1196,6 +1272,7 @@ section {
     font-size: 1rem;
     transition: all 0.3s ease;
     font-family: inherit;
+    line-height: 1.4;
 }
 
 .form-control:focus {
@@ -1233,6 +1310,7 @@ section {
     font-family: monospace;
     letter-spacing: 0.5em;
     -webkit-text-security: disc;
+    line-height: 1;
 }
 
 .otp-input:focus {
@@ -1268,7 +1346,8 @@ section {
     margin: 1rem 0;
     text-align: center;
     color: var(--success);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
 }
 
 .payment-security-notice i {
@@ -1283,9 +1362,10 @@ section {
     color: white;
     padding: 0.4rem 0.8rem;
     border-radius: 6px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
     margin-left: 0.5rem;
+    line-height: 1.4;
 }
 
 /* Disable autofill styles for sensitive fields */
@@ -1383,10 +1463,11 @@ input:-webkit-autofill:active {
     padding: 0.75rem;
     margin: 1rem 0;
     color: var(--danger);
-    font-size: 0.85rem;
+    font-size: 0.8125rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    line-height: 1.4;
 }
 
 .security-warning i {
@@ -1404,6 +1485,7 @@ input:-webkit-autofill:active {
     -webkit-appearance: none !important;
     -moz-appearance: none !important;
     appearance: none !important;
+    line-height: 1.4 !important;
 }
 
 #purchaseEmail, #authEmail {
@@ -1476,6 +1558,8 @@ input:-webkit-autofill:active {
     flex: 1;
     color: white;
     font-weight: 500;
+    line-height: 1.4;
+    font-size: 0.9375rem;
 }
 
 .notification-close {
@@ -1591,7 +1675,19 @@ input:-webkit-autofill:active {
     }
     
     .cta-title {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
+    }
+    
+    h1 {
+        font-size: 3rem;
+    }
+    
+    h2 {
+        font-size: 2.25rem;
+    }
+    
+    h3 {
+        font-size: 1.5rem;
     }
 }
 
@@ -1637,10 +1733,12 @@ input:-webkit-autofill:active {
     
     .hero-gradient {
         font-size: 2.5rem;
+        line-height: 1.1;
     }
     
     .hero-subtitle {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+        line-height: 1.3;
     }
     
     .hero-stats {
@@ -1658,6 +1756,7 @@ input:-webkit-autofill:active {
     
     .section-title {
         font-size: 2rem;
+        line-height: 1.2;
     }
     
     .modal-content {
@@ -1699,17 +1798,38 @@ input:-webkit-autofill:active {
     }
     
     .payment-security-notice {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         padding: 0.75rem;
     }
     
     .cta-title {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
     
     .cta-badge {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         padding: 0.6rem 1.2rem;
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
     }
 }
 
@@ -1721,15 +1841,17 @@ input:-webkit-autofill:active {
     
     .hero-gradient {
         font-size: 2rem;
+        line-height: 1.1;
     }
     
     .hero-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.125rem;
+        line-height: 1.3;
     }
     
     .btn {
         padding: 0.875rem 1.5rem;
-        font-size: 0.95rem;
+        font-size: 0.9375rem;
     }
     
     .otp-input {
@@ -1743,11 +1865,11 @@ input:-webkit-autofill:active {
     }
     
     .section-title {
-        font-size: 1.8rem;
+        font-size: 1.75rem;
     }
     
     .cta-title {
-        font-size: 1.8rem;
+        font-size: 1.75rem;
     }
     
     .notification {
@@ -1767,6 +1889,33 @@ input:-webkit-autofill:active {
     .security-badge {
         font-size: 0.75rem;
         padding: 0.4rem 0.8rem;
+    }
+    
+    .product-badges {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    
+    .product-badge {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+    }
+    
+    .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 2rem 0;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .stat-label {
+        font-size: 0.75rem;
     }
 }
 
