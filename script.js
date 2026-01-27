@@ -61,10 +61,14 @@ const PRODUCTS = [
   }
 ];
 
+// Debug logging
+console.log('ZishanHack initialized');
+console.log('API Base:', API_BASE);
+console.log('Initial auth token:', authToken ? 'Yes' : 'No');
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('ZishanHack initialized');
-  console.log('API Base:', API_BASE);
+  console.log('DOM loaded, initializing...');
   initializeAuth();
   loadProducts();
   checkPaymentCallback();
@@ -72,6 +76,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Preload Razorpay SDK
   loadRazorpaySDK();
+  
+  // Debug: Check if purchases are loaded properly
+  setTimeout(() => {
+    console.log('Initial user purchases:', userPurchases);
+  }, 1000);
 });
 
 // ===== RAZORPAY SDK LOADING =====
@@ -125,6 +134,8 @@ function ensureRazorpaySDK(callback) {
 
 // ===== AUTH FUNCTIONS =====
 function initializeAuth() {
+  console.log('Initializing auth...');
+  
   if (authToken) {
     try {
       const tokenParts = authToken.split('.');
@@ -132,31 +143,47 @@ function initializeAuth() {
         const payload = JSON.parse(atob(tokenParts[0]));
         userEmail = payload.email;
         
+        console.log('User email from token:', userEmail);
+        
         if (payload.exp && payload.exp < Math.floor(Date.now() / 1000)) {
+          console.log('Token expired, logging out...');
           logout();
           return;
         }
         
+        console.log('Token valid, updating UI and loading purchases...');
         updateAuthUI();
         loadPurchases();
+      } else {
+        console.log('Invalid token format, logging out...');
+        logout();
       }
     } catch (error) {
       console.error('Auth error:', error);
       logout();
     }
   } else {
+    console.log('No auth token found, showing login button...');
     updateAuthUI();
   }
 }
 
 function updateAuthUI() {
   const authSection = document.getElementById('authSection');
-  if (!authSection) return;
+  if (!authSection) {
+    console.log('Auth section not found');
+    return;
+  }
+  
+  console.log('Updating auth UI. Auth token:', authToken ? 'Yes' : 'No');
+  console.log('User email:', userEmail);
   
   if (authToken && userEmail) {
     const shortEmail = userEmail.length > 20 
       ? userEmail.substring(0, 17) + '...' 
       : userEmail.split('@')[0];
+    
+    console.log('Showing logged in UI for:', shortEmail);
     
     authSection.innerHTML = `
       <div class="user-dropdown">
@@ -178,6 +205,10 @@ function updateAuthUI() {
             <i class="fas fa-sign-out-alt"></i>
             Logout
           </button>
+          <button class="dropdown-item" onclick="debugUserPurchases()" role="menuitem">
+            <i class="fas fa-bug"></i>
+            Debug Purchases
+          </button>
         </div>
       </div>`;
     
@@ -193,6 +224,7 @@ function updateAuthUI() {
     document.addEventListener('click', closeDropdown);
     
   } else {
+    console.log('Showing login button');
     authSection.innerHTML = `
       <button class="btn btn-premium" onclick="openAuthModal()" aria-label="Login to account">
         <i class="fas fa-sign-in-alt"></i>
@@ -211,6 +243,7 @@ function closeDropdown() {
 }
 
 function logout() {
+  console.log('Logging out...');
   authToken = null;
   userEmail = null;
   userPurchases = {};
@@ -227,6 +260,7 @@ function viewMyDownloads() {
 
 // ===== AUTH MODAL FUNCTIONS =====
 function openAuthModal() {
+  console.log('Opening auth modal');
   const modal = document.getElementById('authModal');
   if (modal) {
     modal.classList.add('show');
@@ -237,6 +271,7 @@ function openAuthModal() {
 }
 
 function closeAuthModal() {
+  console.log('Closing auth modal');
   const modal = document.getElementById('authModal');
   if (modal) {
     modal.classList.remove('show');
@@ -420,6 +455,8 @@ async function verifyOTP() {
     
     const data = await response.json();
     
+    console.log('OTP verify response:', data);
+    
     if (response.ok) {
       authToken = data.token;
       userEmail = email;
@@ -428,7 +465,10 @@ async function verifyOTP() {
       showNotification('Welcome to ZishanHack!', 'success');
       updateAuthUI();
       closeAuthModal();
-      loadPurchases();
+      
+      // Force reload purchases immediately after login
+      console.log('Login successful, loading purchases...');
+      await loadPurchases();
       
     } else {
       showNotification(data.error || 'Invalid verification code', 'error');
@@ -453,9 +493,18 @@ async function verifyOTP() {
 
 // ===== PRODUCT FUNCTIONS =====
 async function loadPurchases() {
-  if (!authToken) return;
+  console.log('Loading purchases...');
+  console.log('Auth token:', authToken ? 'Present' : 'Missing');
+  
+  if (!authToken) {
+    console.log('No auth token, cannot load purchases');
+    userPurchases = {};
+    loadProducts();
+    return;
+  }
   
   try {
+    console.log('Fetching purchases from API...');
     const response = await fetch(`${API_BASE}/api/me/purchases`, {
       headers: { 
         'Authorization': `Bearer ${authToken}`,
@@ -464,40 +513,77 @@ async function loadPurchases() {
       credentials: 'include'
     });
     
+    console.log('Purchases API response status:', response.status);
+    
     if (response.ok) {
       const data = await response.json();
+      console.log('Raw purchases API data:', data);
+      
       userPurchases = {};
       if (data.purchases && Array.isArray(data.purchases)) {
+        console.log('Processing', data.purchases.length, 'purchases');
+        
         data.purchases.forEach(purchase => {
-          if (purchase.status === 'completed') {
+          console.log('Purchase item:', purchase);
+          console.log('Product ID:', purchase.product_id);
+          console.log('Status:', purchase.status);
+          
+          // Check for completed purchase (case-insensitive)
+          if (purchase.status && purchase.status.toLowerCase() === 'completed') {
             userPurchases[purchase.product_id] = true;
+            console.log('✅ Added purchase for product:', purchase.product_id);
+          } else {
+            console.log('❌ Purchase not completed for:', purchase.product_id, 'Status:', purchase.status);
           }
         });
+      } else {
+        console.log('No purchases array in response');
       }
       
+      console.log('Final userPurchases object:', userPurchases);
+      console.log('Has ultimate_checklist?', userPurchases['ultimate_checklist']);
+      
+      // Force UI update with purchases
       loadProducts();
       
     } else if (response.status === 401) {
+      console.log('Auth token expired, logging out');
       logout();
       showNotification('Session expired. Please login again.', 'error');
+    } else {
+      const errorText = await response.text();
+      console.error('Purchases API error:', errorText);
+      showNotification('Failed to load purchases', 'error');
     }
   } catch (error) {
     console.error('Load purchases error:', error);
+    showNotification('Network error loading purchases', 'error');
   }
 }
 
 function loadProducts() {
+  console.log('Loading products...');
+  console.log('Current userPurchases:', userPurchases);
+  
   const container = document.getElementById('productsContainer');
-  if (!container) return;
+  if (!container) {
+    console.log('Products container not found');
+    return;
+  }
   
   const isLoggedIn = !!authToken;
+  console.log('User logged in:', isLoggedIn);
+  
   container.innerHTML = '';
   
   PRODUCTS.forEach(product => {
     const isPurchased = userPurchases[product.id] === true;
+    console.log(`Product ${product.id}: purchased = ${isPurchased}`);
     const productCard = createProductCard(product, isLoggedIn, isPurchased);
     container.appendChild(productCard);
   });
+  
+  console.log('Products loaded');
 }
 
 function formatPrice(amount) {
@@ -505,11 +591,18 @@ function formatPrice(amount) {
 }
 
 function createProductCard(product, isLoggedIn, isPurchased) {
+  console.log(`Creating card for ${product.id}:`);
+  console.log('- isLoggedIn:', isLoggedIn);
+  console.log('- isPurchased:', isPurchased);
+  
   const card = document.createElement('div');
   card.className = 'product-card';
   
   if (isLoggedIn && isPurchased) {
     card.classList.add('product-purchased');
+    console.log(`✅ ${product.id} marked as purchased`);
+  } else {
+    console.log(`❌ ${product.id} not purchased or not logged in`);
   }
   
   const priceDisplay = formatPrice(product.price);
@@ -558,20 +651,26 @@ function createProductCard(product, isLoggedIn, isPurchased) {
 }
 
 function createProductButton(productId, priceDisplay, isLoggedIn, isPurchased) {
+  console.log(`Creating button for ${productId}:`);
+  console.log('- isLoggedIn:', isLoggedIn);
+  console.log('- isPurchased:', isPurchased);
+  
   if (isLoggedIn && isPurchased) {
+    console.log(`✅ Showing download button for ${productId}`);
     return `
       <button class="btn btn-success" onclick="downloadProduct('${productId}')" aria-label="Download ${productId}">
         <i class="fas fa-download"></i>
         DOWNLOAD NOW
       </button>
-      <p class="purchase-note">Already purchased • Click to download</p>`;
+      <p class="purchase-note">✅ Already purchased • Click to download</p>`;
   } else {
+    console.log(`🛒 Showing buy button for ${productId}`);
     return `
       <button class="btn btn-premium btn-sparkle" onclick="buyProduct('${productId}')" aria-label="Buy ${productId} for ${priceDisplay}">
         <i class="fas fa-bolt"></i>
         GET INSTANT ACCESS - ${priceDisplay}
       </button>
-      <p class="purchase-note">One-time payment • Lifetime access • 90% OFF • Cards</p>`;
+      <p class="purchase-note">One-time payment • Lifetime access • 90% OFF • International Cards</p>`;
   }
 }
 
@@ -860,7 +959,6 @@ function initializeRazorpayCheckout(orderData, product) {
       // Fallback: Try alternative opening method
       showNotification('Opening payment window...', 'info');
       
-      // Create a button to manually open payment
       const fallbackHTML = `
         <div class="modal" id="razorpayFallbackModal">
           <div class="modal-overlay" onclick="closeRazorpayFallback()"></div>
@@ -932,6 +1030,8 @@ async function verifyRazorpayPayment(paymentData) {
     
     const data = await response.json();
     
+    console.log('Payment verification response:', data);
+    
     if (response.ok && data.success) {
       showNotification('Payment verified successfully!', 'success');
       
@@ -944,9 +1044,10 @@ async function verifyRazorpayPayment(paymentData) {
         localStorage.setItem('zishanhack_token', authToken);
       }
       
-      setTimeout(() => {
+      // Force reload purchases after successful payment
+      setTimeout(async () => {
         updateAuthUI();
-        loadPurchases();
+        await loadPurchases();
         showNotification('Your purchase is now available!', 'success');
       }, 2000);
       
@@ -963,17 +1064,37 @@ async function verifyRazorpayPayment(paymentData) {
 
 // ===== DOWNLOAD FUNCTIONS =====
 async function downloadProduct(productId) {
+  console.log('Download product called:', productId);
+  console.log('Auth token:', authToken ? 'Present' : 'Missing');
+  console.log('User purchases:', userPurchases);
+  console.log('Has purchase for this product:', userPurchases[productId]);
+  
   if (!authToken) {
     showNotification('Please login to download', 'error');
     openAuthModal();
     return;
   }
   
+  // Double-check purchase status before attempting download
   if (userPurchases[productId] !== true) {
-    showNotification('You need to purchase this resource first', 'warning');
-    return;
+    console.log('Purchase not found in local state, checking with server...');
+    
+    // Force reload purchases to ensure we have latest data
+    await loadPurchases();
+    
+    if (userPurchases[productId] !== true) {
+      showNotification('You need to purchase this resource first', 'warning');
+      
+      // Show debug info
+      console.log('All purchases after reload:', userPurchases);
+      console.log('Looking for product:', productId);
+      console.log('Found:', userPurchases[productId]);
+      
+      return;
+    }
   }
   
+  console.log('Purchase verified, starting download...');
   showLoading(true);
   showNotification('Preparing download...', 'info');
   
@@ -985,14 +1106,19 @@ async function downloadProduct(productId) {
       credentials: 'include'
     });
     
+    console.log('Download response status:', response.status);
+    
     if (!response.ok) {
       if (response.status === 403) {
         showNotification('Purchase verification failed.', 'warning');
-        loadPurchases();
+        // Refresh purchases in case status changed
+        await loadPurchases();
       } else if (response.status === 401) {
         showNotification('Session expired. Please login again.', 'error');
         logout();
       } else {
+        const errorText = await response.text();
+        console.error('Download error response:', errorText);
         showNotification('Download failed. Please try again.', 'error');
       }
       showLoading(false);
@@ -1052,13 +1178,15 @@ async function checkOrderStatus(orderId) {
     });
     const data = await response.json();
     
+    console.log('Order status check:', data);
+    
     if (response.ok) {
       if (data.status === 'completed' || data.status === 'paid') {
         showNotification('Payment verified! Your purchase is now available.', 'success');
         
         if (authToken && userEmail === data.email) {
-          setTimeout(() => {
-            loadPurchases();
+          setTimeout(async () => {
+            await loadPurchases();
           }, 2000);
         } else {
           setTimeout(() => {
@@ -1248,9 +1376,30 @@ function updateCountdown() {
     `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
-// Start countdown timer
-setInterval(updateCountdown, 1000);
-updateCountdown();
+// ===== DEBUG FUNCTIONS =====
+function debugUserPurchases() {
+  console.log('=== DEBUG USER PURCHASES ===');
+  console.log('Auth Token:', authToken ? 'Present' : 'Missing');
+  console.log('User Email:', userEmail);
+  console.log('Current Purchases:', userPurchases);
+  
+  PRODUCTS.forEach(product => {
+    console.log(`${product.id}: ${userPurchases[product.id] ? '✅ Purchased' : '❌ Not Purchased'}`);
+  });
+  
+  // Force reload purchases
+  console.log('Forcing purchase reload...');
+  loadPurchases();
+  
+  console.log('=== END DEBUG ===');
+  showNotification('Debug info logged to console. Press F12 to view.', 'info');
+}
+
+function forceRefreshPurchases() {
+  console.log('Forcing purchase refresh...');
+  loadPurchases();
+  showNotification('Refreshing purchases...', 'info');
+}
 
 // ===== EXPORT FUNCTIONS TO GLOBAL SCOPE =====
 window.openAuthModal = openAuthModal;
@@ -1260,11 +1409,19 @@ window.verifyOTP = verifyOTP;
 window.logout = logout;
 window.buyProduct = buyProduct;
 window.downloadProduct = downloadProduct;
+window.debugUserPurchases = debugUserPurchases;
+window.forceRefreshPurchases = forceRefreshPurchases;
 
 // Debug helper
 window.debugRazorpay = function() {
+  console.log('=== DEBUG RAZORPAY ===');
   console.log('Razorpay SDK loaded:', typeof Razorpay !== 'undefined');
   console.log('Auth token:', authToken ? 'Yes' : 'No');
   console.log('User email:', userEmail);
   console.log('API Base:', API_BASE);
+  console.log('=== END DEBUG ===');
 };
+
+// Start countdown timer
+setInterval(updateCountdown, 1000);
+updateCountdown();
