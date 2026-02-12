@@ -1,6 +1,4 @@
-const API_BASE = window.location.hostname.includes('localhost') 
-  ? 'http://localhost:8787' 
-  : 'https://api.zishanhack.com';
+const API_BASE = 'https://api.zishanhack.com';
 
 let authToken = null;
 let userEmail = null;
