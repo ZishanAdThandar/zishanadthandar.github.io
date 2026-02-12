@@ -2,7 +2,7 @@ const API_BASE = window.location.hostname.includes('localhost')
   ? 'http://localhost:8787' 
   : 'https://api.zishanhack.com';
 
-let authToken = localStorage.getItem('zishanhack_token');
+let authToken = null;
 let userEmail = null;
 let userPurchases = {};
 
@@ -64,9 +64,100 @@ const PRODUCTS = [
 // Debug logging
 console.log('ZishanHack initialized');
 console.log('API Base:', API_BASE);
-console.log('Initial auth token:', authToken ? 'Yes' : 'No');
 
-// Initialize on page load
+// ===== TOKEN MANAGEMENT =====
+function getTokenFromStorage() {
+  return localStorage.getItem('zishanhack_token');
+}
+
+function setTokenToStorage(token) {
+  if (token) {
+    localStorage.setItem('zishanhack_token', token);
+    authToken = token;
+  }
+}
+
+function removeTokenFromStorage() {
+  localStorage.removeItem('zishanhack_token');
+  authToken = null;
+}
+
+function getTokenFromCookie() {
+  const cookies = document.cookie.split(';');
+  for (let cookie of cookies) {
+    const [name, value] = cookie.trim().split('=');
+    if (name === 'auth_token') {
+      try {
+        return decodeURIComponent(value);
+      } catch (e) {
+        console.error('Error decoding cookie token:', e);
+        return value;
+      }
+    }
+  }
+  return null;
+}
+
+function clearAuthCookie() {
+  // Clear with domain
+  document.cookie = 'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.zishanhack.com; Secure; SameSite=Strict';
+  // Clear without domain
+  document.cookie = 'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=Strict';
+  // Clear debug cookie
+  document.cookie = 'auth_token_debug=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.zishanhack.com; Secure; SameSite=Strict';
+  document.cookie = 'auth_token_debug=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=Strict';
+}
+
+function getToken() {
+  // Priority: 1. Memory variable, 2. localStorage, 3. Cookie
+  if (authToken) {
+    return authToken;
+  }
+  
+  const storedToken = getTokenFromStorage();
+  if (storedToken) {
+    authToken = storedToken;
+    return storedToken;
+  }
+  
+  const cookieToken = getTokenFromCookie();
+  if (cookieToken) {
+    authToken = cookieToken;
+    // Sync to localStorage for future use
+    setTokenToStorage(cookieToken);
+    return cookieToken;
+  }
+  
+  return null;
+}
+
+function decodeTokenPayload(token) {
+  try {
+    const parts = token.split('.');
+    
+    // Handle JWT format (3 parts)
+    if (parts.length === 3) {
+      const payload = JSON.parse(atob(parts[1]));
+      return payload;
+    }
+    
+    // Handle legacy format (2 parts)
+    if (parts.length === 2) {
+      const payload = JSON.parse(atob(parts[0]));
+      return payload;
+    }
+  } catch (e) {
+    console.error('Error decoding token:', e);
+  }
+  return null;
+}
+
+function isTokenExpired(payload) {
+  if (!payload || !payload.exp) return true;
+  return payload.exp < Math.floor(Date.now() / 1000);
+}
+
+// ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM loaded, initializing...');
   initializeAuth();
@@ -76,90 +167,49 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Preload Razorpay SDK
   loadRazorpaySDK();
-  
-  // Debug: Check if purchases are loaded properly
-  setTimeout(() => {
-    console.log('Initial user purchases:', userPurchases);
-  }, 1000);
 });
-
-// ===== RAZORPAY SDK LOADING =====
-function loadRazorpaySDK() {
-  if (typeof Razorpay !== 'undefined') {
-    console.log('Razorpay SDK already loaded');
-    return;
-  }
-  
-  console.log('Loading Razorpay SDK...');
-  const script = document.createElement('script');
-  script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-  script.async = true;
-  script.onload = () => {
-    console.log('✅ Razorpay SDK loaded successfully');
-    window.razorpayLoaded = true;
-  };
-  script.onerror = (error) => {
-    console.error('❌ Failed to load Razorpay SDK:', error);
-    window.razorpayLoaded = false;
-  };
-  document.head.appendChild(script);
-}
-
-function ensureRazorpaySDK(callback) {
-  if (typeof Razorpay !== 'undefined') {
-    callback();
-    return;
-  }
-  
-  console.log('Waiting for Razorpay SDK to load...');
-  showNotification('Loading payment system...', 'info');
-  
-  let attempts = 0;
-  const maxAttempts = 5;
-  
-  const checkInterval = setInterval(() => {
-    attempts++;
-    
-    if (typeof Razorpay !== 'undefined') {
-      clearInterval(checkInterval);
-      console.log('✅ Razorpay SDK loaded after', attempts, 'attempts');
-      callback();
-    } else if (attempts >= maxAttempts) {
-      clearInterval(checkInterval);
-      console.error('❌ Razorpay SDK failed to load after', maxAttempts, 'attempts');
-      showNotification('Payment system failed to load. Please refresh the page.', 'error');
-    }
-  }, 500);
-}
 
 // ===== AUTH FUNCTIONS =====
 function initializeAuth() {
   console.log('Initializing auth...');
   
-  if (authToken) {
+  // Get token from all sources
+  const token = getToken();
+  
+  if (token) {
     try {
-      const tokenParts = authToken.split('.');
-      if (tokenParts.length === 2) {
-        const payload = JSON.parse(atob(tokenParts[0]));
-        userEmail = payload.email;
-        
-        console.log('User email from token:', userEmail);
-        
-        if (payload.exp && payload.exp < Math.floor(Date.now() / 1000)) {
-          console.log('Token expired, logging out...');
-          logout();
-          return;
-        }
-        
-        console.log('Token valid, updating UI and loading purchases...');
-        updateAuthUI();
-        loadPurchases();
-      } else {
-        console.log('Invalid token format, logging out...');
+      const payload = decodeTokenPayload(token);
+      
+      if (!payload) {
+        console.log('Invalid token payload, logging out...');
         logout();
+        return;
       }
+      
+      if (!payload.email) {
+        console.log('No email in token, logging out...');
+        logout();
+        return;
+      }
+      
+      if (isTokenExpired(payload)) {
+        console.log('Token expired, logging out...');
+        logout();
+        return;
+      }
+      
+      // Token is valid
+      userEmail = payload.email;
+      authToken = token;
+      
+      console.log('✅ Authentication successful for:', userEmail);
+      console.log('Token expires:', new Date(payload.exp * 1000).toLocaleString());
+      
+      updateAuthUI();
+      loadPurchases();
+      
     } catch (error) {
-      console.error('Auth error:', error);
+      console.error('❌ Auth initialization error:', error);
       logout();
     }
   } else {
@@ -205,9 +255,9 @@ function updateAuthUI() {
             <i class="fas fa-sign-out-alt"></i>
             Logout
           </button>
-          <button class="dropdown-item" onclick="debugUserPurchases()" role="menuitem">
+          <button class="dropdown-item" onclick="debugAuth()" role="menuitem">
             <i class="fas fa-bug"></i>
-            Debug Purchases
+            Debug Auth
           </button>
         </div>
       </div>`;
@@ -244,18 +294,27 @@ function closeDropdown() {
 
 function logout() {
   console.log('Logging out...');
+  
+  // Clear all auth data
   authToken = null;
   userEmail = null;
   userPurchases = {};
-  localStorage.removeItem('zishanhack_token');
+  
+  // Clear storage
+  removeTokenFromStorage();
+  
+  // Clear cookies
+  clearAuthCookie();
+  
+  // Clear any other stored data
+  sessionStorage.removeItem('pending_purchase');
+  
+  // Update UI
   updateAuthUI();
   loadProducts();
+  
   showNotification('Logged out successfully', 'success');
-}
-
-function viewMyDownloads() {
-  document.getElementById('resources').scrollIntoView({ behavior: 'smooth' });
-  closeDropdown();
+  console.log('✅ Logout complete');
 }
 
 // ===== AUTH MODAL FUNCTIONS =====
@@ -266,7 +325,15 @@ function openAuthModal() {
     modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    document.getElementById('authEmail').focus();
+    
+    // Focus on email input
+    setTimeout(() => {
+      const emailInput = document.getElementById('authEmail');
+      if (emailInput) {
+        emailInput.focus();
+        emailInput.select();
+      }
+    }, 100);
   }
 }
 
@@ -457,17 +524,21 @@ async function verifyOTP() {
     
     console.log('OTP verify response:', data);
     
-    if (response.ok) {
-      authToken = data.token;
-      userEmail = email;
-      localStorage.setItem('zishanhack_token', authToken);
+    if (response.ok && data.token) {
+      // Store token
+      setTokenToStorage(data.token);
+      
+      // Decode and set user email
+      const payload = decodeTokenPayload(data.token);
+      userEmail = payload?.email || email;
+      
+      console.log('✅ Login successful for:', userEmail);
       
       showNotification('Welcome to ZishanHack!', 'success');
       updateAuthUI();
       closeAuthModal();
       
       // Force reload purchases immediately after login
-      console.log('Login successful, loading purchases...');
       await loadPurchases();
       
     } else {
@@ -491,12 +562,62 @@ async function verifyOTP() {
   }
 }
 
+// ===== RAZORPAY SDK LOADING =====
+function loadRazorpaySDK() {
+  if (typeof Razorpay !== 'undefined') {
+    console.log('Razorpay SDK already loaded');
+    return;
+  }
+  
+  console.log('Loading Razorpay SDK...');
+  const script = document.createElement('script');
+  script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+  script.async = true;
+  script.onload = () => {
+    console.log('✅ Razorpay SDK loaded successfully');
+    window.razorpayLoaded = true;
+  };
+  script.onerror = (error) => {
+    console.error('❌ Failed to load Razorpay SDK:', error);
+    window.razorpayLoaded = false;
+  };
+  document.head.appendChild(script);
+}
+
+function ensureRazorpaySDK(callback) {
+  if (typeof Razorpay !== 'undefined') {
+    callback();
+    return;
+  }
+  
+  console.log('Waiting for Razorpay SDK to load...');
+  showNotification('Loading payment system...', 'info');
+  
+  let attempts = 0;
+  const maxAttempts = 5;
+  
+  const checkInterval = setInterval(() => {
+    attempts++;
+    
+    if (typeof Razorpay !== 'undefined') {
+      clearInterval(checkInterval);
+      console.log('✅ Razorpay SDK loaded after', attempts, 'attempts');
+      callback();
+    } else if (attempts >= maxAttempts) {
+      clearInterval(checkInterval);
+      console.error('❌ Razorpay SDK failed to load after', maxAttempts, 'attempts');
+      showNotification('Payment system failed to load. Please refresh the page.', 'error');
+    }
+  }, 500);
+}
+
 // ===== PRODUCT FUNCTIONS =====
 async function loadPurchases() {
   console.log('Loading purchases...');
-  console.log('Auth token:', authToken ? 'Present' : 'Missing');
   
-  if (!authToken) {
+  const token = getToken();
+  
+  if (!token) {
     console.log('No auth token, cannot load purchases');
     userPurchases = {};
     loadProducts();
@@ -507,7 +628,7 @@ async function loadPurchases() {
     console.log('Fetching purchases from API...');
     const response = await fetch(`${API_BASE}/api/me/purchases`, {
       headers: { 
-        'Authorization': `Bearer ${authToken}`,
+        'Authorization': `Bearer ${token}`,
         'Accept': 'application/json'
       },
       credentials: 'include'
@@ -520,30 +641,21 @@ async function loadPurchases() {
       console.log('Raw purchases API data:', data);
       
       userPurchases = {};
+      
       if (data.purchases && Array.isArray(data.purchases)) {
         console.log('Processing', data.purchases.length, 'purchases');
         
         data.purchases.forEach(purchase => {
-          console.log('Purchase item:', purchase);
-          console.log('Product ID:', purchase.product_id);
-          console.log('Status:', purchase.status);
-          
-          // Check for completed purchase (case-insensitive)
           if (purchase.status && purchase.status.toLowerCase() === 'completed') {
             userPurchases[purchase.product_id] = true;
             console.log('✅ Added purchase for product:', purchase.product_id);
-          } else {
-            console.log('❌ Purchase not completed for:', purchase.product_id, 'Status:', purchase.status);
           }
         });
-      } else {
-        console.log('No purchases array in response');
       }
       
       console.log('Final userPurchases object:', userPurchases);
-      console.log('Has ultimate_checklist?', userPurchases['ultimate_checklist']);
       
-      // Force UI update with purchases
+      // Update product cards with purchase status
       loadProducts();
       
     } else if (response.status === 401) {
@@ -551,19 +663,15 @@ async function loadPurchases() {
       logout();
       showNotification('Session expired. Please login again.', 'error');
     } else {
-      const errorText = await response.text();
-      console.error('Purchases API error:', errorText);
-      showNotification('Failed to load purchases', 'error');
+      console.error('Purchases API error:', response.status);
     }
   } catch (error) {
     console.error('Load purchases error:', error);
-    showNotification('Network error loading purchases', 'error');
   }
 }
 
 function loadProducts() {
   console.log('Loading products...');
-  console.log('Current userPurchases:', userPurchases);
   
   const container = document.getElementById('productsContainer');
   if (!container) {
@@ -571,8 +679,11 @@ function loadProducts() {
     return;
   }
   
-  const isLoggedIn = !!authToken;
+  const token = getToken();
+  const isLoggedIn = !!token;
+  
   console.log('User logged in:', isLoggedIn);
+  console.log('Current userPurchases:', userPurchases);
   
   container.innerHTML = '';
   
@@ -591,18 +702,11 @@ function formatPrice(amount) {
 }
 
 function createProductCard(product, isLoggedIn, isPurchased) {
-  console.log(`Creating card for ${product.id}:`);
-  console.log('- isLoggedIn:', isLoggedIn);
-  console.log('- isPurchased:', isPurchased);
-  
   const card = document.createElement('div');
   card.className = 'product-card';
   
   if (isLoggedIn && isPurchased) {
     card.classList.add('product-purchased');
-    console.log(`✅ ${product.id} marked as purchased`);
-  } else {
-    console.log(`❌ ${product.id} not purchased or not logged in`);
   }
   
   const priceDisplay = formatPrice(product.price);
@@ -651,12 +755,7 @@ function createProductCard(product, isLoggedIn, isPurchased) {
 }
 
 function createProductButton(productId, priceDisplay, isLoggedIn, isPurchased) {
-  console.log(`Creating button for ${productId}:`);
-  console.log('- isLoggedIn:', isLoggedIn);
-  console.log('- isPurchased:', isPurchased);
-  
   if (isLoggedIn && isPurchased) {
-    console.log(`✅ Showing download button for ${productId}`);
     return `
       <button class="btn btn-success" onclick="downloadProduct('${productId}')" aria-label="Download ${productId}">
         <i class="fas fa-download"></i>
@@ -664,7 +763,6 @@ function createProductButton(productId, priceDisplay, isLoggedIn, isPurchased) {
       </button>
       <p class="purchase-note">✅ Already purchased • Click to download</p>`;
   } else {
-    console.log(`🛒 Showing buy button for ${productId}`);
     return `
       <button class="btn btn-premium btn-sparkle" onclick="buyProduct('${productId}')" aria-label="Buy ${productId} for ${priceDisplay}">
         <i class="fas fa-bolt"></i>
@@ -711,12 +809,14 @@ async function executeBuyProduct(productId) {
   showNotification(`Processing payment for ${product.name}...`, 'info');
   
   try {
+    const token = getToken();
+    
     const response = await fetch(`${API_BASE}/razorpay/create-order`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        ...(authToken && { 'Authorization': `Bearer ${authToken}` })
+        ...(token && { 'Authorization': `Bearer ${token}` })
       },
       body: JSON.stringify({ 
         productId: productId, 
@@ -854,16 +954,11 @@ async function promptForEmail(productName, price) {
 function initializeRazorpayCheckout(orderData, product) {
   console.log('initializeRazorpayCheckout called');
   console.log('Razorpay available:', typeof Razorpay !== 'undefined');
-  console.log('Order data:', orderData);
   
   if (typeof Razorpay === 'undefined') {
     console.error('Razorpay SDK not loaded');
     showNotification('Loading payment system...', 'info');
-    
-    // Try to load Razorpay SDK again
     loadRazorpaySDK();
-    
-    // Retry after SDK loads
     setTimeout(() => {
       if (typeof Razorpay !== 'undefined') {
         initializeRazorpayCheckout(orderData, product);
@@ -931,8 +1026,6 @@ function initializeRazorpayCheckout(orderData, product) {
     }
   };
   
-  console.log('Razorpay options:', options);
-  
   try {
     const rzp = new Razorpay(options);
     
@@ -947,66 +1040,8 @@ function initializeRazorpayCheckout(orderData, product) {
       showNotification('Payment system error. Please try again.', 'error');
     });
     
-    console.log('Opening Razorpay modal...');
-    
-    // Try to open the modal
-    try {
-      rzp.open();
-      console.log('✅ Razorpay modal opened successfully');
-    } catch (openError) {
-      console.error('❌ Error opening Razorpay modal:', openError);
-      
-      // Fallback: Try alternative opening method
-      showNotification('Opening payment window...', 'info');
-      
-      const fallbackHTML = `
-        <div class="modal" id="razorpayFallbackModal">
-          <div class="modal-overlay" onclick="closeRazorpayFallback()"></div>
-          <div class="modal-content">
-            <button class="modal-close" onclick="closeRazorpayFallback()">
-              <i class="fas fa-times"></i>
-            </button>
-            <div class="auth-header">
-              <div class="auth-icon">
-                <i class="fas fa-credit-card"></i>
-              </div>
-              <h3>Complete Payment</h3>
-              <p>Click the button below to complete your payment</p>
-            </div>
-            <div class="auth-form">
-              <button class="btn btn-premium btn-block" onclick="retryRazorpayOpen()">
-                <i class="fas fa-external-link-alt"></i>
-                OPEN PAYMENT PAGE
-              </button>
-              <p class="text-center mt-3" style="color: var(--gray);">
-                If payment window doesn't open, check your popup blocker
-              </p>
-            </div>
-          </div>
-        </div>`;
-      
-      const existingFallback = document.getElementById('razorpayFallbackModal');
-      if (existingFallback) existingFallback.remove();
-      
-      document.body.insertAdjacentHTML('beforeend', fallbackHTML);
-      
-      const fallbackModal = document.getElementById('razorpayFallbackModal');
-      fallbackModal.classList.add('show');
-      
-      window.closeRazorpayFallback = () => {
-        fallbackModal.remove();
-      };
-      
-      window.retryRazorpayOpen = () => {
-        try {
-          rzp.open();
-          fallbackModal.remove();
-        } catch (retryError) {
-          console.error('Retry also failed:', retryError);
-          showNotification('Please allow popups for this site', 'error');
-        }
-      };
-    }
+    rzp.open();
+    console.log('✅ Razorpay modal opened successfully');
     
   } catch (error) {
     console.error('❌ Razorpay init error:', error);
@@ -1039,9 +1074,8 @@ async function verifyRazorpayPayment(paymentData) {
         userEmail = data.email;
       }
       
-      if (data.token && !authToken) {
-        authToken = data.token;
-        localStorage.setItem('zishanhack_token', authToken);
+      if (data.token) {
+        setTokenToStorage(data.token);
       }
       
       // Force reload purchases after successful payment
@@ -1065,11 +1099,10 @@ async function verifyRazorpayPayment(paymentData) {
 // ===== DOWNLOAD FUNCTIONS =====
 async function downloadProduct(productId) {
   console.log('Download product called:', productId);
-  console.log('Auth token:', authToken ? 'Present' : 'Missing');
-  console.log('User purchases:', userPurchases);
-  console.log('Has purchase for this product:', userPurchases[productId]);
   
-  if (!authToken) {
+  const token = getToken();
+  
+  if (!token) {
     showNotification('Please login to download', 'error');
     openAuthModal();
     return;
@@ -1084,12 +1117,6 @@ async function downloadProduct(productId) {
     
     if (userPurchases[productId] !== true) {
       showNotification('You need to purchase this resource first', 'warning');
-      
-      // Show debug info
-      console.log('All purchases after reload:', userPurchases);
-      console.log('Looking for product:', productId);
-      console.log('Found:', userPurchases[productId]);
-      
       return;
     }
   }
@@ -1101,7 +1128,7 @@ async function downloadProduct(productId) {
   try {
     const response = await fetch(`${API_BASE}/api/download/${productId}`, {
       headers: { 
-        'Authorization': `Bearer ${authToken}`
+        'Authorization': `Bearer ${token}`
       },
       credentials: 'include'
     });
@@ -1111,14 +1138,12 @@ async function downloadProduct(productId) {
     if (!response.ok) {
       if (response.status === 403) {
         showNotification('Purchase verification failed.', 'warning');
-        // Refresh purchases in case status changed
         await loadPurchases();
       } else if (response.status === 401) {
         showNotification('Session expired. Please login again.', 'error');
         logout();
       } else {
-        const errorText = await response.text();
-        console.error('Download error response:', errorText);
+        console.error('Download error response:', response.status);
         showNotification('Download failed. Please try again.', 'error');
       }
       showLoading(false);
@@ -1148,7 +1173,7 @@ async function downloadProduct(productId) {
   }
 }
 
-// ===== UTILITY FUNCTIONS =====
+// ===== PAYMENT CALLBACK HANDLING =====
 function checkPaymentCallback() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderId = urlParams.get('order_id');
@@ -1184,7 +1209,9 @@ async function checkOrderStatus(orderId) {
       if (data.status === 'completed' || data.status === 'paid') {
         showNotification('Payment verified! Your purchase is now available.', 'success');
         
-        if (authToken && userEmail === data.email) {
+        const token = getToken();
+        
+        if (token && userEmail === data.email) {
           setTimeout(async () => {
             await loadPurchases();
           }, 2000);
@@ -1276,6 +1303,7 @@ function showPostPurchasePrompt(email) {
   };
 }
 
+// ===== UTILITY FUNCTIONS =====
 function validateEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email) && email.length <= 254;
@@ -1353,6 +1381,57 @@ function hideNotification() {
   }
 }
 
+function viewMyDownloads() {
+  document.getElementById('resources').scrollIntoView({ behavior: 'smooth' });
+  closeDropdown();
+}
+
+// ===== DEBUG FUNCTIONS =====
+function debugAuth() {
+  console.log('=== AUTH DEBUG ===');
+  console.log('Auth token variable:', authToken ? 'Yes' : 'No');
+  console.log('User email:', userEmail);
+  console.log('localStorage token:', localStorage.getItem('zishanhack_token') ? 'Yes' : 'No');
+  console.log('Cookie auth_token:', getTokenFromCookie() ? 'Yes' : 'No');
+  console.log('All cookies:', document.cookie);
+  console.log('User purchases:', userPurchases);
+  console.log('=== END DEBUG ===');
+  
+  // Try to get token from all sources
+  const tokenFromStorage = getTokenFromStorage();
+  const tokenFromCookie = getTokenFromCookie();
+  const currentToken = getToken();
+  
+  let message = '';
+  if (currentToken) {
+    const payload = decodeTokenPayload(currentToken);
+    const expired = payload ? isTokenExpired(payload) : true;
+    message = `✅ Logged in as: ${userEmail || 'Unknown'}\n`;
+    message += `Token expires: ${payload?.exp ? new Date(payload.exp * 1000).toLocaleString() : 'Unknown'}\n`;
+    message += `Token expired: ${expired ? 'Yes' : 'No'}`;
+  } else {
+    message = '❌ Not logged in';
+  }
+  
+  showNotification(message, currentToken ? 'success' : 'error');
+}
+
+function debugRazorpay() {
+  console.log('=== DEBUG RAZORPAY ===');
+  console.log('Razorpay SDK loaded:', typeof Razorpay !== 'undefined');
+  console.log('Auth token:', getToken() ? 'Yes' : 'No');
+  console.log('User email:', userEmail);
+  console.log('API Base:', API_BASE);
+  console.log('=== END DEBUG ===');
+}
+
+function forceRefreshPurchases() {
+  console.log('Forcing purchase refresh...');
+  loadPurchases();
+  showNotification('Refreshing purchases...', 'info');
+}
+
+// ===== COUNTDOWN TIMER =====
 function updateCountdown() {
   const countdownElement = document.getElementById('countdown');
   if (!countdownElement) return;
@@ -1376,31 +1455,6 @@ function updateCountdown() {
     `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
-// ===== DEBUG FUNCTIONS =====
-function debugUserPurchases() {
-  console.log('=== DEBUG USER PURCHASES ===');
-  console.log('Auth Token:', authToken ? 'Present' : 'Missing');
-  console.log('User Email:', userEmail);
-  console.log('Current Purchases:', userPurchases);
-  
-  PRODUCTS.forEach(product => {
-    console.log(`${product.id}: ${userPurchases[product.id] ? '✅ Purchased' : '❌ Not Purchased'}`);
-  });
-  
-  // Force reload purchases
-  console.log('Forcing purchase reload...');
-  loadPurchases();
-  
-  console.log('=== END DEBUG ===');
-  showNotification('Debug info logged to console. Press F12 to view.', 'info');
-}
-
-function forceRefreshPurchases() {
-  console.log('Forcing purchase refresh...');
-  loadPurchases();
-  showNotification('Refreshing purchases...', 'info');
-}
-
 // ===== EXPORT FUNCTIONS TO GLOBAL SCOPE =====
 window.openAuthModal = openAuthModal;
 window.closeAuthModal = closeAuthModal;
@@ -1409,18 +1463,10 @@ window.verifyOTP = verifyOTP;
 window.logout = logout;
 window.buyProduct = buyProduct;
 window.downloadProduct = downloadProduct;
-window.debugUserPurchases = debugUserPurchases;
+window.debugAuth = debugAuth;
+window.debugRazorpay = debugRazorpay;
 window.forceRefreshPurchases = forceRefreshPurchases;
-
-// Debug helper
-window.debugRazorpay = function() {
-  console.log('=== DEBUG RAZORPAY ===');
-  console.log('Razorpay SDK loaded:', typeof Razorpay !== 'undefined');
-  console.log('Auth token:', authToken ? 'Yes' : 'No');
-  console.log('User email:', userEmail);
-  console.log('API Base:', API_BASE);
-  console.log('=== END DEBUG ===');
-};
+window.viewMyDownloads = viewMyDownloads;
 
 // Start countdown timer
 setInterval(updateCountdown, 1000);
