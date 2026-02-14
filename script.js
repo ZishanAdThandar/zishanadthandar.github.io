@@ -8,7 +8,7 @@ const PRODUCTS = [
   {
     id: 'oscp_bundle',
     name: 'OSCP+ Obsidian Notes Bundle',
-    description: 'Complete preparation package for OSCP certification.',
+    description: 'Complete preparation package for OSCP certification with Obsidian format.',
     price: 97,
     originalPrice: 997,
     discount: '90% OFF',
@@ -34,7 +34,7 @@ const PRODUCTS = [
   {
     id: 'crta_notes',
     name: 'CRTA Copy Paste Commands eBook',
-    description: 'Battle-tested notes with copy-paste commands for CyberWarFare Labs CRTA Assessment success.',
+    description: 'Battle-tested notes with copy-paste commands for CyberWarFare Labs CRTA Assessment.',
     price: 5, 
     originalPrice: 50,
     discount: '90% OFF',
@@ -47,7 +47,7 @@ const PRODUCTS = [
   {
     id: 'oswp_notes',
     name: 'OSWP Copy Paste Commands eBook',
-    description: 'Wireless pentesting notes and cheatsheet for Offsec OSWP Certification Test.',
+    description: 'Wireless pentesting notes and cheatsheet for Offsec OSWP Certification.',
     price: 27,
     originalPrice: 270,
     discount: '90% OFF',
@@ -589,18 +589,21 @@ function createProductCard(product, isLoggedIn, isPurchased) {
   const originalPriceDisplay = `$${product.originalPrice}`;
   
   card.innerHTML = `
+    <div class="product-header">
+      <div class="product-icon" style="background: rgba(${hexToRgb(product.iconColor)}, 0.1);">
+        <i class="${product.icon}" style="color: ${product.iconColor};"></i>
+      </div>
+      <div class="product-title-group">
+        <h3 class="product-title">${product.name}</h3>
+        <p class="product-description">${product.description}</p>
+      </div>
+    </div>
+    
     <div class="product-badges">
       ${product.badges.map(badge => `
         <span class="product-badge">${badge}</span>
       `).join('')}
     </div>
-    
-    <div class="product-icon" style="background: rgba(${hexToRgb(product.iconColor)}, 0.1);">
-      <i class="${product.icon}" style="color: ${product.iconColor};"></i>
-    </div>
-    
-    <h3 class="product-title">${product.name}</h3>
-    <p class="product-description">${product.description}</p>
     
     <ul class="product-features">
       ${product.features.map(feature => `
@@ -609,9 +612,11 @@ function createProductCard(product, isLoggedIn, isPurchased) {
     </ul>
     
     <div class="product-price">
-      <span class="original-price">${originalPriceDisplay}</span>
+      <div class="price-header">
+        <span class="original-price">${originalPriceDisplay}</span>
+        <span class="discount-badge">${product.discount}</span>
+      </div>
       <div class="current-price">${priceDisplay}</div>
-      <span class="discount-badge">${product.discount}</span>
       <div class="sales-count">
         <i class="fas fa-users"></i> ${product.salesCount} Sold
       </div>
@@ -631,15 +636,13 @@ function createProductButton(productId, priceDisplay, isLoggedIn, isPurchased) {
       <button class="btn btn-success" onclick="downloadProduct('${productId}')">
         <i class="fas fa-download"></i>
         DOWNLOAD NOW
-      </button>
-      <p class="purchase-note">✅ Already purchased • Click to download</p>`;
+      </button>`;
   } else {
     return `
       <button class="btn btn-premium btn-sparkle" onclick="buyProduct('${productId}')">
         <i class="fas fa-bolt"></i>
         GET INSTANT ACCESS - ${priceDisplay}
-      </button>
-      <p class="purchase-note">One-time payment • Lifetime access • 90% OFF</p>`;
+      </button>`;
   }
 }
 

@@ -1,4 +1,3 @@
-
 :root {
     --primary: #6366f1;
     --primary-dark: #4f46e5;
@@ -468,6 +467,26 @@ section {
     margin: 0 auto;
 }
 
+/* Global Offer Banner */
+.offer-banner {
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid var(--primary);
+    border-radius: 50px;
+    padding: 1rem 2rem;
+    text-align: center;
+    margin: -2rem 0 3rem;
+    color: var(--light);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.offer-banner i {
+    color: var(--primary);
+}
+
 /* Buttons */
 .btn {
     display: inline-flex;
@@ -614,24 +633,12 @@ section {
     opacity: 1;
 }
 
-.product-badges {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
+/* Product Header with Icon and Title Side by Side */
+.product-header {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: flex-end;
-}
-
-.product-badge {
-    background: var(--gradient-accent);
-    color: white;
-    padding: 0.4rem 0.8rem;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
 }
 
 .product-icon {
@@ -644,20 +651,44 @@ section {
     justify-content: center;
     font-size: 2.5rem;
     color: var(--primary);
-    margin-bottom: 1.5rem;
+    flex-shrink: 0;
+}
+
+.product-title-group {
+    flex: 1;
 }
 
 .product-title {
     font-size: 1.8rem;
     font-weight: 800;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: white;
+    line-height: 1.2;
 }
 
 .product-description {
     color: var(--gray);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Badges below icon and title */
+.product-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     margin-bottom: 1.5rem;
-    line-height: 1.6;
+}
+
+.product-badge {
+    background: var(--gradient-accent);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 .product-features {
@@ -679,42 +710,70 @@ section {
     font-size: 1.1rem;
 }
 
+/* ===== UPDATED: Centered Price Section ===== */
 .product-price {
     margin: 2rem 0;
     padding: 1.5rem;
     background: rgba(255, 255, 255, 0.03);
     border-radius: 12px;
     border: 1px solid var(--border);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative background effect */
+.product-price::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: radial-gradient(circle at 30% 50%, rgba(99, 102, 241, 0.1), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.product-price > * {
+    position: relative;
+    z-index: 1;
+}
+
+.price-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .original-price {
     text-decoration: line-through;
     color: var(--gray);
-    font-size: 1rem;
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.current-price {
-    font-size: 3rem;
-    font-weight: 900;
-    color: white;
-    margin: 0.5rem 0;
-    background: linear-gradient(135deg, #f59e0b, #ef4444);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    font-size: 1.2rem;
 }
 
 .discount-badge {
     background: var(--gradient-accent);
     color: white;
     padding: 0.4rem 1rem;
-    border-radius: 6px;
+    border-radius: 50px;
     font-size: 0.9rem;
     font-weight: 700;
     display: inline-block;
-    margin-top: 0.5rem;
+}
+
+.current-price {
+    font-size: 3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.2;
+    text-align: center;
 }
 
 .sales-count {
@@ -745,31 +804,33 @@ section {
     color: var(--success);
 }
 
+/* ===== UPDATED: Centered Button Section ===== */
 .product-actions {
     margin: 1.5rem 0;
-}
-
-.purchase-note {
-    text-align: center;
-    color: var(--gray);
-    font-size: 0.85rem;
-    margin-top: 0.5rem;
-    line-height: 1.4;
-}
-
-.product-guarantee {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    color: var(--gray);
-    font-size: 0.9rem;
 }
 
-.product-guarantee i {
-    color: var(--success);
+.product-actions .btn {
+    min-width: 280px;
+    max-width: 100%;
+}
+
+/* Subtle animation for the CTA button */
+.product-actions .btn-premium {
+    animation: subtle-pulse 2s infinite;
+}
+
+@keyframes subtle-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* For purchased state */
+.product-actions .btn-success {
+    min-width: 280px;
 }
 
 /* Testimonials */
@@ -1679,6 +1740,24 @@ input:-webkit-autofill:active {
         padding: 1.5rem;
     }
     
+    .product-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .product-title-group {
+        width: 100%;
+    }
+    
+    .product-badges {
+        justify-content: center;
+    }
+    
+    .product-actions .btn {
+        min-width: 100%;
+    }
+    
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -1804,7 +1883,8 @@ input:-webkit-autofill:active {
     }
     
     .trust-bar,
-    .cta-badge {
+    .cta-badge,
+    .product-actions .btn-premium {
         animation: none;
     }
     
