@@ -620,11 +620,6 @@ function createProductCard(product, isLoggedIn, isPurchased) {
     <div class="product-actions">
       ${createProductButton(product.id, priceDisplay, isLoggedIn, isPurchased)}
     </div>
-    
-    <div class="product-guarantee">
-      <i class="fas fa-shield-check"></i>
-      <span>30-Day Money Back Guarantee • Instant Access • Lifetime Updates</span>
-    </div>
   `;
   
   return card;
