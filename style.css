@@ -113,7 +113,7 @@ h1, h2, h3, h4, h5, h6 {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 1001;
     animation: pulse 2s infinite;
 }
 
@@ -136,7 +136,7 @@ h1, h2, h3, h4, h5, h6 {
     background: rgba(15, 23, 42, 0.95);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    z-index: 999;
+    z-index: 1000;
     padding: 15px 0;
     transition: all 0.3s ease;
 }
@@ -1633,7 +1633,7 @@ input:-webkit-autofill:active {
     background: #334155 !important;
 }
 
-/* Responsive Design */
+/* ===== MOBILE RESPONSIVE FIXES ===== */
 @media (max-width: 1024px) {
     .hero-gradient {
         font-size: 3rem;
@@ -1657,18 +1657,54 @@ input:-webkit-autofill:active {
 }
 
 @media (max-width: 768px) {
+    /* Trust Bar adjustments */
     .trust-bar {
-        font-size: 13px;
-        padding: 10px 0;
+        font-size: 12px;
+        padding: 8px 0;
+        line-height: 1.3;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1001;
+        white-space: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
     
+    .trust-bar .container {
+        display: inline-block;
+        padding: 0 15px;
+        min-width: 100%;
+    }
+    
+    .trust-bar i {
+        margin-right: 4px;
+    }
+    
+    /* Header adjustments - position below trust bar */
     .header {
-        top: 42px;
+        position: fixed;
+        top: 40px; /* Height of trust bar */
+        left: 0;
+        right: 0;
+        padding: 8px 0;
+        z-index: 1000;
     }
     
+    .nav-brand .logo {
+        font-size: 1.5rem;
+    }
+    
+    .nav-brand .logo i {
+        font-size: 1.5rem;
+        margin-right: 6px;
+    }
+    
+    /* Mobile menu */
     .nav-menu {
         position: fixed;
-        top: 100px;
+        top: 100px; /* trust bar (40px) + header (60px) */
         left: 0;
         right: 0;
         background: var(--dark);
@@ -1676,10 +1712,15 @@ input:-webkit-autofill:active {
         padding: 2rem;
         gap: 1.5rem;
         border-bottom: 1px solid var(--border);
+        border-top: 1px solid var(--border);
         transform: translateY(-100%);
         opacity: 0;
         transition: all 0.3s ease;
         display: none;
+        z-index: 999;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+        box-shadow: var(--shadow-lg);
     }
     
     .nav-menu.show {
@@ -1692,48 +1733,72 @@ input:-webkit-autofill:active {
         display: block;
     }
     
+    /* Hero section adjustments - add top padding to account for fixed elements */
     .hero-section {
-        padding: 140px 0 60px;
+        padding: 140px 0 60px; /* Increased top padding */
+        margin-top: 0;
     }
     
     .hero-gradient {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
     
     .hero-subtitle {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        padding: 0 15px;
     }
     
     .hero-stats {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
+        padding: 2rem 0;
     }
     
     .stat-number {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
     
+    .stat-label {
+        font-size: 0.8rem;
+    }
+    
+    .trust-badges {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .trust-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    /* Section adjustments */
     section {
-        padding: 60px 0;
+        padding: 50px 0;
     }
     
     .section-title {
         font-size: 2rem;
     }
     
-    .modal-content {
-        padding: 2rem;
-        width: 95%;
+    .section-subtitle {
+        font-size: 1rem;
+        padding: 0 15px;
     }
     
-    .notification {
-        left: 20px;
-        right: 20px;
-        max-width: none;
+    .section-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
     }
     
+    /* Product card adjustments */
     .products-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
     .product-card {
@@ -1744,71 +1809,138 @@ input:-webkit-autofill:active {
         flex-direction: column;
         align-items: center;
         text-align: center;
+        gap: 1rem;
     }
     
-    .product-title-group {
-        width: 100%;
+    .product-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+    }
+    
+    .product-title {
+        font-size: 1.5rem;
     }
     
     .product-badges {
         justify-content: center;
     }
     
-    .product-actions .btn {
-        min-width: 100%;
+    .product-price {
+        padding: 1rem;
     }
     
+    .current-price {
+        font-size: 2.2rem;
+    }
+    
+    .product-actions .btn {
+        min-width: 100%;
+        width: 100%;
+    }
+    
+    /* Auth section in mobile */
+    .auth-section {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .auth-section .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .user-dropdown {
+        width: 100%;
+    }
+    
+    .user-dropdown .btn {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .user-dropdown .dropdown-menu {
+        position: static;
+        margin-top: 10px;
+        width: 100%;
+        box-shadow: none;
+        border: 1px solid var(--border);
+    }
+    
+    /* Testimonial adjustments */
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 15px;
+    }
+    
+    .testimonial-card {
+        padding: 1.5rem;
+    }
+    
+    /* FAQ adjustments */
+    .faq-grid {
+        padding: 0 15px;
+    }
+    
+    .faq-question {
+        padding: 1rem;
+        font-size: 0.95rem;
+    }
+    
+    /* CTA adjustments */
+    .cta-title {
+        font-size: 2rem;
+    }
+    
+    .cta-subtitle {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+    
+    .cta-badge {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .cta-guarantee {
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        padding: 0 15px;
+    }
+    
+    /* Footer adjustments */
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
+        padding: 0 15px;
+    }
+    
+    .footer-brand .logo {
+        font-size: 1.8rem;
+    }
+    
+    .footer-social {
+        justify-content: center;
     }
     
     .security-badges {
         flex-direction: column;
         align-items: center;
+        gap: 0.75rem;
     }
     
-    .security-enhanced::after {
-        font-size: 0.7rem;
+    .security-badge {
+        width: 100%;
+        justify-content: center;
     }
     
-    .international-badge {
-        font-size: 0.7rem;
-        padding: 0.3rem 0.6rem;
-    }
-    
-    .payment-security-notice {
-        font-size: 0.8rem;
-        padding: 0.75rem;
-    }
-    
-    .cta-title {
-        font-size: 2.2rem;
-    }
-    
-    .cta-badge {
-        font-size: 0.8rem;
-        padding: 0.6rem 1.2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .trust-badges {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .hero-gradient {
-        font-size: 2rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .btn {
-        padding: 0.875rem 1.5rem;
-        font-size: 0.95rem;
+    /* Modal adjustments */
+    .modal-content {
+        padding: 2rem;
+        width: 95%;
+        max-height: 85vh;
     }
     
     .otp-input {
@@ -1817,35 +1949,173 @@ input:-webkit-autofill:active {
         font-size: 1.5rem;
     }
     
-    .current-price {
-        font-size: 2.5rem;
+    /* Notification adjustments */
+    .notification {
+        left: 20px;
+        right: 20px;
+        min-width: auto;
+        max-width: none;
+        bottom: 20px;
+    }
+    
+    .notification-content {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .trust-bar {
+        font-size: 11px;
+        padding: 6px 0;
+    }
+    
+    .header {
+        top: 35px; /* Match trust bar height */
+        padding: 6px 0;
+    }
+    
+    .nav-menu {
+        top: 85px; /* trust bar (35px) + header (50px) */
+    }
+    
+    .hero-section {
+        padding: 120px 0 50px;
+    }
+    
+    .hero-gradient {
+        font-size: 1.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-description {
+        font-size: 0.95rem;
+    }
+    
+    .trust-badge {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
+    }
+    
+    .stat-number {
+        font-size: 1.6rem;
     }
     
     .section-title {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+    }
+    
+    .product-title {
+        font-size: 1.3rem;
+    }
+    
+    .current-price {
+        font-size: 2rem;
+    }
+    
+    .original-price {
+        font-size: 1rem;
+    }
+    
+    .discount-badge {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.8rem;
     }
     
     .cta-title {
-        font-size: 1.8rem;
-    }
-    
-    .notification {
-        min-width: 280px;
-        left: 10px;
-        right: 10px;
+        font-size: 1.6rem;
     }
     
     .modal-content {
         padding: 1.5rem;
     }
     
-    .footer-social {
-        justify-content: center;
+    .otp-inputs {
+        gap: 0.5rem;
     }
     
-    .security-badge {
-        font-size: 0.75rem;
-        padding: 0.4rem 0.8rem;
+    .otp-input {
+        width: 40px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .trust-bar {
+        font-size: 10px;
+        padding: 5px 0;
+    }
+    
+    .header {
+        top: 32px;
+        padding: 5px 0;
+    }
+    
+    .nav-brand .logo {
+        font-size: 1.3rem;
+    }
+    
+    .nav-brand .logo i {
+        font-size: 1.3rem;
+    }
+    
+    .nav-menu {
+        top: 80px;
+    }
+    
+    .hero-section {
+        padding: 110px 0 40px;
+    }
+    
+    .hero-gradient {
+        font-size: 1.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 1.4rem;
+    }
+    
+    .stat-label {
+        font-size: 0.7rem;
+    }
+    
+    .product-title {
+        font-size: 1.2rem;
+    }
+    
+    .product-description {
+        font-size: 0.85rem;
+    }
+    
+    .current-price {
+        font-size: 1.8rem;
+    }
+    
+    .otp-input {
+        width: 35px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Fix for iOS Safari to prevent zoom on input focus */
+@media screen and (-webkit-min-device-pixel-ratio: 0) { 
+    select,
+    textarea,
+    input {
+        font-size: 16px !important;
     }
 }
 
