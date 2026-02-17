@@ -179,6 +179,25 @@
             outline: none;
         }
         
+        /* Mobile Menu Toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .nav-toggle:hover,
+        .nav-toggle:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+        
         /* Legal Content */
         .legal-container {
             max-width: 800px;
@@ -340,20 +359,90 @@
             gap: 0.5rem;
         }
         
-        /* Responsive Design */
+        .footer-note a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-note a:hover {
+            color: var(--primary);
+        }
+        
+        /* Responsive Design - FIXED VERSION */
         @media (max-width: 768px) {
             .trust-bar {
                 font-size: 13px;
                 padding: 10px 0;
+                white-space: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .trust-bar .container {
+                display: inline-block;
+                min-width: 100%;
             }
             
             .header {
                 top: 42px;
-                padding: 12px 0;
+                padding: 10px 0;
             }
             
+            .nav-brand .logo {
+                font-size: 1.5rem;
+            }
+            
+            .nav-brand .logo i {
+                font-size: 1.5rem;
+                margin-right: 6px;
+            }
+            
+            /* Show mobile toggle button */
+            .nav-toggle {
+                display: block;
+                order: 2;
+            }
+            
+            /* Hide desktop nav-menu by default on mobile */
             .nav-menu {
+                position: fixed;
+                top: 100px;
+                left: 0;
+                right: 0;
+                background: var(--dark);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--border);
+                border-top: 1px solid var(--border);
+                transform: translateY(-150%);
+                opacity: 0;
+                transition: all 0.3s ease;
                 display: none;
+                z-index: 998;
+                max-height: calc(100vh - 100px);
+                overflow-y: auto;
+                box-shadow: var(--shadow-lg);
+            }
+            
+            .nav-menu.show {
+                display: flex;
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            /* Hide back button on mobile - will be in mobile menu */
+            .header .btn-outline {
+                display: none;
+            }
+            
+            /* Add back button to mobile menu */
+            .nav-menu .mobile-back {
+                display: flex !important;
+                margin-top: 1rem;
+                border-top: 1px solid var(--border);
+                padding-top: 1.5rem;
             }
             
             .legal-container {
@@ -379,8 +468,30 @@
         }
         
         @media (max-width: 480px) {
+            .trust-bar {
+                font-size: 11px;
+                padding: 8px 0;
+            }
+            
+            .header {
+                top: 38px;
+                padding: 8px 0;
+            }
+            
+            .nav-brand .logo {
+                font-size: 1.3rem;
+            }
+            
+            .nav-brand .logo i {
+                font-size: 1.3rem;
+            }
+            
+            .nav-menu {
+                top: 85px;
+            }
+            
             .legal-container {
-                padding: 100px 15px 30px;
+                padding: 100px 12px 30px;
             }
             
             .section-title {
@@ -393,7 +504,7 @@
             }
             
             .legal-nav a {
-                width: 200px;
+                width: 100%;
                 text-align: center;
             }
             
@@ -403,6 +514,33 @@
             
             .legal-section h2 {
                 font-size: 1.5rem;
+            }
+            
+            .legal-section h2 i {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .trust-bar {
+                font-size: 10px;
+                padding: 6px 0;
+            }
+            
+            .header {
+                top: 32px;
+            }
+            
+            .nav-menu {
+                top: 75px;
+            }
+            
+            .legal-section {
+                padding: 1rem;
+            }
+            
+            .legal-section h2 {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -427,7 +565,12 @@
                     </a>
                 </div>
                 
-                <div class="nav-menu">
+                <!-- Mobile Menu Toggle Button -->
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="nav-menu" id="navMenu">
                     <a href="/" class="nav-link">
                         <i class="fas fa-home"></i>
                         Home
@@ -436,13 +579,18 @@
                         <i class="fas fa-box"></i>
                         Resources
                     </a>
-                    <a href="#terms" class="nav-link">
+                    <a href="#terms" class="nav-link" onclick="closeMobileMenu()">
                         <i class="fas fa-file-contract"></i>
                         Terms
                     </a>
-                    <a href="#privacy" class="nav-link">
+                    <a href="#privacy" class="nav-link" onclick="closeMobileMenu()">
                         <i class="fas fa-user-shield"></i>
                         Privacy
+                    </a>
+                    <!-- Mobile-only back button -->
+                    <a href="/" class="nav-link mobile-back" style="display: none;">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Home
                     </a>
                 </div>
                 
@@ -602,7 +750,7 @@
                 <p class="copyright">&copy; 2026 ZishanHack. All rights reserved.</p>
                 <p class="footer-note">
                     <i class="fas fa-balance-scale"></i>
-                    <a href="/legal.html" style="color: var(--gray); text-decoration: none;">Legal Information</a>
+                    <a href="/legal.html">Legal Information</a>
                 </p>
             </div>
         </div>
@@ -610,23 +758,86 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu toggle
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+            
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('show');
+                    // Change icon based on menu state
+                    const icon = this.querySelector('i');
+                    if (navMenu.classList.contains('show')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+                        navMenu.classList.remove('show');
+                        const icon = navToggle.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            }
+            
             // Smooth scroll for anchor links
-            document.querySelectorAll('.legal-nav a').forEach(link => {
+            document.querySelectorAll('.legal-nav a, .nav-link[href^="#"]').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const targetId = link.getAttribute('href');
                     const targetSection = document.querySelector(targetId);
                     
-                    // Update active nav
-                    document.querySelectorAll('.legal-nav a').forEach(a => a.classList.remove('active'));
-                    link.classList.add('active');
-                    
-                    // Scroll to section
                     if (targetSection) {
+                        // Update active nav in legal-nav
+                        if (link.closest('.legal-nav')) {
+                            document.querySelectorAll('.legal-nav a').forEach(a => a.classList.remove('active'));
+                            link.classList.add('active');
+                        }
+                        
+                        // Close mobile menu if open
+                        if (navMenu && navMenu.classList.contains('show')) {
+                            navMenu.classList.remove('show');
+                            const icon = navToggle.querySelector('i');
+                            icon.classList.remove('fa-times');
+                            icon.classList.add('fa-bars');
+                        }
+                        
+                        // Scroll to section
                         window.scrollTo({
                             top: targetSection.offsetTop - 100,
                             behavior: 'smooth'
                         });
+                    }
+                });
+            });
+            
+            // Highlight active section on scroll
+            window.addEventListener('scroll', () => {
+                const sections = document.querySelectorAll('.legal-section');
+                const navLinks = document.querySelectorAll('.legal-nav a');
+                
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 150;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
                     }
                 });
             });
