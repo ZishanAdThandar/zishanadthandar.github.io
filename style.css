@@ -1436,23 +1436,6 @@ input:-webkit-autofill:active {
     justify-content: center;
 }
 
-/* Security warning */
-.security-warning {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    border-radius: 8px;
-    padding: 0.75rem;
-    margin: 1rem 0;
-    color: var(--danger);
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.security-warning i {
-    font-size: 1rem;
-}
 
 /* Fix for email input in modals - prevent zoom on iOS */
 .email-input {
