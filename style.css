@@ -855,12 +855,12 @@ section {
 .testimonial-card::before {
     content: '"';
     position: absolute;
-    top: 1rem;
-    left: 1.5rem;
+    top: 0.5rem;
+    right: 1rem;
     font-size: 5rem;
     color: var(--primary);
     opacity: 0.2;
-    font-family: serif;
+    gap: 0.2rem;
 }
 
 .stars {
