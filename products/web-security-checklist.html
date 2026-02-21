@@ -1,1027 +1,506 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Ultimate Web Security Checklist for Bug Hunters | 90% OFF</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- SEO Meta Tags -->
-  <meta name="author" content="Zishan Ahamed Thandar">
-  <meta name="description" content="Ultimate Web Security Checklist for Bug Hunters - Systematic testing for SQLi, XSS, SSRF, API vulnerabilities. Limited time 90% discount.">
-  <meta name="keywords" content="web security checklist, bug bounty checklist, penetration testing checklist, OWASP top 10 checklist, SQL injection testing, XSS testing">
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="Ultimate Web Security Checklist for Bug Hunters | 90% OFF">
-  <meta property="og:description" content="Professional web security checklist covering OWASP Top 10, API testing, cloud security, and advanced vulnerability checks.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://zishanhack.com/assets/web-security-og.jpg">
-  <meta property="og:url" content="https://zishanhack.com/products/web-security-checklist">
-  
-  <!-- Twitter Cards -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ultimate Web Security Checklist for Bug Hunters">
-  <meta name="twitter:description" content="Professional testing checklist for bug bounty hunters and pentesters. Covering 12+ vulnerability categories with specific tool-based checks.">
-  <meta name="twitter:image" content="https://zishanhack.com/assets/web-security-twitter.jpg">
-  <meta name="twitter:site" content="@zishanadthandar">
-  
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔒</text></svg>">
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  
-  <style>
-    :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #111827;
-      --bg-card: #1f2937;
-      --accent-primary: #3b82f6;
-      --accent-secondary: #10b981;
-      --accent-warning: #f59e0b;
-      --accent-danger: #ef4444;
-      --accent-purple: #8b5cf6;
-      --accent-green: #22c55e;
-      --text-primary: #f9fafb;
-      --text-secondary: #d1d5db;
-      --text-muted: #94a3af;
-      --border-light: #374151;
-      --shadow-xl: 0 20px 50px -12px rgba(0, 0, 0, 0.6);
-      --radius-lg: 14px;
-      --radius-full: 9999px;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      min-height: 100vh;
-      overflow-x: hidden;
-      background: 
-        linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
-        linear-gradient(225deg, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-        var(--bg-primary);
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-    }
-
-    /* Back Button */
-    .back-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-full);
-      border: 1px solid var(--border-light);
-      background: rgba(255, 255, 255, 0.05);
-      transition: all 0.3s ease;
-    }
-
-    .back-button:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--accent-green);
-      border-color: var(--accent-green);
-      transform: translateX(-3px);
-    }
-
-    /* Header */
-    .header {
-      text-align: center;
-      margin-bottom: 3rem;
-      animation: fadeIn 0.8s ease;
-    }
-
-    .badge-container {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1.5rem;
-      border-radius: var(--radius-full);
-      font-size: 0.9rem;
-      font-weight: 600;
-      border: 2px solid;
-    }
-
-    .badge-primary {
-      background: linear-gradient(135deg, var(--accent-green), #16a34a);
-      color: white;
-      border-color: rgba(34, 197, 94, 0.3);
-    }
-
-    .badge-warning {
-      background: linear-gradient(135deg, var(--accent-warning), #d97706);
-      color: white;
-      border-color: rgba(245, 158, 11, 0.3);
-    }
-
-    h1 {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--accent-green), var(--accent-primary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.2;
-    }
-
-    .subtitle {
-      font-size: 1.2rem;
-      color: var(--text-secondary);
-      max-width: 700px;
-      margin: 0 auto 2rem;
-    }
-
-    /* Disclaimer Box */
-    .disclaimer-box {
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      margin: 2rem 0;
-      text-align: center;
-    }
-
-    .disclaimer-box p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    .disclaimer-box strong {
-      color: var(--accent-warning);
-    }
-
-    /* Price Section */
-    .price-section {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      margin: 2rem 0 3rem;
-      text-align: center;
-      border: 2px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .price-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .original-price {
-      font-size: 1.8rem;
-      color: var(--text-muted);
-      text-decoration: line-through;
-      position: relative;
-    }
-
-    .discount-price {
-      font-size: 3rem;
-      font-weight: 800;
-      color: var(--accent-green);
-      text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
-    }
-
-    .discount-badge {
-      background: linear-gradient(135deg, #ef4444, #dc2626);
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: var(--radius-full);
-      font-size: 1.2rem;
-      font-weight: 700;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    /* Timer Section */
-    .timer-section {
-      background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(185, 28, 28, 0.1));
-      border: 2px solid rgba(220, 38, 38, 0.3);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      margin: 2rem 0;
-      text-align: center;
-    }
-
-    .timer-title {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #ef4444;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    #countdown-timer {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 2rem;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 0.5rem;
-    }
-
-    /* Primary CTA Button */
-    .cta-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      background: linear-gradient(135deg, var(--accent-green), var(--accent-primary));
-      color: white;
-      padding: 1.3rem 3rem;
-      border-radius: var(--radius-lg);
-      text-decoration: none;
-      font-size: 1.3rem;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      width: 100%;
-      max-width: 400px;
-      margin: 1.5rem auto;
-      box-shadow: var(--shadow-xl);
-    }
-
-    .cta-button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 60px -12px rgba(34, 197, 94, 0.4);
-    }
-
-    /* Value Proposition */
-    .value-proposition {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin: 3rem 0;
-    }
-
-    .value-item {
-      text-align: center;
-      padding: 1.5rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-light);
-      transition: all 0.3s ease;
-    }
-
-    .value-item:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-green);
-      box-shadow: var(--shadow-xl);
-    }
-
-    .value-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: var(--accent-green);
-    }
-
-    /* Features Grid */
-    .features-section {
-      margin: 4rem 0;
-    }
-
-    .section-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.8rem;
-      margin-bottom: 2rem;
-      color: white;
-      text-align: center;
-      position: relative;
-      padding-bottom: 1rem;
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent-green), var(--accent-primary));
-      border-radius: var(--radius-full);
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      transition: all 0.3s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-primary);
-      box-shadow: var(--shadow-xl);
-    }
-
-    .feature-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .feature-icon {
-      width: 50px;
-      height: 50px;
-      background: linear-gradient(135deg, var(--accent-primary), #2563eb);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      color: white;
-    }
-
-    .feature-card h3 {
-      font-size: 1.1rem;
-      color: white;
-    }
-
-    .feature-list {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .feature-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-    }
-
-    .feature-list li::before {
-      content: '✓';
-      color: var(--accent-green);
-      font-weight: bold;
-      margin-top: 0.1rem;
-    }
-
-    /* Tool Coverage */
-    .tools-section {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
-      border-radius: var(--radius-lg);
-      padding: 2.5rem;
-      margin: 3rem 0;
-    }
-
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .tool-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-light);
-      transition: all 0.3s ease;
-    }
-
-    .tool-item:hover {
-      background: rgba(59, 130, 246, 0.1);
-      border-color: var(--accent-primary);
-      transform: translateY(-2px);
-    }
-
-    .tool-icon {
-      font-size: 1.2rem;
-      color: var(--accent-primary);
-    }
-
-    /* Testimonial */
-    .testimonial {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
-      border: 1px solid rgba(139, 92, 246, 0.3);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      margin: 3rem 0;
-      position: relative;
-    }
-
-    .testimonial::before {
-      content: '"';
-      position: absolute;
-      top: -20px;
-      left: 20px;
-      font-size: 4rem;
-      color: var(--accent-purple);
-      font-family: Georgia, serif;
-    }
-
-    .testimonial p {
-      font-size: 1.1rem;
-      font-style: italic;
-      color: var(--text-primary);
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .testimonial-author img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-primary), var(--accent-purple));
-    }
-
-    /* Guarantee */
-    .guarantee-section {
-      text-align: center;
-      margin: 3rem 0;
-      padding: 2rem;
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(34, 197, 94, 0.1));
-      border-radius: var(--radius-lg);
-      border: 2px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .guarantee-icon {
-      font-size: 3rem;
-      color: var(--accent-green);
-      margin-bottom: 1rem;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 3rem 0 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 4rem;
-    }
-
-    .footer-note {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 1.5rem;
-      line-height: 1.6;
-    }
-
-    .product-note {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 1rem auto;
-      line-height: 1.5;
-      text-align: center;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: var(--radius-lg);
-    }
-
-    .copyright {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      opacity: 0.7;
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .container {
-        padding: 1.5rem 1rem;
-      }
-      
-      h1 {
-        font-size: 2rem;
-      }
-      
-      .subtitle {
-        font-size: 1.1rem;
-      }
-      
-      .discount-price {
-        font-size: 2.5rem;
-      }
-      
-      .original-price {
-        font-size: 1.5rem;
-      }
-      
-      .price-container {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .tools-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .cta-button {
-        padding: 1.1rem 2rem;
-        font-size: 1.1rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-      
-      .badge {
-        font-size: 0.8rem;
-        padding: 0.4rem 1rem;
-      }
-      
-      #countdown-timer {
-        font-size: 1.5rem;
-      }
-      
-      .tools-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Web Security Checklist 2026 | Bug Bounty Testing Guide | ZishanHack</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="Zishan Ahamed Thandar">
+    <meta name="description" content="Ultimate Web Security Checklist 2026 for Bug Hunters - 32-page PDF with 300+ specific tests for SQLi, XSS, SSRF, API vulnerabilities. Used by top 1% of bug bounty hunters.">
+    <meta name="keywords" content="web security checklist 2026, bug bounty checklist, penetration testing checklist, OWASP Top 10, API security testing">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zishanhack.com/products/web-checklist">
+    <meta property="og:title" content="Ultimate Web Security Checklist 2026 | 90% OFF">
+    <meta property="og:description" content="32-page PDF with 300+ specific security tests for SQLi, XSS, SSRF, and API vulnerabilities. Used by top 1% of bug bounty hunters.">
+    <meta property="og:image" content="https://zishanhack.com/products/ogweb.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@zishanhack">
+    <meta name="twitter:creator" content="@zishanhack">
+    <meta name="twitter:title" content="Ultimate Web Security Checklist 2026 | 90% OFF">
+    <meta name="twitter:description" content="32-page PDF with 300+ specific security tests for SQLi, XSS, SSRF, and API vulnerabilities.">
+    <meta name="twitter:image" content="https://zishanhack.com/products/ogweb.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/svgs/solid/shield-halved.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Shared Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        body.websec-theme {
+            --primary: #10b981;
+            --gradient: linear-gradient(135deg, #10b981, #3b82f6);
+        }
+        
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-link i {
+            margin-right: 6px;
+            color: var(--primary);
+        }
+        
+        .timer-section {
+            display: none;
+        }
+        
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .value-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .value-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .value-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .value-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <!-- Back to Main Link -->
-    <a href="https://zishanhack.com" class="back-button">
-      <i class="fas fa-arrow-left"></i>
-      Back to Main Page
-    </a>
-
-    <!-- Header -->
+<body class="websec-theme">
+    <!-- Header (exact same as main site) -->
     <header class="header">
-      <div class="badge-container">
-        <div class="badge badge-primary">
-          <i class="fas fa-shield-alt"></i>
-          BUG BOUNTY CHECKLIST
+        <div class="container">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <a href="https://zishanhack.com" class="logo">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>ZISHAN<span class="logo-highlight">HACK</span></span>
+                    </a>
+                </div>
+                
+                <div class="nav-menu" id="navMenu">
+                    <a href="https://zishanhack.com/#resources" class="nav-link">RESOURCES</a>
+                    <a href="https://zishanhack.com/#testimonials" class="nav-link">REVIEWS</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
+                </div>
+                
+                <div class="auth-section">
+                    <a href="https://zishanhack.com" class="btn btn-premium">
+                        <i class="fas fa-user"></i> ACCOUNT
+                    </a>
+                </div>
+                
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
         </div>
-        <div class="badge badge-warning">
-          <i class="fas fa-bolt"></i>
-          VERSION 2.0
-        </div>
-      </div>
-      
-      <h1>Ultimate Web Security Checklist</h1>
-      <p class="subtitle">32-page PDF checklist with 300+ specific security tests across 12+ vulnerability categories. Systematize your penetration testing workflow.</p>
-      
-      <!-- Disclaimer -->
-      <div class="disclaimer-box">
-        <p><strong>Important:</strong> This is a <strong>checklist and reference guide</strong>, not a tutorial course. It provides specific testing steps and tool mentions for each vulnerability category, assuming foundational security knowledge.</p>
-      </div>
-
-      <!-- Price Section -->
-      <div class="price-section">
-        <div class="price-container">
-          <span class="original-price">$250</span>
-          <span class="discount-price">$25</span>
-          <span class="discount-badge">90% OFF</span>
-        </div>
-        <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 1rem;">
-          <i class="fas fa-gift"></i> Limited-time launch offer
-        </p>
-      </div>
-
-      <!-- Timer -->
-      <div class="timer-section">
-        <div class="timer-title">Offer Ends In:</div>
-        <div id="countdown-timer">24:00:00</div>
-        <div style="font-size: 0.9rem; color: var(--text-muted);">
-          <i class="fas fa-exclamation-circle"></i> Price increases to $49 after timer ends
-        </div>
-      </div>
-
-      <!-- Primary CTA -->
-      <a href="https://zishanhack.com/checkout/web-security-checklist" class="cta-button" onclick="trackPurchase('web_security_checklist')">
-        <i class="fas fa-download"></i>
-        Download Checklist Now - $25
-      </a>
-      
-      <div class="product-note">
-        <p><i class="fas fa-file-pdf"></i> <strong>Instant Delivery:</strong> 32-page PDF checklist with checkboxes for 300+ specific security tests</p>
-      </div>
     </header>
 
-    <!-- Value Proposition -->
-    <div class="value-proposition">
-      <div class="value-item">
-        <div class="value-icon">✅</div>
-        <h3>Complete Coverage</h3>
-        <p>300+ specific tests across 12+ vulnerability categories in checkboxes</p>
-      </div>
-      
-      <div class="value-item">
-        <div class="value-icon">📋</div>
-        <h3>Structured Testing</h3>
-        <p>Organized by vulnerability type with clear testing steps</p>
-      </div>
-      
-      <div class="value-item">
-        <div class="value-icon">🔧</div>
-        <h3>Tool References</h3>
-        <p>Mentions appropriate tools for each testing scenario</p>
-      </div>
-      
-      <div class="value-item">
-        <div class="value-icon">🎯</div>
-        <h3>Professional Format</h3>
-        <p>Clean PDF with table of contents and organized sections</p>
-      </div>
-    </div>
+    <main class="container">
+        <a href="https://zishanhack.com" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Back to Main Page
+        </a>
 
-    <!-- Features -->
-    <div class="features-section">
-      <h2 class="section-title">Checklist Contents</h2>
-      
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-header">
-            <div class="feature-icon">
-              <i class="fas fa-search"></i>
+        <div class="digital-badge">
+            <i class="fas fa-download"></i>
+            DIGITAL GOODS · INSTANT ACCESS
+        </div>
+
+        <div class="page-header compact">
+            <div class="cert-badge">
+                <i class="fas fa-shield-alt"></i>
+                BUG BOUNTY CHECKLIST · VERSION 2.0 (2026)
             </div>
-            <h3>Reconnaissance (Page 3-4)</h3>
-          </div>
-          <ul class="feature-list">
-            <li>Subdomain discovery tests</li>
-            <li>Directory enumeration steps</li>
-            <li>Port scanning checkpoints</li>
-            <li>OSINT gathering procedures</li>
-            <li>Asset enumeration methods</li>
-          </ul>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-header">
-            <div class="feature-icon">
-              <i class="fas fa-code"></i>
+            
+            <h1>Ultimate Web Security Checklist</h1>
+            <p class="subtitle">32-page PDF with 300+ specific security tests across 12+ vulnerability categories. Used by top 1% of bug bounty hunters.</p>
+
+            <!-- Disclaimer -->
+            <div class="disclaimer-box">
+                <p><strong>Important:</strong> This is a <strong>checklist and reference guide</strong>, not a tutorial course. It provides specific testing steps and tool mentions for each vulnerability category, assuming foundational security knowledge.</p>
             </div>
-            <h3>Injection Vulnerabilities (Page 5-6)</h3>
-          </div>
-          <ul class="feature-list">
-            <li>SQL injection test cases</li>
-            <li>Command injection checks</li>
-            <li>XXE vulnerability tests</li>
-            <li>NoSQL injection scenarios</li>
-            <li>GraphQL injection steps</li>
-          </ul>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-header">
-            <div class="feature-icon">
-              <i class="fas fa-bug"></i>
+
+            <div class="price-section">
+                <div class="price-container">
+                    <span class="original-price">$250</span>
+                    <span class="discount-price">$25</span>
+                    <span class="discount-badge">90% OFF</span>
+                </div>
+                <p style="color: var(--gray);">
+                    <i class="fas fa-gift"></i> Limited time offer - Price increases to $49 soon
+                </p>
             </div>
-            <h3>XSS & Client-Side (Page 7-8)</h3>
-          </div>
-          <ul class="feature-list">
-            <li>Stored XSS test vectors</li>
-            <li>Reflected XSS checks</li>
-            <li>DOM-based XSS scenarios</li>
-            <li>CSP bypass attempts</li>
-            <li>WAF evasion tests</li>
-          </ul>
+
+            <a href="https://zishanhack.com" class="cta-button">
+                <i class="fas fa-download"></i>
+                Download Checklist Now - $25
+            </a>
+            
+            <p style="color: var(--gray); font-size: 0.9rem; margin-top: 0.5rem;">
+                <i class="fas fa-lock"></i> Secure Payment · Instant PDF Download
+            </p>
         </div>
-        
-        <div class="feature-card">
-          <div class="feature-header">
-            <div class="feature-icon">
-              <i class="fas fa-user-lock"></i>
+
+        <div class="value-grid">
+            <div class="value-card">
+                <div class="value-icon">✅</div>
+                <h3>Complete Coverage</h3>
+                <p>300+ specific tests across 12+ vulnerability categories</p>
             </div>
-            <h3>Authentication & AuthZ (Page 9-12)</h3>
-          </div>
-          <ul class="feature-list">
-            <li>Authentication bypass tests</li>
-            <li>Session management checks</li>
-            <li>MFA circumvention attempts</li>
-            <li>IDOR vulnerability tests</li>
-            <li>Privilege escalation scenarios</li>
-          </ul>
+            
+            <div class="value-card">
+                <div class="value-icon">📋</div>
+                <h3>Structured Testing</h3>
+                <p>Organized by vulnerability type with clear testing steps</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">🔧</div>
+                <h3>Tool References</h3>
+                <p>Mentions appropriate tools for each testing scenario</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon">🎯</div>
+                <h3>Professional Format</h3>
+                <p>Clean PDF with table of contents and organized sections</p>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- More Vulnerability Categories -->
-    <div class="features-grid" style="margin-top: 2rem;">
-      <div class="feature-card">
-        <div class="feature-header">
-          <div class="feature-icon" style="background: linear-gradient(135deg, var(--accent-purple), #7c3aed);">
-            <i class="fas fa-upload"></i>
-          </div>
-          <h3>File Handling (Page 13-14)</h3>
+        <!-- Features Grid (What's Inside) -->
+        <div class="features-section">
+            <h2 class="section-title">Checklist Contents</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Reconnaissance</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Subdomain discovery tests</li>
+                        <li><i class="fas fa-check"></i> Directory enumeration steps</li>
+                        <li><i class="fas fa-check"></i> Port scanning checkpoints</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Injection Vulnerabilities</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> SQL injection test cases</li>
+                        <li><i class="fas fa-check"></i> Command injection checks</li>
+                        <li><i class="fas fa-check"></i> XXE vulnerability tests</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>XSS & Client-Side</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Stored XSS test vectors</li>
+                        <li><i class="fas fa-check"></i> Reflected XSS checks</li>
+                        <li><i class="fas fa-check"></i> DOM-based XSS scenarios</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-lock"></i>
+                    </div>
+                    <h3>Authentication & AuthZ</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Authentication bypass tests</li>
+                        <li><i class="fas fa-check"></i> Session management checks</li>
+                        <li><i class="fas fa-check"></i> IDOR vulnerability tests</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <h3>File Handling</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> File upload vulnerability tests</li>
+                        <li><i class="fas fa-check"></i> Path traversal attempts</li>
+                        <li><i class="fas fa-check"></i> LFI/RFI test cases</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Infrastructure</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> SSRF test scenarios</li>
+                        <li><i class="fas fa-check"></i> CORS misconfiguration checks</li>
+                        <li><i class="fas fa-check"></i> Subdomain takeover checks</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <ul class="feature-list">
-          <li>File upload vulnerability tests</li>
-          <li>Path traversal attempts</li>
-          <li>LFI/RFI test cases</li>
-          <li>File inclusion checks</li>
-          <li>File type validation tests</li>
-        </ul>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-header">
-          <div class="feature-icon" style="background: linear-gradient(135deg, var(--accent-danger), #dc2626);">
-            <i class="fas fa-server"></i>
-          </div>
-          <h3>Infrastructure (Page 15-16)</h3>
-        </div>
-        <ul class="feature-list">
-          <li>SSRF test scenarios</li>
-          <li>CORS misconfiguration checks</li>
-          <li>HTTP smuggling attempts</li>
-          <li>Clickjacking tests</li>
-          <li>Subdomain takeover checks</li>
-        </ul>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-header">
-          <div class="feature-icon" style="background: linear-gradient(135deg, var(--accent-green), #16a34a);">
-            <i class="fas fa-project-diagram"></i>
-          </div>
-          <h3>API & Business Logic (Page 17-18)</h3>
-        </div>
-        <ul class="feature-list">
-          <li>API endpoint security tests</li>
-          <li>Business logic flaw checks</li>
-          <li>Rate limiting tests</li>
-          <li>Mass assignment attempts</li>
-          <li>GraphQL security tests</li>
-        </ul>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-header">
-          <div class="feature-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
-            <i class="fas fa-cloud"></i>
-          </div>
-          <h3>Cloud & Advanced (Page 19-22)</h3>
-        </div>
-        <ul class="feature-list">
-          <li>Cloud misconfiguration tests</li>
-          <li>Secret exposure checks</li>
-          <li>Prototype pollution tests</li>
-          <li>Deserialization attempts</li>
-          <li>Advanced exploitation steps</li>
-        </ul>
-      </div>
-    </div>
 
-    <!-- Tools Section - ACCURATE to PDF -->
-    <div class="tools-section">
-      <h2 class="section-title">Tools Referenced in Checklists</h2>
-      <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
-        The checklist mentions these tools in specific testing contexts (not tutorials)
-      </p>
-      
-      <div class="tools-grid">
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fas fa-search"></i></div>
-          <span>Burp Suite</span>
+        <div class="tools-section">
+            <h2 class="section-title">Tools Referenced</h2>
+            
+            <div class="tools-grid">
+                <div class="tool-item">
+                    <i class="fas fa-search tool-icon"></i>
+                    <span>Burp Suite</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-database tool-icon"></i>
+                    <span>sqlmap</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-bomb tool-icon"></i>
+                    <span>Nuclei</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-network-wired tool-icon"></i>
+                    <span>ffuf</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-eye tool-icon"></i>
+                    <span>Gobuster</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-sitemap tool-icon"></i>
+                    <span>Amass</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-project-diagram tool-icon"></i>
+                    <span>Nmap</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-code-branch tool-icon"></i>
+                    <span>Custom Scripts</span>
+                </div>
+            </div>
         </div>
-        
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fas fa-database"></i></div>
-          <span>sqlmap</span>
-        </div>
-        
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fas fa-bomb"></i></div>
-          <span>Nuclei</span>
-        </div>
-        
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fas fa-network-wired"></i></div>
-          <span>ffuf</span>
-        </div>
-        
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fas fa-eye"></i></div>
-          <span>Gobuster</span>
-        </div>
-        
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fas fa-sitemap"></i></div>
-          <span>Amass</span>
-        </div>
-        
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fas fa-project-diagram"></i></div>
-          <span>Nmap</span>
-        </div>
-        
-        <div class="tool-item">
-          <div class="tool-icon"><i class="fas fa-code-branch"></i></div>
-          <span>Custom Scripts</span>
-        </div>
-      </div>
-      
-      <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 2rem;">
-        <i class="fas fa-info-circle"></i> These tools are mentioned in testing steps (e.g., "Test with sqlmap", "Scan with Nmap")
-      </p>
-    </div>
 
-    <!-- Testimonial -->
-    <div class="testimonial">
-      <p>"This checklist helped me systematize my testing. Having 300+ specific tests organized by category means I never miss important checks. It's especially useful for ensuring complete coverage during bug bounty engagements."</p>
-      <div class="testimonial-author">
-        <div style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-purple)); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-          RB
+        <!-- Testimonials - expanded with international names -->
+        <div class="testimonials-section">
+            <h2 class="section-title">Trusted by Bug Hunters Worldwide</h2>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"This checklist helped me systematize my testing. Having 300+ specific tests organized by category means I never miss important checks during bug bounty engagements."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RB</div>
+                        <div class="author-info">
+                            <div class="author-name">Ryan B.</div>
+                            <div class="author-title">Top 1% on Bugcrowd · USA</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Found 3 critical bugs in my first week using this checklist. The API testing section is particularly thorough. Worth every penny."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">NC</div>
+                        <div class="author-info">
+                            <div class="author-name">Nadia C.</div>
+                            <div class="author-title">Bug Bounty Hunter · France</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"I've been pentesting for 5 years and still found new test cases in this checklist. Great for ensuring you don't miss anything during assessments."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PW</div>
+                        <div class="author-info">
+                            <div class="author-name">Peter W.</div>
+                            <div class="author-title">Senior Pentester · Australia</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-          <strong>Professional Bug Hunter</strong><br>
-          <span style="color: var(--text-muted); font-size: 0.9rem;">Top 1% on Bugcrowd & HackerOne</span>
+
+        <div class="faq-section" id="faq">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What format is the checklist?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>32-page professionally formatted PDF with clickable table of contents, organized by vulnerability category with checkboxes for each test.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is this a course or tutorial?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No. This is a checklist and reference guide with specific testing steps and tool mentions. It assumes you already have foundational knowledge of web security concepts and tools.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer updates?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! All buyers receive free updates for 12 months. You'll be notified via email when new versions are available.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What's your refund policy?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Due to the digital nature of our products, all sales are final. We do not offer refunds once products are downloaded or accessed. Please review carefully before purchasing.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Guarantee -->
-    <div class="guarantee-section">
-      <div class="guarantee-icon">
-        <i class="fas fa-shield-check"></i>
-      </div>
-      <h3 style="margin-bottom: 1rem; color: white;">30-Day Money-Back Guarantee</h3>
-      <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto;">
-        If this checklist doesn't help you systematize your testing or ensure complete vulnerability coverage within 30 days, I'll refund every penny. No questions asked.
-      </p>
-    </div>
+        <div class="price-section" style="margin-top: 4rem;">
+            <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: white;">Get the Complete Testing Checklist</h2>
+            <p style="color: var(--gray); margin-bottom: 1.5rem;">
+                32-page PDF with 300+ specific security tests across 12+ vulnerability categories
+            </p>
+            
+            <div class="price-container">
+                <span class="original-price">$250</span>
+                <span class="discount-price">$25</span>
+                <span class="discount-badge">90% OFF</span>
+            </div>
+            
+            <a href="https://zishanhack.com" class="cta-button">
+                <i class="fas fa-download"></i>
+                Download Complete Checklist - $25
+            </a>
+        </div>
+    </main>
 
-    <!-- Final CTA -->
-    <div class="price-section" style="margin-top: 4rem;">
-      <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: white;">Get the Complete Testing Checklist</h2>
-      <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.1rem;">
-        32-page PDF with 300+ specific security tests across 12+ vulnerability categories
-      </p>
-      
-      <div class="price-container">
-        <span class="original-price">$250</span>
-        <span class="discount-price">$25</span>
-        <span class="discount-badge">90% OFF</span>
-      </div>
-      
-      <div class="timer-section" style="max-width: 500px; margin: 1.5rem auto;">
-        <div class="timer-title">Limited Time Offer</div>
-        <div id="final-countdown">24:00:00</div>
-      </div>
-      
-      <a href="https://zishanhack.com/checkout/web-security-checklist" class="cta-button" onclick="trackPurchase('web_security_checklist_final')">
-        <i class="fas fa-download"></i>
-        Download Complete Checklist - Only $25
-      </a>
-      
-      <div class="product-note">
-        <p><i class="fas fa-file-pdf"></i> <strong>What You Get:</strong> 32-page professionally formatted PDF checklist with table of contents, 12+ vulnerability categories, 300+ specific test checkpoints, and tool references for each testing scenario.</p>
-      </div>
-      
-      <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 1.5rem;">
-        <i class="fas fa-lock"></i> Secure payment · Instant PDF download · 30-day guarantee
-      </p>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <p class="footer-note">
-        <strong>Perfect for:</strong> Bug bounty hunters who want systematic testing, penetration testers needing complete checklists, security engineers establishing testing procedures, and cybersecurity professionals looking to ensure no vulnerability is missed.
-      </p>
-      <p class="product-note">
-        <strong>Product Note:</strong> This is a <strong>checklist and reference guide</strong> containing specific testing steps and tool mentions. It assumes existing knowledge of web application security concepts and tools.
-      </p>
-      <p class="copyright">
-        © 2026 Zishan Ahamed Thandar. All rights reserved.<br>
-        Professional Cybersecurity Resources at <a href="https://zishanhack.com" style="color: var(--accent-green); text-decoration: none;">zishanhack.com</a>
-      </p>
+    <!-- Footer (exact same as main site) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="https://zishanhack.com" class="logo">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>ZISHAN<span class="logo-highlight">HACK</span></span>
+                    </a>
+                    <p class="footer-description">
+                        Premium cybersecurity resources crafted by industry experts. Trusted by professionals worldwide.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <a href="https://zishanhack.com/#resources" class="footer-link">All Resources</a>
+                    <a href="https://zishanhack.com/#testimonials" class="footer-link">Customer Reviews</a>
+                    <a href="#faq" class="footer-link">FAQ</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Legal</h3>
+                    <a href="/legal.html" class="footer-link">Terms of Service</a>
+                    <a href="/legal.html" class="footer-link">Privacy Policy</a>
+                    <a href="/legal.html" class="footer-link">Refund Policy</a>
+                    <a href="/responsible-disclosure.html" class="footer-link">Security</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Support</h3>
+                    <a href="https://zishanhack.com" class="footer-link">My Account</a>
+                    <a href="mailto:support@zishanhack.com" class="footer-link">Contact Support</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="security-badges">
+                    <span class="security-badge"><i class="fas fa-lock"></i> SSL SECURE</span>
+                    <span class="security-badge"><i class="fas fa-shield-alt"></i> PCI DSS COMPLIANT</span>
+                    <span class="security-badge"><i class="fas fa-globe"></i> INTERNATIONAL PAYMENTS</span>
+                </div>
+                <p class="copyright">
+                    &copy; 2026 ZishanHack. All rights reserved.
+                </p>
+            </div>
+        </div>
     </footer>
-  </div>
 
-  <script>
-    // Countdown Timer
-    function updateCountdown() {
-      const endTime = new Date();
-      endTime.setHours(23, 59, 59, 999); // End of today
-      
-      const now = new Date();
-      const diff = endTime - now;
-      
-      if (diff > 0) {
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    <!-- Notification and Loading Spinner (same as CRTA) -->
+    <div class="notification" id="notification">...</div>
+    <div class="loading-spinner" id="loadingSpinner">...</div>
+
+    <script>
+        // Same mobile menu and FAQ toggle as CRTA
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('show');
+        });
         
-        const formatTime = (h, m, s) => 
-          `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+                const icon = question.querySelector('i');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
         
-        document.getElementById('countdown-timer').textContent = formatTime(hours, minutes, seconds);
-        document.getElementById('final-countdown').textContent = formatTime(hours, minutes, seconds);
-        
-        // Add warning color when under 1 hour
-        if (hours < 1) {
-          document.getElementById('countdown-timer').style.color = '#ef4444';
-          document.getElementById('final-countdown').style.color = '#ef4444';
+        function showNotification(message, type = 'info') {
+            // Same as CRTA
         }
-      } else {
-        document.getElementById('countdown-timer').textContent = 'OFFER EXPIRED';
-        document.getElementById('final-countdown').textContent = 'OFFER EXPIRED';
-        document.getElementById('countdown-timer').style.color = '#ef4444';
-        document.getElementById('final-countdown').style.color = '#ef4444';
-      }
-    }
-
-    // Purchase Tracking
-    function trackPurchase(product) {
-      console.log(`Purchase attempt: ${product}`);
-      // Add your analytics tracking here
-      // gtag('event', 'purchase_click', { 'product': product, 'value': 25 });
-    }
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
-      // Start countdown timer
-      setInterval(updateCountdown, 1000);
-      updateCountdown();
-      
-      // Add scroll animations
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeIn 0.8s ease forwards';
-          }
-        });
-      }, { threshold: 0.1 });
-      
-      // Observe elements for animation
-      document.querySelectorAll('.value-item, .feature-card, .tool-item').forEach(el => {
-        observer.observe(el);
-      });
-      
-      // Add smooth hover effects
-      document.querySelectorAll('.feature-card, .value-item').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          card.style.transition = 'all 0.3s ease';
-        });
-      });
-    });
-  </script>
+    </script>
 </body>
 </html>

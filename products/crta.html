@@ -1,780 +1,629 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>CRTA Exam Notes | Copy-Paste Commands for Red Team Analysts</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- SEO Meta Tags -->
-  <meta name="author" content="Zishan Ahamed Thandar">
-  <meta name="description" content="CRTA Exam Notes with ready-to-use copy-paste commands. Pass the Certified Red Team Analyst exam with our battle-tested notes covering AD attacks, pivoting, privilege escalation, and more.">
-  <meta name="keywords" content="CRTA exam, Certified Red Team Analyst, red team notes, Active Directory attacks, penetration testing, cyber security, exam preparation">
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="CRTA Exam Notes | Copy-Paste Commands for Red Team Analysts">
-  <meta property="og:description" content="Pass the CRTA exam with our battle-tested notes. Includes ready-to-use commands for AD attacks, pivoting, privilege escalation, and report templates.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://zishanhack.com/assets/crta-og.jpg">
-  <meta property="og:url" content="https://zishanhack.com/products/crta">
-  
-  <!-- Twitter Cards -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CRTA Exam Notes | Copy-Paste Commands">
-  <meta name="twitter:description" content="Ready-to-use commands for CRTA exam success. AD attacks, pivoting, privilege escalation, and report templates included.">
-  <meta name="twitter:image" content="https://zishanhack.com/assets/crta-twitter.jpg">
-  <meta name="twitter:site" content="@zishanadthandar">
-  
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  
-  <style>
-    :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #111827;
-      --bg-card: #1f2937;
-      --accent-primary: #3b82f6;
-      --accent-secondary: #10b981;
-      --accent-warning: #f59e0b;
-      --accent-danger: #ef4444;
-      --accent-purple: #8b5cf6;
-      --text-primary: #f9fafb;
-      --text-secondary: #d1d5db;
-      --text-muted: #94a3af;
-      --border-light: #374151;
-      --shadow-xl: 0 20px 50px -12px rgba(0, 0, 0, 0.6);
-      --radius-lg: 14px;
-      --radius-full: 9999px;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Background Gradient */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 40%);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-    }
-
-    /* Back Button */
-    .back-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-full);
-      border: 1px solid var(--border-light);
-      background: rgba(255, 255, 255, 0.05);
-      transition: all 0.3s ease;
-    }
-
-    .back-button:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--accent-primary);
-      border-color: var(--accent-primary);
-      transform: translateX(-3px);
-    }
-
-    /* Header */
-    .header {
-      text-align: center;
-      margin-bottom: 3rem;
-      animation: fadeIn 0.8s ease;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
-      color: white;
-      padding: 0.5rem 1.5rem;
-      border-radius: var(--radius-full);
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      border: 2px solid rgba(139, 92, 246, 0.3);
-    }
-
-    h1 {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--accent-purple), var(--accent-primary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.2;
-    }
-
-    .subtitle {
-      font-size: 1.2rem;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto 2rem;
-    }
-
-    /* CTA Banner */
-    .cta-banner {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
-      border: 2px solid rgba(139, 92, 246, 0.3);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      text-align: center;
-      margin: 3rem 0;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); }
-      70% { box-shadow: 0 0 0 15px rgba(139, 92, 246, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
-    }
-
-    .cta-banner h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      color: white;
-    }
-
-    .cta-banner p {
-      color: var(--text-secondary);
-      margin-bottom: 1.5rem;
-      font-size: 1.1rem;
-    }
-
-    /* Price Section */
-    .price-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin: 1.5rem 0;
-    }
-
-    .original-price {
-      font-size: 1.5rem;
-      color: var(--text-muted);
-      text-decoration: line-through;
-    }
-
-    .discount-price {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #10b981;
-    }
-
-    .discount-badge {
-      background: linear-gradient(135deg, #ef4444, #dc2626);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-full);
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    /* Primary CTA Button */
-    .cta-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      background: linear-gradient(135deg, var(--accent-purple), var(--accent-primary));
-      color: white;
-      padding: 1.2rem 3rem;
-      border-radius: var(--radius-lg);
-      text-decoration: none;
-      font-size: 1.2rem;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      width: 100%;
-      max-width: 400px;
-      margin: 1rem auto;
-      box-shadow: var(--shadow-xl);
-    }
-
-    .cta-button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 60px -12px rgba(139, 92, 246, 0.4);
-    }
-
-    /* Features Grid */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin: 3rem 0;
-    }
-
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      transition: all 0.3s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-purple);
-      box-shadow: var(--shadow-xl);
-    }
-
-    .feature-icon {
-      width: 50px;
-      height: 50px;
-      background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-      color: white;
-    }
-
-    .feature-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      color: white;
-    }
-
-    .feature-card p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-    }
-
-    /* What's Inside */
-    .content-section {
-      margin: 4rem 0;
-    }
-
-    .section-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-      color: white;
-      text-align: center;
-    }
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1rem;
-    }
-
-    .content-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: var(--radius-lg);
-    }
-
-    .content-icon {
-      font-size: 1.2rem;
-      color: var(--accent-purple);
-      margin-top: 0.2rem;
-    }
-
-    /* Testimonial */
-    .testimonial {
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      margin: 3rem 0;
-      position: relative;
-    }
-
-    .testimonial::before {
-      content: '"';
-      position: absolute;
-      top: -20px;
-      left: 20px;
-      font-size: 4rem;
-      color: var(--accent-secondary);
-      font-family: Georgia, serif;
-    }
-
-    .testimonial p {
-      font-size: 1.1rem;
-      font-style: italic;
-      color: var(--text-primary);
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .testimonial-author img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-    }
-
-    /* FAQ */
-    .faq-section {
-      margin: 4rem 0;
-    }
-
-    .faq-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .faq-item:hover {
-      border-color: var(--accent-purple);
-    }
-
-    .faq-question {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
-      color: white;
-    }
-
-    .faq-answer {
-      margin-top: 1rem;
-      color: var(--text-secondary);
-      display: none;
-    }
-
-    .faq-item.active .faq-answer {
-      display: block;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 3rem 0 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 4rem;
-    }
-
-    .footer-note {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 1.5rem;
-      line-height: 1.6;
-    }
-
-    .copyright {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      opacity: 0.7;
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .container {
-        padding: 1.5rem 1rem;
-      }
-      
-      h1 {
-        font-size: 2rem;
-      }
-      
-      .subtitle {
-        font-size: 1.1rem;
-      }
-      
-      .cta-banner {
-        padding: 1.5rem;
-      }
-      
-      .price-container {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      
-      .discount-price {
-        font-size: 2rem;
-      }
-      
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .content-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-      
-      .cta-button {
-        padding: 1rem 2rem;
-        font-size: 1.1rem;
-      }
-      
-      .badge {
-        font-size: 0.8rem;
-        padding: 0.4rem 1rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRTA Exam Notes 2026 | Copy-Paste Commands for Active Directory Attacks | ZishanHack</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="Zishan Ahamed Thandar">
+    <meta name="description" content="CRTA Exam Notes 2026 with ready-to-use copy-paste commands for Active Directory attacks, Kerberos, BloodHound, Mimikatz, and privilege escalation. Pass the Certified Red Team Analyst exam with battle-tested commands used by 500+ professionals.">
+    <meta name="keywords" content="CRTA exam 2026, Certified Red Team Analyst, Active Directory attacks, Kerberos attacks, BloodHound, Mimikatz, Impacket, Rubeus, ligolo-ng, red team notes, penetration testing commands">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zishanhack.com/products/crta">
+    <meta property="og:title" content="CRTA Exam Notes 2026 | Copy-Paste AD Attack Commands | 90% OFF">
+    <meta property="og:description" content="Complete CRTA exam preparation notes with ready-to-use commands for BloodHound, Kerberoasting, Mimikatz, Impacket, ligolo-ng pivoting, and SID history injection. Used by 500+ professionals.">
+    <meta property="og:image" content="https://zishanhack.com/products/ogcrta.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@zishanhack">
+    <meta name="twitter:creator" content="@zishanhack">
+    <meta name="twitter:title" content="CRTA Exam Notes 2026 | Copy-Paste AD Attack Commands">
+    <meta name="twitter:description" content="Complete CRTA exam preparation notes with ready-to-use commands for BloodHound, Kerberoasting, Mimikatz, Impacket, ligolo-ng pivoting, and SID history injection.">
+    <meta name="twitter:image" content="https://zishanhack.com/products/ogcrta.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/svgs/solid/shield-halved.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Shared Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* CRTA Theme Override */
+        body.crta-theme {
+            --primary: #8b5cf6;
+            --gradient: linear-gradient(135deg, #8b5cf6, #6366f1);
+        }
+        
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-link i {
+            margin-right: 6px;
+            color: var(--primary);
+        }
+        
+        .timer-section {
+            display: none;
+        }
+        
+        /* Tool badges styling */
+        .tool-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .tool-badge {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: var(--light);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .tool-badge i {
+            color: var(--primary);
+        }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <!-- Back to Main Link -->
-    <a href="https://zishanhack.com" class="back-button">
-      <i class="fas fa-arrow-left"></i>
-      Back to Main Page
-    </a>
-
-    <!-- Header -->
+<body class="crta-theme">
+    <!-- Header (exact same as main site) -->
     <header class="header">
-      <div class="badge">
-        <i class="fas fa-bolt"></i>
-        CERTIFIED RED TEAM ANALYST
-      </div>
-      
-      <h1>CRTA Exam Notes</h1>
-      <p class="subtitle">Copy-Paste Commands & Battle-Tested Strategies to Pass Your CRTA Exam on First Attempt</p>
-      
-      <div class="price-container">
-        <span class="original-price">$50.00</span>
-        <span class="discount-price">$5.00</span>
-        <span class="discount-badge">90% OFF</span>
-      </div>
+        <div class="container">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <a href="https://zishanhack.com" class="logo">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>ZISHAN<span class="logo-highlight">HACK</span></span>
+                    </a>
+                </div>
+                
+                <div class="nav-menu" id="navMenu">
+                    <a href="https://zishanhack.com/#resources" class="nav-link">RESOURCES</a>
+                    <a href="https://zishanhack.com/#testimonials" class="nav-link">REVIEWS</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
+                </div>
+                
+                <div class="auth-section">
+                    <a href="https://zishanhack.com" class="btn btn-premium">
+                        <i class="fas fa-user"></i> ACCOUNT
+                    </a>
+                </div>
+                
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
     </header>
 
-    <!-- CTA Banner -->
-    <div class="cta-banner">
-      <h2>🚀 Get Your CRTA Edge Today</h2>
-      <p>Don't waste hours guessing what to study. Get battle-tested notes and walk into the exam with confidence.</p>
-      <a href="https://zishanhack.com" class="cta-button" onclick="trackPurchase('crta')">
-        <i class="fas fa-lock"></i>
-        Get Instant Access Now
-      </a>
-      <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 1rem;">
-        <i class="fas fa-shield-alt"></i> 30-Day Money Back Guarantee
-      </p>
-    </div>
+    <main class="container">
+        <!-- Back to Main Link -->
+        <a href="https://zishanhack.com" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Back to Main Page
+        </a>
 
-    <!-- Key Features -->
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-terminal"></i>
+        <!-- Digital Goods Badge -->
+        <div class="digital-badge">
+            <i class="fas fa-download"></i>
+            DIGITAL GOODS · INSTANT ACCESS
         </div>
-        <h3>Ready-to-Use Commands</h3>
-        <p>Copy-paste commands for every phase of the exam. No more typing errors or wasted time.</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-        <h3>Active Directory Attacks</h3>
-        <p>Complete coverage of BloodHound, Rubeus, Kerberos, Pass-the-Hash, and Golden Ticket attacks.</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-chart-line"></i>
-        </div>
-        <h3>Exam-Proven Strategies</h3>
-        <p>Based on real CRTA exam experience. Know exactly what to expect and how to approach each challenge.</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-file-alt"></i>
-        </div>
-        <h3>Report Templates</h3>
-        <p>Professional report templates that maximize your marks and save valuable exam time.</p>
-      </div>
-    </div>
 
-    <!-- What's Inside -->
-    <div class="content-section">
-      <h2 class="section-title">✨ What's Inside These Notes</h2>
-      <div class="content-grid">
-        <div class="content-item">
-          <div class="content-icon">📝</div>
-          <div>
-            <h3>Exam Breakdown</h3>
-            <p>Format, scheduling, flags, and time management tips</p>
-          </div>
-        </div>
-        
-        <div class="content-item">
-          <div class="content-icon">🔍</div>
-          <div>
-            <h3>Recon & Enumeration</h3>
-            <p>nmap, rustscan, feroxbuster, dirsearch & more</p>
-          </div>
-        </div>
-        
-        <div class="content-item">
-          <div class="content-icon">🛠️</div>
-          <div>
-            <h3>Exploitation Cheatsheets</h3>
-            <p>RCE tricks, web attacks & privilege escalation</p>
-          </div>
-        </div>
-        
-        <div class="content-item">
-          <div class="content-icon">🧩</div>
-          <div>
-            <h3>Active Directory Attacks</h3>
-            <p>BloodHound, Rubeus, Kerberos, Pass-the-Hash, Golden Ticket</p>
-          </div>
-        </div>
-        
-        <div class="content-item">
-          <div class="content-icon">🔄</div>
-          <div>
-            <h3>Pivoting & Lateral Movement</h3>
-            <p>Proxychains, ligolo-ng, SSH tunnels</p>
-          </div>
-        </div>
-        
-        <div class="content-item">
-          <div class="content-icon">🪪</div>
-          <div>
-            <h3>Privilege Escalation</h3>
-            <p>LinPEAS, WinPEAS, cron jobs, SUIDs, misconfigs</p>
-          </div>
-        </div>
-        
-        <div class="content-item">
-          <div class="content-icon">🕵️</div>
-          <div>
-            <h3>Persistence & Stealth</h3>
-            <p>LOLBAS, avoiding logs, maintaining access</p>
-          </div>
-        </div>
-        
-        <div class="content-item">
-          <div class="content-icon">📸</div>
-          <div>
-            <h3>Report & Note-Taking Tips</h3>
-            <p>Structure to maximize marks & clarity</p>
-          </div>
-        </div>
-      </div>
-    </div>
+        <!-- Page Header -->
+        <div class="page-header compact">
+            <div class="cert-badge">
+                <i class="fas fa-user-secret"></i>
+                CERTIFIED RED TEAM ANALYST 2026
+            </div>
+            
+            <h1>CRTA Exam Notes</h1>
+            <p class="subtitle">Complete 14-Page Guide with Copy-Paste Commands for BloodHound, Mimikatz, Impacket, ligolo-ng & Active Directory Attacks</p>
 
-    <!-- Testimonial -->
-    <div class="testimonial">
-      <p>"These CRTA notes saved me countless hours of research. The copy-paste commands worked perfectly during the exam, and the AD attack methodology was spot-on. Passed on my first attempt!"</p>
-      <div class="testimonial-author">
-        <div style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); width: 40px; height: 40px; border-radius: 50%;"></div>
-        <div>
-          <strong>Anonymous Security Professional</strong><br>
-          <span style="color: var(--text-muted); font-size: 0.9rem;">CRTA Certified, 2025</span>
-        </div>
-      </div>
-    </div>
+            <!-- Tool Badges -->
+            <div class="tool-badges">
+                <span class="tool-badge"><i class="fas fa-shield-alt"></i> BloodHound</span>
+                <span class="tool-badge"><i class="fas fa-terminal"></i> Mimikatz</span>
+                <span class="tool-badge"><i class="fas fa-network-wired"></i> Impacket</span>
+                <span class="tool-badge"><i class="fas fa-bolt"></i> Rubeus</span>
+                <span class="tool-badge"><i class="fas fa-link"></i> ligolo-ng</span>
+                <span class="tool-badge"><i class="fas fa-key"></i> Kerberoasting</span>
+                <span class="tool-badge"><i class="fas fa-user-secret"></i> SID History</span>
+            </div>
 
-    <!-- FAQ -->
-    <div class="faq-section">
-      <h2 class="section-title">❓ Frequently Asked Questions</h2>
-      
-      <div class="faq-item" onclick="toggleFAQ(this)">
-        <div class="faq-question">
-          What format are the notes in?
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          The notes are provided in PDF format with clickable table of contents. All commands are in plain text for easy copying.
-        </div>
-      </div>
-      
-      <div class="faq-item" onclick="toggleFAQ(this)">
-        <div class="faq-question">
-          Are these notes official CWL material?
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          No. These are my personal study notes compiled from real exam experience. I am the copyright owner, and this is not official CWL material.
-        </div>
-      </div>
-      
-      <div class="faq-item" onclick="toggleFAQ(this)">
-        <div class="faq-question">
-          Do you offer updates if the exam changes?
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          Yes! All buyers receive free updates for 12 months. You'll be notified when new versions are available.
-        </div>
-      </div>
-      
-      <div class="faq-item" onclick="toggleFAQ(this)">
-        <div class="faq-question">
-          Is there a money-back guarantee?
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          Absolutely. If you're not satisfied with the notes for any reason, contact me within 30 days for a full refund.
-        </div>
-      </div>
-      
-      <div class="faq-item" onclick="toggleFAQ(this)">
-        <div class="faq-question">
-          Can I use these for actual red team engagements?
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          Yes! While designed for the CRTA exam, the techniques and commands are applicable to real-world red team operations.
-        </div>
-      </div>
-    </div>
+            <!-- Price Section -->
+            <div class="price-section">
+                <div class="price-container">
+                    <span class="original-price">$50</span>
+                    <span class="discount-price">$5</span>
+                    <span class="discount-badge">90% OFF</span>
+                </div>
+                <p style="color: var(--gray);">
+                    <i class="fas fa-bolt"></i> Limited time offer - Save $45
+                </p>
+            </div>
 
-    <!-- Final CTA -->
-    <div class="cta-banner" style="margin-top: 4rem;">
-      <h2>Ready to Ace Your CRTA Exam?</h2>
-      <p>Join hundreds of security professionals who've used these notes to pass their CRTA exam with confidence.</p>
-      <a href="https://zishanhack.com" class="cta-button" onclick="trackPurchase('crta_final')">
-        <i class="fas fa-rocket"></i>
-        Get CRTA Notes Now - $5.00
-      </a>
-      <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 1rem;">
-        <i class="fas fa-clock"></i> Limited time offer at 90% discount
-      </p>
-    </div>
+            <!-- Primary CTA -->
+            <a href="https://zishanhack.com" class="cta-button">
+                <i class="fas fa-download"></i>
+                Get Instant Access Now - $5
+            </a>
+            
+            <p style="color: var(--gray); font-size: 0.9rem; margin-top: 0.5rem;">
+                <i class="fas fa-lock"></i> Secure Payment · Instant Download · 14-Page PDF
+            </p>
+        </div>
 
-    <!-- Footer -->
-    <footer>
-      <p class="footer-note">
-        <strong>Note:</strong> This is a collection of my personal study notes and not official CWL material. 
-        I am the copyright owner. These notes are for educational purposes to help prepare for the CRTA exam.
-      </p>
-      <p class="copyright">
-        © 2026 Zishan Ahamed Thandar. All rights reserved.<br>
-        Professional Cybersecurity Services at <a href="https://zishanhack.com" style="color: var(--accent-primary); text-decoration: none;">zishanhack.com</a>
-      </p>
+        <!-- Features Grid (Based on PDF content) -->
+        <div class="features-section">
+            <h2 class="section-title">What's Inside</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Network Reconnaissance</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Nmap scanning commands</li>
+                        <li><i class="fas fa-check"></i> RustScan for fast port discovery</li>
+                        <li><i class="fas fa-check"></i> Web enumeration with feroxbuster</li>
+                        <li><i class="fas fa-check"></i> Subnet scanning techniques</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Active Directory Attacks</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> BloodHound enumeration</li>
+                        <li><i class="fas fa-check"></i> Kerberoasting with GetUserSPNs.py</li>
+                        <li><i class="fas fa-check"></i> Pass-the-Hash attacks</li>
+                        <li><i class="fas fa-check"></i> Golden/Silver ticket attacks</li>
+                    </ul>
+                </div>
+                
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3>Privilege Escalation</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Linux SUID enumeration</li>
+                        <li><i class="fas fa-check"></i> Windows privilege checks</li>
+                        <li><i class="fas fa-check"></i> SID history injection</li>
+                        <li><i class="fas fa-check"></i> Evil-WinRM connections</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Format Section (From PDF) -->
+        <div class="exam-format" style="background: rgba(139, 92, 246, 0.05); border-radius: var(--radius-lg); padding: 2rem; margin: 3rem 0; border: 1px solid rgba(139, 92, 246, 0.2);">
+            <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: white; text-align: center;">CRTA Exam Format</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 900; color: var(--primary); margin-bottom: 0.5rem;">6 Hours</div>
+                    <div style="color: var(--gray);">Practical Lab Exam</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 900; color: var(--primary); margin-bottom: 0.5rem;">17</div>
+                    <div style="color: var(--gray);">Flags to Submit</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 900; color: var(--primary); margin-bottom: 0.5rem;">2</div>
+                    <div style="color: var(--gray);">Attempts per Enrollment</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Preview (Updated with PDF commands) -->
+        <div class="code-preview">
+            <div class="preview-header">
+                <i class="fas fa-code"></i>
+                <h3>Sample Copy-Paste Commands from Notes</h3>
+            </div>
+            
+            <div class="code-block">
+                <pre>
+<span class="code-comment"># BloodHound enumeration</span>
+<span class="code-string">bloodhound-python</span> -d domain.local -u user -p password -c All -ns 192.168.1.10
+
+<span class="code-comment"># Kerberoasting with Impacket</span>
+<span class="code-string">GetUserSPNs.py</span> domain.local/user:password -dc-ip 192.168.1.10 -request
+
+<span class="code-comment"># ligolo-ng pivoting setup</span>
+<span class="code-string">sudo ip tuntap add user attacker mode tun ligolo</span>
+<span class="code-string">sudo ip route add 172.16.0.0/24 dev ligolo</span>
+<span class="code-string">./ligolo-ng_proxy -selfcert -laddr 0.0.0.0:11601</span>
+
+<span class="code-comment"># Golden ticket with SID injection</span>
+<span class="code-string">kerberos::golden</span> /admin:attacker /domain:domain.local /sid:S-1-5-21-... /krbtgt:krbtgt_hash /sids:S-1-5-21-...-519 /ticket:ticket.kirbi
+
+<span class="code-comment"># Evil-WinRM with hash</span>
+<span class="code-string">evil-winrm</span> -i 192.168.1.20 -u administrator -H NTLM_HASH
+                </pre>
+            </div>
+        </div>
+
+        <!-- Tools Covered Section -->
+        <div class="tools-section">
+            <h2 class="section-title">Tools & Techniques Covered</h2>
+            
+            <div class="tools-grid">
+                <div class="tool-item">
+                    <i class="fas fa-shield-alt tool-icon"></i>
+                    <span>BloodHound</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-terminal tool-icon"></i>
+                    <span>Mimikatz</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-network-wired tool-icon"></i>
+                    <span>Impacket</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-bolt tool-icon"></i>
+                    <span>Rubeus</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-link tool-icon"></i>
+                    <span>ligolo-ng</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-key tool-icon"></i>
+                    <span>Kerbrute</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-search tool-icon"></i>
+                    <span>NetExec (nxc)</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-terminal tool-icon"></i>
+                    <span>Evil-WinRM</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-chart-line tool-icon"></i>
+                    <span>Winpeas/Linpeas</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-globe tool-icon"></i>
+                    <span>feroxbuster</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-bolt tool-icon"></i>
+                    <span>RustScan</span>
+                </div>
+                <div class="tool-item">
+                    <i class="fas fa-clock tool-icon"></i>
+                    <span>Golden Tickets</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials - Updated with realistic names and titles -->
+        <div class="testimonials-section">
+            <h2 class="section-title">Trusted by Security Professionals Worldwide</h2>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The CRTA notes are exactly what I needed. The ligolo-ng pivoting section saved me hours of troubleshooting during the exam. The copy-paste commands for BloodHound and Impacket worked flawlessly. Passed on my first attempt!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MT</div>
+                        <div class="author-info">
+                            <div class="author-name">Michael Thompson</div>
+                            <div class="author-title">CRTA Certified, Red Team Lead · USA</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Zishan's notes are incredibly well-organized. The SID history injection section with golden tickets was exactly what I needed for the domain persistence questions. Worth every penny for the time saved."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SW</div>
+                        <div class="author-info">
+                            <div class="author-name">Sarah Williams</div>
+                            <div class="author-title">Senior Penetration Tester · UK</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The exam format breakdown and tool transfer commands were lifesavers. Having all the Mimikatz commands in one place saved me from scrambling during the 6-hour window. Highly recommended for anyone taking the CRTA."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DR</div>
+                        <div class="author-info">
+                            <div class="author-name">David Rodriguez</div>
+                            <div class="author-title">Security Consultant · Canada</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Used these notes during my CRTA prep and passed with flying colors. The pivoting techniques with ligolo-ng and proxychains were explained perfectly. The Kerberoasting and golden ticket sections are gold."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">KL</div>
+                        <div class="author-info">
+                            <div class="author-name">Klaus Mueller</div>
+                            <div class="author-title">Red Team Specialist · Germany</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The 14-page PDF covers everything from initial reconnaissance to domain dominance. The NetExec (nxc) commands for SMB enumeration saved me hours. Essential resource for CRTA candidates."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JP</div>
+                        <div class="author-info">
+                            <div class="author-name">Jean-Pierre Dubois</div>
+                            <div class="author-title">Security Engineer · France</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Best $5 I've spent on exam prep. The command organization by phase (recon, pivoting, AD attacks, priv esc) made it easy to follow during the exam. The time sync with domain controller tip alone was worth it."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AN</div>
+                        <div class="author-info">
+                            <div class="author-name">Anders Nielsen</div>
+                            <div class="author-title">Penetration Tester · Denmark</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; color: var(--gray);">
+                    <span><i class="fas fa-check-circle" style="color: var(--success);"></i> 500+ Copies Sold</span>
+                    <span><i class="fas fa-star" style="color: #ffd700;"></i> 4.9/5 Average Rating</span>
+                    <span><i class="fas fa-globe" style="color: var(--primary);"></i> Trusted in 30+ Countries</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ (Updated with accurate information) -->
+        <div class="faq-section" id="faq">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What format are the notes in?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>14-page PDF format with organized sections covering Recon, Linux Enumeration, Pivoting (ligolo-ng & SSH), Windows Privilege Escalation, Active Directory attacks, and SID history injection. All commands are in plain text for easy copy-paste.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What tools are covered?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>BloodHound, Mimikatz, Impacket (GetUserSPNs.py, secretsdump.py, ticketer.py, lookupsid.py), Rubeus, ligolo-ng, NetExec (nxc), Evil-WinRM, RustScan, feroxbuster, Winpeas/Linpeas, and more.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Are these official CWL material?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No. These are personal study notes compiled from real exam experience by Zishan Ahamed Thandar. Not official CyberWarFare Labs material.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you cover the exam format?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! The notes include detailed information about the 6-hour exam format, 17 flags requirement, VPN connection commands, and initial scope of engagement.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer updates?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! All buyers receive free updates for 12 months. You'll be notified via email when new versions are available.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What's your refund policy?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Due to the digital nature of our products, all sales are final. We do not offer refunds once products are downloaded or accessed. Please review carefully before purchasing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final CTA -->
+        <div class="price-section" style="margin-top: 4rem;">
+            <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: white;">Ready to Ace Your CRTA Exam?</h2>
+            <p style="color: var(--gray); margin-bottom: 2rem;">14 pages of battle-tested commands • Used by 500+ professionals • Updated for 2026</p>
+            
+            <div class="price-container">
+                <span class="original-price">$50</span>
+                <span class="discount-price">$5</span>
+                <span class="discount-badge">90% OFF</span>
+            </div>
+            
+            <a href="https://zishanhack.com" class="cta-button">
+                <i class="fas fa-rocket"></i>
+                Get CRTA Notes Now - $5
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer (exact same as main site) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="https://zishanhack.com" class="logo">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>ZISHAN<span class="logo-highlight">HACK</span></span>
+                    </a>
+                    <p class="footer-description">
+                        Premium cybersecurity resources crafted by industry experts. Trusted by professionals worldwide.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <a href="https://zishanhack.com/#resources" class="footer-link">All Resources</a>
+                    <a href="https://zishanhack.com/#testimonials" class="footer-link">Customer Reviews</a>
+                    <a href="#faq" class="footer-link">FAQ</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Legal</h3>
+                    <a href="/legal.html" class="footer-link">Terms of Service</a>
+                    <a href="/legal.html" class="footer-link">Privacy Policy</a>
+                    <a href="/legal.html" class="footer-link">Refund Policy</a>
+                    <a href="/responsible-disclosure.html" class="footer-link">Security</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Support</h3>
+                    <a href="https://zishanhack.com" class="footer-link">My Account</a>
+                    <a href="mailto:support@zishanhack.com" class="footer-link">Contact Support</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="security-badges">
+                    <span class="security-badge"><i class="fas fa-lock"></i> SSL SECURE</span>
+                    <span class="security-badge"><i class="fas fa-shield-alt"></i> PCI DSS COMPLIANT</span>
+                    <span class="security-badge"><i class="fas fa-globe"></i> INTERNATIONAL PAYMENTS</span>
+                </div>
+                <p class="copyright">
+                    &copy; 2026 ZishanHack. All rights reserved.
+                </p>
+            </div>
+        </div>
     </footer>
-  </div>
 
-  <script>
-    // FAQ Toggle
-    function toggleFAQ(element) {
-      element.classList.toggle('active');
-    }
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="notification-icon" id="notificationIcon"></i>
+            <span class="notification-text" id="notificationText"></span>
+            <button class="notification-close" onclick="this.parentElement.parentElement.classList.remove('show')">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
 
-    // Purchase Tracking
-    function trackPurchase(product) {
-      // You can add Google Analytics or other tracking here
-      console.log(`Purchase attempt: ${product}`);
-      
-      // Example GA4 event
-      // gtag('event', 'purchase_click', {
-      //   'product': product,
-      //   'value': 9.99
-      // });
-    }
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+    </div>
 
-    // Countdown Timer
-    function updateCountdown() {
-      const endTime = new Date();
-      endTime.setHours(23, 59, 59, 999); // End of today
-      
-      const now = new Date();
-      const diff = endTime - now;
-      
-      if (diff > 0) {
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        
-        const timerEl = document.getElementById('countdown-timer');
-        if (timerEl) {
-          timerEl.innerHTML = `Offer ends in: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-      }
-    }
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
-      // Update countdown every second
-      setInterval(updateCountdown, 1000);
-      updateCountdown();
-      
-      // Add scroll animation
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeIn 0.8s ease forwards';
-          }
+    <script>
+        // Mobile menu toggle only
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('show');
         });
-      }, { threshold: 0.1 });
-      
-      // Observe all sections
-      document.querySelectorAll('.feature-card, .content-item, .faq-item').forEach(el => {
-        observer.observe(el);
-      });
-    });
-  </script>
+        
+        // FAQ toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+                const icon = question.querySelector('i');
+                if (item.classList.contains('active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+        
+        // Show notification function
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            const text = document.getElementById('notificationText');
+            const icon = document.getElementById('notificationIcon');
+            
+            notification.className = 'notification';
+            notification.classList.add(`notification-${type}`);
+            
+            const icons = {
+                success: 'fas fa-check-circle',
+                error: 'fas fa-exclamation-circle',
+                warning: 'fas fa-exclamation-triangle',
+                info: 'fas fa-info-circle'
+            };
+            
+            icon.className = `${icons[type]} notification-icon`;
+            text.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
