@@ -54,94 +54,9 @@
     <meta name="twitter:title" content="ZishanHack | 90% OFF Premium Cybersecurity Resources">
     <meta name="twitter:description" content="Battle-tested cybersecurity resources trusted by professionals. Limited time 90% discount!">
     <meta name="twitter:image" content="https://zishanhack.com/assets/preview.jpg">
-    
-    <style>
-        /* Critical CSS for immediate loading */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #10b981;
-            --accent: #f59e0b;
-            --danger: #ef4444;
-            --success: #10b981;
-            --dark: #0f172a;
-            --darker: #0a0e17;
-            --light: #ffffff;
-            --gray: #94a3b8;
-            --gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
-            --gradient-accent: linear-gradient(135deg, #f59e0b, #ef4444);
-            --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
-            --border: rgba(255, 255, 255, 0.1);
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--darker);
-            color: var(--light);
-            line-height: 1.7;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-        
-        .trust-bar {
-            background: linear-gradient(90deg, #ef4444, #f97316, #f59e0b);
-            color: white;
-            padding: 12px 0;
-            font-size: 15px;
-            font-weight: 700;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            animation: pulse 2s infinite;
-        }
-        
-        .trust-bar i {
-            margin-right: 8px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .header {
-            position: fixed;
-            top: 46px;
-            left: 0;
-            right: 0;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            z-index: 999;
-            padding: 15px 0;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.9; }
-            100% { opacity: 1; }
-        }
-    </style>
 </head>
 <body>
-    <!-- Trust Bar -->
-    <div class="trust-bar">
-        <div class="container">
-            <i class="fas fa-bolt"></i> LIMITED TIME: Get 90% OFF on ALL Resources • Trusted by 2,500+ Security Professionals • 
-            <span id="countdown">Offer ends in: 03:59:59</span>
-        </div>
-    </div>
+
 
     <!-- Header -->
     <header class="header">
@@ -178,7 +93,7 @@
                 <div class="trust-badges">
                     <span class="trust-badge">
                         <i class="fas fa-fire"></i>
-                        90% OFF
+                        90%
                     </span>
                     <span class="trust-badge">
                         <i class="fas fa-users"></i>
@@ -601,90 +516,52 @@
     </div>
 
     <script src="/script.js"></script>
-    <script>
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-        
-        // Countdown timer
-        function updateCountdown() {
-            const now = new Date();
-            const endOfDay = new Date();
-            endOfDay.setHours(23, 59, 59, 999);
-            
-            const diff = endOfDay - now;
-            
-            if (diff <= 0) {
-                document.getElementById('countdown').textContent = '00:00:00';
-                return;
-            }
-            
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            document.getElementById('countdown').textContent = 
-                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+<script>
+document.querySelectorAll('.faq-question').forEach(question => {
+
+    question.setAttribute('tabindex', '0');
+
+    question.addEventListener('click', () => {
+
+        const answer = question.nextElementSibling;
+
+        const icon = question.querySelector('i');
+
+        const isOpen = answer.classList.contains('show');
+
+        // Close all FAQ items
+        document.querySelectorAll('.faq-answer').forEach(item => {
+            item.classList.remove('show');
+        });
+
+        document.querySelectorAll('.faq-question i').forEach(i => {
+            i.classList.remove('fa-chevron-up');
+            i.classList.add('fa-chevron-down');
+        });
+
+        // Open clicked item if closed
+        if (!isOpen) {
+            answer.classList.add('show');
+
+            icon.classList.remove('fa-chevron-down');
+            icon.classList.add('fa-chevron-up');
         }
-        
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-        
-        // Mobile menu toggle
-        document.getElementById('navToggle').addEventListener('click', function() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('show');
-            this.setAttribute('aria-expanded', navMenu.classList.contains('show'));
-        });
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const navMenu = document.getElementById('navMenu');
-            const navToggle = document.getElementById('navToggle');
-            
-            if (navMenu.classList.contains('show') && 
-                !navMenu.contains(event.target) && 
-                !navToggle.contains(event.target)) {
-                navMenu.classList.remove('show');
-                navToggle.setAttribute('aria-expanded', 'false');
-            }
-        });
-        
-        // FAQ toggle
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const isExpanded = answer.classList.toggle('show');
-                question.querySelector('i').classList.toggle('fa-chevron-up');
-                question.setAttribute('aria-expanded', isExpanded);
-            });
-            
-            // Make FAQ accessible via keyboard
-            question.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    question.click();
-                }
-            });
-        });
-        
-        // Prevent form submission on Enter in search/input fields
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && e.target.tagName === 'INPUT' && !e.target.type.includes('submit')) {
-                e.preventDefault();
-            }
-        });
-        
-        // Add focus styles for accessibility
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Tab') {
-                document.body.classList.add('keyboard-navigation');
-            }
-        });
-        
-        document.addEventListener('mousedown', function() {
-            document.body.classList.remove('keyboard-navigation');
-        });
-    </script>
+
+    });
+
+    question.addEventListener('keydown', (e) => {
+
+        if (e.key === 'Enter' || e.key === ' ') {
+
+            e.preventDefault();
+            question.click();
+
+        }
+
+    });
+
+});
+</script>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YYCENYFQ0P"></script>

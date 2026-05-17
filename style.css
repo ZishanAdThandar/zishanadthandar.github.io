@@ -12,10 +12,10 @@
     --gray: #94a3b8;
     --gray-dark: #475569;
     --gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
-    --gradient-accent: linear-gradient(135deg, #f59e0b, #ef4444);
+    --gradient-accent: linear-gradient(135deg, #6366f1, #8b5cf6);
     --gradient-dark: linear-gradient(135deg, #0f172a, #1e1b4b);
     --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.25);
     --border: rgba(255, 255, 255, 0.1);
     --border-light: rgba(255, 255, 255, 0.2);
 }
@@ -77,12 +77,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-gradient {
-    background: linear-gradient(135deg, #f59e0b, #ef4444, #6366f1);
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     display: block;
-    font-size: 4rem;
+    font-size: 3.4rem;
     font-weight: 900;
     letter-spacing: -1px;
     margin-bottom: 0.5rem;
@@ -101,36 +101,11 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 20px;
 }
 
-/* Trust Bar */
-.trust-bar {
-    background: linear-gradient(90deg, #ef4444, #f97316, #f59e0b);
-    color: white;
-    padding: 12px 0;
-    font-size: 15px;
-    font-weight: 700;
-    text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1001;
-    animation: pulse 2s infinite;
-}
-
-.trust-bar i {
-    margin-right: 8px;
-}
-
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.9; }
-    100% { opacity: 1; }
-}
 
 /* Navigation */
 .header {
     position: fixed;
-    top: 46px;
+    top: 0; 
     left: 0;
     right: 0;
     background: rgba(15, 23, 42, 0.95);
@@ -185,8 +160,7 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.3px;
     transition: all 0.3s ease;
     position: relative;
     padding: 0.5rem 0;
@@ -248,7 +222,6 @@ h1, h2, h3, h4, h5, h6 {
     top: 100%;
     right: 0;
     background: var(--dark);
-    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1rem;
     min-width: 250px;
@@ -311,7 +284,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero Section */
 .hero-section {
-    padding: 180px 0 100px;
+    padding: 140px 0 100px;
     background: var(--gradient-dark);
     position: relative;
     overflow: hidden;
@@ -326,8 +299,8 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 0;
     background: 
         radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 80%, rgba(239, 68, 68, 0.1) 0%, transparent 50%);
+        radial-gradient(circle at 80% 20%, rgba(99,102,241,0.12) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(139,92,246,0.10) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -352,14 +325,13 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
     font-weight: 600;
-    padding: 0.75rem 1.5rem;
+    padding: 0.55rem 1rem;
     border-radius: 50px;
     backdrop-filter: blur(10px);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.9rem;
-    text-transform: uppercase;
+    font-size: 0.85rem;
     letter-spacing: 1px;
 }
 
@@ -411,7 +383,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .stat-number {
-    font-size: 3rem;
+    font-size: 2.4rem;
     font-weight: 900;
     background: var(--gradient);
     -webkit-background-clip: text;
@@ -429,7 +401,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Sections */
 section {
-    padding: 100px 0;
+    padding: 80px 0;
 }
 
 .section-header {
@@ -450,7 +422,6 @@ section {
     font-size: 0.9rem;
     letter-spacing: 1px;
     margin-bottom: 1.5rem;
-    text-transform: uppercase;
 }
 
 .section-title {
@@ -541,20 +512,6 @@ section {
     overflow: hidden;
 }
 
-.btn-sparkle::after {
-    content: '⚡';
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    font-size: 1.2rem;
-    animation: sparkle 2s infinite;
-}
-
-@keyframes sparkle {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.7; transform: scale(1.1); }
-}
-
 .btn-large {
     padding: 1.25rem 2.5rem;
     font-size: 1.1rem;
@@ -601,7 +558,6 @@ section {
 
 .product-card {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
     border-radius: 20px;
     padding: 2.5rem;
     position: relative;
@@ -623,7 +579,7 @@ section {
 
 .product-card:hover,
 .product-card:focus-within {
-    transform: translateY(-10px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
     border-color: var(--primary);
 }
@@ -716,24 +672,11 @@ section {
     padding: 1.5rem;
     background: rgba(255, 255, 255, 0.03);
     border-radius: 12px;
-    border: 1px solid var(--border);
     text-align: center;
     position: relative;
     overflow: hidden;
 }
 
-/* Decorative background effect */
-.product-price::before {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-    background: radial-gradient(circle at 30% 50%, rgba(99, 102, 241, 0.1), transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-}
 
 .product-price > * {
     position: relative;
@@ -768,10 +711,10 @@ section {
 .current-price {
     font-size: 3rem;
     font-weight: 900;
-    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
+    color: #c4b5fd;
     line-height: 1.2;
     text-align: center;
 }
@@ -818,15 +761,6 @@ section {
     max-width: 100%;
 }
 
-/* Subtle animation for the CTA button */
-.product-actions .btn-premium {
-    animation: subtle-pulse 2s infinite;
-}
-
-@keyframes subtle-pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-}
 
 /* For purchased state */
 .product-actions .btn-success {
@@ -846,7 +780,6 @@ section {
 
 .testimonial-card {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
     border-radius: 20px;
     padding: 2.5rem;
     position: relative;
@@ -857,9 +790,9 @@ section {
     position: absolute;
     top: 0.5rem;
     right: 1rem;
-    font-size: 5rem;
+    font-size: 3rem;
     color: var(--primary);
-    opacity: 0.2;
+    opacity: 0.1;
     gap: 0.2rem;
 }
 
@@ -902,7 +835,6 @@ section {
 
 .faq-item {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
     border-radius: 12px;
     margin-bottom: 1rem;
     overflow: hidden;
@@ -967,7 +899,7 @@ section {
     bottom: 0;
     background: 
         radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.15) 0%, transparent 50%);
+        radial-gradient(circle at 90% 80%, rgba(139,92,246,0.12) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -979,7 +911,8 @@ section {
 }
 
 .cta-badge {
-    background: var(--gradient-accent);
+    background: rgba(99,102,241,0.1);
+    border: 1px solid rgba(99,102,241,0.3);
     color: white;
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
@@ -990,7 +923,6 @@ section {
     align-items: center;
     gap: 0.75rem;
     margin-bottom: 2rem;
-    animation: pulse 2s infinite;
 }
 
 .cta-title {
@@ -1108,7 +1040,7 @@ section {
 .footer-link:hover,
 .footer-link:focus {
     color: var(--primary);
-    transform: translateX(5px);
+    transform: translateX(2px);
     outline: none;
 }
 
@@ -1128,7 +1060,6 @@ section {
 
 .security-badge {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
     color: var(--gray);
     padding: 0.5rem 1rem;
     border-radius: 50px;
@@ -1175,7 +1106,6 @@ section {
     left: 50%;
     transform: translate(-50%, -50%);
     background: var(--dark);
-    border: 1px solid var(--border);
     border-radius: 20px;
     padding: 3rem;
     width: 90%;
@@ -1251,7 +1181,6 @@ section {
     width: 100%;
     padding: 1rem 1.5rem;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
     border-radius: 12px;
     color: white;
     font-size: 1rem;
@@ -1388,12 +1317,10 @@ input:-webkit-autofill:active {
     .auth-form,
     .btn,
     .modal,
-    .notification,
-    .trust-bar {
+    .notification {
         display: none !important;
     }
 }
-
 /* International payment indicator */
 .international-payment {
     border: 2px solid #3b82f6 !important;
@@ -1473,10 +1400,9 @@ input:-webkit-autofill:active {
     bottom: 30px;
     right: 30px;
     z-index: 9999;
-    min-width: 350px;
+    min-width: 280px;
     max-width: 500px;
     background: var(--dark);
-    border: 1px solid var(--border);
     border-radius: 15px;
     box-shadow: var(--shadow-lg);
     transform: translateY(100px);
@@ -1640,35 +1566,10 @@ input:-webkit-autofill:active {
 }
 
 @media (max-width: 768px) {
-    /* Trust Bar adjustments */
-    .trust-bar {
-        font-size: 12px;
-        padding: 8px 0;
-        line-height: 1.3;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1001;
-        white-space: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .trust-bar .container {
-        display: inline-block;
-        padding: 0 15px;
-        min-width: 100%;
-    }
-    
-    .trust-bar i {
-        margin-right: 4px;
-    }
-    
     /* Header adjustments - position below trust bar */
     .header {
         position: fixed;
-        top: 40px; /* Height of trust bar */
+        top: 0;
         left: 0;
         right: 0;
         padding: 8px 0;
@@ -1687,7 +1588,7 @@ input:-webkit-autofill:active {
     /* Mobile menu */
     .nav-menu {
         position: fixed;
-        top: 100px; /* trust bar (40px) + header (60px) */
+        top: 100%; /* trust bar (40px) + header (60px) */
         left: 0;
         right: 0;
         background: var(--dark);
@@ -1718,7 +1619,7 @@ input:-webkit-autofill:active {
     
     /* Hero section adjustments - add top padding to account for fixed elements */
     .hero-section {
-        padding: 140px 0 60px; /* Increased top padding */
+        padding: 110px 0 60px; /* Increased top padding */
         margin-top: 0;
     }
     
@@ -1947,18 +1848,14 @@ input:-webkit-autofill:active {
 }
 
 @media (max-width: 480px) {
-    .trust-bar {
-        font-size: 11px;
-        padding: 6px 0;
-    }
-    
+  
     .header {
-        top: 35px; /* Match trust bar height */
+        top: 0; 
         padding: 6px 0;
     }
     
     .nav-menu {
-        top: 85px; /* trust bar (35px) + header (50px) */
+        top: 100%; /* trust bar (35px) + header (50px) */
     }
     
     .hero-section {
@@ -2032,13 +1929,9 @@ input:-webkit-autofill:active {
 }
 
 @media (max-width: 360px) {
-    .trust-bar {
-        font-size: 10px;
-        padding: 5px 0;
-    }
     
     .header {
-        top: 32px;
+        top: 0;
         padding: 5px 0;
     }
     
@@ -2051,7 +1944,7 @@ input:-webkit-autofill:active {
     }
     
     .nav-menu {
-        top: 80px;
+        top: 100%;
     }
     
     .hero-section {
@@ -2135,7 +2028,6 @@ input:-webkit-autofill:active {
         transition-duration: 0.01ms !important;
     }
     
-    .trust-bar,
     .cta-badge,
     .product-actions .btn-premium {
         animation: none;
