@@ -54,23 +54,10 @@
         }
         
         /* Header & Navbar - Exactly like index.html */
-        .trust-bar {
-            background: linear-gradient(90deg, #ef4444, #f97316, #f59e0b);
-            color: white;
-            padding: 12px 0;
-            font-size: 15px;
-            font-weight: 700;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
-        
+
         .header {
             position: fixed;
-            top: 46px;
+            top: 0px;
             left: 0;
             right: 0;
             background: rgba(15, 23, 42, 0.95);
@@ -371,21 +358,14 @@
         
         /* Responsive Design - FIXED VERSION */
         @media (max-width: 768px) {
-            .trust-bar {
-                font-size: 13px;
-                padding: 10px 0;
-                white-space: nowrap;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
             
-            .trust-bar .container {
+            .container {
                 display: inline-block;
                 min-width: 100%;
             }
             
             .header {
-                top: 42px;
+                top: 0px;
                 padding: 10px 0;
             }
             
@@ -407,7 +387,7 @@
             /* Hide desktop nav-menu by default on mobile */
             .nav-menu {
                 position: fixed;
-                top: 100px;
+                top: 100%;
                 left: 0;
                 right: 0;
                 background: var(--dark);
@@ -468,13 +448,9 @@
         }
         
         @media (max-width: 480px) {
-            .trust-bar {
-                font-size: 11px;
-                padding: 8px 0;
-            }
             
             .header {
-                top: 38px;
+                top: 0px;
                 padding: 8px 0;
             }
             
@@ -487,7 +463,7 @@
             }
             
             .nav-menu {
-                top: 85px;
+                top: 0px;
             }
             
             .legal-container {
@@ -522,17 +498,13 @@
         }
         
         @media (max-width: 360px) {
-            .trust-bar {
-                font-size: 10px;
-                padding: 6px 0;
-            }
             
             .header {
-                top: 32px;
+                top: 0px;
             }
             
             .nav-menu {
-                top: 75px;
+                top: 0px;
             }
             
             .legal-section {
@@ -546,12 +518,6 @@
     </style>
 </head>
 <body>
-    <!-- Trust Bar -->
-    <div class="trust-bar">
-        <div class="container">
-            <i class="fas fa-bolt"></i> ZishanHack Legal Information • Terms of Service • Privacy Policy • Refund Policy
-        </div>
-    </div>
 
     <!-- Header -->
     <header class="header">
