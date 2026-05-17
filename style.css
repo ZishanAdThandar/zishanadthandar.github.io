@@ -284,7 +284,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero Section */
 .hero-section {
-    padding: 140px 0 100px;
+    padding: 110px 0 80px;
     background: var(--gradient-dark);
     position: relative;
     overflow: hidden;
@@ -870,7 +870,7 @@ section {
 
 .faq-answer.show {
     padding: 1.5rem;
-    max-height: 500px;
+    max-height: 1000px;
 }
 
 .faq-answer p {
@@ -1588,7 +1588,7 @@ input:-webkit-autofill:active {
     /* Mobile menu */
     .nav-menu {
         position: fixed;
-        top: 100%; /* trust bar (40px) + header (60px) */
+        top: 100%; 
         left: 0;
         right: 0;
         background: var(--dark);
@@ -1601,7 +1601,7 @@ input:-webkit-autofill:active {
         opacity: 0;
         transition: all 0.3s ease;
         display: none;
-        z-index: 999;
+        z-index: 1001;
         max-height: calc(100vh - 100px);
         overflow-y: auto;
         box-shadow: var(--shadow-lg);
@@ -1855,7 +1855,7 @@ input:-webkit-autofill:active {
     }
     
     .nav-menu {
-        top: 100%; /* trust bar (35px) + header (50px) */
+        top: 100%; 
     }
     
     .hero-section {
@@ -1944,7 +1944,7 @@ input:-webkit-autofill:active {
     }
     
     .nav-menu {
-        top: 100%;
+        top: 70px;
     }
     
     .hero-section {
