@@ -641,7 +641,7 @@ function createProductButton(productId, priceDisplay, isLoggedIn, isPurchased) {
     return `
       <button class="btn btn-premium btn-sparkle" onclick="buyProduct('${productId}')">
         <i class="fas fa-bolt"></i>
-        GET INSTANT ACCESS - ${priceDisplay}
+        Access Resources - ${priceDisplay}
       </button>`;
   }
 }
