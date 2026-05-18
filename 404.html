@@ -49,16 +49,13 @@
             --primary-dark: #4f46e5;
             --primary-glow: rgba(99, 102, 241, 0.5);
             --secondary: #10b981;
-            --accent: #f59e0b;
             --danger: #ef4444;
-            --danger-glow: rgba(239, 68, 68, 0.3);
             --dark: #0f172a;
             --darker: #0a0e17;
             --light: #ffffff;
             --gray: #94a3b8;
             --gray-dark: #475569;
             --gradient-primary: linear-gradient(135deg, #6366f1, #8b5cf6);
-            --gradient-accent: linear-gradient(135deg, #f59e0b, #ef4444);
             --border: rgba(255, 255, 255, 0.1);
             --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.7);
             --font-mono: 'JetBrains Mono', monospace;
@@ -121,7 +118,7 @@
         }
 
         .glow-orb-2 {
-            background: rgba(239, 68, 68, 0.1);
+            background: rgba(139, 92, 246, 0.12);
             bottom: -100px;
             right: -100px;
             animation-delay: -5s;
@@ -177,7 +174,7 @@
 
         .glitch {
             position: relative;
-            font-size: 180px;
+            font-size: 160px;
             font-weight: 900;
             line-height: 1;
             font-family: 'Poppins', sans-serif;
@@ -205,7 +202,7 @@
         }
 
         .glitch::before {
-            animation: glitch-left 0.4s infinite;
+            animation: glitch-left 0.8s infinite;
             color: var(--danger);
             text-shadow: 2px 0 var(--danger);
             clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
@@ -214,7 +211,7 @@
         }
 
         .glitch::after {
-            animation: glitch-right 0.4s infinite;
+            animation: glitch-right 0.8s infinite;
             color: var(--primary);
             text-shadow: -2px 0 var(--primary);
             clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
@@ -246,7 +243,7 @@
             font-weight: 800;
             text-align: center;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -351,9 +348,9 @@
         }
 
         .action-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-2px);
             border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.14);
         }
 
         .action-icon {
@@ -465,7 +462,7 @@
         .resource-item:hover {
             background: rgba(99, 102, 241, 0.1);
             border-color: var(--primary);
-            transform: translateX(5px);
+            transform: translateX(2px);
         }
 
         .resource-icon {
@@ -495,7 +492,7 @@
         .help-section {
             margin: 50px 0 30px;
             padding: 30px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(239, 68, 68, 0.1));
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.08));
             border-radius: 24px;
             text-align: center;
         }
@@ -537,8 +534,8 @@
             align-items: center;
             gap: 8px;
             padding: 8px 16px;
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.18);
             border-radius: 60px;
             color: var(--gray);
             font-size: 13px;
@@ -651,7 +648,7 @@
                 <div class="glitch">404</div>
             </div>
 
-            <h1 class="error-title">ACCESS DENIED</h1>
+            <h1 class="error-title">Page Not Found</h1>
             
             <p class="error-message">
                 The page you're looking for doesn't exist or has been moved to a secure location. 
@@ -715,30 +712,8 @@
                 </a>
             </div>
 
-            <!-- Safe Search - with proper XSS protection -->
-            <div class="search-section">
-                <form action="/" method="GET" id="searchForm">
-                    <div class="search-container">
-                        <input type="text" 
-                               class="search-input" 
-                               placeholder="Search for resources, notes, bundles..." 
-                               name="search"
-                               id="searchInput"
-                               maxlength="100"
-                               pattern="[a-zA-Z0-9\s\-_]+"
-                               title="Only letters, numbers, spaces, hyphens and underscores allowed"
-                               autofocus>
-                        <button type="submit" class="search-btn" title="Search">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                    <!-- Add hash to ensure we go to resources section -->
-                    <input type="hidden" name="_" value="resources">
-                </form>
-            </div>
-
             <!-- Static Resources Grid -->
-            <h3 class="resources-title">🔥 Popular Resources You Might Need</h3>
+            <h3 class="resources-title">Popular Resources You Might Need</h3>
             <div class="resources-grid">
                 <a href="/#resources" class="resource-item">
                     <div class="resource-icon">
@@ -746,7 +721,7 @@
                     </div>
                     <div class="resource-info">
                         <h4>OSCP+ Bundle</h4>
-                        <p>1,500+ sold • 90% OFF</p>
+                        <p>OSCP Preparation</p>
                     </div>
                 </a>
                 <a href="/#resources" class="resource-item">
@@ -755,7 +730,7 @@
                     </div>
                     <div class="resource-info">
                         <h4>CRTA Notes</h4>
-                        <p>500+ sold • Copy-paste commands</p>
+                        <p>Practical Methodology</p>
                     </div>
                 </a>
                 <a href="/#resources" class="resource-item">
@@ -764,7 +739,7 @@
                     </div>
                     <div class="resource-info">
                         <h4>Web Security Checklist</h4>
-                        <p>2,000+ sold • Bug hunter approved</p>
+                        <p>Testing Methodology</p>
                     </div>
                 </a>
                 <a href="/#resources" class="resource-item">
@@ -773,14 +748,14 @@
                     </div>
                     <div class="resource-info">
                         <h4>OSWP Notes</h4>
-                        <p>Wireless pentesting • New</p>
+                        <p>Wireless Testing</p>
                     </div>
                 </a>
             </div>
 
             <!-- Help Section -->
             <div class="help-section">
-                <div class="help-title">🚀 Need immediate assistance?</div>
+                <div class="help-title">Need Assistance?</div>
                 <div class="help-links">
                     <a href="/legal.html" class="help-link">
                         <i class="fas fa-gavel"></i>
@@ -804,7 +779,7 @@
             <!-- Security Badge -->
             <div class="security-badge">
                 <i class="fas fa-shield"></i>
-                <span>Error logged • IP recorded • Security team notified</span>
+                <span>Error logged for troubleshooting purposes</span>
             </div>
 
             <!-- Footer Links -->
@@ -819,68 +794,7 @@
         </div>
     </div>
 
-    <!-- Minimal Safe JavaScript - with proper sanitization -->
-    <script>
-        (function() {
-            'use strict';
 
-            // Safe form handling with input validation
-            const searchForm = document.getElementById('searchForm');
-            if (searchForm) {
-                searchForm.addEventListener('submit', function(e) {
-                    const searchInput = document.getElementById('searchInput');
-                    if (searchInput) {
-                        // Sanitize input - remove any potentially dangerous characters
-                        let searchTerm = searchInput.value.trim();
-                        
-                        // Allow only alphanumeric, spaces, hyphens, underscores
-                        searchTerm = searchTerm.replace(/[^a-zA-Z0-9\s\-_]/g, '');
-                        
-                        // Limit length
-                        if (searchTerm.length > 50) {
-                            searchTerm = searchTerm.substring(0, 50);
-                        }
-                        
-                        if (searchTerm) {
-                            // Properly encode for URL
-                            searchInput.value = searchTerm; // Update input with sanitized value
-                            // Let the form submit naturally
-                        } else {
-                            e.preventDefault();
-                            // Optional: Show a message
-                            alert('Please enter a valid search term');
-                        }
-                    }
-                });
-            }
-
-            // Safe URL parameter handling (if needed)
-            function getUrlParameter(name) {
-                name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
-                const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-                const results = regex.exec(location.search);
-                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-            }
-
-            // Auto-focus search with safe check
-            window.addEventListener('load', function() {
-                const searchInput = document.getElementById('searchInput');
-                if (searchInput && !searchInput.disabled) {
-                    setTimeout(function() {
-                        searchInput.focus();
-                    }, 500);
-                }
-            });
-
-            // Safe analytics (if needed)
-            if (typeof gtag !== 'undefined') {
-                gtag('event', '404_error', {
-                    'page_path': window.location.pathname,
-                    'page_title': document.title
-                });
-            }
-        })();
-    </script>
 
     <!-- Google Analytics with SRI -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YYCENYFQ0P"></script>
