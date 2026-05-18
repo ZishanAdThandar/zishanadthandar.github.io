@@ -29,10 +29,9 @@
       --gray: #94a3b8;
       --gray-dark: #475569;
       --gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
-      --gradient-accent: linear-gradient(135deg, #f59e0b, #ef4444);
       --gradient-dark: linear-gradient(135deg, #0f172a, #1e1b4b);
       --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 12px 30px rgba(0,0,0,0.28);
       --border: rgba(255, 255, 255, 0.1);
       --border-light: rgba(255, 255, 255, 0.2);
     }
@@ -62,8 +61,8 @@
       bottom: 0;
       background: 
         radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 80%, rgba(239, 68, 68, 0.1) 0%, transparent 50%);
+        radial-gradient(circle at 80% 20%, rgba(99,102,241,0.12) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(139,92,246,0.10) 0%, transparent 50%);
       pointer-events: none;
       z-index: 0;
     }
@@ -85,24 +84,23 @@
     .section-badge {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       background: var(--gradient);
       color: white;
-      padding: 12px 28px;
+      padding: 10px 22px;
       border-radius: 50px;
       font-weight: 700;
       font-size: 0.9rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      letter-spacing: 0.5px;
       margin-bottom: 24px;
       border: 1px solid rgba(255,255,255,0.2);
       box-shadow: var(--shadow);
     }
 
     h1 {
-      font-size: 3.2rem;
+      font-size: 3rem;
       font-weight: 900;
-      letter-spacing: -2px;
+      letter-spacing: -1.5px;
       line-height: 1.1;
       margin-bottom: 16px;
       color: white;
@@ -142,7 +140,7 @@
     }
 
     .policy-card {
-      background: rgba(15, 23, 42, 0.7);
+      background: rgba(15, 23, 42, 0.88);
       backdrop-filter: blur(10px);
       border: 1px solid var(--border);
       border-radius: 20px;
@@ -166,10 +164,10 @@
     }
 
     .policy-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-1px);
       border-color: var(--primary);
       box-shadow: var(--shadow-lg);
-      background: rgba(30, 41, 59, 0.8);
+      background: rgba(15, 23, 42, 0.92);
     }
 
     .policy-card:hover::before {
@@ -365,7 +363,7 @@
       background: var(--primary);
       color: white;
       border-color: var(--primary);
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
 
     /* ===== HALL OF FAME - PREMIUM ===== */
@@ -389,8 +387,8 @@
 
     .hof-entry:hover {
       border-color: var(--primary);
-      background: rgba(99, 102, 241, 0.05);
-      transform: translateY(-3px);
+      background: rgba(99, 102, 241, 0.03);
+      transform: translateY(-1px);
     }
 
     .hof-rank {
@@ -527,7 +525,7 @@
       background: rgba(99, 102, 241, 0.1);
       color: white;
       border-color: rgba(99, 102, 241, 0.3);
-      transform: translateX(-5px);
+      transform: translateX(-2px);
     }
 
     .trust-badge {
@@ -535,7 +533,7 @@
       align-items: center;
       gap: 8px;
       padding: 8px 20px;
-      background: rgba(255,255,255,0.02);
+      background: rgba(255,255,255,0.01);
       border: 1px solid var(--border);
       border-radius: 30px;
       color: var(--gray);
@@ -571,8 +569,7 @@
     <div class="policy-header">
       <div class="section-badge">
         <i class="fas fa-shield-halved"></i>
-        SECURITY & DISCLOSURE
-        <i class="fas fa-shield-halved"></i>
+        Security & Disclosure
       </div>
       
       <h1>
@@ -602,7 +599,7 @@
           </p>
           <div class="scope-container" style="margin-top: 8px;">
             <span class="scope-tag"><i class="fas fa-check-circle"></i> Good Faith Testing</span>
-            <span class="scope-tag"><i class="fas fa-check-circle"></i> No Legal Action</span>
+            <span class="scope-tag"><i class="fas fa-check-circle"></i> Researcher Safe Harbor</span>
             <span class="scope-tag"><i class="fas fa-check-circle"></i> Coordinated Disclosure</span>
           </div>
         </div>
@@ -684,7 +681,7 @@
             </div>
             <button class="copy-btn" onclick="copyEmail()">
               <i class="fas fa-copy"></i>
-              COPY EMAIL
+              Copy Email
             </button>
           </div>
 
@@ -753,14 +750,14 @@
                   <a href="https://hackerone.com/cyphryn" target="_blank" rel="noopener noreferrer">Cyphryn</a>
                 </div>
                 <div class="hof-meta">
-                  <span>Critical Vulnerability</span>
+                  <span>Security Vulnerability</span>
                   <span class="critical-badge">Resolved</span>
                 </div>
                 <div style="color: var(--gray); font-size: 0.8rem; margin-top: 4px;">February 2026</div>
               </div>
             </div>
             
-            <div class="hof-entry" style="opacity: 0.7; border-style: dashed;">
+            <div class="hof-entry" style="opacity: 0.7;">
               <div class="hof-rank" style="background: var(--gray-dark);">—</div>
               <div class="hof-details">
                 <div class="hof-name" style="color: var(--gray);">Your name here</div>
@@ -803,7 +800,7 @@
     <div class="policy-footer">
       <a href="/" class="back-link">
         <i class="fas fa-arrow-left"></i>
-        RETURN TO HOME
+        Return to Home
       </a>
       
       <div style="display: flex; gap: 12px;">
@@ -831,13 +828,13 @@
       navigator.clipboard.writeText(email).then(() => {
         const btn = document.querySelector('.copy-btn');
         const originalHTML = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-check"></i> COPIED!';
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied';
         btn.style.background = 'var(--success)';
         btn.style.color = 'white';
         btn.style.borderColor = 'var(--success)';
         
         setTimeout(() => {
-          btn.innerHTML = '<i class="fas fa-copy"></i> COPY EMAIL';
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copy Email';
           btn.style.background = 'transparent';
           btn.style.color = 'var(--gray)';
           btn.style.borderColor = 'var(--border)';
