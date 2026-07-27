@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zishanhack.com/sitemap.xml
+Sitemap: https://zishanhack.com/blog/sitemap.xml
