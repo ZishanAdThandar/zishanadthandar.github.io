@@ -174,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
   loadProducts();
   checkPaymentCallback();
   setupOTPInputs();
-  loadRazorpaySDK();
 });
 
 // ===== AUTH FUNCTIONS =====
@@ -502,7 +501,9 @@ function ensureRazorpaySDK(callback) {
     callback();
     return;
   }
-  
+
+  loadRazorpaySDK();
+
   let attempts = 0;
   const checkInterval = setInterval(() => {
     attempts++;

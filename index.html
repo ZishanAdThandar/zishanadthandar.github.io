@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZishanHack | Premium Cybersecurity Resources - Practical Offensive Security Resources</title>
+    <title>ZishanHack | OSCP & CRTA Notes, Web Security Checklist</title>
+    <link rel="canonical" href="https://zishanhack.com/">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/svgs/solid/shield-halved.svg">
     
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
           crossorigin="anonymous" referrerpolicy="no-referrer">
     
     <!-- Google Fonts -->
@@ -20,9 +21,6 @@
     <link rel="stylesheet" href="/style.css">
     <link rel="preconnect" href="https://checkout.razorpay.com">
     <link rel="preconnect" href="https://api.zishanhack.com">
-    
-    <!-- Razorpay JS SDK -->
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     
     <!-- Enhanced Security Meta Tags -->
 <meta http-equiv="Content-Security-Policy" content="
@@ -43,7 +41,7 @@
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
     
     <!-- Trust & Sales Meta -->
-    <meta name="description" content="Premium cybersecurity notes, checklists, and training resources for red teamers, penetration testers, and bug bounty hunters. CRTA Notes, OSCP Bundle, Web Security Checklist.">
+    <meta name="description" content="Battle-tested OSCP, CRTA & OSWP notes plus a web security checklist for pentesters and bug bounty hunters. Instant access with lifetime updates.">
     <meta name="keywords" content="CRTA notes, OSCP bundle, cybersecurity, 90% off, penetration testing, security certification, red team, bug bounty">
     <meta property="og:title" content="ZishanHack | Premium Cybersecurity Resources">
     <meta property="og:description" content="Battle-tested cybersecurity resources trusted by professionals. Limited time 90% discount!">
@@ -54,6 +52,92 @@
     <meta name="twitter:title" content="ZishanHack | Premium Cybersecurity Resources">
     <meta name="twitter:description" content="Battle-tested cybersecurity resources trusted by professionals. Limited time 90% discount!">
     <meta name="twitter:image" content="https://zishanhack.com/assets/preview.jpg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://zishanhack.com/#website",
+          "url": "https://zishanhack.com/",
+          "name": "ZishanHack",
+          "description": "Premium offensive security resources: OSCP, CRTA and OSWP notes plus a web security checklist for penetration testers and bug bounty hunters.",
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://zishanhack.com/#organization",
+            "name": "ZishanHack",
+            "url": "https://zishanhack.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://zishanhack.com/assets/preview.jpg"
+            }
+          }
+        },
+        {
+          "@type": "Product",
+          "name": "OSCP+ Obsidian Notes Bundle",
+          "description": "Complete preparation package for OSCP certification with Obsidian format, copy-paste commands, and Active Directory attack guides.",
+          "image": "https://zishanhack.com/products/ogoscp.png",
+          "url": "https://zishanhack.com/products/oscp-bundle",
+          "brand": { "@type": "Brand", "name": "ZishanHack" },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://zishanhack.com/products/oscp-bundle",
+            "price": "97.00",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        },
+        {
+          "@type": "Product",
+          "name": "Ultimate Web Security Checklist",
+          "description": "Comprehensive checklist for bug bounty hunters covering OWASP Top 10, API security, and logic flaws.",
+          "image": "https://zishanhack.com/products/ogweb.png",
+          "url": "https://zishanhack.com/products/web-security-checklist",
+          "brand": { "@type": "Brand", "name": "ZishanHack" },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://zishanhack.com/products/web-security-checklist",
+            "price": "25.00",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        },
+        {
+          "@type": "Product",
+          "name": "CRTA Copy Paste Commands eBook",
+          "description": "Battle-tested notes with copy-paste commands for CyberWarFare Labs CRTA assessment, including AD attack guides.",
+          "image": "https://zishanhack.com/products/ogcrta.png",
+          "url": "https://zishanhack.com/products/crta",
+          "brand": { "@type": "Brand", "name": "ZishanHack" },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://zishanhack.com/products/crta",
+            "price": "5.00",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        },
+        {
+          "@type": "Product",
+          "name": "OSWP Copy Paste Commands eBook",
+          "description": "Wireless pentesting notes and cheatsheet for Offsec OSWP certification, including rogue AP setup.",
+          "image": "https://zishanhack.com/products/ogoswp.png",
+          "url": "https://zishanhack.com/products/oswp-notes",
+          "brand": { "@type": "Brand", "name": "ZishanHack" },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://zishanhack.com/products/oswp-notes",
+            "price": "27.00",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
 
@@ -135,8 +219,8 @@
                 
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <div class="stat-number">AD</div>
-                        <div class="stat-label">Security Focus</div>
+                        <div class="stat-number">Top 10</div>
+                        <div class="stat-label">Hack The Box (Legacy)</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">OSCP</div>
@@ -169,7 +253,157 @@
             </div>
             
             <div class="products-grid" id="productsContainer">
-                <!-- Products loaded by JavaScript -->
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-icon" style="background: rgba(245, 158, 11, 0.1);">
+                            <i class="fas fa-certificate" style="color: #f59e0b;"></i>
+                        </div>
+                        <div class="product-title-group">
+                            <h3 class="product-title">OSCP+ Obsidian Notes Bundle</h3>
+                            <p class="product-description">Complete preparation package for OSCP certification with Obsidian format.</p>
+                        </div>
+                    </div>
+                    <div class="product-badges">
+                        <span class="product-badge">Premium</span>
+                        <span class="product-badge">Career-Boosting</span>
+                    </div>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Obsidian Notes</li>
+                        <li><i class="fas fa-check"></i> Copy Paste Commands</li>
+                        <li><i class="fas fa-check"></i> Active Directory Commands</li>
+                        <li><i class="fas fa-check"></i> Professional Report Writing</li>
+                    </ul>
+                    <div class="product-price">
+                        <div class="price-header">
+                            <span class="original-price">$997</span>
+                            <span class="discount-badge">90% OFF</span>
+                        </div>
+                        <div class="current-price">$97</div>
+                        <div class="sales-count">
+                            <i class="fas fa-users"></i> 1,500+ Sold
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <a href="https://zishanhack.com/products/oscp-bundle" class="btn btn-premium btn-sparkle">
+                            <i class="fas fa-bolt"></i>
+                            View Product - $97
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-icon" style="background: rgba(16, 185, 129, 0.1);">
+                            <i class="fas fa-clipboard-check" style="color: #10b981;"></i>
+                        </div>
+                        <div class="product-title-group">
+                            <h3 class="product-title">Ultimate Web Security Checklist for Bug Hunters</h3>
+                            <p class="product-description">Comprehensive checklist for bug bounty hunters and pentesters.</p>
+                        </div>
+                    </div>
+                    <div class="product-badges">
+                        <span class="product-badge">Top Rated</span>
+                        <span class="product-badge">Trending</span>
+                    </div>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> OWASP Top 10</li>
+                        <li><i class="fas fa-check"></i> API security</li>
+                        <li><i class="fas fa-check"></i> Crafted for Hunters</li>
+                        <li><i class="fas fa-check"></i> Tested Checklist</li>
+                    </ul>
+                    <div class="product-price">
+                        <div class="price-header">
+                            <span class="original-price">$250</span>
+                            <span class="discount-badge">90% OFF</span>
+                        </div>
+                        <div class="current-price">$25</div>
+                        <div class="sales-count">
+                            <i class="fas fa-users"></i> 2,000+ Sold
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <a href="https://zishanhack.com/products/web-security-checklist" class="btn btn-premium btn-sparkle">
+                            <i class="fas fa-bolt"></i>
+                            View Product - $25
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-icon" style="background: rgba(239, 68, 68, 0.1);">
+                            <i class="fas fa-user-secret" style="color: #ef4444;"></i>
+                        </div>
+                        <div class="product-title-group">
+                            <h3 class="product-title">CRTA Copy Paste Commands eBook</h3>
+                            <p class="product-description">Battle-tested notes with copy-paste commands for CyberWarFare Labs CRTA Assessment.</p>
+                        </div>
+                    </div>
+                    <div class="product-badges">
+                        <span class="product-badge">Top Rated</span>
+                        <span class="product-badge">500+ Sold</span>
+                    </div>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Tested Commands List</li>
+                        <li><i class="fas fa-check"></i> Copy-paste commands</li>
+                        <li><i class="fas fa-check"></i> AD attack guides</li>
+                        <li><i class="fas fa-check"></i> Privilege escalation</li>
+                    </ul>
+                    <div class="product-price">
+                        <div class="price-header">
+                            <span class="original-price">$50</span>
+                            <span class="discount-badge">90% OFF</span>
+                        </div>
+                        <div class="current-price">$5</div>
+                        <div class="sales-count">
+                            <i class="fas fa-users"></i> 500+ Sold
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <a href="https://zishanhack.com/products/crta" class="btn btn-premium btn-sparkle">
+                            <i class="fas fa-bolt"></i>
+                            View Product - $5
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-icon" style="background: rgba(99, 102, 241, 0.1);">
+                            <i class="fas fa-wifi" style="color: #6366f1;"></i>
+                        </div>
+                        <div class="product-title-group">
+                            <h3 class="product-title">OSWP Copy Paste Commands eBook</h3>
+                            <p class="product-description">Wireless pentesting notes and cheatsheet for Offsec OSWP Certification.</p>
+                        </div>
+                    </div>
+                    <div class="product-badges">
+                        <span class="product-badge">New</span>
+                        <span class="product-badge">eBook</span>
+                    </div>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Wireless commands</li>
+                        <li><i class="fas fa-check"></i> Proper cheatsheet</li>
+                        <li><i class="fas fa-check"></i> Rogue AP setup</li>
+                        <li><i class="fas fa-check"></i> Full Assessment guide</li>
+                    </ul>
+                    <div class="product-price">
+                        <div class="price-header">
+                            <span class="original-price">$270</span>
+                            <span class="discount-badge">90% OFF</span>
+                        </div>
+                        <div class="current-price">$27</div>
+                        <div class="sales-count">
+                            <i class="fas fa-users"></i> 300+ Sold
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <a href="https://zishanhack.com/products/oswp-notes" class="btn btn-premium btn-sparkle">
+                            <i class="fas fa-bolt"></i>
+                            View Product - $27
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -256,7 +490,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>✅ <strong>YES!</strong> All purchases include lifetime access and free updates forever. We constantly update resources based on latest techniques.</p>
+                        <p><i class="fas fa-check-circle faq-icon faq-icon-success"></i> <strong>YES!</strong> All purchases include lifetime access and free updates forever. We constantly update resources based on latest techniques.</p>
                     </div>
                 </div>
                 
@@ -266,7 +500,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>✅ <strong>Instant download!</strong> After purchase, login to your account and all resources are available for download in PDF/ZIP format. You'll also get email access.</p>
+                        <p><i class="fas fa-check-circle faq-icon faq-icon-success"></i> <strong>Instant download!</strong> After purchase, login to your account and all resources are available for download in PDF/ZIP format. You'll also get email access.</p>
                     </div>
                 </div>
                 
@@ -276,7 +510,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>✅ <strong>100% legal and secure.</strong> All resources are educational materials for authorized testing. We use Razorpay for secure payments and never store payment details.</p>
+                        <p><i class="fas fa-check-circle faq-icon faq-icon-success"></i> <strong>100% legal and secure.</strong> All resources are educational materials for authorized testing. We use Razorpay for secure payments and never store payment details.</p>
                     </div>
                 </div>
                 
@@ -286,7 +520,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>⚠️ <strong>No Refund Policy:</strong> Due to the digital nature of our products, all sales are final. We do not offer refunds once products are downloaded or accessed. Please review carefully before purchasing.</p>
+                        <p><i class="fas fa-exclamation-circle faq-icon faq-icon-warning"></i> <strong>No Refund Policy:</strong> Due to the digital nature of our products, all sales are final. We do not offer refunds once products are downloaded or accessed. Please review carefully before purchasing.</p>
                     </div>
                 </div>
                 
@@ -296,7 +530,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>✅ <strong>International cards in USD only.</strong> We accept Visa, Mastercard, American Express and other international cards. All payments are processed in <strong>USD only</strong> through Razorpay's secure gateway.</p>
+                        <p><i class="fas fa-check-circle faq-icon faq-icon-success"></i> <strong>International cards in USD only.</strong> We accept Visa, Mastercard, American Express and other international cards. All payments are processed in <strong>USD only</strong> through Razorpay's secure gateway.</p>
                     </div>
                 </div>
                 
@@ -306,7 +540,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>❌ <strong>Account sharing is prohibited.</strong> Each license is for individual use only. Sharing accounts or distributing purchased resources violates our terms and will result in account termination.</p>
+                        <p><i class="fas fa-times-circle faq-icon faq-icon-danger"></i> <strong>Account sharing is prohibited.</strong> Each license is for individual use only. Sharing accounts or distributing purchased resources violates our terms and will result in account termination.</p>
                     </div>
                 </div>
                 
@@ -316,7 +550,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>✅ <strong>24/7 Support Available!</strong> We provide email support for technical issues, download problems, and account access. Contact us at <strong>support@zishanhack.com</strong></p>
+                        <p><i class="fas fa-check-circle faq-icon faq-icon-success"></i> <strong>24/7 Support Available!</strong> We provide email support for technical issues, download problems, and account access. Contact us at <strong>support@zishanhack.com</strong></p>
                     </div>
                 </div>
                 
@@ -326,7 +560,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>✅ <strong>Four easy steps:</strong> 1) Complete payment → 2) Create account with email → 3) Login instantly → 4) Download resources immediately. You'll also receive a purchase confirmation email.</p>
+                        <p><i class="fas fa-check-circle faq-icon faq-icon-success"></i> <strong>Four easy steps:</strong> 1) Complete payment → 2) Create account with email → 3) Login instantly → 4) Download resources immediately. You'll also receive a purchase confirmation email.</p>
                     </div>
                 </div>
                 
@@ -336,7 +570,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>✅ <strong>Yes, all resources are current for 2026!</strong> We update our materials regularly to reflect the latest cybersecurity techniques, tools, and certification requirements.</p>
+                        <p><i class="fas fa-check-circle faq-icon faq-icon-success"></i> <strong>Yes, all resources are current for 2026!</strong> We update our materials regularly to reflect the latest cybersecurity techniques, tools, and certification requirements.</p>
                     </div>
                 </div>
                 
@@ -346,7 +580,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>✅ <strong>Absolutely!</strong> You can purchase any combination of resources. Each purchase will be added to your account and available for immediate download. Bundle discounts may apply for multiple purchases.</p>
+                        <p><i class="fas fa-check-circle faq-icon faq-icon-success"></i> <strong>Absolutely!</strong> You can purchase any combination of resources. Each purchase will be added to your account and available for immediate download. Bundle discounts may apply for multiple purchases.</p>
                     </div>
                 </div>
             </div>

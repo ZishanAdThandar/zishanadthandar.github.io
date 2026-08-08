@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Zishan | Cybersecurity Consultant - Links</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://zishanhack.com/links/">
   
   <!-- SEO Meta Tags -->
   <meta name="author" content="Zishan Ahamed Thandar">
@@ -45,6 +46,32 @@
   </script>
 
   <link rel="stylesheet" href="style.css">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://zishanhack.com/links/#person",
+    "name": "Zishan Ahamed Thandar",
+    "url": "https://zishanhack.com/links/",
+    "image": "https://zishanhack.com/links/ogcard.png",
+    "jobTitle": "Cybersecurity Consultant",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "ZishanHack",
+      "url": "https://zishanhack.com/"
+    },
+    "knowsAbout": ["Offensive Security", "Penetration Testing", "Bug Bounty", "Active Directory Security", "API Security"],
+    "sameAs": [
+      "https://github.com/ZishanAdThandar",
+      "https://linkedin.com/in/ZishanAdThandar",
+      "https://twitter.com/ZishanAdThandar",
+      "https://app.hackthebox.com/public/users/4477",
+      "https://tryhackme.com/p/ZishanAdThandar"
+    ]
+  }
+  </script>
   
 </head>
 <body>
@@ -321,22 +348,22 @@
     <div class="social-section">
       <div class="social-title">Connect With Me</div>
       <div class="social-grid">
-        <a href="https://github.com/ZishanAdThandar" target="_blank" class="social-link" title="GitHub">
+        <a href="https://github.com/ZishanAdThandar" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
           <i class="fab fa-github"></i>
         </a>
-        <a href="https://linkedin.com/in/ZishanAdThandar" target="_blank" class="social-link" title="LinkedIn">
+        <a href="https://linkedin.com/in/ZishanAdThandar" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
-        <a href="https://twitter.com/ZishanAdThandar" target="_blank" class="social-link" title="Twitter/X">
+        <a href="https://twitter.com/ZishanAdThandar" target="_blank" rel="noopener noreferrer" class="social-link" title="Twitter/X">
           <i class="fab fa-twitter"></i>
         </a>
-        <a href="https://t.me/ZishanHack" target="_blank" class="social-link" title="Telegram">
+        <a href="https://t.me/ZishanHack" target="_blank" rel="noopener noreferrer" class="social-link" title="Telegram">
           <i class="fab fa-telegram"></i>
         </a>
-        <a href="https://app.hackthebox.com/public/users/4477" target="_blank" class="social-link" title="HackTheBox">
+        <a href="https://app.hackthebox.com/public/users/4477" target="_blank" rel="noopener noreferrer" class="social-link" title="HackTheBox">
           <i class="fas fa-cube"></i>
         </a>
-        <a href="https://tryhackme.com/p/ZishanAdThandar" target="_blank" class="social-link" title="TryHackMe">
+        <a href="https://tryhackme.com/p/ZishanAdThandar" target="_blank" rel="noopener noreferrer" class="social-link" title="TryHackMe">
           <i class="fas fa-cloud-rain"></i>
         </a>
         <a href="mailto:contact@zishanhack.com" class="social-link" title="Email">
@@ -344,16 +371,15 @@
         </a>
       </div>
 
-<br> 
-      <div class="social-title">Community</div>
+      <div class="social-title community-title">Community</div>
       <div class="social-grid">
-        <a href="https://discord.gg/T47v67eVT4" target="_blank" class="social-link" title="Discord">
+        <a href="https://discord.gg/T47v67eVT4" target="_blank" rel="noopener noreferrer" class="social-link" title="Discord">
           <i class="fab fa-discord"></i>
         </a>
-        <a href="https://t.me/addlist/Bqw26iGfReYyMGZl" target="_blank" class="social-link" title="Telegram">
+        <a href="https://t.me/addlist/Bqw26iGfReYyMGZl" target="_blank" rel="noopener noreferrer" class="social-link" title="Telegram">
           <i class="fab fa-telegram"></i>
         </a>
-        <a href="https://youtube.com/ZishanAdThandar?sub_confirmation=1" target="_blank" class="social-link" title="YouTube">
+        <a href="https://youtube.com/ZishanAdThandar?sub_confirmation=1" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube">
           <i class="fab fa-youtube"></i>
         </a>
       </div>
@@ -363,7 +389,7 @@
     <!-- Footer -->
     <footer>
       <p class="footer-text">
-        <span class="footer-link" onclick="window.location.href='https://zishanhack.com'">zishanhack.com</span> • Professional Cybersecurity Services
+        <a href="https://zishanhack.com" class="footer-link">zishanhack.com</a> • Professional Cybersecurity Services
       </p>
       <p class="copyright">© 2026 Zishan Ahamed Thandar. All rights reserved.</p>
     </footer>
@@ -397,7 +423,7 @@
         });
       });
 
-      document.querySelectorAll('a[target="_blank"]').forEach(link => {
+      document.querySelectorAll('a[target="_blank" rel="noopener noreferrer"]').forEach(link => {
         link.addEventListener('click', function(e) {
           gtag('event', 'click', {
             'event_category': 'external_link',

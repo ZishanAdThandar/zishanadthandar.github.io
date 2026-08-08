@@ -486,6 +486,10 @@
       font-weight: 500;
     }
 
+    .social-title.community-title {
+      margin-top: 2.25rem;
+    }
+
     .social-grid {
       display: flex;
       justify-content: center;
