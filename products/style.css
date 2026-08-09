@@ -19,9 +19,6 @@
     --gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
     --gradient-accent: linear-gradient(135deg, #f59e0b, #ef4444);
     --gradient-dark: linear-gradient(135deg, #0f172a, #1e1b4b);
-    --gradient-green: linear-gradient(135deg, #10b981, #059669);
-    --gradient-blue: linear-gradient(135deg, #3b82f6, #2563eb);
-    --gradient-purple: linear-gradient(135deg, #8b5cf6, #7c3aed);
     --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
     --border: rgba(255, 255, 255, 0.1);
@@ -47,25 +44,6 @@
 }
 
 /* Product-specific color themes (applied via body class) */
-body.oscp-theme {
-    --primary: #7c3aed;
-    --gradient: linear-gradient(135deg, #7c3aed, #3b82f6);
-}
-
-body.crta-theme {
-    --primary: #8b5cf6;
-    --gradient: linear-gradient(135deg, #8b5cf6, #6366f1);
-}
-
-body.oswp-theme {
-    --primary: #06b6d4;
-    --gradient: linear-gradient(135deg, #06b6d4, #3b82f6);
-}
-
-body.websec-theme {
-    --primary: #10b981;
-    --gradient: linear-gradient(135deg, #10b981, #3b82f6);
-}
 
 /* ===== BASE STYLES ===== */
 * {
