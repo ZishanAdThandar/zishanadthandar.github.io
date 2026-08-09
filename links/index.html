@@ -425,7 +425,7 @@
         });
       });
 
-      document.querySelectorAll('a[target="_blank" rel="noopener noreferrer"]').forEach(link => {
+      document.querySelectorAll('a[target="_blank"][rel="noopener noreferrer"]').forEach(link => {
         link.addEventListener('click', function(e) {
           gtag('event', 'click', {
             'event_category': 'external_link',
