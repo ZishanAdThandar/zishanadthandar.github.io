@@ -88,11 +88,18 @@
     }
 
     /* zishanhack logo */
+    .profile-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      margin: 0 auto 1.4rem;
+    }
+
     .logo-lockup {
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
-      margin: 0 auto 1.4rem;
       padding: 0.45rem 1.1rem;
       border-radius: var(--radius-full);
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -117,11 +124,15 @@
       background-clip: text;
     }
 
+    .profile-info {
+      text-align: left;
+    }
+
     h1 {
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-size: clamp(1.3rem, 3.4vw, 1.8rem);
       font-weight: 700;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
       background: var(--gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -131,11 +142,8 @@
     /* bio */
     .bio {
       color: var(--gray);
-      font-size: clamp(0.9rem, 2vw, 1rem);
-      margin-bottom: 0.8rem;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
+      font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+      margin-bottom: 0;
     }
 
   
@@ -591,6 +599,16 @@
     }
 
     @media (max-width: 480px) {
+      .profile-row {
+        flex-direction: column;
+        gap: 0.9rem;
+        margin-bottom: 1.1rem;
+      }
+
+      .profile-info {
+        text-align: center;
+      }
+
       .role-badges {
         gap: 0.4rem;
       }
