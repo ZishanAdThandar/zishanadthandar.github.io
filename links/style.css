@@ -494,11 +494,6 @@
         font-size: 1rem;
       }
 
-      .featured-content {
-        flex-direction: column;
-        text-align: center;
-      }
-
       .scroll-indicator {
         bottom: 1rem;
         right: 1rem;
