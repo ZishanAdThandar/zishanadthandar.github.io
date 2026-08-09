@@ -139,61 +139,6 @@
     }
 
   
-    /* authority strip */
-    .authority-strip {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-
-    margin: 0 auto 1.4rem;
-    padding: 0.75rem 1.4rem;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(99,102,241,0.16),
-            rgba(139,92,246,0.10)
-        );
-
-    border: 1px solid rgba(139,92,246,0.28);
-
-    border-radius: 999px;
-
-    color: #e2e8f0;
-
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-
-    backdrop-filter: blur(14px);
-
-    box-shadow:
-        0 0 0 1px rgba(255,255,255,0.03),
-        0 8px 30px rgba(99,102,241,0.18);
-
-    position: relative;
-    }
-
-
-    .authority-strip::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(99,102,241,0.35),
-            rgba(139,92,246,0.12)
-        );
-
-    opacity: 0.5;
-    z-index: -1;
-    filter: blur(12px);
-    }
-
     /* Role Badges */
     .role-badges {
       display: flex;
