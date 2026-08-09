@@ -102,15 +102,15 @@
     }
 
     .logo-lockup i {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       color: var(--primary);
     }
 
     .logo-lockup span {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 900;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       color: white;
     }
 
