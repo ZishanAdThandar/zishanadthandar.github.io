@@ -513,6 +513,10 @@ section {
     left: 100%;
 }
 
+.btn:active {
+    transform: scale(0.97);
+}
+
 .btn-premium {
     background: var(--gradient);
     color: white;

@@ -265,10 +265,40 @@ h5, h6 { font-size: var(--fs-sm); }
 .back-button:hover,
 .back-button:focus {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--primary);
     border-color: var(--primary);
-    transform: translateX(-3px);
-    outline: none;
+    color: var(--light);
+    transform: translateY(-2px);
+}
+
+/* ===== BREADCRUMB ===== */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1.25rem 0 0;
+    font-size: 0.85rem;
+    color: var(--gray);
+}
+
+.breadcrumb a {
+    color: var(--gray);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.breadcrumb a:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.breadcrumb-sep {
+    color: var(--gray-dark);
+    user-select: none;
+}
+
+.breadcrumb-current {
+    color: var(--light);
+    font-weight: 600;
 }
 
 /* ===== PAGE HEADER ===== */
@@ -457,6 +487,10 @@ h5, h6 { font-size: var(--fs-sm); }
     transform: translateY(-3px);
     box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.5);
     outline: none;
+}
+
+.cta-button:active {
+    transform: translateY(0) scale(0.97);
 }
 
 /* ===== FEATURES GRID ===== */

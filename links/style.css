@@ -42,6 +42,12 @@
       box-sizing: border-box;
     }
 
+    .icon {
+      display: inline-block;
+      fill: currentColor;
+      vertical-align: middle;
+    }
+
     html {
       scroll-behavior: smooth;
     }
@@ -85,8 +91,9 @@
       box-shadow: var(--shadow-md);
     }
 
-    .logo-lockup i {
-      font-size: 1.4rem;
+    .logo-lockup .icon {
+      width: 1.4rem;
+      height: 1.4rem;
       color: var(--primary);
     }
 
@@ -151,9 +158,10 @@
       border: 1px solid var(--border);
     }
 
-    .role-badge i {
+    .role-badge .icon {
       color: var(--primary);
-      font-size: 0.8rem;
+      width: 0.8rem;
+      height: 0.8rem;
     }
 
 
@@ -176,7 +184,11 @@
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 0.9rem;
+    }
+
+    .section-icon .icon {
+      width: 0.9rem;
+      height: 0.9rem;
     }
 
     .section-title {
@@ -237,6 +249,10 @@
       opacity: 0.05;
     }
 
+    .link-card:active {
+      transform: translateY(-1px) scale(0.985);
+    }
+
     /* Animation delays */
     .link-card:nth-child(1) { animation-delay: 0.1s; }
     .link-card:nth-child(2) { animation-delay: 0.15s; }
@@ -265,10 +281,14 @@
       align-items: center;
       justify-content: center;
       color: var(--primary);
-      font-size: 1.1rem;
       transition: all 0.3s ease;
       position: relative;
       z-index: 1;
+    }
+
+    .link-icon .icon {
+      width: 1.1rem;
+      height: 1.1rem;
     }
 
     .link-card:hover .link-icon {
@@ -329,10 +349,14 @@
 
     .link-arrow {
       color: var(--gray);
-      font-size: 0.9rem;
       transition: all 0.3s ease;
       position: relative;
       z-index: 1;
+    }
+
+    .link-arrow .icon {
+      width: 0.9rem;
+      height: 0.9rem;
     }
 
     .link-card:hover .link-arrow {
@@ -380,9 +404,13 @@
       align-items: center;
       justify-content: center;
       color: var(--gray);
-      font-size: 1rem;
       text-decoration: none;
       transition: all 0.3s ease;
+    }
+
+    .social-link .icon {
+      width: 1rem;
+      height: 1rem;
     }
 
     .social-link:hover {
@@ -391,6 +419,60 @@
       background: var(--gradient);
       border-color: transparent;
       box-shadow: var(--shadow);
+    }
+
+    .social-link:active {
+      transform: scale(0.92);
+    }
+
+    /* FAQ */
+    .faq-grid {
+      gap: 0.5rem;
+    }
+
+    .faq-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 0.8rem 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .faq-item[open] {
+      border-color: var(--primary);
+    }
+
+    .faq-item summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--light);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: '+';
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .faq-item[open] summary::after {
+      content: '−';
+    }
+
+    .faq-item p {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.5;
     }
 
     /* Footer */
@@ -450,6 +532,11 @@
       z-index: 100;
       opacity: 0;
       pointer-events: none;
+    }
+
+    .scroll-indicator .icon {
+      width: 1rem;
+      height: 1rem;
     }
 
     .scroll-indicator.visible {
