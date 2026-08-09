@@ -16,6 +16,7 @@
       --gradient-accent: linear-gradient(135deg, #f59e0b, #ef4444);
       --gradient-dark: linear-gradient(135deg, #0f172a, #1e1b4b);
       --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 10px 35px rgba(0, 0, 0, 0.35);
       --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
       --border: rgba(255, 255, 255, 0.1);
       --border-light: rgba(255, 255, 255, 0.2);
@@ -86,37 +87,34 @@
       margin-bottom: 2.5rem;
     }
 
-    .profile-image {
-      width: 100px;
-      height: 100px;
-      background: var(--gradient);
-      border-radius: 50%;
-      display: flex;
+    /* zishanhack logo */
+    .logo-lockup {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.5rem;
-      box-shadow: var(--shadow-lg);
-      border: 3px solid rgba(255, 255, 255, 0.1);
-      position: relative;
+      gap: 0.6rem;
+      margin: 0 auto 1.4rem;
+      padding: 0.45rem 1.1rem;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-md);
     }
 
-    .profile-image::after {
-      content: '';
-      position: absolute;
-      top: -3px;
-      left: -3px;
-      right: -3px;
-      bottom: -3px;
-      border-radius: 50%;
+    .logo-lockup i {
+      font-size: 1.15rem;
+      color: #818cf8;
+    }
+
+    .logo-lockup span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
       background: var(--gradient);
-      opacity: 0.3;
-      z-index: -1;
-      filter: blur(10px);
-    }
-
-    .profile-image i {
-      font-size: 3rem;
-      color: white;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     h1 {
@@ -138,18 +136,6 @@
       max-width: 500px;
       margin-left: auto;
       margin-right: auto;
-    }
-
-    /* about text - adds substance for indexing */
-    .about-text {
-      max-width: 480px;
-      margin: 0 auto 1.4rem;
-      color: var(--gray);
-      opacity: 0.9;
-      font-size: 0.8rem;
-      line-height: 1.7;
-      letter-spacing: 0.2px;
-      text-align: center;
     }
 
   
@@ -620,15 +606,6 @@
     @media (max-width: 768px) {
       .container {
         padding: 1.5rem 1rem;
-      }
-
-      .profile-image {
-        width: 80px;
-        height: 80px;
-      }
-
-      .profile-image i {
-        font-size: 2.5rem;
       }
 
       .stats-grid {
