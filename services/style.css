@@ -23,6 +23,8 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 
+.icon { display: inline-block; fill: currentColor; vertical-align: middle; flex-shrink: 0; }
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--darker);
@@ -77,7 +79,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif;
 }
 
-.nav-brand .logo i { color: var(--primary); margin-right: 8px; font-size: 1.6rem; }
+.nav-brand .logo .icon { color: var(--primary); margin-right: 8px; width: 1.4rem; height: 1.4rem; }
 
 .logo-highlight {
     background: var(--gradient);
@@ -123,12 +125,13 @@ h1, h2, h3, h4, h5, h6 {
     background: none;
     border: none;
     color: white;
-    font-size: 1.5rem;
     cursor: pointer;
     padding: 5px;
     border-radius: 4px;
     transition: background-color 0.3s ease;
 }
+
+.nav-toggle .icon { width: 1.5rem; height: 1.5rem; }
 
 .nav-toggle:hover { background-color: rgba(255, 255, 255, 0.1); }
 
@@ -195,6 +198,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-large { padding: 1.25rem 2.5rem; font-size: 1.05rem; }
+
+.btn .icon, .service-link .icon { width: 0.9rem; height: 0.9rem; }
 .btn-block { width: 100%; }
 
 /* ===== HERO ===== */
@@ -228,7 +233,7 @@ h1, h2, h3, h4, h5, h6 {
     gap: 8px;
 }
 
-.hero-badge i { color: var(--primary); font-size: 0.85rem; }
+.hero-badge .icon { color: var(--primary); width: 0.85rem; height: 0.85rem; }
 
 .hero-title {
     font-size: clamp(2.2rem, 5vw, 3.4rem);
@@ -268,7 +273,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-contact a { color: var(--gray); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
 .hero-contact a:hover { color: var(--primary); }
-.hero-contact i { color: var(--primary); }
+.hero-contact .icon { color: var(--primary); width: 0.9rem; height: 0.9rem; }
 
 /* ===== SECTIONS ===== */
 section { padding: 80px 0; scroll-margin-top: 90px; }
@@ -318,10 +323,11 @@ section { padding: 80px 0; scroll-margin-top: 90px; }
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
     color: var(--primary);
     margin-bottom: 1.25rem;
 }
+
+.service-icon .icon { width: 1.5rem; height: 1.5rem; }
 
 .service-title { font-size: 1.2rem; margin-bottom: 0.5rem; }
 .service-description { color: var(--gray); font-size: 0.9rem; margin-bottom: 1.25rem; }
@@ -337,7 +343,7 @@ section { padding: 80px 0; scroll-margin-top: 90px; }
     font-size: 0.88rem;
 }
 
-.service-features li i { color: var(--secondary); font-size: 0.75rem; }
+.service-features li .icon { color: var(--secondary); width: 0.75rem; height: 0.75rem; margin-top: 2px; }
 
 .service-link {
     color: var(--primary);
@@ -406,10 +412,13 @@ section { padding: 80px 0; scroll-margin-top: 90px; }
 .industry-card:hover { border-color: var(--primary); transform: translateY(-3px); }
 
 .industry-icon {
-    font-size: 1.6rem;
+    width: 1.7rem;
+    height: 1.7rem;
     color: var(--primary);
     margin-bottom: 0.75rem;
     display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .industry-card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
@@ -434,7 +443,7 @@ section { padding: 80px 0; scroll-margin-top: 90px; }
     text-align: center;
 }
 
-.info-icon { font-size: 1.6rem; color: var(--primary); margin-bottom: 0.75rem; display: block; }
+.info-icon { width: 1.6rem; height: 1.6rem; color: var(--primary); margin-bottom: 0.75rem; display: block; margin-left: auto; margin-right: auto; }
 .info-card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
 .info-card p { margin: 0.5rem 0; font-size: 0.9rem; }
 .info-card a { color: var(--light); text-decoration: none; word-break: break-all; }
@@ -474,7 +483,7 @@ input:focus, select:focus, textarea:focus {
 select option { background: var(--dark); color: white; }
 
 .form-note { text-align: center; color: var(--gray); font-size: 0.8rem; margin-top: 1rem; }
-.form-note i { color: var(--primary); margin-right: 4px; }
+.form-note .icon { color: var(--primary); margin-right: 4px; width: 0.75rem; height: 0.75rem; }
 
 /* ===== FOOTER ===== */
 .footer {
@@ -501,7 +510,7 @@ select option { background: var(--dark); color: white; }
     text-decoration: none;
 }
 
-.footer-brand .logo i { color: var(--primary); margin-right: 10px; font-size: 1.8rem; }
+.footer-brand .logo .icon { color: var(--primary); margin-right: 10px; width: 1.6rem; height: 1.6rem; }
 
 .footer-description { color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem; }
 
@@ -521,6 +530,8 @@ select option { background: var(--dark); color: white; }
 }
 
 .social-link:hover { background: var(--primary); color: white; transform: translateY(-3px); }
+
+.social-link .icon { width: 18px; height: 18px; }
 
 .footer-links h3 { color: white; font-size: 1.05rem; margin-bottom: 1rem; font-weight: 700; }
 

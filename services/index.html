@@ -28,14 +28,11 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/svgs/solid/shield-halved.svg">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:site_name" content="ZishanHack">
@@ -64,13 +61,41 @@
     <meta name="robots" content="index, follow, max-image-preview:large">
 </head>
 <body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="fa-shield-halved" viewBox="0 0 512 512"><path d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0zm0 66.8V444.8C394 378 431.1 230.1 432 141.4L256 66.8l0 0z"/></symbol>
+    <symbol id="fa-bars" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></symbol>
+    <symbol id="fa-user-shield" viewBox="0 0 640 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c1.8 0 3.5-.2 5.3-.5c-76.3-55.1-99.8-141-103.1-200.2c-16.1-4.8-33.1-7.3-50.7-7.3H178.3zm308.8-78.3l-120 48C358 277.4 352 286.2 352 296c0 63.3 25.9 168.8 134.8 214.2c5.9 2.5 12.6 2.5 18.5 0C614.1 464.8 640 359.3 640 296c0-9.8-6-18.6-15.1-22.3l-120-48c-5.7-2.3-12.1-2.3-17.8 0zM591.4 312c-3.9 50.7-27.2 116.7-95.4 149.7V273.8L591.4 312z"/></symbol>
+    <symbol id="fa-file-contract" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM80 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16zm54.2 253.8c-6.1 20.3-24.8 34.2-46 34.2H80c-8.8 0-16-7.2-16-16s7.2-16 16-16h8.2c7.1 0 13.3-4.6 15.3-11.4l14.9-49.5c3.4-11.3 13.8-19.1 25.6-19.1s22.2 7.7 25.6 19.1l11.6 38.6c7.4-6.2 16.8-9.7 26.8-9.7c15.9 0 30.4 9 37.5 23.2l4.4 8.8H304c8.8 0 16 7.2 16 16s-7.2 16-16 16H240c-6.1 0-11.6-3.4-14.3-8.8l-8.8-17.7c-1.7-3.4-5.1-5.5-8.8-5.5s-7.2 2.1-8.8 5.5l-8.8 17.7c-2.9 5.9-9.2 9.4-15.7 8.8s-12.1-5.1-13.9-11.3L144 349l-9.8 32.8z"/></symbol>
+    <symbol id="fa-award" viewBox="0 0 384 512"><path d="M173.8 5.5c11-7.3 25.4-7.3 36.4 0L228 17.2c6 3.9 13 5.8 20.1 5.4l21.3-1.3c13.2-.8 25.6 6.4 31.5 18.2l9.6 19.1c3.2 6.4 8.4 11.5 14.7 14.7L344.5 83c11.8 5.9 19 18.3 18.2 31.5l-1.3 21.3c-.4 7.1 1.5 14.2 5.4 20.1l11.8 17.8c7.3 11 7.3 25.4 0 36.4L366.8 228c-3.9 6-5.8 13-5.4 20.1l1.3 21.3c.8 13.2-6.4 25.6-18.2 31.5l-19.1 9.6c-6.4 3.2-11.5 8.4-14.7 14.7L301 344.5c-5.9 11.8-18.3 19-31.5 18.2l-21.3-1.3c-7.1-.4-14.2 1.5-20.1 5.4l-17.8 11.8c-11 7.3-25.4 7.3-36.4 0L156 366.8c-6-3.9-13-5.8-20.1-5.4l-21.3 1.3c-13.2 .8-25.6-6.4-31.5-18.2l-9.6-19.1c-3.2-6.4-8.4-11.5-14.7-14.7L39.5 301c-11.8-5.9-19-18.3-18.2-31.5l1.3-21.3c.4-7.1-1.5-14.2-5.4-20.1L5.5 210.2c-7.3-11-7.3-25.4 0-36.4L17.2 156c3.9-6 5.8-13 5.4-20.1l-1.3-21.3c-.8-13.2 6.4-25.6 18.2-31.5l19.1-9.6C65 70.2 70.2 65 73.4 58.6L83 39.5c5.9-11.8 18.3-19 31.5-18.2l21.3 1.3c7.1 .4 14.2-1.5 20.1-5.4L173.8 5.5zM272 192a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM1.3 441.8L44.4 339.3c.2 .1 .3 .2 .4 .4l9.6 19.1c11.7 23.2 36 37.3 62 35.8l21.3-1.3c.2 0 .5 0 .7 .2l17.8 11.8c5.1 3.3 10.5 5.9 16.1 7.7l-37.6 89.3c-2.3 5.5-7.4 9.2-13.3 9.7s-11.6-2.2-14.8-7.2L74.4 455.5l-56.1 8.3c-5.7 .8-11.4-1.5-15-6s-4.3-10.7-2.1-16zm248 60.4L211.7 413c5.6-1.8 11-4.3 16.1-7.7l17.8-11.8c.2-.1 .4-.2 .7-.2l21.3 1.3c26 1.5 50.3-12.6 62-35.8l9.6-19.1c.1-.2 .2-.3 .4-.4l43.2 102.5c2.2 5.3 1.4 11.4-2.1 16s-9.3 6.9-15 6l-56.1-8.3-32.2 49.2c-3.2 5-8.9 7.7-14.8 7.2s-11-4.3-13.3-9.7z"/></symbol>
+    <symbol id="fa-globe" viewBox="0 0 512 512"><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64H348.7c2.2 20.4 3.3 41.8 3.3 64zm28.8-64H503.9c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192H131.2c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6H344.3c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352H135.3zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6H493.4z"/></symbol>
+    <symbol id="fa-calendar-check" viewBox="0 0 448 512"><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zM329 305c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-95 95-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L329 305z"/></symbol>
+    <symbol id="fa-crosshairs" viewBox="0 0 512 512"><path d="M256 0c17.7 0 32 14.3 32 32V42.4c93.7 13.9 167.7 88 181.6 181.6H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H469.6c-13.9 93.7-88 167.7-181.6 181.6V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V469.6C130.3 455.7 56.3 381.7 42.4 288H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H42.4C56.3 130.3 130.3 56.3 224 42.4V32c0-17.7 14.3-32 32-32zM107.4 288c12.5 58.3 58.4 104.1 116.6 116.6V384c0-17.7 14.3-32 32-32s32 14.3 32 32v20.6c58.3-12.5 104.1-58.4 116.6-116.6H384c-17.7 0-32-14.3-32-32s14.3-32 32-32h20.6C392.1 165.7 346.3 119.9 288 107.4V128c0 17.7-14.3 32-32 32s-32-14.3-32-32V107.4C165.7 119.9 119.9 165.7 107.4 224H128c17.7 0 32 14.3 32 32s-14.3 32-32 32H107.4zM256 224a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></symbol>
+    <symbol id="fa-envelope" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></symbol>
+    <symbol id="fa-check" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></symbol>
+    <symbol id="fa-arrow-right" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></symbol>
+    <symbol id="fa-network-wired" viewBox="0 0 640 512"><path d="M256 64H384v64H256V64zM240 0c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48h48v32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96v32H80c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48H240c26.5 0 48-21.5 48-48V368c0-26.5-21.5-48-48-48H192V288H448v32H400c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48H560c26.5 0 48-21.5 48-48V368c0-26.5-21.5-48-48-48H512V288h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H352V192h48c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H240zM96 448V384H224v64H96zm320-64H544v64H416V384z"/></symbol>
+    <symbol id="fa-server" viewBox="0 0 512 512"><path d="M64 32C28.7 32 0 60.7 0 96v64c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm280 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm48 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zM64 288c-35.3 0-64 28.7-64 64v64c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V352c0-35.3-28.7-64-64-64H64zm280 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm56 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/></symbol>
+    <symbol id="fa-clipboard-check" viewBox="0 0 384 512"><path d="M192 0c-41.8 0-77.4 26.7-90.5 64H64C28.7 64 0 92.7 0 128V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H282.5C269.4 26.7 233.8 0 192 0zm0 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM305 273L177 401c-9.4 9.4-24.6 9.4-33.9 0L79 337c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L271 239c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></symbol>
+    <symbol id="fa-comments" viewBox="0 0 640 512"><path d="M208 352c114.9 0 208-78.8 208-176S322.9 0 208 0S0 78.8 0 176c0 38.6 14.7 74.3 39.6 103.4c-3.5 9.4-8.7 17.7-14.2 24.7c-4.8 6.2-9.7 11-13.3 14.3c-1.8 1.6-3.3 2.9-4.3 3.7c-.5 .4-.9 .7-1.1 .8l-.2 .2 0 0 0 0C1 327.2-1.4 334.4 .8 340.9S9.1 352 16 352c21.8 0 43.8-5.6 62.1-12.5c9.2-3.5 17.8-7.4 25.3-11.4C134.1 343.3 169.8 352 208 352zM448 176c0 112.3-99.1 196.9-216.5 207C255.8 457.4 336.4 512 432 512c38.2 0 73.9-8.7 104.7-23.9c7.5 4 16 7.9 25.2 11.4c18.3 6.9 40.3 12.5 62.1 12.5c6.9 0 13.1-4.5 15.2-11.1c2.1-6.6-.2-13.8-5.8-17.9l0 0 0 0-.2-.2c-.2-.2-.6-.4-1.1-.8c-1-.8-2.5-2-4.3-3.7c-3.6-3.3-8.5-8.1-13.3-14.3c-5.5-7-10.7-15.4-14.2-24.7c24.9-29 39.6-64.7 39.6-103.4c0-92.8-84.9-168.9-192.6-175.5c.4 5.1 .6 10.3 .6 15.5z"/></symbol>
+    <symbol id="fa-cloud" viewBox="0 0 640 512"><path d="M0 336c0 79.5 64.5 144 144 144H512c70.7 0 128-57.3 128-128c0-61.9-44-113.6-102.4-125.4c4.1-10.7 6.4-22.4 6.4-34.6c0-53-43-96-96-96c-19.7 0-38.1 6-53.3 16.2C367 64.2 315.3 32 256 32C167.6 32 96 103.6 96 192c0 2.7 .1 5.4 .2 8.1C40.2 219.8 0 273.2 0 336z"/></symbol>
+    <symbol id="fa-building" viewBox="0 0 384 512"><path d="M48 0C21.5 0 0 21.5 0 48V464c0 26.5 21.5 48 48 48h96V432c0-26.5 21.5-48 48-48s48 21.5 48 48v80h96c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H48zM64 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V240zm112-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V240zM80 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V112zM272 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16z"/></symbol>
+    <symbol id="fa-cart-shopping" viewBox="0 0 576 512"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></symbol>
+    <symbol id="fa-building-columns" viewBox="0 0 512 512"><path d="M243.4 2.6l-224 96c-14 6-21.8 21-18.7 35.8S16.8 160 32 160v8c0 13.3 10.7 24 24 24H456c13.3 0 24-10.7 24-24v-8c15.2 0 28.3-10.7 31.3-25.6s-4.8-29.9-18.7-35.8l-224-96c-8-3.4-17.2-3.4-25.2 0zM128 224H64V420.3c-.6 .3-1.2 .7-1.8 1.1l-48 32c-11.7 7.8-17 22.4-12.9 35.9S17.9 512 32 512H480c14.1 0 26.5-9.2 30.6-22.7s-1.1-28.1-12.9-35.9l-48-32c-.6-.4-1.2-.7-1.8-1.1V224H384V416H344V224H280V416H232V224H168V416H128V224zM256 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></symbol>
+    <symbol id="fa-landmark" viewBox="0 0 512 512"><path d="M240.1 4.2c9.8-5.6 21.9-5.6 31.8 0l171.8 98.1L448 104l0 .9 47.9 27.4c12.6 7.2 18.8 22 15.1 36s-16.4 23.8-30.9 23.8H32c-14.5 0-27.2-9.8-30.9-23.8s2.5-28.8 15.1-36L64 104.9V104l4.4-1.6L240.1 4.2zM64 224h64V416h40V224h64V416h48V224h64V416h40V224h64V420.3c.6 .3 1.2 .7 1.8 1.1l48 32c11.7 7.8 17 22.4 12.9 35.9S494.1 512 480 512H32c-14.1 0-26.5-9.2-30.6-22.7s1.1-28.1 12.9-35.9l48-32c.6-.4 1.2-.7 1.8-1.1V224z"/></symbol>
+    <symbol id="fa-rocket" viewBox="0 0 512 512"><path d="M156.6 384.9L125.7 354c-8.5-8.5-11.5-20.8-7.7-32.2c3-8.9 7-20.5 11.8-33.8L24 288c-8.6 0-16.6-4.6-20.9-12.1s-4.2-16.7 .2-24.1l52.5-88.5c13-21.9 36.5-35.3 61.9-35.3l82.3 0c2.4-4 4.8-7.7 7.2-11.3C289.1-4.1 411.1-8.1 483.9 5.3c11.6 2.1 20.6 11.2 22.8 22.8c13.4 72.9 9.3 194.8-111.4 276.7c-3.5 2.4-7.3 4.8-11.3 7.2v82.3c0 25.4-13.4 49-35.3 61.9l-88.5 52.5c-7.4 4.4-16.6 4.5-24.1 .2s-12.1-12.2-12.1-20.9V380.8c-14.1 4.9-26.4 8.9-35.7 11.9c-11.2 3.6-23.4 .5-31.8-7.8zM384 168a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></symbol>
+    <symbol id="fa-handshake" viewBox="0 0 640 512"><path d="M323.4 85.2l-96.8 78.4c-16.1 13-19.2 36.4-7 53.1c12.9 17.8 38 21.3 55.3 7.8l99.3-77.2c7-5.4 17-4.2 22.5 2.8s4.2 17-2.8 22.5l-20.9 16.2L512 316.8V128h-.7l-3.9-2.5L434.8 79c-15.3-9.8-33.2-15-51.4-15c-21.8 0-43 7.5-60 21.2zm22.8 124.4l-51.7 40.2C263 274.4 217.3 268 193.7 235.6c-22.2-30.5-16.6-73.1 12.7-96.8l83.2-67.3c-11.6-4.9-24.1-7.4-36.8-7.4C234 64 215.7 69.6 200 80l-72 48V352h28.2l91.4 83.4c19.6 17.9 49.9 16.5 67.8-3.1c5.5-6.1 9.2-13.2 11.1-20.6l17 15.6c19.5 17.9 49.9 16.6 67.8-2.9c4.5-4.9 7.8-10.6 9.9-16.5c19.4 13 45.8 10.3 62.1-7.5c17.9-19.5 16.6-49.9-2.9-67.8l-134.2-123zM16 128c-8.8 0-16 7.2-16 16V352c0 17.7 14.3 32 32 32H64c17.7 0 32-14.3 32-32V128H16zM48 320a16 16 0 1 1 0 32 16 16 0 1 1 0-32zM544 128V352c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V144c0-8.8-7.2-16-16-16H544zm32 208a16 16 0 1 1 32 0 16 16 0 1 1 -32 0z"/></symbol>
+    <symbol id="fa-lock" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></symbol>
+    <symbol id="fa-x-twitter" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></symbol>
+    <symbol id="fa-github" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></symbol>
+</svg>
+
     <!-- HEADER -->
     <header class="header">
         <div class="container">
             <nav class="navbar">
                 <div class="nav-brand">
                     <a href="https://zishanhack.com" class="logo">
-                        <i class="fas fa-shield-halved"></i>
+                        <svg class="icon" aria-hidden="true"><use href="#fa-shield-halved"/></svg>
                         <span>ZISHAN<span class="logo-highlight">HACK</span></span>
                     </a>
                 </div>
@@ -84,7 +109,7 @@
                 </div>
 
                 <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
-                    <i class="fas fa-bars"></i>
+                    <svg class="icon" aria-hidden="true"><use href="#fa-bars"/></svg>
                 </button>
             </nav>
         </div>
@@ -95,10 +120,10 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-badges">
-                    <span class="hero-badge"><i class="fas fa-user-shield"></i> Manual Testing</span>
-                    <span class="hero-badge"><i class="fas fa-file-contract"></i> NDA Protected</span>
-                    <span class="hero-badge"><i class="fas fa-award"></i> 7+ Years Experience</span>
-                    <span class="hero-badge"><i class="fas fa-globe"></i> Worldwide</span>
+                    <span class="hero-badge"><svg class="icon" aria-hidden="true"><use href="#fa-user-shield"/></svg> Manual Testing</span>
+                    <span class="hero-badge"><svg class="icon" aria-hidden="true"><use href="#fa-file-contract"/></svg> NDA Protected</span>
+                    <span class="hero-badge"><svg class="icon" aria-hidden="true"><use href="#fa-award"/></svg> 7+ Years Experience</span>
+                    <span class="hero-badge"><svg class="icon" aria-hidden="true"><use href="#fa-globe"/></svg> Worldwide</span>
                 </div>
 
                 <h1 class="hero-title">
@@ -112,17 +137,17 @@
 
                 <div class="hero-cta">
                     <a href="#contact" class="btn btn-primary">
-                        <i class="fas fa-calendar-check"></i>
+                        <svg class="icon" aria-hidden="true"><use href="#fa-calendar-check"/></svg>
                         Request Assessment
                     </a>
                     <a href="#services" class="btn btn-outline">
-                        <i class="fas fa-crosshairs"></i>
+                        <svg class="icon" aria-hidden="true"><use href="#fa-crosshairs"/></svg>
                         View Services
                     </a>
                 </div>
 
                 <div class="hero-contact">
-                    <a href="mailto:secure@zishanhack.com"><i class="fas fa-envelope"></i> secure@zishanhack.com</a>
+                    <a href="mailto:secure@zishanhack.com"><svg class="icon" aria-hidden="true"><use href="#fa-envelope"/></svg> secure@zishanhack.com</a>
                 </div>
             </div>
         </div>
@@ -139,68 +164,68 @@
 
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-crosshairs"></i></div>
+                    <div class="service-icon"><svg class="icon" aria-hidden="true"><use href="#fa-crosshairs"/></svg></div>
                     <h3 class="service-title">Web &amp; API Penetration Testing</h3>
                     <p class="service-description">Deep manual testing of web applications and APIs aligned with the OWASP Top 10.</p>
                     <ul class="service-features">
-                        <li><i class="fas fa-check"></i> OWASP Top 10 Coverage</li>
-                        <li><i class="fas fa-check"></i> Authentication &amp; Access Control</li>
-                        <li><i class="fas fa-check"></i> API &amp; Business Logic</li>
-                        <li><i class="fas fa-check"></i> Manual Exploit Validation</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> OWASP Top 10 Coverage</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> Authentication &amp; Access Control</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> API &amp; Business Logic</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> Manual Exploit Validation</li>
                     </ul>
-                    <a href="#contact" class="service-link">Inquire <i class="fas fa-arrow-right"></i></a>
+                    <a href="#contact" class="service-link">Inquire <svg class="icon" aria-hidden="true"><use href="#fa-arrow-right"/></svg></a>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-network-wired"></i></div>
+                    <div class="service-icon"><svg class="icon" aria-hidden="true"><use href="#fa-network-wired"/></svg></div>
                     <h3 class="service-title">Network &amp; Infrastructure Testing</h3>
                     <p class="service-description">Assessment of networks, servers, and applications from both external and internal perspectives.</p>
                     <ul class="service-features">
-                        <li><i class="fas fa-check"></i> External &amp; Internal Scope</li>
-                        <li><i class="fas fa-check"></i> Server &amp; Application Testing</li>
-                        <li><i class="fas fa-check"></i> CVE-Driven Exploitation</li>
-                        <li><i class="fas fa-check"></i> Recon to Persistence</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> External &amp; Internal Scope</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> Server &amp; Application Testing</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> CVE-Driven Exploitation</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> Recon to Persistence</li>
                     </ul>
-                    <a href="#contact" class="service-link">Inquire <i class="fas fa-arrow-right"></i></a>
+                    <a href="#contact" class="service-link">Inquire <svg class="icon" aria-hidden="true"><use href="#fa-arrow-right"/></svg></a>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-server"></i></div>
+                    <div class="service-icon"><svg class="icon" aria-hidden="true"><use href="#fa-server"/></svg></div>
                     <h3 class="service-title">Active Directory Security</h3>
                     <p class="service-description">Attack path analysis and exploitation of Active Directory environments and Windows infrastructure.</p>
                     <ul class="service-features">
-                        <li><i class="fas fa-check"></i> AD Enumeration</li>
-                        <li><i class="fas fa-check"></i> Attack Path Analysis</li>
-                        <li><i class="fas fa-check"></i> Kerberos Abuse &amp; Lateral Movement</li>
-                        <li><i class="fas fa-check"></i> Privilege Escalation</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> AD Enumeration</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> Attack Path Analysis</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> Kerberos Abuse &amp; Lateral Movement</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> Privilege Escalation</li>
                     </ul>
-                    <a href="#contact" class="service-link">Inquire <i class="fas fa-arrow-right"></i></a>
+                    <a href="#contact" class="service-link">Inquire <svg class="icon" aria-hidden="true"><use href="#fa-arrow-right"/></svg></a>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-clipboard-check"></i></div>
+                    <div class="service-icon"><svg class="icon" aria-hidden="true"><use href="#fa-clipboard-check"/></svg></div>
                     <h3 class="service-title">Vulnerability Assessment</h3>
                     <p class="service-description">Scanning and validation to identify, prioritize, and remediate security weaknesses.</p>
                     <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Nessus &amp; Acunetix Scans</li>
-                        <li><i class="fas fa-check"></i> False-Positive Elimination</li>
-                        <li><i class="fas fa-check"></i> Risk-Based Prioritization</li>
-                        <li><i class="fas fa-check"></i> Remediation Guidance</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> Nessus &amp; Acunetix Scans</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> False-Positive Elimination</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> Risk-Based Prioritization</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> Remediation Guidance</li>
                     </ul>
-                    <a href="#contact" class="service-link">Inquire <i class="fas fa-arrow-right"></i></a>
+                    <a href="#contact" class="service-link">Inquire <svg class="icon" aria-hidden="true"><use href="#fa-arrow-right"/></svg></a>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-comments"></i></div>
+                    <div class="service-icon"><svg class="icon" aria-hidden="true"><use href="#fa-comments"/></svg></div>
                     <h3 class="service-title">Security Consulting</h3>
                     <p class="service-description">Strategic guidance on risk, remediation, and disclosure from a practicing offensive security professional.</p>
                     <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Risk-Based Reporting</li>
-                        <li><i class="fas fa-check"></i> Remediation Guidance</li>
-                        <li><i class="fas fa-check"></i> Coordinated Disclosure Support</li>
-                        <li><i class="fas fa-check"></i> Toolchain &amp; Workflow Optimization</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> Risk-Based Reporting</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> Remediation Guidance</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> Coordinated Disclosure Support</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#fa-check"/></svg> Toolchain &amp; Workflow Optimization</li>
                     </ul>
-                    <a href="#contact" class="service-link">Consult <i class="fas fa-arrow-right"></i></a>
+                    <a href="#contact" class="service-link">Consult <svg class="icon" aria-hidden="true"><use href="#fa-arrow-right"/></svg></a>
                 </div>
             </div>
         </div>
@@ -234,12 +259,12 @@
             </div>
 
             <div class="industries-grid">
-                <div class="industry-card"><i class="fas fa-cloud industry-icon"></i><h3>Technology &amp; SaaS</h3><p>Web applications, APIs, and cloud-native platforms</p></div>
-                <div class="industry-card"><i class="fas fa-building industry-icon"></i><h3>Enterprise IT</h3><p>Active Directory and Windows infrastructure</p></div>
-                <div class="industry-card"><i class="fas fa-shopping-cart industry-icon"></i><h3>E-commerce</h3><p>Transaction flows and customer data protection</p></div>
-                <div class="industry-card"><i class="fas fa-university industry-icon"></i><h3>Finance &amp; Fintech</h3><p>Authentication, access control, sensitive data</p></div>
-                <div class="industry-card"><i class="fas fa-landmark industry-icon"></i><h3>Government</h3><p>Coordinated and responsible disclosure programs</p></div>
-                <div class="industry-card"><i class="fas fa-rocket industry-icon"></i><h3>Startups</h3><p>Full-stack assessments on a lean budget</p></div>
+                <div class="industry-card"><svg class="icon industry-icon" aria-hidden="true"><use href="#fa-cloud"/></svg><h3>Technology &amp; SaaS</h3><p>Web applications, APIs, and cloud-native platforms</p></div>
+                <div class="industry-card"><svg class="icon industry-icon" aria-hidden="true"><use href="#fa-building"/></svg><h3>Enterprise IT</h3><p>Active Directory and Windows infrastructure</p></div>
+                <div class="industry-card"><svg class="icon industry-icon" aria-hidden="true"><use href="#fa-cart-shopping"/></svg><h3>E-commerce</h3><p>Transaction flows and customer data protection</p></div>
+                <div class="industry-card"><svg class="icon industry-icon" aria-hidden="true"><use href="#fa-building-columns"/></svg><h3>Finance &amp; Fintech</h3><p>Authentication, access control, sensitive data</p></div>
+                <div class="industry-card"><svg class="icon industry-icon" aria-hidden="true"><use href="#fa-landmark"/></svg><h3>Government</h3><p>Coordinated and responsible disclosure programs</p></div>
+                <div class="industry-card"><svg class="icon industry-icon" aria-hidden="true"><use href="#fa-rocket"/></svg><h3>Startups</h3><p>Full-stack assessments on a lean budget</p></div>
             </div>
         </div>
     </section>
@@ -256,13 +281,13 @@
             <div class="contact-container">
                 <div class="contact-info">
                     <div class="info-card">
-                        <i class="fas fa-envelope info-icon"></i>
+                        <svg class="icon info-icon" aria-hidden="true"><use href="#fa-envelope"/></svg>
                         <h3>General</h3>
                         <p><a href="mailto:secure@zishanhack.com">secure@zishanhack.com</a></p>
                         <span class="info-note">Business hours &middot; 24h response</span>
                     </div>
                     <div class="info-card">
-                        <i class="fas fa-handshake info-icon"></i>
+                        <svg class="icon info-icon" aria-hidden="true"><use href="#fa-handshake"/></svg>
                         <h3>Partnerships</h3>
                         <p><a href="mailto:hello@zishanhack.com">hello@zishanhack.com</a></p>
                         <span class="info-note">Bounty programs &middot; Collaborations</span>
@@ -292,7 +317,7 @@
                     <textarea name="message" placeholder="Describe your needs *" rows="4" required></textarea>
 
                     <button type="submit" class="btn btn-primary btn-block">Send Inquiry</button>
-                    <p class="form-note"><i class="fas fa-lock"></i> Confidential &bull; Encrypted</p>
+                    <p class="form-note"><svg class="icon" aria-hidden="true"><use href="#fa-lock"/></svg> Confidential &bull; Encrypted</p>
                 </form>
             </div>
         </div>
@@ -304,16 +329,16 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="logo">
-                        <i class="fas fa-shield-halved"></i>
+                        <svg class="icon" aria-hidden="true"><use href="#fa-shield-halved"/></svg>
                         <span>ZISHAN<span class="logo-highlight">HACK</span></span>
                     </div>
                     <p class="footer-description">
                         Penetration testing and security assessments trusted by startups, SaaS, and enterprises worldwide.
                     </p>
                     <div class="footer-social">
-                        <a href="https://x.com/ZishanAdThandar" target="_blank" rel="noopener noreferrer" class="social-link" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
-                        <a href="https://github.com/ZishanAdThandar" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="mailto:secure@zishanhack.com" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="https://x.com/ZishanAdThandar" target="_blank" rel="noopener noreferrer" class="social-link" title="X / Twitter"><svg class="icon" aria-hidden="true"><use href="#fa-x-twitter"/></svg></a>
+                        <a href="https://github.com/ZishanAdThandar" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub"><svg class="icon" aria-hidden="true"><use href="#fa-github"/></svg></a>
+                        <a href="mailto:secure@zishanhack.com" class="social-link" title="Email"><svg class="icon" aria-hidden="true"><use href="#fa-envelope"/></svg></a>
                     </div>
                 </div>
 
