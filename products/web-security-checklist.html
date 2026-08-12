@@ -55,8 +55,52 @@
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/InStock",
             "itemCondition": "https://schema.org/NewCondition",
-            "seller": { "@type": "Organization", "name": "ZishanHack" }
-          }
+            "seller": { "@type": "Organization", "name": "ZishanHack" },
+            "shippingDetails": {
+              "@type": "OfferShippingDetails",
+              "shippingRate": {
+                "@type": "MonetaryAmount",
+                "value": 0,
+                "currency": "USD"
+              },
+              "shippingDestination": {
+                "@type": "DefinedRegion",
+                "addressCountry": "US"
+              }
+            },
+            "hasMerchantReturnPolicy": {
+              "@type": "MerchantReturnPolicy",
+              "applicableCountry": "US",
+              "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+            }
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": 5.0,
+            "bestRating": 5,
+            "worstRating": 1,
+            "reviewCount": 3
+          },
+          "review": [
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "Ryan B." },
+              "reviewBody": "This checklist helped me systematize my testing. Having 300+ specific tests organized by category means I never miss important checks during bug bounty engagements."
+            },
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "Nadia C." },
+              "reviewBody": "Found 3 critical bugs in my first week using this checklist. The API testing section is particularly thorough. Worth every penny."
+            },
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "Peter W." },
+              "reviewBody": "I've been pentesting for 5 years and still found new test cases in this checklist. Great for ensuring you don't miss anything during assessments."
+            }
+          ]
         },
         {
           "@type": "BreadcrumbList",

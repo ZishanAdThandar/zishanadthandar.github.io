@@ -55,8 +55,52 @@
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/InStock",
             "itemCondition": "https://schema.org/NewCondition",
-            "seller": { "@type": "Organization", "name": "ZishanHack" }
-          }
+            "seller": { "@type": "Organization", "name": "ZishanHack" },
+            "shippingDetails": {
+              "@type": "OfferShippingDetails",
+              "shippingRate": {
+                "@type": "MonetaryAmount",
+                "value": 0,
+                "currency": "USD"
+              },
+              "shippingDestination": {
+                "@type": "DefinedRegion",
+                "addressCountry": "US"
+              }
+            },
+            "hasMerchantReturnPolicy": {
+              "@type": "MerchantReturnPolicy",
+              "applicableCountry": "US",
+              "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+            }
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": 5.0,
+            "bestRating": 5,
+            "worstRating": 1,
+            "reviewCount": 3
+          },
+          "review": [
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "Alex Johnson" },
+              "reviewBody": "The Obsidian vault structure helped me organize my notes like never before. Passed on my first try with 100%! The AD attack section alone is worth the price."
+            },
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "Michael T." },
+              "reviewBody": "These notes cut my preparation time in half. Having everything organized in Obsidian with linked notes made it easy to review concepts quickly. Highly recommended!"
+            },
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "Lisa W." },
+              "reviewBody": "The command library saved me during the exam. Instead of searching through my own notes, I just opened the Obsidian vault and had everything ready. Essential resource."
+            }
+          ]
         },
         {
           "@type": "BreadcrumbList",

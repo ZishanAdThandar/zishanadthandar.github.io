@@ -55,8 +55,52 @@
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/InStock",
             "itemCondition": "https://schema.org/NewCondition",
-            "seller": { "@type": "Organization", "name": "ZishanHack" }
-          }
+            "seller": { "@type": "Organization", "name": "ZishanHack" },
+            "shippingDetails": {
+              "@type": "OfferShippingDetails",
+              "shippingRate": {
+                "@type": "MonetaryAmount",
+                "value": 0,
+                "currency": "USD"
+              },
+              "shippingDestination": {
+                "@type": "DefinedRegion",
+                "addressCountry": "US"
+              }
+            },
+            "hasMerchantReturnPolicy": {
+              "@type": "MerchantReturnPolicy",
+              "applicableCountry": "US",
+              "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+            }
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": 5.0,
+            "bestRating": 5,
+            "worstRating": 1,
+            "reviewCount": 3
+          },
+          "review": [
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "Kevin W." },
+              "reviewBody": "The OSWP cheatsheet saved me during the exam. Having all commands organized and ready to copy-paste was invaluable. Passed on first attempt!"
+            },
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "Elena M." },
+              "reviewBody": "I was struggling with WPA-Enterprise until I got these notes. The step-by-step commands for setting up the rogue AP worked perfectly. Highly recommended!"
+            },
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "David T." },
+              "reviewBody": "The hashcat cracking commands alone are worth the price. Saved me hours of research and troubleshooting. Essential for anyone taking the OSWP exam."
+            }
+          ]
         },
         {
           "@type": "BreadcrumbList",

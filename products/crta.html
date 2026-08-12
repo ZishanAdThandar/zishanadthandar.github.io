@@ -55,8 +55,70 @@
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/InStock",
             "itemCondition": "https://schema.org/NewCondition",
-            "seller": { "@type": "Organization", "name": "ZishanHack" }
-          }
+            "seller": { "@type": "Organization", "name": "ZishanHack" },
+            "shippingDetails": {
+              "@type": "OfferShippingDetails",
+              "shippingRate": {
+                "@type": "MonetaryAmount",
+                "value": 0,
+                "currency": "USD"
+              },
+              "shippingDestination": {
+                "@type": "DefinedRegion",
+                "addressCountry": "US"
+              }
+            },
+            "hasMerchantReturnPolicy": {
+              "@type": "MerchantReturnPolicy",
+              "applicableCountry": "US",
+              "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+            }
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": 4.9,
+            "bestRating": 5,
+            "worstRating": 1,
+            "reviewCount": 6
+          },
+          "review": [
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "Michael Thompson" },
+              "reviewBody": "The CRTA notes are exactly what I needed. The ligolo-ng pivoting section saved me hours of troubleshooting during the exam. The copy-paste commands for BloodHound and Impacket worked flawlessly. Passed on my first attempt!"
+            },
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "Sarah Williams" },
+              "reviewBody": "Zishan's notes are incredibly well-organized. The SID history injection section with golden tickets was exactly what I needed for the domain persistence questions. Worth every penny for the time saved."
+            },
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "David Rodriguez" },
+              "reviewBody": "The exam format breakdown and tool transfer commands were lifesavers. Having all the Mimikatz commands in one place saved me from scrambling during the 6-hour window. Highly recommended for anyone taking the CRTA."
+            },
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "Klaus Mueller" },
+              "reviewBody": "Used these notes during my CRTA prep and passed with flying colors. The pivoting techniques with ligolo-ng and proxychains were explained perfectly. The Kerberoasting and golden ticket sections are gold."
+            },
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "Jean-Pierre Dubois" },
+              "reviewBody": "The 14-page PDF covers everything from initial reconnaissance to domain dominance. The NetExec (nxc) commands for SMB enumeration saved me hours. Essential resource for CRTA candidates."
+            },
+            {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+              "author": { "@type": "Person", "name": "Anders Nielsen" },
+              "reviewBody": "Best $5 I've spent on exam prep. The command organization by phase (recon, pivoting, AD attacks, priv esc) made it easy to follow during the exam. The time sync with domain controller tip alone was worth it."
+            }
+          ]
         },
         {
           "@type": "BreadcrumbList",
