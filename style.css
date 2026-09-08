@@ -305,7 +305,7 @@ h5, h6 { font-size: var(--fs-sm); }
 
 /* Hero Section */
 .hero-section {
-    padding: 90px 0 50px;
+    padding: 80px 0 45px;
     background: var(--gradient-dark);
     position: relative;
     overflow: hidden;
@@ -374,7 +374,7 @@ h5, h6 { font-size: var(--fs-sm); }
 }
 
 .hero-cta {
-    margin-bottom: 2.25rem;
+    margin-bottom: 1.75rem;
 }
 
 .hero-guarantee {
@@ -395,7 +395,7 @@ h5, h6 { font-size: var(--fs-sm); }
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
-    padding: 3rem 0;
+    padding: 2rem 0;
     border-top: 1px solid var(--border);
 }
 
@@ -422,13 +422,13 @@ h5, h6 { font-size: var(--fs-sm); }
 
 /* Sections */
 section {
-    padding: 80px 0;
+    padding: 60px 0;
 }
 
 .section-header {
     text-align: center;
     max-width: 800px;
-    margin: 0 auto 2.75rem;
+    margin: 0 auto 2rem;
 }
 
 .section-badge {
@@ -578,7 +578,7 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.25rem;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
 
 .product-card {
@@ -817,7 +817,7 @@ section {
     position: absolute;
     top: 0.5rem;
     right: 1rem;
-    font-size: 3rem;
+    font-size: 2rem;
     color: var(--primary);
     opacity: 0.1;
     gap: 0.2rem;
@@ -965,7 +965,7 @@ section {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .cta-title {
@@ -978,7 +978,7 @@ section {
 .cta-subtitle {
     color: var(--gray);
     font-size: 1.2rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
 }
 
 .cta-guarantee {
@@ -986,7 +986,7 @@ section {
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     color: var(--gray);
     font-size: 0.95rem;
 }
@@ -998,7 +998,7 @@ section {
 /* Footer */
 .footer {
     background: var(--dark);
-    padding: 50px 0 30px;
+    padding: 45px 0 25px;
     border-top: 1px solid var(--border);
 }
 
@@ -1177,7 +1177,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: var(--primary);
     margin: 0 auto 1.5rem;
 }
