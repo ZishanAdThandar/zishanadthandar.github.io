@@ -374,7 +374,7 @@ h5, h6 { font-size: var(--fs-sm); }
 }
 
 .hero-cta {
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.25rem;
 }
 
 .hero-guarantee {
@@ -395,7 +395,7 @@ h5, h6 { font-size: var(--fs-sm); }
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
-    padding: 2rem 0;
+    padding: 1.25rem 0;
     border-top: 1px solid var(--border);
 }
 
@@ -404,7 +404,7 @@ h5, h6 { font-size: var(--fs-sm); }
 }
 
 .stat-number {
-    font-size: 2.4rem;
+    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
     font-weight: 900;
     background: var(--gradient);
     -webkit-background-clip: text;
@@ -1638,11 +1638,11 @@ input:-webkit-autofill:active {
     .hero-stats {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
-        padding: 2rem 0;
+        padding: 1.25rem 0;
     }
     
     .stat-number {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     
     .stat-label {
@@ -1848,7 +1848,7 @@ input:-webkit-autofill:active {
     }
     
     .stat-number {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
     }
     
     .current-price {
@@ -1908,7 +1908,7 @@ input:-webkit-autofill:active {
     }
     
     .stat-number {
-        font-size: 1.4rem;
+        font-size: 1.25rem;
     }
     
     .stat-label {
