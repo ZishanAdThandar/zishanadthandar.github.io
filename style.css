@@ -680,6 +680,7 @@ section {
 
 .product-features li {
     color: var(--light);
+    font-size: 0.9rem;
     padding: 0.28rem 0;
     padding-left: 1.4rem;
     position: relative;
@@ -721,7 +722,7 @@ section {
 .original-price {
     text-decoration: line-through;
     color: var(--gray);
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .discount-badge {
@@ -735,7 +736,7 @@ section {
 }
 
 .current-price {
-    font-size: 1.8rem;
+    font-size: clamp(1rem, 1.5vw, 1.08rem);
     font-weight: 900;
     background: linear-gradient(135deg, #6366f1, #8b5cf6);
     -webkit-background-clip: text;
@@ -785,6 +786,7 @@ section {
 .product-actions .btn {
     width: 100%;
     justify-content: center;
+    font-size: 0.95rem;
 }
 
 
@@ -1706,7 +1708,7 @@ input:-webkit-autofill:active {
     }
     
     .current-price {
-        font-size: 1.8rem;
+        font-size: 0.95rem;
     }
     
     .product-actions .btn {
@@ -1852,11 +1854,11 @@ input:-webkit-autofill:active {
     }
     
     .current-price {
-        font-size: 1.8rem;
+        font-size: 0.95rem;
     }
     
     .original-price {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
     
     .discount-badge {
@@ -1920,7 +1922,7 @@ input:-webkit-autofill:active {
     }
     
     .current-price {
-        font-size: 1.8rem;
+        font-size: 0.95rem;
     }
     
     .otp-input {
