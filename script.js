@@ -14,7 +14,6 @@ const PRODUCTS = [
     badges: ['Premium', 'Complete', 'Proven'],
     icon: 'fas fa-certificate',
     iconColor: '#f59e0b',
-    salesCount: '1,500+',
     features: ['Obsidian Notes', 'Copy Paste Commands', 'Active Directory Commands', 'Professional Report Writing']
   },
   {
@@ -26,7 +25,6 @@ const PRODUCTS = [
     badges: ['Bestseller', 'Trusted', 'Updated'],
     icon: 'fas fa-clipboard-check',
     iconColor: '#10b981',
-    salesCount: '2,000+',
     features: ['OWASP Top 10', 'API security', 'Crafted for Hunters', 'Tested Checklist']
   },
   {
@@ -38,7 +36,6 @@ const PRODUCTS = [
     badges: ['Popular', 'Concise', 'Practical'],
     icon: 'fas fa-user-secret',
     iconColor: '#ef4444',
-    salesCount: '500+',
     features: ['Tested Commands List', 'Copy-paste commands', 'AD attack guides', 'Privilege escalation']
   },
   {
@@ -50,7 +47,6 @@ const PRODUCTS = [
     badges: ['New', 'Focused', 'Current'],
     icon: 'fas fa-wifi',
     iconColor: '#6366f1',
-    salesCount: '300+',
     features: ['Wireless commands', 'Proper cheatsheet', 'Rogue AP setup', 'Full Assessment guide']
   }
 ];
@@ -614,7 +610,7 @@ function createProductCard(product, isLoggedIn, isPurchased) {
       </div>
       <div class="current-price">${priceDisplay}</div>
       <div class="sales-count">
-        <i class="fas fa-users"></i> ${product.salesCount} Sold
+        <i class="fas fa-lock"></i> Instant Download · Lifetime Updates
       </div>
     </div>
     
