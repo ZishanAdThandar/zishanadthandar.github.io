@@ -681,9 +681,10 @@ section {
 .product-features li {
     color: var(--light);
     font-size: 0.9rem;
-    padding: 0.28rem 0;
+    padding: 0.15rem 0;
     padding-left: 1.4rem;
     position: relative;
+    line-height: 1.4;
 }
 
 .product-features li i {
