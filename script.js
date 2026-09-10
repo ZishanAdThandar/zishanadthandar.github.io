@@ -9,9 +9,8 @@ const PRODUCTS = [
     id: 'oscp_bundle',
     name: 'OSCP+ Obsidian Notes Bundle',
     description: 'Complete preparation package for OSCP certification with Obsidian format.',
-    price: 97,
-    originalPrice: 997,
-    discount: '90% OFF',
+    price: 149,
+    originalPrice: 749,
     badges: ['Premium', 'Complete', 'Proven'],
     icon: 'fas fa-certificate',
     iconColor: '#f59e0b',
@@ -22,9 +21,8 @@ const PRODUCTS = [
     id: 'ultimate_checklist',
     name: 'Ultimate Web Security Checklist for Bug Hunters',
     description: 'Comprehensive checklist for bug bounty hunters and pentesters.',
-    price: 25,
-    originalPrice: 250,
-    discount: '90% OFF',
+    price: 49,
+    originalPrice: 299,
     badges: ['Bestseller', 'Trusted', 'Updated'],
     icon: 'fas fa-clipboard-check',
     iconColor: '#10b981',
@@ -35,9 +33,8 @@ const PRODUCTS = [
     id: 'crta_notes',
     name: 'CRTA Copy Paste Commands eBook',
     description: 'Battle-tested notes with copy-paste commands for CyberWarFare Labs CRTA Assessment.',
-    price: 5, 
-    originalPrice: 50,
-    discount: '90% OFF',
+    price: 19, 
+    originalPrice: 149,
     badges: ['Popular', 'Concise', 'Practical'],
     icon: 'fas fa-user-secret',
     iconColor: '#ef4444',
@@ -48,9 +45,8 @@ const PRODUCTS = [
     id: 'oswp_notes',
     name: 'OSWP Copy Paste Commands eBook',
     description: 'Wireless pentesting notes and cheatsheet for Offsec OSWP Certification.',
-    price: 27,
-    originalPrice: 270,
-    discount: '90% OFF',
+    price: 49,
+    originalPrice: 299,
     badges: ['New', 'Focused', 'Current'],
     icon: 'fas fa-wifi',
     iconColor: '#6366f1',
@@ -615,7 +611,6 @@ function createProductCard(product, isLoggedIn, isPurchased) {
     <div class="product-price">
       <div class="price-header">
         <span class="original-price">${originalPriceDisplay}</span>
-        <span class="discount-badge">${product.discount}</span>
       </div>
       <div class="current-price">${priceDisplay}</div>
       <div class="sales-count">
@@ -1122,30 +1117,6 @@ function viewMyDownloads() {
   closeDropdown();
 }
 
-// ===== COUNTDOWN TIMER =====
-function updateCountdown() {
-  const countdownElement = document.getElementById('countdown');
-  if (!countdownElement) return;
-  
-  const now = new Date();
-  const endOfDay = new Date();
-  endOfDay.setHours(23, 59, 59, 999);
-  
-  const diff = endOfDay - now;
-  
-  if (diff <= 0) {
-    countdownElement.textContent = '00:00:00';
-    return;
-  }
-  
-  const hours = Math.floor(diff / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-  
-  countdownElement.textContent = 
-    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-}
-
 // ===== EXPORT FUNCTIONS TO GLOBAL SCOPE =====
 window.openAuthModal = openAuthModal;
 window.closeAuthModal = closeAuthModal;
@@ -1155,7 +1126,3 @@ window.logout = logout;
 window.buyProduct = buyProduct;
 window.downloadProduct = downloadProduct;
 window.viewMyDownloads = viewMyDownloads;
-
-// Start countdown timer
-setInterval(updateCountdown, 1000);
-updateCountdown();
