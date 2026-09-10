@@ -896,14 +896,21 @@ async function downloadProduct(productId) {
     });
     
     if (!response.ok) {
+      let serverError = null;
+      try {
+        const errData = await response.json();
+        serverError = errData && errData.error;
+      } catch (e) {}
       if (response.status === 401) {
         logout();
         showNotification('Session expired. Please login again.', 'error');
       } else if (response.status === 403) {
-        showNotification('Purchase verification failed.', 'warning');
+        showNotification(serverError || 'Purchase verification failed.', 'warning');
         await loadPurchases();
+      } else if (response.status === 429) {
+        showNotification(serverError || 'Too many download attempts. Please try again later.', 'warning');
       } else {
-        showNotification('Download failed. Please try again.', 'error');
+        showNotification(serverError || 'Download failed. Please try again.', 'error');
       }
       showLoading(false);
       return;
