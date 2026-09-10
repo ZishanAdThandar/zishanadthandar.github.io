@@ -14,7 +14,7 @@ const PRODUCTS = [
     badges: ['Premium', 'Complete', 'Proven'],
     icon: 'fas fa-certificate',
     iconColor: '#f59e0b',
-    features: ['Obsidian Notes', 'Kali Tools Download Kit', 'Copy Paste Commands', 'Active Directory Commands', 'Professional Report Writing']
+    features: ['Kali Tools Download Kit', 'Copy Paste Commands', 'Active Directory Commands', 'Professional Report Writing']
   },
   {
     id: 'ultimate_checklist',
