@@ -13,7 +13,7 @@ const PRODUCTS = [
     originalPrice: 749,
     badges: ['Premium', 'Complete', 'Proven'],
     icon: 'fas fa-certificate',
-    iconColor: '#f59e0b',
+    iconColor: '#6366f1',
     features: ['Kali Tools Download Kit', 'Copy Paste Commands', 'Active Directory Commands', 'Professional Report Writing']
   },
   {
@@ -24,7 +24,7 @@ const PRODUCTS = [
     originalPrice: 299,
     badges: ['Bestseller', 'Trusted', 'Updated'],
     icon: 'fas fa-clipboard-check',
-    iconColor: '#10b981',
+    iconColor: '#6366f1',
     features: ['OWASP Top 10', 'API security', 'Crafted for Hunters', 'Tested Checklist']
   },
   {
@@ -35,7 +35,7 @@ const PRODUCTS = [
     originalPrice: 149,
     badges: ['Popular', 'Concise', 'Practical'],
     icon: 'fas fa-user-secret',
-    iconColor: '#ef4444',
+    iconColor: '#6366f1',
     features: ['Tested Commands List', 'Copy-paste commands', 'AD attack guides', 'Privilege escalation']
   },
   {
