@@ -607,8 +607,8 @@ function createProductCard(product, isLoggedIn, isPurchased) {
     <div class="product-price">
       <div class="price-header">
         <span class="original-price">${originalPriceDisplay}</span>
+        <span class="current-price">${priceDisplay}</span>
       </div>
-      <div class="current-price">${priceDisplay}</div>
       <div class="sales-count">
         <i class="fas fa-lock"></i> Instant Download · Lifetime Updates
       </div>
