@@ -713,7 +713,7 @@ section {
     justify-content: center;
     gap: 1rem;
     margin-bottom: 0.25rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .original-price {
