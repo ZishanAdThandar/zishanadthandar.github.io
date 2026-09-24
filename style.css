@@ -857,6 +857,11 @@ section {
 }
 
 /* FAQ */
+.faq-section {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+}
+
 .faq-grid {
     max-width: 800px;
     margin: 0 auto;
