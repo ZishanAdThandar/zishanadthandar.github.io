@@ -11,7 +11,7 @@ const PRODUCTS = [
     description: 'Complete Obsidian vault plus curated tool installer scripts for OSCP prep.',
     price: 97,
     originalPrice: 763,
-    badges: ['Premium', 'Complete', 'Proven'],
+    badges: ['Premium', 'Step-by-Step', 'Exam Focused'],
     icon: 'fas fa-certificate',
     iconColor: '#6366f1',
     features: ['Real World Verified', 'Battle Tested Commands', 'Tools Installer Scripts', 'Step by Step Guide']
@@ -22,7 +22,7 @@ const PRODUCTS = [
     description: 'Proper Web App pentesting checklist for Bug Bounty Hunters and Red Teamers.',
     price: 37,
     originalPrice: 243,
-    badges: ['Bestseller', 'Trusted', 'Updated'],
+    badges: ['Popular', 'Updated', 'Practical'],
     icon: 'fas fa-clipboard-check',
     iconColor: '#6366f1',
     features: ['OWASP Top 10', 'API security', 'Crafted for Hunters', 'Tested Checklist']
@@ -33,7 +33,7 @@ const PRODUCTS = [
     description: 'Copy-Paste commands list ready for Cyber Warfare Labs CRTA test.',
     price: 14,
     originalPrice: 146,
-    badges: ['Popular', 'Concise', 'Practical'],
+    badges: ['Bestseller', 'Copy-Paste Ready', 'Practical'],
     icon: 'fas fa-user-secret',
     iconColor: '#6366f1',
     features: ['Tested Commands List', 'Copy-paste commands', 'AD attack guides', 'Privilege escalation']
