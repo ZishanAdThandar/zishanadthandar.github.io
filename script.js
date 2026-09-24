@@ -19,7 +19,7 @@ const PRODUCTS = [
   {
     id: 'ultimate_checklist',
     name: 'Ultimate Web Security Checklist for Bug Hunters',
-    description: 'Comprehensive checklist for bug bounty hunters and pentesters.',
+    description: 'Proper Web App pentesting checklist for Bug Bounty Hunters and Red Teamers.',
     price: 49,
     originalPrice: 299,
     badges: ['Bestseller', 'Trusted', 'Updated'],
@@ -30,7 +30,7 @@ const PRODUCTS = [
   {
     id: 'crta_notes',
     name: 'CRTA Copy Paste Commands eBook',
-    description: 'Battle-tested notes with copy-paste commands for CyberWarFare Labs CRTA Assessment.',
+    description: 'Copy-Paste commands list ready for Cyber Warfare Labs CRTA test.',
     price: 19, 
     originalPrice: 149,
     badges: ['Popular', 'Concise', 'Practical'],
