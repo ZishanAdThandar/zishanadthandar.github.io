@@ -7,14 +7,14 @@ let userPurchases = {};
 const PRODUCTS = [
   {
     id: 'oscp_bundle',
-    name: 'OSCP+ Obsidian Notes and Tools Bundle',
-    description: 'Complete Obsidian vault plus curated Kali tools and setup scripts for OSCP prep.',
+    name: 'OSCP+ Obsidian Notes premium Bundle',
+    description: 'Complete Obsidian vault plus curated tool installer scripts for OSCP prep.',
     price: 149,
     originalPrice: 749,
     badges: ['Premium', 'Complete', 'Proven'],
     icon: 'fas fa-certificate',
     iconColor: '#6366f1',
-    features: ['Kali Tools Download Kit', 'Copy Paste Commands', 'Active Directory Commands', 'Professional Report Writing']
+    features: ['Real World Verified', 'Battle Tested Commands', 'Tools Installer Scripts', 'Step by Step Guide']
   },
   {
     id: 'ultimate_checklist',
