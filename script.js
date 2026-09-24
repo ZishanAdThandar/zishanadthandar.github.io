@@ -610,7 +610,7 @@ function createProductCard(product, isLoggedIn, isPurchased) {
         <span class="original-price">${originalPriceDisplay}</span>
       </div>
       <div class="sales-count">
-        <i class="fas fa-lock"></i> Instant Download · Lifetime Updates
+        <i class="fas fa-clock"></i> Limited Time Offer · Hurry Up!
       </div>
     </div>
     

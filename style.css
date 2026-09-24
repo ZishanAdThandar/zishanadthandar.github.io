@@ -744,8 +744,9 @@ section {
 }
 
 .sales-count {
-    color: var(--gray);
+    color: #f59e0b;
     font-size: 0.8rem;
+    font-weight: 600;
     margin-top: 0.2rem;
     display: flex;
     align-items: center;
