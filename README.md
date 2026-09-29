@@ -2,15 +2,24 @@
 
 Official site: https://zishanhack.com/
 
-ZishanHack provides an Obsidian‑ready OSCP+ vault, Active Directory attack checklists, and pentest reporting templates for red teamers and bug bounty hunters. This repository links to the official product and contains a small sample vault and quickstart instructions.
+ZishanHack provides an Obsidian‑ready OSCP+ vault, Active Directory attack checklists, and pentest reporting templates for red teamers and bug bounty hunters.
 
-## Quickstart
-1. Visit the official site: https://zishanhack.com/
-2. Purchase the OSCP+ vault or download the sample release from this repo.
-3. Open the vault in Obsidian: File → Open folder as vault.
+## Key pages (direct links to help discovery)
+- **Home** — https://zishanhack.com/  
+  Short: Official landing page for ZishanHack resources and product catalog.
+- **OSCP Bundle** — https://zishanhack.com/products/oscp-bundle  
+  Short: Obsidian‑ready OSCP+ vault, exam checklists, and reporting templates.
+- **Web Security Checklist** — https://zishanhack.com/products/web-security-checklist  
+  Short: Practical checklist for web app pentests and quick triage.
+- **CRTA** — https://zishanhack.com/products/crta  
+  Short: Red team attack playbooks and lab walkthroughs.
+- **OSWP Notes** — https://zishanhack.com/products/oswp-notes  
+  Short: Wireless security notes and lab exercises.
+- **Blog** — https://zishanhack.com/blog/  
+  Short: Articles, walkthroughs, and release notes.
 
 ## Releases
-See the Releases tab for sample vaults and demo assets.
+See the Releases tab for sample vaults and demo assets (attach `vault-sample.zip` to a release).
 
 ## Contact and Security
 Responsible disclosure: https://zishanhack.com/.well-known/security.txt  
