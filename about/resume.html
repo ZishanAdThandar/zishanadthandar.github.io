@@ -221,21 +221,30 @@
         var w = rest.match(/^\\([a-zA-Z]+)/);
         if (w) {
           var cmd = w[1];
-          if (cmd === 'textbf' || cmd === 'textit' || cmd === 'emph' || cmd === 'texttt') {
+          if (cmd === 'textbf' || cmd === 'textit' || cmd === 'emph' || cmd === 'texttt' || cmd === 'textsc') {
             var q = i + cmd.length + 1;
             while (s[q] !== '{') q++;
             var e = findClosing(s, q);
             if (e === -1) { i += w[0].length; continue; }
             var inner = normalize(s.slice(q + 1, e));
-            out += (cmd === 'textbf') ? '**' + inner + '**' : '*' + inner + '*';
+            if (cmd === 'textbf') out += '**' + inner + '**';
+            else out += '*' + inner + '*';
             i = e + 1; continue;
           }
           if (cmd === 'bfseries') { out += '**'; i += w[0].length; continue; }
           if (cmd === 'itshape') { out += '*'; i += w[0].length; continue; }
           if (cmd === 'quad' || cmd === 'qquad') { out += '    '; i += w[0].length; continue; }
-          if (cmd === 'enskip' || cmd === 'enspace') { out += ' '; i += w[0].length; continue; }
+          if (cmd === 'enskip' || cmd === 'enspace' || cmd === 'hspace') {
+            var hq = s.indexOf('{', i + w[0].length), he = hq !== -1 ? findClosing(s, hq) : -1;
+            var hn = (s[i + w[0].length] === '*') ? 1 : 0;
+            if (he !== -1) i = he + 1; else i += w[0].length + hn;
+            out += ' '; continue;
+          }
+          if (cmd === 'hfill') { out += ' '; i += w[0].length; continue; }
+          if (cmd === 'vspace') { var vq = s.indexOf('{', i + w[0].length), ve = vq !== -1 ? findClosing(s, vq) : -1; i = (ve !== -1 ? ve + 1 : i + w[0].length); continue; }
           if (cmd === 'newline' || cmd === 'linebreak' || cmd === 'par') { out += '\n'; i += w[0].length; continue; }
-          if (/^(LARGE|Large|large|scriptsize|small|normalsize|Huge|huge)$/.test(cmd)) { i += w[0].length; continue; }
+          if (/^(LARGE|Large|large|scriptsize|small|normalsize|footnotesize|tiny|Huge|huge)$/.test(cmd)) { i += w[0].length; continue; }
+          if (/^(raggedright|raggedleft|centering|setlength|usepackage|pagestyle|setlist|titleformat|titlespacing|newcommand|definecolor)$/.test(cmd)) { i += w[0].length; continue; }
           i += w[0].length; continue; /* unknown control word -> drop */
         }
         var sym = rest.match(/^\\([^a-zA-Z])/);
