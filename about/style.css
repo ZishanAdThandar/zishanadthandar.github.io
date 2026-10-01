@@ -832,11 +832,6 @@ section:first-of-type {
   margin: 0;
 }
 
-.footer-bottom .third-party-note {
-  margin-top: 0.4rem;
-  font-size: 0.8rem;
-}
-
 /* Scroll Top Button */
 .scroll-top-btn {
   position: fixed;
