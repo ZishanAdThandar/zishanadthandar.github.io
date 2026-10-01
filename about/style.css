@@ -293,15 +293,6 @@ section:first-of-type {
   pointer-events: none;
 }
 
-.hero-kicker {
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--primary);
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-
 .hero-title {
   font-size: 2.5rem;
   font-weight: 800;
@@ -349,7 +340,6 @@ section:first-of-type {
 }
 
 /* Buttons - match main site .btn/.btn-premium */
-.btn-primary-custom,
 .btn-secondary-custom {
   display: inline-flex;
   align-items: center;
@@ -360,26 +350,10 @@ section:first-of-type {
   border-radius: 12px;
   transition: all 0.3s ease;
   text-decoration: none;
-  border: none;
   cursor: pointer;
   font-size: 1rem;
   position: relative;
   overflow: hidden;
-}
-
-.btn-primary-custom {
-  background: var(--gradient);
-  color: white;
-  box-shadow: var(--shadow);
-}
-
-.btn-primary-custom:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-  color: white;
-}
-
-.btn-secondary-custom {
   border: 2px solid var(--primary);
   color: var(--primary);
   background: transparent;
@@ -391,7 +365,6 @@ section:first-of-type {
   transform: translateY(-3px);
 }
 
-.btn-primary-custom::before,
 .btn-secondary-custom::before {
   content: '';
   position: absolute;
@@ -403,24 +376,9 @@ section:first-of-type {
   transition: 0.5s;
 }
 
-.btn-primary-custom:hover::before,
-.btn-primary-custom:focus::before,
 .btn-secondary-custom:hover::before,
 .btn-secondary-custom:focus::before {
   left: 100%;
-}
-
-.hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  font-size: 0.9rem;
-  color: var(--gray);
-}
-
-.hero-meta span i {
-  margin-right: 0.5rem;
-  color: var(--primary);
 }
 
 /* Avatar */
@@ -968,15 +926,9 @@ section:first-of-type {
     flex-direction: column;
   }
   
-  .btn-primary-custom,
   .btn-secondary-custom {
     width: 100%;
     justify-content: center;
-  }
-  
-  .hero-meta {
-    flex-direction: column;
-    gap: 0.5rem;
   }
   
   .hero-avatar {
@@ -1036,7 +988,6 @@ section:first-of-type {
     gap: 0.5rem;
   }
   
-  .btn-primary-custom,
   .btn-secondary-custom {
     padding: 0.8rem 1.5rem;
     font-size: 0.95rem;
@@ -1087,7 +1038,6 @@ section:first-of-type {
   }
   
   .card-premium:hover,
-  .btn-primary-custom:hover,
   .btn-secondary-custom:hover {
     transform: none;
   }
