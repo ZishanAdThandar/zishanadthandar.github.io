@@ -1,0 +1,188 @@
+% Zishan Ahamed Thandar — Resume
+% Compile with pdfLaTeX or XeLaTeX
+
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[
+    top=0.55in,
+    bottom=0.55in,
+    left=0.65in,
+    right=0.65in
+]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{array}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\definecolor{heading}{RGB}{25,25,25}
+
+\titleformat{\section}
+  {\large\bfseries\color{heading}}
+  {}
+  {0pt}
+  {}
+  [\vspace{-5pt}\rule{\textwidth}{0.5pt}\vspace{-5pt}]
+
+\titlespacing*{\section}{0pt}{8pt}{6pt}
+
+\setlist[itemize]{
+    leftmargin=1.25em,
+    itemsep=1pt,
+    topsep=1pt,
+    parsep=0pt,
+    partopsep=0pt
+}
+
+\newcommand{\resumeEntry}[4]{
+    \textbf{#1}\hfill \textit{#2}\\
+    \textit{#3}\hfill #4
+    \vspace{1pt}
+}
+
+\newcommand{\project}[2]{
+    \textbf{#1} \hfill \textit{#2}\\[-2pt]
+}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries Zishan Ahamed Thandar}\\[3pt]
+    \textbf{Offensive Security Engineer | Penetration Tester | Security Consultant}\\[4pt]
+    \href{mailto:hi@zishanhack.com}{hi@zishanhack.com}
+    \quad$\diamond$\quad
+    \href{https://www.linkedin.com/in/zishanadthandar/}{linkedin.com/in/zishanadthandar}
+    \quad$\diamond$\quad
+    \href{https://zishanhack.com/about/}{zishanhack.com/about/}
+    \quad$\diamond$\quad
+    \href{https://zishanhack.com/links/}{links}
+\end{center}
+
+\section{Summary}
+
+Offensive Security Engineer with 7+ years of hands-on experience in penetration testing, vulnerability research, and bug bounty programs. Specialized in web, API, and Active Directory security assessments. Discovered and responsibly disclosed 50+ validated vulnerabilities across public bug bounty and private disclosure programs, with Hall of Fame acknowledgments from organizations such as Google, Oracle, and NCIIPC. Skilled in manual vulnerability discovery, privilege escalation, Kerberos abuse, and delivery of clear remediation guidance. Author of open-source security tools and practical security research notes.
+
+\section{Professional Experience}
+
+\resumeEntry{Freelance Security Researcher \& Bug Bounty Hunter}{Jan 2018 -- Present}{HackerOne \& Other Security Programs}{}
+\begin{itemize}
+    \item Conduct freelance security testing on bug bounty engagements across HackerOne and other public programs on an on-demand basis.
+    \item Discovered and responsibly disclosed 50+ validated vulnerabilities across HackerOne and other public security programs, including issues affecting authentication, authorization, access control, and sensitive data exposure.
+    \item Recognized through Hall of Fame acknowledgements from Google, Oracle, and other organizations for responsibly disclosed vulnerabilities.
+    \item Produce reproducible vulnerability reports with proof-of-concept, impact analysis, technical details, and remediation guidance.
+    \item Communicate with security and engineering teams throughout triage, validation, and coordinated disclosure processes.
+\end{itemize}
+
+\section{Technical Skills}
+
+\begin{itemize}
+    \item \textbf{Penetration Testing \& Offensive Security:} Web \& API security testing (OWASP Top 10, MITRE ATT\&CK), manual vulnerability discovery and exploit validation, risk-based reporting.
+    \item \textbf{Active Directory \& Windows Attacks:} AD enumeration, Kerberos abuse, privilege escalation, lateral movement, and attack path analysis.
+    \item \textbf{Tools \& Platforms:} Burp Suite, Nmap, Metasploit, Nessus, Acunetix, Nuclei, BloodHound, Impacket, CrackMapExec, Hashcat, Hydra, Splunk.
+    \item \textbf{Vulnerability Research \& Bug Bounty:} 50+ validated vulnerabilities disclosed across HackerOne and other public programs; coordinated disclosure experience.
+    \item \textbf{Automation, Scripting \& Web Technologies:} Python, Bash, PHP, JavaScript, MySQL, HTML, CSS; OS environments -- Kali, Arch, Debian, Ubuntu, Windows.
+\end{itemize}
+
+\section{Languages}
+
+\begin{tabularx}{\textwidth}{@{}X X X X@{}}
+\textbf{Bangla} & Native &
+\textbf{English} & Fluent (Read/Write/Speak) \\
+\textbf{Hindi} & Fluent (Read/Write/Speak) &
+\textbf{Urdu} & Conversational (Speaking)
+\end{tabularx}
+
+\section{Projects}
+
+\project{\href{https://pypi.org/project/website-dorker-pro/}{WebsiteDorkerPro -- OSINT \& Reconnaissance Tool}}{Python}
+\begin{itemize}
+    \item Developed an automated OSINT tool for domain reconnaissance, enabling efficient discovery of subdomains, exposed endpoints, and publicly indexed assets during the recon phase.
+\end{itemize}
+
+\project{\href{https://addons.mozilla.org/en-US/firefox/addon/hackerproxypro/}{Hacker Proxy Pro -- Browser Pentesting Add-on}}{JavaScript}
+\begin{itemize}
+    \item Built a lightweight Firefox extension for one-click proxy switching between Burp Suite and TOR.
+    \item Trusted by 500+ security professionals for streamlined traffic interception workflows.
+\end{itemize}
+
+\project{\href{https://github.com/ZishanAdThandar/hackify}{Hackify -- Pentesting Environment Automation Tool}}{Bash}
+\begin{itemize}
+    \item Created an open-source tool to automate installation of penetration testing tools and wordlists on Debian-based systems, reducing setup time for offensive security engagements.
+\end{itemize}
+
+\project{\href{https://github.com/ZishanAdThandar/pentest}{Organized Pentester Guide -- Penetration Testing Knowledge Base}}{}
+\begin{itemize}
+    \item Created and maintained a comprehensive penetration testing guide covering tools, methodologies, scripts, certifications, labs, learning resources, and career paths. Used as a structured reference for practical offensive security and continuous skill development.
+\end{itemize}
+
+\project{\href{https://zishanhack.com}{Web Security Checklist -- Practical Security Testing Methodology}}{}
+\begin{itemize}
+    \item Created a step-by-step web security testing checklist with a practical methodology for identifying, reproducing, and prioritizing common web and API security issues.
+\end{itemize}
+
+\project{\href{https://zishanhack.com/blog}{Cyber Security Write-Ups -- Vulnerability Research \& CTF Solutions}}{}
+\begin{itemize}
+    \item Authored detailed security write-ups documenting real-world bug bounty findings, Hack The Box, and TryHackMe challenge solutions. Focused on methodology, exploitation logic, and root-cause analysis to improve reproducibility and learning outcomes.
+\end{itemize}
+
+\project{\href{https://addons.mozilla.org/en-US/firefox/addon/zishanadthandar-cyberterminus/}{CyberTerminus -- Security-Focused Browser Theme}}{}
+\begin{itemize}
+    \item Designed a high-contrast, security-centric Firefox theme optimized for long hours of security research and coding. Created to enhance readability and reduce visual fatigue for penetration testers and developers working in dark environments.
+\end{itemize}
+
+\section{Hall of Fame \& Recognition}
+
+Recognized by security teams for responsible vulnerability disclosure, with acknowledgements from:
+\href{https://bughunters.google.com/leaderboard/honorable-mentions}{Google},
+\href{https://www.oracle.com/security-alerts/cpuapr2018.html}{Oracle},
+\href{https://nciipc.gov.in/documents/NCIIPC_Newsletter_Oct19.pdf}{NCIIPC},
+\href{https://bugbounty.zohocorp.com/bb/info#hof}{Zoho},
+\href{https://hackerone.com/flipkart}{Flipkart},
+\href{https://hackerone.com/att}{AT\&T},
+\href{https://web.archive.org/web/20191231125749/https://contact.security.aol.com/hof/}{AOL},
+\href{https://www.postnl.nl/en/responsible-disclosure/}{PostNL},
+\href{https://www.eur.nl/en/campus/locations/campus-woudestein/security-safety/information-security/hall-fame}{EUR.nl},
+\href{https://www.visenze.com/hall-of-fame/}{Visenze},
+\href{https://finefriends.social/security/hof}{Finefriends},
+\href{https://support.teamhively.com/general-use/i-found-a-bug-what-should-i-do/}{Hively},
+and other organizations.
+
+\begin{itemize}
+    \item \href{https://app.yogosha.com/r/ZishanAdThandar}{Selected member of the Yogosha Strike Force}.
+    \item \href{https://zishanhack.com/about/img/CERT/eccouncil1.jpg}{EC-Council Bug Submission Certificate}.
+    \item \href{https://zishanhack.com/about/img/CERT/paytm.jpg}{PayTM Acknowledgment Certificate}.
+    \item \href{https://web.archive.org/web/20220521173955/https://www.geeksforgeeks.org/certificates/?hof=1}{GeeksForGeeks Acknowledgment Certificate}.
+    \item \href{https://zishanhack.com/about/img/CERT/shaadi.jpg}{Shaadi.com Acknowledgment Certificate}.
+\end{itemize}
+
+\section{Certifications}
+
+\begin{itemize}
+    \item \href{https://zishanhack.com/about/img/CERT/crta.jpg}{Certified Red Team Analyst (CRTA) -- CyberWarFare Labs}.
+    \item \href{https://app.kajabi.com/certificates/5481eb7c}{Certified Cyber Security Analyst (C3SA) -- CyberWarFare Labs}.
+    \item \href{https://web.archive.org/web/20240407035000/https://codered.eccouncil.org/certificate/9a734562-7963-400b-84b6-4f04d7477bd6?finalAssessment=true&type=1&logged=false}{EC-Council Ethical Hacking Essentials}.
+\end{itemize}
+
+\textbf{Coding \& Development Certifications}
+\begin{itemize}
+    \item \textbf{SoloLearn:} \href{https://web.archive.org/web/20230826182653/https://www.sololearn.com/certificates/CT-ESUIEOIL}{Python}, \href{https://web.archive.org/web/20230827045336/https://www.sololearn.com/certificates/CT-6MPPT9PS}{Java}, \href{https://web.archive.org/web/20230827044856/https://www.sololearn.com/certificates/CT-URP0SEVV}{PHP}, \href{https://web.archive.org/web/20230827045028/https://www.sololearn.com/certificates/CT-O8CPNDPQ}{HTML}, \href{https://web.archive.org/web/20230827044259/https://www.sololearn.com/certificates/CT-6XXLMJLU}{CSS}, \href{https://web.archive.org/web/20230827044658/https://www.sololearn.com/certificates/CT-V5B4OHBJ}{JavaScript}, \href{https://web.archive.org/web/20230827045224/https://www.sololearn.com/certificates/CT-8D99WRRR}{jQuery}.
+    \item \textbf{Codecademy:} \href{https://www.codecademy.com/profiles/ZishanAdThandar/certificates/b97fd4d87a816c761a674af1b5391ef1}{Python 2}, \href{https://www.codecademy.com/profiles/ZishanAdThandar/certificates/d3f89367b558583e361640f778191345}{Java}, \href{https://www.codecademy.com/profiles/ZishanAdThandar/certificates/a8ab218d5950c29861635cc0bf12fd13}{Git \& GitHub}.
+    \item \href{https://zishanhack.com/about/img/CERT/ardent.jpg}{Ardent: Android App Development (2013)}.
+\end{itemize}
+
+\section{Education}
+
+\resumeEntry{\href{https://zishanhack.com/about/img/CERT/makaut.jpg}{Bachelor of Technology}}{May 2011 -- May 2015}{\href{https://zishanhack.com/about/img/CERT/makaut.jpg}{MAKAUT, WB}}{}
+\begin{itemize}
+    \item \href{https://zishanhack.com/about/img/CERT/nsdc.jpg}{Completed Soft Skill Training Program by National Skill Development Corporation (2015).}
+\end{itemize}
+
+\end{document}

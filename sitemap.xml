@@ -60,22 +60,15 @@
 </url>
 
 <url>
-  <loc>https://zishanhack.com/legal.html</loc>
+  <loc>https://zishanhack.com/legal</loc>
   <lastmod>2026-09-11</lastmod>
   <priority>0.50</priority>
 </url>
 
 <url>
-  <loc>https://zishanhack.com/responsible-disclosure.html</loc>
+  <loc>https://zishanhack.com/responsible-disclosure</loc>
   <lastmod>2026-09-11</lastmod>
   <priority>0.50</priority>
-</url>
-
-<url>
-  <loc>https://zishanhack.com/about/resume.pdf</loc>
-  <loc>https://zishanhack.com/about/resume</loc>
-  <lastmod>2026-09-11</lastmod>
-  <priority>0.30</priority>
 </url>
 
 </urlset>
