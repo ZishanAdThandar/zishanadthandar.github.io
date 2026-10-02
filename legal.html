@@ -30,18 +30,35 @@
     <style>
         /* CSS Variables */
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #10b981;
-            --accent: #f59e0b;
-            --danger: #ef4444;
-            --success: #10b981;
-            --dark: #0f172a;
-            --darker: #0a0e17;
-            --light: #ffffff;
-            --gray: #94a3b8;
-            --border: rgba(255, 255, 255, 0.1);
-        }
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary: #10b981;
+    --accent: #f59e0b;
+    --danger: #ef4444;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --dark: #0f172a;
+    --darker: #0a0e17;
+    --light: #ffffff;
+    --gray: #94a3b8;
+    --gray-dark: #475569;
+    --gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
+    --gradient-accent: linear-gradient(135deg, #6366f1, #8b5cf6);
+    --gradient-dark: linear-gradient(135deg, #0f172a, #1e1b4b);
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.25);
+    --border: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.2);
+
+    /* Type scale - consistent hierarchy: H1 2.5em, H2 2em, H3 1.5em, H4 1.125em */
+    --fs-h1: clamp(1.7rem, 4.5vw, 2.5rem);
+    --fs-h2: clamp(1.4rem, 3.5vw, 2rem);
+    --fs-h3: clamp(1.125rem, 2.2vw, 1.5rem);
+    --fs-h4: clamp(1rem, 1.5vw, 1.125rem);
+    --fs-body: 1rem;
+    --fs-sm: 0.875rem;
+    --fs-xs: 0.75rem;
+}
         
         /* Base Reset */
         * {
@@ -69,14 +86,15 @@
 
         .header {
             position: fixed;
-            top: 0px;
+            top: 0;
             left: 0;
             right: 0;
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
-            z-index: 999;
-            padding: 15px 0;
+            z-index: 1000;
+            padding: 8px 0;
+            transition: all 0.3s ease;
         }
         
         .navbar {
@@ -88,7 +106,7 @@
         .nav-brand .logo {
             display: flex;
             align-items: center;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 900;
             color: white;
             text-decoration: none;
@@ -97,12 +115,12 @@
         
         .nav-brand .logo i {
             color: var(--primary);
-            margin-right: 10px;
-            font-size: 2rem;
+            margin-right: 8px;
+            font-size: 1.6rem;
         }
         
         .logo-highlight {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: var(--gradient);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -117,11 +135,11 @@
             color: var(--gray);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             letter-spacing: 0.3px;
             transition: all 0.3s ease;
             position: relative;
-            padding: 0.5rem 0;
+            padding: 0.35rem 0;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -140,7 +158,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: var(--gradient);
             transition: width 0.3s ease;
         }
         
@@ -185,7 +203,9 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            padding: 5px 10px;
+            padding: 5px;
+            min-width: 44px;
+            min-height: 44px;
             border-radius: 4px;
             transition: background-color 0.3s ease;
         }
@@ -338,8 +358,8 @@
             }
             
             .header {
-                top: 0px;
-                padding: 10px 0;
+                top: 0;
+                padding: 8px 0;
             }
             
             .nav-brand .logo {
@@ -360,20 +380,18 @@
             /* Hide desktop nav-menu by default on mobile */
             .nav-menu {
                 position: fixed;
-                top: 100%;
+                top: 70px;
                 left: 0;
                 right: 0;
-                background: var(--dark);
+                background: rgba(15, 23, 42, 0.98);
+                backdrop-filter: blur(20px);
                 flex-direction: column;
-                padding: 2rem;
-                gap: 1.5rem;
-                border-bottom: 1px solid var(--border);
+                padding: 1.5rem;
+                gap: 1.2rem;
                 border-top: 1px solid var(--border);
-                transform: translateY(-150%);
-                opacity: 0;
-                transition: all 0.3s ease;
+                border-bottom: 1px solid var(--border);
                 display: none;
-                z-index: 998;
+                z-index: 999;
                 max-height: calc(100vh - 100px);
                 overflow-y: auto;
                 box-shadow: var(--shadow-lg);
@@ -381,8 +399,6 @@
             
             .nav-menu.show {
                 display: flex;
-                transform: translateY(0);
-                opacity: 1;
             }
             
             /* Hide back button on mobile - will be in mobile menu */
@@ -423,20 +439,12 @@
         @media (max-width: 480px) {
             
             .header {
-                top: 0px;
-                padding: 8px 0;
-            }
-            
-            .nav-brand .logo {
-                font-size: 1.3rem;
-            }
-            
-            .nav-brand .logo i {
-                font-size: 1.3rem;
+                top: 0;
+                padding: 6px 0;
             }
             
             .nav-menu {
-                top: 0px;
+                top: 100%;
             }
             
             .legal-container {
@@ -473,11 +481,20 @@
         @media (max-width: 360px) {
             
             .header {
-                top: 0px;
+                top: 0;
+                padding: 5px 0;
+            }
+            
+            .nav-brand .logo {
+                font-size: 1.3rem;
+            }
+            
+            .nav-brand .logo i {
+                font-size: 1.3rem;
             }
             
             .nav-menu {
-                top: 0px;
+                top: 70px;
             }
             
             .legal-section {
@@ -537,7 +554,7 @@
         /* links/style.css scopes this to .logo-lockup, so restate it for the footer.
            legal.html has no --gradient token, hence the literal fallback. */
         .footer-brand .logo-highlight {
-          background: var(--gradient, linear-gradient(135deg, #6366f1, #8b5cf6));
+          background: var(--gradient);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;

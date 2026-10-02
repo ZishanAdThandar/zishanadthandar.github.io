@@ -2,16 +2,34 @@
 
 /* Main site color variables */
 :root {
-  --primary: #6366f1;
-  --dark: #0f172a;
-  --darker: #0a0e17;
-  --light: #ffffff;
-  --gray: #94a3b8;
-  --gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
-  --gradient-dark: linear-gradient(135deg, #0f172a, #1e1b4b);
-  --shadow-lg: 0 10px 30px rgba(0,0,0,0.25);
-  --border: rgba(255, 255, 255, 0.1);
-  --fs-h1: clamp(1.7rem, 4.5vw, 2.5rem);
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary: #10b981;
+    --accent: #f59e0b;
+    --danger: #ef4444;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --dark: #0f172a;
+    --darker: #0a0e17;
+    --light: #ffffff;
+    --gray: #94a3b8;
+    --gray-dark: #475569;
+    --gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
+    --gradient-accent: linear-gradient(135deg, #6366f1, #8b5cf6);
+    --gradient-dark: linear-gradient(135deg, #0f172a, #1e1b4b);
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.25);
+    --border: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.2);
+
+    /* Type scale - consistent hierarchy: H1 2.5em, H2 2em, H3 1.5em, H4 1.125em */
+    --fs-h1: clamp(1.7rem, 4.5vw, 2.5rem);
+    --fs-h2: clamp(1.4rem, 3.5vw, 2rem);
+    --fs-h3: clamp(1.125rem, 2.2vw, 1.5rem);
+    --fs-h4: clamp(1rem, 1.5vw, 1.125rem);
+    --fs-body: 1rem;
+    --fs-sm: 0.875rem;
+    --fs-xs: 0.75rem;
 }
 
 /* Base Reset */
@@ -34,7 +52,7 @@ html {
 
 /* ===== FIXED: Using Inter font (main site) ===== */
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 400;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
@@ -54,19 +72,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: var(--fs-h1);
   font-weight: 800;
   margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: var(--fs-h2);
   font-weight: 800;
   margin-bottom: 1rem;
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: var(--fs-h3);
   font-weight: 700;
   margin-bottom: 0.75rem;
 }
@@ -197,8 +215,6 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0;
-  flex-wrap: nowrap;
 }
 
 .nav-brand .logo {
@@ -270,6 +286,8 @@ section {
   font-size: 1.5rem;
   cursor: pointer;
   padding: 5px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
@@ -328,7 +346,7 @@ section {
 /* links/style.css scopes this to .logo-lockup, so restate it for the footer.
    legal.html has no --gradient token, hence the literal fallback. */
 .footer-brand .logo-highlight {
-  background: var(--gradient, linear-gradient(135deg, #6366f1, #8b5cf6));
+  background: var(--gradient);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -386,6 +404,13 @@ section:first-of-type {
 
 /* Mobile nav - matches main site */
 @media (max-width: 768px) {
+  .header { padding: 8px 0; }
+
+  .nav-brand .logo i {
+    font-size: 1.5rem;
+    margin-right: 6px;
+  }
+
   .nav-menu {
     position: fixed;
     top: 70px;
@@ -971,6 +996,9 @@ section:first-of-type {
 }
 
 @media (max-width: 480px) {
+  .header { padding: 6px 0; }
+  .nav-menu { top: 100%; }
+
   section:first-of-type {
     padding-top: calc(1rem + 60px);
   }
@@ -1009,6 +1037,13 @@ section:first-of-type {
     bottom: 1rem;
     right: 1rem;
   }
+}
+
+@media (max-width: 360px) {
+  .header { padding: 5px 0; }
+  .nav-brand .logo { font-size: 1.3rem; }
+  .nav-brand .logo i { font-size: 1.3rem; }
+  .nav-menu { top: 70px; }
 }
 
 /* Print Styles */

@@ -5,19 +5,28 @@
     --accent: #f59e0b;
     --danger: #ef4444;
     --success: #10b981;
+    --warning: #f59e0b;
     --dark: #0f172a;
     --darker: #0a0e17;
     --light: #ffffff;
     --gray: #94a3b8;
     --gray-dark: #475569;
     --gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
-    --gradient-accent: linear-gradient(135deg, #f59e0b, #ef4444);
+    --gradient-accent: linear-gradient(135deg, #6366f1, #8b5cf6);
     --gradient-dark: linear-gradient(135deg, #0f172a, #1e1b4b);
     --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.25);
     --border: rgba(255, 255, 255, 0.1);
     --border-light: rgba(255, 255, 255, 0.2);
     --transition: all 0.3s ease;
+    /* Type scale - consistent hierarchy: H1 2.5em, H2 2em, H3 1.5em, H4 1.125em */
+    --fs-h1: clamp(1.7rem, 4.5vw, 2.5rem);
+    --fs-h2: clamp(1.4rem, 3.5vw, 2rem);
+    --fs-h3: clamp(1.125rem, 2.2vw, 1.5rem);
+    --fs-h4: clamp(1rem, 1.5vw, 1.125rem);
+    --fs-body: 1rem;
+    --fs-sm: 0.875rem;
+    --fs-xs: 0.75rem;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -79,7 +88,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif;
 }
 
-.nav-brand .logo .icon { color: var(--primary); margin-right: 8px; width: 1.4rem; height: 1.4rem; }
+.nav-brand .logo .icon { color: var(--primary); margin-right: 8px; width: 1.6rem; height: 1.6rem; }
 
 .logo-highlight {
     background: var(--gradient);
@@ -88,7 +97,7 @@ h1, h2, h3, h4, h5, h6 {
     color: transparent;
 }
 
-.nav-menu { display: flex; gap: 2rem; align-items: center; }
+.nav-menu { display: flex; gap: 2rem; }
 
 .nav-link {
     color: var(--gray);
@@ -127,6 +136,8 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
     cursor: pointer;
     padding: 5px;
+    min-width: 44px;
+    min-height: 44px;
     border-radius: 4px;
     transition: background-color 0.3s ease;
 }
@@ -236,7 +247,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-badge .icon { color: var(--primary); width: 0.85rem; height: 0.85rem; }
 
 .hero-title {
-    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-size: var(--fs-h1);
     font-weight: 900;
     letter-spacing: -1px;
     line-height: 1.15;
@@ -258,22 +269,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 2.5rem;
 }
 
-.hero-contact {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    color: var(--gray);
-    font-size: 0.9rem;
-    border-top: 1px solid var(--border);
-    padding-top: 2rem;
-    max-width: 560px;
-    margin: 0 auto;
-}
-
-.hero-contact a { color: var(--gray); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
-.hero-contact a:hover { color: var(--primary); }
-.hero-contact .icon { color: var(--primary); width: 0.9rem; height: 0.9rem; }
 
 /* ===== SECTIONS ===== */
 section { padding: 80px 0; scroll-margin-top: 90px; }
@@ -289,7 +284,7 @@ section { padding: 80px 0; scroll-margin-top: 90px; }
     margin-bottom: 0.75rem;
 }
 
-.section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; }
+.section-title { font-size: var(--fs-h2); font-weight: 800; margin-bottom: 1rem; }
 .section-subtitle { color: var(--gray); font-size: 1rem; }
 
 /* ===== SERVICES GRID ===== */
@@ -425,30 +420,12 @@ section { padding: 80px 0; scroll-margin-top: 90px; }
 .industry-card p { color: var(--gray); font-size: 0.85rem; margin: 0; }
 
 /* ===== CONTACT ===== */
+/* One centred column: the section is form-only now that the two
+   info cards are gone. */
 .contact-container {
-    display: grid;
-    grid-template-columns: 1fr 1.6fr;
-    gap: 2rem;
-    max-width: 960px;
-    margin: 0 auto;
+  max-width: 640px;
+  margin: 0 auto;
 }
-
-.contact-info { display: flex; flex-direction: column; gap: 1.25rem; }
-
-.info-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 1.75rem;
-    text-align: center;
-}
-
-.info-icon { width: 1.6rem; height: 1.6rem; color: var(--primary); margin-bottom: 0.75rem; display: block; margin-left: auto; margin-right: auto; }
-.info-card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
-.info-card p { margin: 0.5rem 0; font-size: 0.9rem; }
-.info-card a { color: var(--light); text-decoration: none; word-break: break-all; }
-.info-card a:hover { color: var(--primary); }
-.info-note { color: var(--gray); font-size: 0.8rem; }
 
 .contact-form {
     background: rgba(255, 255, 255, 0.03);
@@ -533,7 +510,7 @@ select option { background: var(--dark); color: white; }
 /* links/style.css scopes this to .logo-lockup, so restate it for the footer.
    legal.html has no --gradient token, hence the literal fallback. */
 .footer-brand .logo-highlight {
-  background: var(--gradient, linear-gradient(135deg, #6366f1, #8b5cf6));
+  background: var(--gradient);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -578,9 +555,16 @@ select option { background: var(--dark); color: white; }
 
 /* ===== MOBILE ===== */
 @media (max-width: 900px) {
+    .process-grid { grid-template-columns: repeat(2, 1fr); }
+    .industries-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .header { padding: 8px 0; }
+    .nav-brand .logo .icon { width: 1.5rem; height: 1.5rem; margin-right: 6px; }
     .nav-menu {
         position: fixed;
-        top: 56px;
+        top: 70px;
         left: 0;
         right: 0;
         background: rgba(15, 23, 42, 0.98);
@@ -595,29 +579,30 @@ select option { background: var(--dark); color: white; }
         z-index: 999;
         box-shadow: var(--shadow-lg);
     }
-
     .nav-menu.show { display: flex; }
     .nav-toggle { display: block; }
-    .process-grid { grid-template-columns: repeat(2, 1fr); }
-    .industries-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 768px) {
     section { padding: 60px 0; }
     .hero { padding: 130px 0 60px; }
-    .hero-title { font-size: 2.2rem; }
     .services-grid { grid-template-columns: 1fr; }
     .contact-container { grid-template-columns: 1fr; }
-    .contact-info { flex-direction: row; flex-wrap: wrap; }
-    .info-card { flex: 1; min-width: 220px; }
 }
 
 @media (max-width: 480px) {
-    .hero-title { font-size: 1.8rem; }
+    .header { padding: 6px 0; }
+    .nav-menu { top: 100%; }
+}
+
+@media (max-width: 360px) {
+    .header { padding: 5px 0; }
+    .nav-brand .logo { font-size: 1.3rem; }
+    .nav-brand .logo .icon { width: 1.3rem; height: 1.3rem; }
+    .nav-menu { top: 70px; }
+}
+
+@media (max-width: 480px) {
     .hero-cta { flex-direction: column; }
     .btn-large, .btn { width: 100%; }
     .process-grid { grid-template-columns: 1fr; }
     .industries-grid { grid-template-columns: 1fr; }
-    .info-card { min-width: 100%; }
     .form-row { grid-template-columns: 1fr; }
 }

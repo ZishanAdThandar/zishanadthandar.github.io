@@ -222,6 +222,8 @@ h5, h6 { font-size: var(--fs-sm); }
     font-size: 1.5rem;
     cursor: pointer;
     padding: 5px;
+    min-width: 44px;
+    min-height: 44px;
     border-radius: 4px;
     transition: background-color 0.3s ease;
 }
@@ -1047,7 +1049,7 @@ section {
 /* links/style.css scopes this to .logo-lockup, so restate it for the footer.
    legal.html has no --gradient token, hence the literal fallback. */
 .footer-brand .logo-highlight {
-  background: var(--gradient, linear-gradient(135deg, #6366f1, #8b5cf6));
+  background: var(--gradient);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
