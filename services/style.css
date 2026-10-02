@@ -214,8 +214,9 @@ h1, h2, h3, h4, h5, h6 {
 .btn-block { width: 100%; }
 
 /* ===== HERO ===== */
+/* top padding clears the fixed 58px header without opening a hole */
 .hero {
-    padding: 170px 0 80px;
+    padding: 96px 0 80px;
     background: var(--gradient-dark);
     position: relative;
     scroll-margin-top: 90px;
@@ -587,7 +588,7 @@ select option { background: var(--dark); color: white; }
     .nav-menu.show { display: flex; }
     .nav-toggle { display: block; }
     section { padding: 60px 0; }
-    .hero { padding: 130px 0 60px; }
+    .hero { padding: 76px 0 60px; }
     .services-grid { grid-template-columns: 1fr; }
     .contact-container { grid-template-columns: 1fr; }
 }
