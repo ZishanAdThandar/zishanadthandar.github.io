@@ -355,47 +355,13 @@
     }
 
     /* Header Section */
-    /* Linktree profile card */
+    /* Linktree profile card — the brand lockup lives in the site navbar above */
     .profile {
       text-align: center;
       margin-bottom: 1.75rem;
     }
 
-    /* zishanhack logo */
-    .logo-lockup {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin: 0 auto 1rem;
-      padding: 0.45rem 1.1rem;
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .logo-lockup .icon {
-      width: 1.4rem;
-      height: 1.4rem;
-      color: var(--primary);
-    }
-
-    .logo-lockup span {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      color: white;
-    }
-
-    .logo-lockup .logo-highlight {
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
+    /* name */
     h1 {
       font-family: 'JetBrains Mono', monospace;
       font-size: clamp(1.5rem, 4vw, 2rem);
