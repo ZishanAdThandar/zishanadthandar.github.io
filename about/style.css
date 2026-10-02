@@ -80,18 +80,6 @@ p {
   margin-bottom: 1rem;
 }
 
-/* Particles Background */
-#particles-js {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  opacity: 0.25;
-  pointer-events: none;
-}
-
 /* Container */
 .container {
   max-width: 1200px;
@@ -101,7 +89,7 @@ p {
 
 /* Section Spacing */
 section {
-  padding: 4rem 0;
+  padding: 2.5rem 0;
   position: relative;
   scroll-margin-top: 80px;
 }
@@ -220,9 +208,9 @@ section {
   padding: 0 20px;
 }
 
-/* First section padding */
+/* First section padding - clears the fixed header, then sits tight to it */
 section:first-of-type {
-  padding-top: calc(4rem + 80px);
+  padding-top: calc(1rem + 80px);
 }
 
 /* Mobile nav - matches main site */
@@ -323,12 +311,6 @@ section:first-of-type {
   color: var(--gray);
   background: rgba(255, 255, 255, 0.03);
   font-weight: 500;
-}
-
-.pill-strong {
-  border-color: var(--primary);
-  background: rgba(99, 102, 241, 0.1);
-  color: #a5b4fc;
 }
 
 /* Hero CTA wrapper */
@@ -893,11 +875,11 @@ section:first-of-type {
 
 @media (max-width: 768px) {
   section {
-    padding: 3rem 0;
+    padding: 2rem 0;
   }
   
   section:first-of-type {
-    padding-top: calc(3.5rem + 70px);
+    padding-top: calc(1rem + 70px);
   }
   
   .hero-title {
@@ -960,7 +942,7 @@ section:first-of-type {
 
 @media (max-width: 480px) {
   section:first-of-type {
-    padding-top: calc(3rem + 60px);
+    padding-top: calc(1rem + 60px);
   }
   
   .hero-title {
