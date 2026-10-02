@@ -3,23 +3,15 @@
 /* Main site color variables */
 :root {
   --primary: #6366f1;
-  --primary-dark: #4f46e5;
-  --secondary: #10b981;
-  --accent: #f59e0b;
-  --danger: #ef4444;
-  --success: #10b981;
   --dark: #0f172a;
   --darker: #0a0e17;
   --light: #ffffff;
   --gray: #94a3b8;
-  --gray-dark: #475569;
   --gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
-  --gradient-accent: linear-gradient(135deg, #6366f1, #8b5cf6);
   --gradient-dark: linear-gradient(135deg, #0f172a, #1e1b4b);
-  --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 30px rgba(0,0,0,0.25);
   --border: rgba(255, 255, 255, 0.1);
-  --border-light: rgba(255, 255, 255, 0.2);
+  --fs-h1: clamp(1.7rem, 4.5vw, 2.5rem);
 }
 
 /* Base Reset */
@@ -117,15 +109,6 @@ p {
 .g-3 {
   --bs-gutter-x: 1rem;
   --bs-gutter-y: 1rem;
-}
-
-.g-4 {
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 1.5rem;
-}
-
-.align-items-center {
-  align-items: center;
 }
 
 .col-12 {
@@ -373,10 +356,20 @@ section:first-of-type {
 }
 
 .hero-title {
-  font-size: 2.5rem;
-  font-weight: 800;
   margin-bottom: 1rem;
-  color: white;
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: block;
+  font-size: var(--fs-h1);
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
 }
 
 .hero-subtitle {
@@ -386,23 +379,27 @@ section:first-of-type {
   line-height: 1.7;
 }
 
-.hero-highlight {
+.trust-badges {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.7rem;
   margin-bottom: 1.5rem;
 }
 
-/* Pill Badges */
-.pill {
-  font-size: 0.85rem;
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  color: var(--gray);
-  background: rgba(255, 255, 255, 0.03);
-  font-weight: 500;
+.trust-badge {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.3px;
 }
 
 /* Hero CTA wrapper */
@@ -456,28 +453,6 @@ section:first-of-type {
   left: 100%;
 }
 
-/* Avatar */
-.hero-avatar {
-  position: relative;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.hero-avatar img {
-  max-width: 240px;
-  border-radius: 50%;
-  border: 3px solid rgba(99, 102, 241, 0.3);
-  box-shadow: var(--shadow-lg);
-}
-
-.avatar-glow {
-  position: absolute;
-  inset: 15% 20%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent 70%);
-  filter: blur(20px);
-  z-index: -1;
-}
-
 /* Section Headers */
 .section-header {
   margin-bottom: 2.5rem;
@@ -507,19 +482,23 @@ section:first-of-type {
   width: 120px;
 }
 
-.section-title {
-  font-size: 2rem;
-  font-weight: 800;
-  color: white;
-  display: flex;
+.section-badge {
+  display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  margin: 0;
-}
-
-.section-title i {
-  color: var(--primary);
-  font-size: 1.5rem;
+  background: var(--gradient);
+  color: white;
+  padding: 0.6rem 1.25rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
+  /* The homepage stacks this badge above the title in a centred column, so it
+     carries a 1.25rem bottom margin there. Here it sits in a flex row beside
+     .section-kicker, where that margin lifted the badge 10px off the kicker's
+     centre line and added 20px to the header height. The row's own gap
+     supplies the spacing. */
+  margin-bottom: 0;
 }
 
 .section-kicker {
@@ -945,14 +924,6 @@ section:first-of-type {
   .testimonials-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
-  .hero-title {
-    font-size: 2.2rem;
-  }
-  
-  .section-title {
-    font-size: 1.8rem;
-  }
 }
 
 @media (max-width: 768px) {
@@ -963,11 +934,7 @@ section:first-of-type {
   section:first-of-type {
     padding-top: calc(1rem + 70px);
   }
-  
-  .hero-title {
-    font-size: 2rem;
-  }
-  
+
   .hero-subtitle {
     font-size: 0.95rem;
   }
@@ -977,15 +944,7 @@ section:first-of-type {
     align-items: flex-start;
     gap: 0.5rem;
   }
-  
-  .section-title {
-    font-size: 1.6rem;
-  }
-  
-  .section-title i {
-    font-size: 1.2rem;
-  }
-  
+
   .hero-cta {
     flex-direction: column;
   }
@@ -994,15 +953,7 @@ section:first-of-type {
     width: 100%;
     justify-content: center;
   }
-  
-  .hero-avatar {
-    margin-bottom: 1.5rem;
-  }
-  
-  .hero-avatar img {
-    max-width: 200px;
-  }
-  
+
   .testimonials-grid {
     grid-template-columns: 1fr;
   }
@@ -1026,24 +977,11 @@ section:first-of-type {
   section:first-of-type {
     padding-top: calc(1rem + 60px);
   }
-  
-  .hero-title {
-    font-size: 1.8rem;
-  }
-  
-  .section-title {
-    font-size: 1.4rem;
-  }
-  
+
   .card-premium {
     padding: 1.25rem;
   }
-  
-  .pill {
-    font-size: 0.8rem;
-    padding: 0.3rem 0.8rem;
-  }
-  
+
   .hero-cta {
     gap: 0.5rem;
   }
