@@ -604,23 +604,19 @@
     }
 
 
-    /* Social Links — sits directly under the profile intro */
+    /* Social Links — no visible headings; each grid carries its own aria-label */
     .social-section {
-      margin: 2rem 0 0;
       text-align: center;
     }
 
-    .social-title {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--gray);
-      margin-bottom: 0.75rem;
-      font-weight: 500;
+    /* community row sits inside the profile hero */
+    .social-community {
+      margin: 2rem 0 0;
     }
 
-    .social-title.community-title {
-      margin-top: 1.5rem;
+    /* connect row sits between the last card group and the FAQ */
+    .social-connect {
+      margin: 2.5rem 0 0.5rem;
     }
 
     .social-grid {
