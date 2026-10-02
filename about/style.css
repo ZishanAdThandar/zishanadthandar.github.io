@@ -372,11 +372,16 @@ section:first-of-type {
   margin-bottom: 0.35rem;
 }
 
+/* Hero paragraph. This is the homepage's .hero-description, under the same
+   name here, so it carries that rule's metrics: 1.05rem on a 700px measure
+   at 1.6 line-height. The 700px cap matters, the hero column is 900px and a
+   39-word sentence across all of it is too long a line. */
 .hero-subtitle {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--gray);
-  margin-bottom: 1.5rem;
-  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto 1.75rem;
+  line-height: 1.6;
 }
 
 .trust-badges {
@@ -493,6 +498,12 @@ section:first-of-type {
   font-weight: 700;
   font-size: 0.85rem;
   letter-spacing: 0.3px;
+  /* The homepage's badge is a div, so it takes body's 1.7 line-height. This
+     one is an h2 and would pick up the 1.2 from the h1..h6 rule instead, which
+     measured 23.12px against the homepage's 16.32px of line box. Declare 1.7
+     so the pill matches. Font-weight and letter-spacing already win over the
+     h2 rule on specificity, so they need no restatement here. */
+  line-height: 1.7;
   /* The homepage stacks this badge above the title in a centred column, so it
      carries a 1.25rem bottom margin there. Here it sits in a flex row beside
      .section-kicker, where that margin lifted the badge 10px off the kicker's
@@ -936,7 +947,21 @@ section:first-of-type {
   }
 
   .hero-subtitle {
-    font-size: 0.95rem;
+    font-size: 1rem;
+  }
+
+  .trust-badges {
+    gap: 0.5rem;
+  }
+
+  .trust-badge {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .section-badge {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
   }
   
   .section-header {
@@ -980,6 +1005,15 @@ section:first-of-type {
 
   .card-premium {
     padding: 1.25rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .trust-badge {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
   }
 
   .hero-cta {
