@@ -29,6 +29,12 @@
   box-sizing: border-box;
 }
 
+/* Replaces the part of Bootstrap's Reboot this page actually relied on */
+img,
+svg {
+  vertical-align: middle;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
@@ -85,6 +91,90 @@ p {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+/* Grid - replaces Bootstrap's grid */
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-.5 * var(--bs-gutter-x));
+  margin-left: calc(-.5 * var(--bs-gutter-x));
+}
+
+.row > * {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-top: var(--bs-gutter-y);
+  border-top: var(--bs-gutter-y) solid transparent;
+}
+
+.g-3 {
+  --bs-gutter-x: 1rem;
+  --bs-gutter-y: 1rem;
+}
+
+.g-4 {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 1.5rem;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.col-12 {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .col-md-6 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+}
+
+@media (min-width: 992px) {
+  .col-lg-5 {
+    flex: 0 0 auto;
+    width: 41.66666667%;
+  }
+  .col-lg-6 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+  .col-lg-7 {
+    flex: 0 0 auto;
+    width: 58.33333333%;
+  }
+}
+
+/* Spacing utilities - replace Bootstrap's.
+   These keep !important deliberately: they have to outrank component rules
+   such as `.card-premium p`, which is what Bootstrap's utilities did too. */
+.mt-1 {
+  margin-top: 0.25rem !important;
+}
+.mt-3 {
+  margin-top: 1rem !important;
+}
+.mb-1 {
+  margin-bottom: 0.25rem !important;
+}
+.mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+.mb-3 {
+  margin-bottom: 1rem !important;
+}
+.ms-1 {
+  margin-left: 0.25rem !important;
 }
 
 /* Section Spacing */
@@ -275,39 +365,11 @@ section:first-of-type {
   z-index: 1;
 }
 
-.hero-card {
-  background: rgba(10, 15, 30, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 24px;
-  padding: 2.5rem;
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--gradient);
-}
-
-.hero-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-  pointer-events: none;
+/* Hero content - mirrors the homepage .hero-content */
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .hero-title {
@@ -327,6 +389,7 @@ section:first-of-type {
 .hero-highlight {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
 }
@@ -346,6 +409,7 @@ section:first-of-type {
 .hero-cta {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
@@ -396,6 +460,7 @@ section:first-of-type {
 .hero-avatar {
   position: relative;
   text-align: center;
+  margin-bottom: 2rem;
 }
 
 .hero-avatar img {
@@ -931,7 +996,7 @@ section:first-of-type {
   }
   
   .hero-avatar {
-    margin-top: 2rem;
+    margin-bottom: 1.5rem;
   }
   
   .hero-avatar img {
@@ -968,10 +1033,6 @@ section:first-of-type {
   
   .section-title {
     font-size: 1.4rem;
-  }
-  
-  .hero-card {
-    padding: 1.5rem;
   }
   
   .card-premium {
@@ -1019,7 +1080,6 @@ section:first-of-type {
     color: black;
   }
   
-  .hero-card,
   .card-premium {
     border: 1px solid #ddd;
     box-shadow: none;
