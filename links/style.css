@@ -1,3 +1,101 @@
+
+
+    /* ============================================
+       FOOTER - single compact bar
+       ============================================
+       Replaces a four-column grid whose tallest column set the footer height
+       and which collapsed to one column on narrow screens. One flex row that
+       wraps keeps every destination while dropping the per-column headings and
+       description text that made the grid tall. */
+
+    /* This page's content column is a narrow 760px, which would force the
+       footer bar onto a second row. The footer matches the other pages at
+       full width. */
+    .footer .container {
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+
+    .footer {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      padding: 1.75rem 0;
+    }
+
+    .footer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.75rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      color: white;
+      white-space: nowrap;
+    }
+
+    /* This page loads no icon font, so the header shield is also an inline SVG;
+       both use the same FA 6 glyph in --primary. */
+    .footer-brand .footer-icon {
+      width: 1.05rem;
+      height: 1.05rem;
+      fill: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .footer-brand .logo-highlight {
+      background: var(--gradient, linear-gradient(135deg, #6366f1, #8b5cf6));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem 1.1rem;
+    }
+
+    .footer-nav a {
+      color: var(--gray);
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-nav a:hover,
+    .footer-nav a:focus {
+      color: white;
+    }
+
+    .footer-copy {
+      margin: 0;
+      color: var(--gray);
+      font-size: 0.8125rem;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      .footer-bar {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-copy {
+        white-space: normal;
+      }
+    }
+
     /* Global Variables - Matches main site theme */
     :root {
       --primary: #6366f1;
@@ -133,7 +231,6 @@
       margin-right: auto;
     }
 
-  
     /* Role Badges */
     .role-badges {
       display: flex;
@@ -164,7 +261,6 @@
       height: 0.8rem;
     }
 
-
     /* Intro editorial block */
     .intro-about {
       max-width: 780px;
@@ -187,7 +283,6 @@
       color: var(--light);
       font-weight: 600;
     }
-
 
     /* Section Headers */
     .section-header {
@@ -509,31 +604,6 @@
       transform: translateY(20px);
       animation: fadeInUp 0.6s ease forwards;
       animation-delay: 0.55s;
-    }
-
-    .footer-text {
-      font-size: 0.85rem;
-      color: var(--gray);
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-link {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-
-    .footer-link:hover {
-      color: var(--secondary);
-      text-decoration: underline;
-    }
-
-    .copyright {
-      font-size: 0.75rem;
-      color: var(--gray);
-      opacity: 0.7;
-      margin-top: 0.5rem;
     }
 
     /* Scroll Indicator */
