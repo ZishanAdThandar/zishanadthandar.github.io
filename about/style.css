@@ -439,7 +439,7 @@ section:first-of-type {
 
 /* HERO Section - mirrors the homepage .hero-section */
 .hero {
-  padding: 0;
+  padding: 0 0 60px;
   background: var(--gradient-dark);
   position: relative;
   overflow: hidden;
@@ -956,6 +956,11 @@ section:first-of-type {
     padding-top: calc(1rem + 70px);
   }
 
+  /* keeps the hero CTA off the gradient edge, scaled with the section rhythm */
+  .hero {
+    padding-bottom: 48px;
+  }
+
   .hero-subtitle {
     font-size: 1rem;
   }
@@ -1002,6 +1007,10 @@ section:first-of-type {
     padding-top: calc(1rem + 60px);
   }
 
+  .hero {
+    padding-bottom: 40px;
+  }
+
   .card-premium {
     padding: 1.25rem;
   }
@@ -1043,6 +1052,10 @@ section:first-of-type {
   .nav-brand .logo { font-size: 1.3rem; }
   .nav-brand .logo i { font-size: 1.3rem; }
   .nav-menu { top: 70px; }
+
+  .hero {
+    padding-bottom: 36px;
+  }
 }
 
 /* Print Styles */
