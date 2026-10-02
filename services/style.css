@@ -272,7 +272,6 @@ h1, h2, h3, h4, h5, h6 {
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 2.5rem;
 }
 
 
@@ -441,6 +440,9 @@ section { padding: 80px 0; scroll-margin-top: 90px; }
 }
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+
+/* the row supplies the spacing; the inputs must not add their own beneath it */
+.form-row input, .form-row textarea { margin-bottom: 0; }
 
 input, select, textarea {
     width: 100%;

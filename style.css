@@ -873,6 +873,9 @@ section {
     overflow: hidden;
 }
 
+/* last item must not push the section's bottom padding away from the grid */
+.faq-item:last-child { margin-bottom: 0; }
+
 .faq-question {
     padding: 1.25rem;
     display: flex;

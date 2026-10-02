@@ -529,7 +529,6 @@ section:first-of-type {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
-  margin-bottom: 1.5rem;
 }
 
 /* Buttons - match main site .btn/.btn-premium */
