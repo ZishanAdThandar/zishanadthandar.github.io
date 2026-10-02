@@ -373,65 +373,48 @@
       background-clip: text;
     }
     
-    /* bio */
-    .bio {
-      color: var(--gray);
-      font-size: clamp(0.9rem, 2vw, 1rem);
-      margin-bottom: 0.8rem;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Role Badges */
-    .role-badges {
+    /* Trust badges — same treatment as /about/ and /services/ */
+    .trust-badges {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: -0.2rem;
-      margin-bottom: 0;
-      opacity: 0.9;
+      gap: 0.7rem;
+      margin: 0 0 1.5rem;
+      padding: 0;
+      list-style: none;
     }
 
-    .role-badge {
+    .trust-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--gray);
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-full);
-      font-size: 0.85rem;
-      font-weight: 500;
-      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 0.45rem 0.9rem;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
     }
 
-    .role-badge .icon {
+    .trust-badge .icon {
       color: var(--primary);
       width: 0.8rem;
       height: 0.8rem;
     }
 
-    /* Intro editorial block */
-    .intro-about {
-      max-width: 780px;
-      margin: 1rem auto 0.5rem;
-      padding: 1rem 1.25rem;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-    }
-
-    .intro-about p {
+    /* intro paragraph — the bio line and the hub description, merged */
+    .hero-description {
       color: var(--gray);
-      font-size: 0.95rem;
-      line-height: 1.75;
-      margin: 0;
-      text-align: center;
+      font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+      line-height: 1.7;
+      max-width: 680px;
+      margin: 0 auto 0.5rem;
     }
 
-    .intro-about strong {
+    .hero-description strong {
       color: var(--light);
       font-weight: 600;
     }
@@ -621,9 +604,9 @@
     }
 
 
-    /* Social Links */
+    /* Social Links — sits directly under the profile intro */
     .social-section {
-      margin: 1.75rem 0;
+      margin: 2rem 0 0;
       text-align: center;
     }
 
@@ -820,13 +803,17 @@
     }
 
     @media (max-width: 480px) {
-      .role-badges {
-        gap: 0.4rem;
+      .trust-badges {
+        gap: 0.5rem;
       }
 
-      .role-badge {
+      .trust-badge {
         font-size: 0.75rem;
         padding: 0.4rem 0.8rem;
+      }
+
+      .hero-description {
+        line-height: 1.65;
       }
 
       .section-header {
