@@ -20,7 +20,7 @@ const PRODUCTS = [
     id: 'ultimate_checklist',
     name: 'Ultimate Web Security Checklist for Bug Hunters',
     description: 'Proper Web App pentesting checklist for Bug Bounty Hunters and Red Teamers.',
-    price: 37,
+    price: 25,
     originalPrice: 243,
     badges: ['Popular', 'Updated', 'Practical'],
     icon: 'fas fa-clipboard-check',
@@ -31,7 +31,7 @@ const PRODUCTS = [
     id: 'crta_notes',
     name: 'CRTA Copy Paste Commands eBook',
     description: 'Copy-Paste commands list ready for Cyber Warfare Labs CRTA test.',
-    price: 14,
+    price: 5,
     originalPrice: 146,
     badges: ['Bestseller', 'Copy-Paste Ready', 'Practical'],
     icon: 'fas fa-user-secret',
@@ -610,7 +610,7 @@ function createProductCard(product, isLoggedIn, isPurchased) {
         <span class="original-price">${originalPriceDisplay}</span>
       </div>
       <div class="sales-count">
-        <i class="fas fa-clock"></i> Limited Time Offer · Hurry Up!
+        <i class="fas fa-clock"></i> Limited Time Offer · 90% Discount
       </div>
     </div>
     
