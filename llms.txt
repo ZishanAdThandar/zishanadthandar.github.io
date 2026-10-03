@@ -6,7 +6,7 @@ All prices are USD. All products are digital, delivered as an instant download a
 
 ## Products
 
-- [OSCP Prep Bundle 2026](https://zishanhack.com/products/oscp-bundle): Obsidian notes vault, tool installer scripts, copy-paste commands, Active Directory attack methodology, and exam-day methodology for OSCP preparation. Markdown/Obsidian format.
+- [OSCP Prep Bundle 2026](https://zishanhack.com/products/oscp-bundle): Obsidian notes vault, a tools installation guide, copy-paste commands, Active Directory attack methodology, and exam-day methodology for OSCP preparation. Markdown/Obsidian format.
 - [Ultimate Web Security Checklist](https://zishanhack.com/products/web-security-checklist): 32-page PDF with 300+ specific tests covering OWASP Top 10, API security, and logic flaws. Built for bug bounty hunters and web pentesters.
 - [CRTA Exam Notes](https://zishanhack.com/products/crta): CyberWarFare Labs CRTA preparation. Active Directory attacks, Kerberoasting, BloodHound, Mimikatz, Impacket, Rubeus, and ligolo-ng pivoting commands.
 - [OSWP Exam Notes & Cheatsheet](https://zishanhack.com/products/oswp-notes): Offensive Security OSWP preparation. Copy-paste commands for WEP, WPA-PSK, and WPA-Enterprise wireless attacks, plus rogue AP setup and assessment workflow.
