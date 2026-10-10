@@ -578,28 +578,27 @@ DO NOT DELETE IT.
         var PM = window.pdfMake;
         if (!PM || !PM.vfs) throw new Error('pdfmake failed to load');
 
-        /* ---- Professional typography ----
-           Serif (Caladea, Cambria-metric) for name + section headings,
-           Sans  (Carlito, Calibri-metric) for body/contacts/entries.
-           Metrics-compatible with Word's Cambria + Calibri so the DOCX matches. */
+        /* ---- Typography mirrors the on-page preview ----
+           Poppins ExtraBold for the name + section headings,
+           Inter for body/contacts/entries (exactly the live preview fonts). */
         var MX = 46, MT = 40, MB = 44;
         var W = 595.28 - MX * 2;
+        /* palette + type scale mirror the on-page preview (resume.html :root) */
         /* pdfmake/pdfkit only accepts '#'-prefixed hex, otherwise the colour is ignored */
-        var INK = '#1F2937', BODY = '#374151', MUTED = '#6B7280',
-            RULE = '#EDEFF2', ACCENT = '#1E3A8A', MARK = '#9CA3AF';
+        var INK = '#111827', NAME = '#1F2937', BODY = '#374151', MUTED = '#6B7280',
+            RULE = '#E5E7EB', ACCENT = '#4F46E5', MARK = '#374151', SEP = '#C7CBD1';
         var S = {
-          name: 22, role: 10.2, contact: 8.8,
-          head: 11, body: 9.3, lh: 1.16,
-          entry: 9.9, sub: 9.1, right: 8.9, cell: 9.2
+          name: 20.4, role: 10, contact: 8.4,
+          head: 9.6, body: 9.4, lh: 1.18,
+          entry: 9.4, sub: 9.4, right: 8.9, cell: 9.1
         };
 
         var FONT_FILES = [
-          ['./fonts/Caladea-Regular.ttf', 'Caladea-Regular.ttf'],
-          ['./fonts/Caladea-Bold.ttf', 'Caladea-Bold.ttf'],
-          ['./fonts/Carlito-Regular.ttf', 'Carlito-Regular.ttf'],
-          ['./fonts/Carlito-Bold.ttf', 'Carlito-Bold.ttf'],
-          ['./fonts/Carlito-Italic.ttf', 'Carlito-Italic.ttf'],
-          ['./fonts/Carlito-BoldItalic.ttf', 'Carlito-BoldItalic.ttf']
+          ['./fonts/Poppins-ExtraBold.ttf', 'Poppins-ExtraBold.ttf'],
+          ['./fonts/Inter-Regular.ttf', 'Inter-Regular.ttf'],
+          ['./fonts/Inter-SemiBold.ttf', 'Inter-SemiBold.ttf'],
+          ['./fonts/Inter-Bold.ttf', 'Inter-Bold.ttf'],
+          ['./fonts/Inter-Italic.ttf', 'Inter-Italic.ttf']
         ];
 
         function toB64(buf) {
@@ -618,24 +617,37 @@ DO NOT DELETE IT.
           }).then(function (buf) { PM.vfs[f[1]] = toB64(buf); });
         })).then(function () {
           return {
-            Serif: { normal: 'Caladea-Regular.ttf', bold: 'Caladea-Bold.ttf', italics: 'Caladea-Bold.ttf', bolditalics: 'Caladea-Bold.ttf' },
-            Sans: { normal: 'Carlito-Regular.ttf', bold: 'Carlito-Bold.ttf', italics: 'Carlito-Italic.ttf', bolditalics: 'Carlito-BoldItalic.ttf' }
+            Display: { normal: 'Poppins-ExtraBold.ttf', bold: 'Poppins-ExtraBold.ttf', italics: 'Poppins-ExtraBold.ttf', bolditalics: 'Poppins-ExtraBold.ttf' },
+            Semi: { normal: 'Inter-SemiBold.ttf', bold: 'Inter-SemiBold.ttf', italics: 'Inter-SemiBold.ttf', bolditalics: 'Inter-SemiBold.ttf' },
+            Body: { normal: 'Inter-Regular.ttf', bold: 'Inter-Bold.ttf', italics: 'Inter-Italic.ttf', bolditalics: 'Inter-Italic.ttf' }
           };
         }).catch(function () {
-          return { Serif: robo, Sans: robo };   /* graceful fallback */
+          return { Display: robo, Semi: robo, Body: robo };   /* graceful fallback */
         });
 
         return fontsReady.then(function (FONTS) {
-          var SERIF = 'Serif', SANS = 'Sans';
+          var SERIF = 'Display', SANS = 'Body', SEMI = 'Semi';
 
+          /* Collapse whitespace across runs WITHOUT merging one run into
+             another (that used to fold a normal run into a preceding bold run,
+             making whole bullets bold). A leading space is moved onto the
+             previous run as a single separator space; the run keeps its style. */
           function spaced(rs) {
             var out = [];
             rs.forEach(function (r) {
               var t = (r.t || '').replace(/\s+/g, ' ');
-              if (/^\s+$/.test(t) && out.length) { out[out.length - 1].t += ' '; return; }
-              if (t) { if (/^\s/.test(t) && out.length) out[out.length - 1].t += t.replace(/^\s+/, ' '); else out.push({ t: t, b: r.b, i: r.i, url: r.url }); }
+              if (!t) return;
+              if (/^\s+$/.test(t)) {
+                if (out.length) out[out.length - 1].t = out[out.length - 1].t.replace(/\s+$/, '') + ' ';
+                return;
+              }
+              if (/^\s/.test(t)) {
+                if (out.length) out[out.length - 1].t = out[out.length - 1].t.replace(/\s+$/, '') + ' ';
+                t = t.replace(/^\s+/, '');
+              }
+              out.push({ t: t, b: r.b, i: r.i, url: r.url });
             });
-            return out.filter(function (r) { return r.t.trim(); });
+            return out.filter(function (r) { return r.t; });
           }
           function inl(md, font) {
             return spaced(runs(md || '')).filter(function (r) { return r.t; }).map(function (r) {
@@ -650,33 +662,34 @@ DO NOT DELETE IT.
             });
           }
           var LINK = '#1E3A8A';
+          var LINK = ACCENT;
           function ulOf(items, size) {
             return {
-              ul: items.map(function (it) { return { text: inl(it, SANS), margin: [0, 0.6, 0, 0.6] }; }),
+              ul: items.map(function (it) { return { text: inl(it, SANS), margin: [0, 0.8, 0, 0.8] }; }),
               fontSize: size, color: BODY, lineHeight: S.lh, markerColor: MARK,
-              margin: [2, 0.3, 0, 3]
+              margin: [2, 1.5, 0, 3]
             };
           }
           function heading(title) {
             return {
               stack: [
-                { text: title.toUpperCase(), font: SERIF, fontSize: S.head, bold: true, color: INK, characterSpacing: 1, margin: [0, 0, 0, 0] },
-                { canvas: [{ type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 0.5, lineColor: RULE }], margin: [0, 1.6, 0, 0] }
+                { text: title.toUpperCase(), font: SERIF, fontSize: S.head, color: INK, characterSpacing: 0.5, margin: [0, 0, 0, 0] },
+                { canvas: [{ type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 0.9, lineColor: RULE }], margin: [0, 2, 0, 0] }
               ],
-              margin: [0, 7.5, 0, 2.8]
+              margin: [0, 9, 0, 2.4]
             };
           }
 
           var content = [];
           content.push({ stack: [
-            { text: d.header.name, font: SERIF, fontSize: S.name, bold: true, color: INK, alignment: 'center', characterSpacing: 0.3 },
-            d.header.role ? { text: d.header.role, font: SANS, fontSize: S.role, bold: true, color: ACCENT, alignment: 'center', characterSpacing: 0.4, margin: [0, 3, 0, 3.5] } : null
+            { text: d.header.name, font: SERIF, fontSize: S.name, color: NAME, alignment: 'center', characterSpacing: 0.2 },
+            d.header.role ? { text: d.header.role, font: SEMI, fontSize: S.role, color: ACCENT, alignment: 'center', margin: [0, 1.5, 0, 4] } : null
           ].filter(Boolean) });
 
           if (d.header.contacts.length) {
             var cks = [];
             d.header.contacts.forEach(function (c, i) {
-              if (i > 0) cks.push({ text: '\u2002\u2022\u2002', color: '#C7CBD1', fontSize: S.contact, font: SANS });
+              if (i > 0) cks.push({ text: '\u2002|\u2002', color: SEP, fontSize: S.contact, font: SANS });
               /* noWrap keeps each contact a single unbroken link annotation */
               cks.push({ text: c.text, link: c.url || ('mailto:' + c.text), color: c.url ? ACCENT : MUTED, fontSize: S.contact, font: SANS, noWrap: true });
             });
@@ -687,7 +700,7 @@ DO NOT DELETE IT.
             content.push(heading(s.title));
             s.blocks.forEach(function (b) {
               if (b.type === 'p') {
-                content.push({ text: inl(b.md, SANS), font: SANS, fontSize: S.body, color: BODY, lineHeight: S.lh, margin: [0, 0.6, 0, 3] });
+                content.push({ text: inl(b.md, SANS), font: SANS, fontSize: S.body, color: BODY, lineHeight: S.lh, margin: [0, 1.5, 0, 3] });
               } else if (b.type === 'bullets') {
                 content.push(ulOf(b.items, S.body));
               } else if (b.type === 'entry' || b.type === 'project') {
@@ -697,9 +710,9 @@ DO NOT DELETE IT.
                   content.push({ unbreakable: true, columns: [
                     { text: titleRuns, fontSize: S.entry, color: INK },
                     { text: right, font: SANS, fontSize: S.right, italics: true, color: MUTED, alignment: 'right', noWrap: true }
-                  ], widths: ['*', 'auto'], columnGap: 10, margin: [0, 3.5, 0, 0] });
+                  ], widths: ['*', 'auto'], columnGap: 10, margin: [0, 4, 0, 0] });
                 } else {
-                  content.push({ text: titleRuns, fontSize: S.entry, color: INK, margin: [0, 3.5, 0, 0] });
+                  content.push({ text: titleRuns, fontSize: S.entry, color: INK, margin: [0, 4, 0, 0] });
                 }
                 if (b.org || b.detail) {
                   var sub = inl(b.org, SANS);
@@ -749,6 +762,99 @@ DO NOT DELETE IT.
   }
 
 /* ============================================================
+     DOCX FONT EMBEDDING
+     The .docx library does not embed fonts, so the generated package
+     is post-processed: the same Inter/Poppins faces used by the live
+     preview are added as obfuscated font parts (ECMA-376 Part 4
+     §2.8.1), so the file renders identically even where the fonts are
+     not installed.
+  ============================================================ */
+  var DOCX_FAMILIES = [
+    { name: 'Poppins', slots: { embedRegular: 'Poppins-ExtraBold.ttf', embedBold: 'Poppins-ExtraBold.ttf', embedItalic: 'Poppins-ExtraBold.ttf', embedBoldItalic: 'Poppins-ExtraBold.ttf' } },
+    { name: 'Inter',   slots: { embedRegular: 'Inter-Regular.ttf', embedBold: 'Inter-Bold.ttf', embedItalic: 'Inter-Italic.ttf', embedBoldItalic: 'Inter-Italic.ttf' } }
+  ];
+  var DOCX_GUIDS = [
+    '{1B2E3F4A-5C6D-4E7F-8A9B-0C1D2E3F4A5B}',
+    '{2C3F4A5B-6D7E-4F80-9B0C-1D2E3F4A5B6C}',
+    '{3D4A5B6C-7E8F-4091-AC1D-2E3F4A5B6C7D}',
+    '{4E5B6C7D-8F90-41A2-BD2E-3F4A5B6C7D8E}',
+    '{5F6C7D8E-90A1-42B3-CE3F-4A5B6C7D8E9F}',
+    '{607D8E9F-A1B2-43C4-DF40-5B6C7D8E9FA0}',
+    '{718E9FA0-B2C3-44D5-E051-6C7D8E9FA0B1}',
+    '{829FA0B1-C3D4-45E6-F162-7D8E9FA0B1C2}'
+  ];
+
+  function docxEmbedFonts(blob) {
+    return loadLib('https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js').then(function () {
+      var JSZip = window.JSZip;
+      var files = {};
+      DOCX_FAMILIES.forEach(function (f) {
+        Object.keys(f.slots).forEach(function (k) { files[f.slots[k]] = null; });
+      });
+      var names = Object.keys(files);
+      return Promise.all(names.map(function (fn) {
+        return fetch('./fonts/' + fn, { cache: 'force-cache' }).then(function (r) {
+          if (!r.ok) throw new Error('missing ' + fn);
+          return r.arrayBuffer();
+        }).then(function (ab) { files[fn] = ab; });
+      })).then(function () {
+        return JSZip.loadAsync(blob);
+      }).then(function (zip) {
+        var NS_W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
+        var NS_R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships';
+        var REL_FONT = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/font';
+        var fontTable = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<w:fonts xmlns:w="' + NS_W + '" xmlns:r="' + NS_R + '">';
+        var ftRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">';
+        var n = 0;
+        function obfuscate(ab, guid) {
+          var data = new Uint8Array(ab.slice(0));
+          var hex = guid.replace(/[{}-]/g, ''), key = [];
+          for (var i = 0; i < 16; i++) key.push(parseInt(hex.substr(i * 2, 2), 16));
+          key.reverse();      /* ECMA-376: reverse the GUID bytes (Big Endian) */
+          for (var j = 0; j < 32 && j < data.length; j++) data[j] ^= key[j % 16];
+          return data;
+        }
+        DOCX_FAMILIES.forEach(function (f) {
+          fontTable += '<w:font w:name="' + f.name + '">';
+          ['embedRegular', 'embedBold', 'embedItalic', 'embedBoldItalic'].forEach(function (slot) {
+            var g = DOCX_GUIDS[n], rId = 'rIdFont' + (n + 1), part = 'font' + (n + 1) + '.odttf';
+            zip.file('word/fonts/' + part, obfuscate(files[f.slots[slot]], g));
+            fontTable += '<w:' + slot + ' r:id="' + rId + '" w:fontKey="' + g + '"/>';
+            ftRels += '<Relationship Id="' + rId + '" Type="' + REL_FONT + '" Target="fonts/' + part + '"/>';
+            n++;
+          });
+          fontTable += '</w:font>';
+        });
+        fontTable += '</w:fonts>';
+        ftRels += '</Relationships>';
+        zip.file('word/fontTable.xml', fontTable);
+        zip.file('word/_rels/fontTable.xml.rels', ftRels);
+
+        var ctP = zip.file('[Content_Types].xml').async('string').then(function (ct) {
+          zip.file('[Content_Types].xml', ct.replace('</Types>',
+            '<Default ContentType="application/vnd.openxmlformats-officedocument.obfuscatedFont" Extension="odttf"/>' +
+            '<Override ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml" PartName="/word/fontTable.xml"/></Types>'));
+        });
+        var relP = zip.file('word/_rels/document.xml.rels').async('string').then(function (rels) {
+          zip.file('word/_rels/document.xml.rels', rels.replace('</Relationships>',
+            '<Relationship Id="rIdFontTable" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable" Target="fontTable.xml"/></Relationships>'));
+        });
+        var setP = zip.file('word/settings.xml').async('string').then(function (st) {
+          zip.file('word/settings.xml', st.replace('<w:displayBackgroundShape/>',
+            '<w:displayBackgroundShape/><w:embedTrueTypeFonts/><w:saveSubsetFonts/>'));
+        });
+        return Promise.all([ctP, relP, setP]).then(function () {
+          return zip.generateAsync({
+            type: 'blob',
+            mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            compression: 'DEFLATE'
+          });
+        });
+      });
+    });
+  }
+
+/* ============================================================
      DOCX GENERATION (docx)
   ============================================================ */
   function genDOCX(data) {
@@ -757,10 +863,10 @@ DO NOT DELETE IT.
       var D = window.docx;
       var TextRun = D.TextRun, Paragraph = D.Paragraph, Hyper = D.ExternalHyperlink;
       var AL = D.AlignmentType, BS = D.BorderStyle, UL = D.UnderlineType;
-      var INK = '1F2937', BODY = '374151', MUT = '6B7280', RULE = 'EDEFF2',
-          ACC = '1E3A8A', LINK = '1E3A8A';
-      var HEADF = 'Cambria', BODYF = 'Calibri', TAB = 10178;
-      var LINE = 240;   /* single line spacing */
+      var INK = '111827', BODY = '374151', MUT = '6B7280', RULE = 'E5E7EB',
+          ACC = '4F46E5', LINK = '4F46E5';
+      var HEADF = 'Poppins', BODYF = 'Inter', TAB = 10178;
+      var LINE = 300;   /* ~1.25 line spacing (preview is 1.45) */
 
       function run(md, font) {
         return runs(md).map(function (r) {
@@ -770,54 +876,54 @@ DO NOT DELETE IT.
         });
       }
       function para(md) {
-        return new Paragraph({ children: run(md), spacing: { after: 40, line: LINE } });
+        return new Paragraph({ children: run(md), spacing: { after: 50, line: LINE } });
       }
       function heading(t) {
         return new Paragraph({
-          children: [new TextRun({ text: t.toUpperCase(), bold: true, size: 22, color: INK, font: HEADF, characterSpacing: 14 })],
-          spacing: { before: 150, after: 60 },
+          children: [new TextRun({ text: t.toUpperCase(), size: 19, color: INK, font: HEADF, characterSpacing: 10 })],
+          spacing: { before: 190, after: 70 },
           keepNext: true,
-          border: { bottom: { color: RULE, space: 3, style: BS.SINGLE, size: 4 } }
+          border: { bottom: { color: RULE, space: 3, style: BS.SINGLE, size: 8 } }
         });
       }
       function bullet(it) {
         return new Paragraph({
           children: run(it), bullet: { level: 0 },
           indent: { left: 300, hanging: 300 },
-          spacing: { after: 12, line: LINE }
+          spacing: { after: 20, line: LINE }
         });
       }
       function entryPara(title, right, org, detail) {
         var t = run(title);
-        if (right) t.push(new TextRun({ text: '\t' + right, italics: true, color: MUT, font: BODYF }));
+        if (right) t.push(new TextRun({ text: '\t' + right, italics: true, color: MUT, size: 18, font: BODYF }));
         var out = [new Paragraph({
           children: t,
           tabStops: [{ type: AL.RIGHT, position: TAB }],
-          spacing: { before: 60, after: 8, line: LINE },
+          spacing: { before: 90, after: 10, line: LINE },
           keepNext: true
         })];
         if (org || detail) {
           var ok = runs(org).map(function (r) {
-            var o = { text: r.t, italics: !!r.i, color: MUT, font: BODYF };
+            var o = { text: r.t, italics: !!r.i, color: MUT, size: 19, font: BODYF };
             if (r.url) { o.color = LINK; o.underline = { type: UL.SINGLE }; return new Hyper({ link: r.url, children: [new TextRun(o)] }); }
             return new TextRun(o);
           });
-          if (detail) ok.push(new TextRun({ text: '  ' + detail, italics: true, color: MUT, font: BODYF }));
-          out.push(new Paragraph({ children: ok, spacing: { after: 12, line: LINE }, keepNext: true }));
+          if (detail) ok.push(new TextRun({ text: '  ' + detail, italics: true, color: MUT, size: 19, font: BODYF }));
+          out.push(new Paragraph({ children: ok, spacing: { after: 20, line: LINE }, keepNext: true }));
         }
         return out;
       }
 
       var children = [];
-      children.push(new Paragraph({ alignment: AL.CENTER, children: [new TextRun({ text: data.header.name, bold: true, size: 44, color: INK, font: HEADF })], spacing: { after: 20 } }));
-      if (data.header.role) children.push(new Paragraph({ alignment: AL.CENTER, children: [new TextRun({ text: data.header.role, bold: true, size: 21, color: ACC, font: BODYF })], spacing: { after: 30 } }));
+      children.push(new Paragraph({ alignment: AL.CENTER, children: [new TextRun({ text: data.header.name, bold: true, size: 41, color: INK, font: HEADF })], spacing: { after: 20 } }));
+      if (data.header.role) children.push(new Paragraph({ alignment: AL.CENTER, children: [new TextRun({ text: data.header.role, bold: true, size: 20, color: ACC, font: BODYF })], spacing: { after: 30 } }));
       if (data.header.contacts.length) {
         var ckids = [];
         data.header.contacts.forEach(function (c, idx) {
-          if (idx > 0) ckids.push(new TextRun({ text: '\u2003\u2022\u2003', color: 'C7CBD1', size: 18, font: BODYF }));
-          ckids.push(new Hyper({ link: c.url || ('mailto:' + c.text), children: [new TextRun({ text: c.text, color: LINK, size: 18, font: BODYF, underline: { type: UL.SINGLE } })] }));
+          if (idx > 0) ckids.push(new TextRun({ text: '\u2002|\u2002', color: 'C7CBD1', size: 17, font: BODYF }));
+          ckids.push(new Hyper({ link: c.url || ('mailto:' + c.text), children: [new TextRun({ text: c.text, color: LINK, size: 17, font: BODYF, underline: { type: UL.SINGLE } })] }));
         });
-        children.push(new Paragraph({ alignment: AL.CENTER, children: ckids, spacing: { after: 30 } }));
+        children.push(new Paragraph({ alignment: AL.CENTER, children: ckids, spacing: { after: 40 } }));
       }
 
       data.sections.forEach(function (s) {
@@ -851,13 +957,16 @@ DO NOT DELETE IT.
 
       var doc = new D.Document({
         properties: { title: 'Zishan Ahamed Thandar — Resume', author: 'Zishan Ahamed Thandar' },
-        styles: { default: { document: { run: { font: BODYF, size: 21, color: BODY }, paragraph: { spacing: { line: LINE, after: 28 } } } } },
+        styles: { default: { document: { run: { font: BODYF, size: 19, color: BODY }, paragraph: { spacing: { line: LINE, after: 34 } } } } },
         sections: [{
           properties: { page: { size: { width: 11906, height: 16838 }, margin: { top: 800, right: 920, bottom: 880, left: 920 } } },
           children: children
         }]
       });
       return D.Packer.toBlob(doc).then(function (blob) {
+        /* Embed Inter/Poppins so the file matches the live preview everywhere. */
+        return docxEmbedFonts(blob).catch(function () { return blob; });
+      }).then(function (blob) {
         saveBlob(blob, 'Zishan-Ahamed-Thandar-Resume.docx');
       });
     });
