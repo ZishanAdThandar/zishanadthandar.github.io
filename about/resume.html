@@ -862,16 +862,17 @@ DO NOT DELETE IT.
     return loadLib('https://cdn.jsdelivr.net/npm/docx@7.8.2/build/index.min.js').then(function () {
       var D = window.docx;
       var TextRun = D.TextRun, Paragraph = D.Paragraph, Hyper = D.ExternalHyperlink;
-      var AL = D.AlignmentType, BS = D.BorderStyle, UL = D.UnderlineType;
+      var AL = D.AlignmentType, BS = D.BorderStyle;
       var INK = '111827', BODY = '374151', MUT = '6B7280', RULE = 'E5E7EB',
           ACC = '4F46E5', LINK = '4F46E5';
       var HEADF = 'Poppins', BODYF = 'Inter', TAB = 10178;
       var LINE = 300;   /* ~1.25 line spacing (preview is 1.45) */
+      var BULLET_REF = 'resume-bullet';
 
       function run(md, font) {
         return runs(md).map(function (r) {
           var o = { text: r.t, bold: !!r.b, italics: !!r.i, font: font || BODYF };
-          if (r.url) { o.color = LINK; o.underline = { type: UL.SINGLE }; return new Hyper({ link: r.url, children: [new TextRun(o)] }); }
+          if (r.url) { o.color = LINK; return new Hyper({ link: r.url, children: [new TextRun(o)] }); }
           return new TextRun(o);
         });
       }
@@ -888,8 +889,8 @@ DO NOT DELETE IT.
       }
       function bullet(it) {
         return new Paragraph({
-          children: run(it), bullet: { level: 0 },
-          indent: { left: 300, hanging: 300 },
+          children: run(it),
+          numbering: { reference: BULLET_REF, level: 0 },
           spacing: { after: 20, line: LINE }
         });
       }
@@ -905,7 +906,7 @@ DO NOT DELETE IT.
         if (org || detail) {
           var ok = runs(org).map(function (r) {
             var o = { text: r.t, italics: !!r.i, color: MUT, size: 19, font: BODYF };
-            if (r.url) { o.color = LINK; o.underline = { type: UL.SINGLE }; return new Hyper({ link: r.url, children: [new TextRun(o)] }); }
+            if (r.url) { o.color = LINK; return new Hyper({ link: r.url, children: [new TextRun(o)] }); }
             return new TextRun(o);
           });
           if (detail) ok.push(new TextRun({ text: '  ' + detail, italics: true, color: MUT, size: 19, font: BODYF }));
@@ -915,13 +916,13 @@ DO NOT DELETE IT.
       }
 
       var children = [];
-      children.push(new Paragraph({ alignment: AL.CENTER, children: [new TextRun({ text: data.header.name, bold: true, size: 41, color: INK, font: HEADF })], spacing: { after: 20 } }));
+      children.push(new Paragraph({ alignment: AL.CENTER, children: [new TextRun({ text: data.header.name, bold: true, size: 41, color: INK, font: HEADF })], spacing: { after: 40, line: 360, lineRule: D.LineRuleType.AUTO } }));
       if (data.header.role) children.push(new Paragraph({ alignment: AL.CENTER, children: [new TextRun({ text: data.header.role, bold: true, size: 20, color: ACC, font: BODYF })], spacing: { after: 30 } }));
       if (data.header.contacts.length) {
         var ckids = [];
         data.header.contacts.forEach(function (c, idx) {
           if (idx > 0) ckids.push(new TextRun({ text: '\u2002|\u2002', color: 'C7CBD1', size: 17, font: BODYF }));
-          ckids.push(new Hyper({ link: c.url || ('mailto:' + c.text), children: [new TextRun({ text: c.text, color: LINK, size: 17, font: BODYF, underline: { type: UL.SINGLE } })] }));
+          ckids.push(new Hyper({ link: c.url || ('mailto:' + c.text), children: [new TextRun({ text: c.text, color: LINK, size: 17, font: BODYF })] }));
         });
         children.push(new Paragraph({ alignment: AL.CENTER, children: ckids, spacing: { after: 40 } }));
       }
@@ -957,6 +958,21 @@ DO NOT DELETE IT.
 
       var doc = new D.Document({
         properties: { title: 'Zishan Ahamed Thandar — Resume', author: 'Zishan Ahamed Thandar' },
+        numbering: {
+          config: [{
+            reference: BULLET_REF,
+            levels: [{
+              level: 0,
+              format: D.LevelFormat.BULLET,
+              text: '\u2022',
+              alignment: AL.LEFT,
+              style: {
+                run: { size: 19, font: BODYF, color: BODY },
+                paragraph: { indent: { left: 320, hanging: 320 } }
+              }
+            }]
+          }]
+        },
         styles: { default: { document: { run: { font: BODYF, size: 19, color: BODY }, paragraph: { spacing: { line: LINE, after: 34 } } } } },
         sections: [{
           properties: { page: { size: { width: 11906, height: 16838 }, margin: { top: 800, right: 920, bottom: 880, left: 920 } } },
