@@ -568,25 +568,18 @@ DO NOT DELETE IT.
         var d = model;
         var PM = window.pdfMake;
         if (!PM || !PM.vfs) throw new Error('pdfmake failed to load');
-        var W = 595.28 - 38 * 2;
-        var CFG = {
-          name: 16, role: 8.2, contact: 6.6, headRuleTop: 4,
-          head: 9.0, headRule: 0.4, headRuleGap: 1, headGap: 2.2,
-          body: 6.85, lh: 1.15, bodyGap: 0.72,
-          entry: 7.25, sub: 6.75, right: 6.8, entryGap: 0.7,
-          cell: 6.9, tableGap: 0.5
+
+        /* ---- Professional theme ---- */
+        var MX = 46, MT = 38, MB = 42;          /* page margins (pt) */
+        var W = 595.28 - MX * 2;                 /* content width */
+        var INK = '111827', BODY = '374151', MUTED = '6B7280',
+            RULE = 'D1D5DB', ACCENT = '4338CA', LINK = '4338CA', MARK = '9CA3AF';
+        var S = {
+          name: 20.5, role: 10.3, contact: 8.7,
+          head: 10.4, body: 9.3, lh: 1.28,
+          entry: 9.9, sub: 9.1, right: 8.9, cell: 9.2
         };
-        function inl(md) {
-          return spaced(runs(md || '')).filter(function (r) { return r.t; }).map(function (r) {
-            var t = r.t;
-            if (r.url) t = t.replace(/\s+/g, '\u00A0');
-            var x = { text: t };
-            if (r.b) x.bold = true;
-            if (r.i) x.italics = true;
-            if (r.url) x.link = r.url;
-            return x;
-          });
-        }
+
         function spaced(rs) {
           var out = [];
           rs.forEach(function (r) {
@@ -596,74 +589,101 @@ DO NOT DELETE IT.
           });
           return out.filter(function (r) { return r.t.trim(); });
         }
-        function ulOf(items, opt) {
+        function inl(md) {
+          return spaced(runs(md || '')).filter(function (r) { return r.t; }).map(function (r) {
+            var t = r.t;
+            if (r.url) t = t.replace(/\s+/g, '\u00A0');
+            var x = { text: t };
+            if (r.b) x.bold = true;
+            if (r.i) x.italics = true;
+            if (r.url) { x.link = r.url; x.color = LINK; }
+            return x;
+          });
+        }
+        function ulOf(items, size) {
           return {
-            ul: items.map(function (it) { return { text: inl(it), margin: [0, 0.1, 0, 0.1] }; }),
-            fontSize: opt.size, color: opt.color, lineHeight: opt.lh,
-            markerColor: '6B7280', margin: opt.margin
+            ul: items.map(function (it) { return { text: inl(it), margin: [0, 0.9, 0, 0.9] }; }),
+            fontSize: size, color: BODY, lineHeight: S.lh, markerColor: MARK,
+            margin: [1, 0.4, 0, 3.4]
           };
         }
         function heading(title) {
           return {
-            headlineLevel: 1,
             stack: [
-              { text: title.toUpperCase(), fontSize: CFG.head, bold: true, color: '111827', characterSpacing: 0.4 },
-              { canvas: [{ type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 1, lineColor: 'E5E7EB' }], margin: [0, CFG.headRuleGap, 0, 0] }
+              { text: title.toUpperCase(), fontSize: S.head, bold: true, color: INK, characterSpacing: 0.8 },
+              { canvas: [{ type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 0.8, lineColor: RULE }], margin: [0, 1.5, 0, 0] }
             ],
-            margin: [0, CFG.headRuleTop, 0, CFG.headRuleGap]
+            margin: [0, 9, 0, 3.2]
           };
         }
+
         var content = [];
         content.push({ stack: [
-          { text: d.header.name, fontSize: CFG.name, bold: true, color: '111827', alignment: 'center', margin: [0, 0, 0, 0.6] },
-          d.header.role ? { text: d.header.role, fontSize: CFG.role, bold: true, color: '4F46E5', alignment: 'center', margin: [0, 1, 0, 2] } : null
+          { text: d.header.name, fontSize: S.name, bold: true, color: INK, alignment: 'center', characterSpacing: 0.2 },
+          d.header.role ? { text: d.header.role, fontSize: S.role, bold: true, color: ACCENT, alignment: 'center', margin: [0, 2.5, 0, 3] } : null
         ].filter(Boolean) });
+
         if (d.header.contacts.length) {
           var cks = [];
           d.header.contacts.forEach(function (c, i) {
-            if (i > 0) cks.push({ text: '  |  ', color: 'C7CBD1', fontSize: CFG.contact });
-            cks.push({ text: c.text, link: c.url || 'mailto:' + c.text, color: '6B7280', fontSize: CFG.contact });
+            if (i > 0) cks.push({ text: '\u2002\u2022\u2002', color: 'C7CBD1', fontSize: S.contact });
+            cks.push({ text: c.text, link: c.url || ('mailto:' + c.text), color: c.url ? LINK : MUTED, fontSize: S.contact });
           });
-          content.push({ text: cks, alignment: 'center', fontSize: CFG.contact, margin: [0, 1, 0, 1] });
+          content.push({ text: cks, alignment: 'center' });
         }
+
+        content.push({ canvas: [{ type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 1, lineColor: INK }], margin: [0, 8, 0, 0] });
+
         d.sections.forEach(function (s) {
           content.push(heading(s.title));
           s.blocks.forEach(function (b) {
             if (b.type === 'p') {
-              content.push({ text: inl(b.md), fontSize: CFG.body, color: '374151', lineHeight: CFG.lh, margin: [0, 0.2, 0, CFG.bodyGap] });
+              content.push({ text: inl(b.md), fontSize: S.body, color: BODY, lineHeight: S.lh, margin: [0, 0.8, 0, 3.6] });
             } else if (b.type === 'bullets') {
-              content.push(ulOf(b.items, { size: CFG.body, color: '374151', lh: CFG.lh, margin: [0, 0.2, 0, CFG.bodyGap] }));
+              content.push(ulOf(b.items, S.body));
             } else if (b.type === 'entry' || b.type === 'project') {
               var right = b.dates || b.tech;
               var titleRuns = inl(b.title).map(function (t) { t.bold = true; return t; });
-              content.push({ unbreakable: true, columns: [
-                { text: titleRuns, fontSize: CFG.entry, color: '111827' },
-                right ? { text: right, fontSize: CFG.right, italics: true, color: '6B7280', alignment: 'right', noWrap: true } : { text: '' }
-              ], columnGap: 6, margin: [0, CFG.entryGap, 0, 0] });
+              if (right) {
+                content.push({ unbreakable: true, columns: [
+                  { text: titleRuns, fontSize: S.entry, color: INK },
+                  { text: right, fontSize: S.right, italics: true, color: MUTED, alignment: 'right', noWrap: true }
+                ], widths: ['*', 'auto'], columnGap: 10, margin: [0, 4, 0, 0] });
+              } else {
+                content.push({ text: titleRuns, fontSize: S.entry, color: INK, margin: [0, 4, 0, 0] });
+              }
               if (b.org || b.detail) {
                 var sub = inl(b.org);
-                if (b.detail) sub.push({ text: '  ' + b.detail, italics: true, color: '6B7280' });
-                content.push({ text: sub, fontSize: CFG.sub, color: '6B7280', margin: [0, 0.3, 0, 0] });
+                if (b.detail) sub.push({ text: '  ' + b.detail, italics: true, color: MUTED, fontSize: S.sub });
+                content.push({ text: sub, fontSize: S.sub, color: MUTED, margin: [0, 1, 0, 0] });
               }
-              if (b.items && b.items.length) {
-                content.push(ulOf(b.items, { size: CFG.body, color: '374151', lh: CFG.lh, margin: [0, 0.2, 0, CFG.bodyGap] }));
-              }
+              if (b.items && b.items.length) content.push(ulOf(b.items, S.body));
             } else if (b.type === 'table') {
-              var body = b.rows.map(function (row, ri) {
+              var tbody = b.rows.map(function (row) {
                 return row.map(function (cell) {
-                  return { text: inl(cell), bold: ri === 0, fontSize: CFG.cell, color: '374151', margin: [0, 0.3, 0, 0.3] };
+                  return { text: inl(cell), fontSize: S.cell, color: BODY, margin: [0, 1.4, 0, 1.4] };
                 });
               });
-              content.push({ table: { widths: b.rows[0].map(function () { return '*'; }), body: body }, layout: 'noBorders', margin: [0, 0.4, 0, CFG.tableGap] });
+              content.push({ table: { widths: b.rows[0].map(function () { return '*'; }), body: tbody }, layout: 'noBorders', margin: [0, 2, 0, 4] });
             }
           });
         });
+
         var dd = {
           pageSize: 'A4',
-          pageMargins: [38, 11, 38, 11],
-          defaultStyle: { font: 'Roboto' },
+          pageMargins: [MX, MT, MX, MB],
+          defaultStyle: { font: 'Roboto', color: BODY, fontSize: S.body, lineHeight: S.lh },
           content: content,
-          pageBreakBefore: function (cur, fol) { return false; }
+          footer: function (cur, total) {
+            if (total <= 1) return null;
+            return {
+              columns: [
+                { text: d.header.name, fontSize: 7.6, color: '9CA3AF' },
+                { text: 'Page ' + cur + ' of ' + total, fontSize: 7.6, color: '9CA3AF', alignment: 'right' }
+              ],
+              margin: [MX, 16, MX, 0]
+            };
+          }
         };
         return new Promise(function (resolve, reject) {
           var vp;
@@ -676,6 +696,7 @@ DO NOT DELETE IT.
       });
     });
   }
+
 /* ============================================================
      DOCX GENERATION (docx)
   ============================================================ */
@@ -683,91 +704,117 @@ DO NOT DELETE IT.
     return loadLib('https://cdn.jsdelivr.net/npm/docx@7.8.2/build/index.min.js').then(function () {
       var D = window.docx;
       var TextRun = D.TextRun, Paragraph = D.Paragraph, Hyper = D.ExternalHyperlink;
-      var align = D.AlignmentType;
-      var IND = '4F46E5', DARK = '111827', MUT = '6B7280';
-      var LEFT = align.LEFT, CENTER = align.CENTER, RIGHT = align.RIGHT;
+      var AL = D.AlignmentType, BS = D.BorderStyle, UL = D.UnderlineType;
+      var INK = '111827', BODY = '374151', MUT = '6B7280', RULE = 'D1D5DB',
+          ACC = '4338CA', LINK = '4338CA';
+      var FONT = 'Calibri', TAB = 10178;   /* right tab stop = A4 content width (0.6in margins) */
 
       function run(md) {
         return runs(md).map(function (r) {
-          var opts = { text: r.t, bold: !!r.b, italics: !!r.i };
-          if (r.url) return new Hyper({ link: r.url, children: [new TextRun({ text: r.t, style: 'Hyperlink' })] });
-          return new TextRun(opts);
+          var o = { text: r.t, bold: !!r.b, italics: !!r.i };
+          if (r.url) { o.color = LINK; o.underline = { type: UL.SINGLE }; return new Hyper({ link: r.url, children: [new TextRun(o)] }); }
+          return new TextRun(o);
         });
       }
-      function para(md, opts) {
-        opts = opts || {};
-        return new Paragraph({ children: run(md), spacing: opts.spacing || { after: 40 } });
+      function para(md) {
+        return new Paragraph({ children: run(md), spacing: { after: 60, line: 264 } });
       }
       function heading(t) {
         return new Paragraph({
-          children: [new TextRun({ text: t.toUpperCase(), bold: true, size: 19, color: IND, font: 'Poppins' })],
-          spacing: { before: 80, after: 30 }
+          children: [new TextRun({ text: t.toUpperCase(), bold: true, size: 22, color: INK, font: FONT, characterSpacing: 10 })],
+          spacing: { before: 200, after: 60 },
+          border: { bottom: { color: RULE, space: 3, style: BS.SINGLE, size: 6 } }
         });
       }
-      function bulletLine(it) {
-        return new Paragraph({ children: run(it), bullet: { level: 0 }, indent: { left: 180, hanging: 180 }, spacing: { after: 12 } });
+      function bullet(it) {
+        return new Paragraph({
+          children: run(it), bullet: { level: 0 },
+          indent: { left: 280, hanging: 280 },
+          spacing: { after: 26, line: 264 }
+        });
       }
       function entryPara(title, right, org, detail) {
         var t = run(title);
-        if (right) {
-          t.push(new TextRun({ text: '\t' + right, bold: true, color: MUT }));
-        }
+        if (right) t.push(new TextRun({ text: '\t' + right, italics: true, color: MUT }));
         var out = [new Paragraph({
           children: t,
-          tabStops: [{ type: RIGHT, position: 9920 }],
-          spacing: { before: 30, after: 8 }
+          tabStops: [{ type: AL.RIGHT, position: TAB }],
+          spacing: { before: 80, after: 10, line: 264 }
         })];
-        if (org) {
-          var ok = run(org);
-          if (detail) ok.push(new TextRun({ text: '  ' + detail, italics: true, color: MUT, size: 18 }));
-          out.push(new Paragraph({ children: ok, spacing: { after: 8 } }));
+        if (org || detail) {
+          var ok = runs(org).map(function (r) {
+            var o = { text: r.t, italics: !!r.i, color: MUT };
+            if (r.url) { o.color = LINK; o.underline = { type: UL.SINGLE }; return new Hyper({ link: r.url, children: [new TextRun(o)] }); }
+            return new TextRun(o);
+          });
+          if (detail) ok.push(new TextRun({ text: '  ' + detail, italics: true, color: MUT }));
+          out.push(new Paragraph({ children: ok, spacing: { after: 20, line: 264 } }));
         }
         return out;
       }
 
       var children = [];
-      children.push(new Paragraph({ alignment: CENTER, children: [new TextRun({ text: data.header.name, bold: true, size: 30, font: 'Poppins', color: DARK })], spacing: { after: 20 } }));
-      if (data.header.role) children.push(new Paragraph({ alignment: CENTER, children: [new TextRun({ text: data.header.role, size: 20, color: IND })], spacing: { after: 50 } }));
+      children.push(new Paragraph({ alignment: AL.CENTER, children: [new TextRun({ text: data.header.name, bold: true, size: 44, color: INK, font: FONT })], spacing: { after: 20 } }));
+      if (data.header.role) children.push(new Paragraph({ alignment: AL.CENTER, children: [new TextRun({ text: data.header.role, bold: true, size: 22, color: ACC, font: FONT })], spacing: { after: 30 } }));
       if (data.header.contacts.length) {
         var ckids = [];
         data.header.contacts.forEach(function (c, idx) {
-          if (idx > 0) ckids.push(new TextRun({ text: '   |   ', color: MUT }));
-          ckids.push(new Hyper({ link: c.url || 'mailto:' + c.text, children: [new TextRun({ text: c.text, style: 'Hyperlink' })] }));
+          if (idx > 0) ckids.push(new TextRun({ text: '\u2003\u2022\u2003', color: 'C7CBD1', size: 18 }));
+          ckids.push(new Hyper({ link: c.url || ('mailto:' + c.text), children: [new TextRun({ text: c.text, color: LINK, size: 18, underline: { type: UL.SINGLE } })] }));
         });
-        children.push(new Paragraph({ alignment: CENTER, children: ckids, spacing: { after: 70 } }));
+        children.push(new Paragraph({ alignment: AL.CENTER, children: ckids, spacing: { after: 20 } }));
       }
+      children.push(new Paragraph({ children: [], border: { bottom: { color: INK, space: 1, style: BS.SINGLE, size: 6 } }, spacing: { before: 20, after: 140 } }));
 
       data.sections.forEach(function (s) {
         children.push(heading(s.title));
         s.blocks.forEach(function (b) {
-          if (b.type === 'p') children.push(para(b.md, { spacing: { after: 40 } }));
-          else if (b.type === 'bullets') b.items.forEach(function (it) { children.push(bulletLine(it)); });
+          if (b.type === 'p') children.push(para(b.md));
+          else if (b.type === 'bullets') b.items.forEach(function (it) { children.push(bullet(it)); });
           else if (b.type === 'entry' || b.type === 'project') {
             var right = b.dates || b.tech;
             children = children.concat(entryPara(b.title, right, b.org, b.detail));
-            b.items.forEach(function (it) { children.push(bulletLine(it)); });
-          }
-          else if (b.type === 'table') {
+            (b.items || []).forEach(function (it) { children.push(bullet(it)); });
+          } else if (b.type === 'table') {
             var rows = b.rows.map(function (row) {
-              return new D.TableRow({
-                children: row.map(function (cell) {
-                  return new D.TableCell({ children: [new Paragraph({ children: run(cell), spacing: { after: 20 } })] });
-                })
-              });
+              return new D.TableRow({ children: row.map(function (cell) {
+                return new D.TableCell({ children: [new Paragraph({ children: run(cell), spacing: { after: 20, line: 264 } })] });
+              }) });
             });
-            children.push(new D.Table({ rows: rows, cellMargin: { top: 20, bottom: 20, left: 60, right: 60 }, width: { size: 100, type: D.WidthType.PERCENTAGE }, spacing: { after: 40 } }));
+            var ncol = b.rows[0].length;
+            var colw = ncol === 4 ? [1400, 3600, 1400, 3778] : b.rows[0].map(function () { return Math.floor(10178 / ncol); });
+            children.push(new D.Table({
+              rows: rows,
+              width: { size: 100, type: D.WidthType.PERCENTAGE },
+              columnWidths: colw,
+              borders: {
+                top: { style: BS.NONE }, bottom: { style: BS.NONE }, left: { style: BS.NONE }, right: { style: BS.NONE },
+                insideHorizontal: { style: BS.NONE }, insideVertical: { style: BS.NONE }
+              },
+              cellMargin: { top: 30, bottom: 30, left: 70, right: 70 },
+              spacing: { after: 40 }
+            }));
           }
         });
       });
 
-      var doc = new D.Document({ styles: { default: { document: { run: { font: 'Calibri', size: 20 } } } }, sections: [{ properties: { page: { margin: { top: 540, right: 540, bottom: 540, left: 540 } } }, children: children }] });
+      var doc = new D.Document({
+        properties: { title: 'Zishan Ahamed Thandar — Resume', author: 'Zishan Ahamed Thandar' },
+        styles: {
+          default: { document: { run: { font: FONT, size: 21, color: BODY }, paragraph: { spacing: { line: 264, after: 40 } } } }
+        },
+        sections: [{
+          properties: { page: { size: { width: 11906, height: 16838 }, margin: { top: 720, right: 864, bottom: 720, left: 864 } } },
+          children: children
+        }]
+      });
       return D.Packer.toBlob(doc).then(function (blob) {
         saveBlob(blob, 'Zishan-Ahamed-Thandar-Resume.docx');
       });
     });
   }
 
-  /* ============================================================
+/* ============================================================
      BOOTSTRAP PAGE
   ============================================================ */
   var data = null, dom = document.getElementById('resume-dom');
