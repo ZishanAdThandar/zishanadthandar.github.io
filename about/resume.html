@@ -562,135 +562,185 @@ DO NOT DELETE IT.
   /* ============================================================
      PDF GENERATION (pdfmake)
   ============================================================ */
+  /* Smart punctuation for the exported files only (on-page preview stays untouched) */
+  function smartify(v) {
+    if (typeof v === 'string') return v.replace(/---/g, '\u2014').replace(/--/g, '\u2013');
+    if (Array.isArray(v)) return v.map(smartify);
+    if (v && typeof v === 'object') { var o = {}; for (var k in v) o[k] = smartify(v[k]); return o; }
+    return v;
+  }
+
   function genPDF(model) {
+    model = smartify(model);
     return loadLib('https://cdn.jsdelivr.net/npm/pdfmake@0.2.9/build/pdfmake.min.js').then(function () {
       return loadLib('https://cdn.jsdelivr.net/npm/pdfmake@0.2.9/build/vfs_fonts.js').then(function () {
         var d = model;
         var PM = window.pdfMake;
         if (!PM || !PM.vfs) throw new Error('pdfmake failed to load');
 
-        /* ---- Professional theme ---- */
-        var MX = 46, MT = 38, MB = 42;          /* page margins (pt) */
-        var W = 595.28 - MX * 2;                 /* content width */
-        var INK = '111827', BODY = '374151', MUTED = '6B7280',
-            RULE = 'D1D5DB', ACCENT = '4338CA', LINK = '4338CA', MARK = '9CA3AF';
+        /* ---- Professional typography ----
+           Serif (Caladea, Cambria-metric) for name + section headings,
+           Sans  (Carlito, Calibri-metric) for body/contacts/entries.
+           Metrics-compatible with Word's Cambria + Calibri so the DOCX matches. */
+        var MX = 46, MT = 40, MB = 44;
+        var W = 595.28 - MX * 2;
+        var INK = '1F2937', BODY = '374151', MUTED = '6B7280',
+            RULE = 'E5E7EB', ACCENT = '1E3A8A', MARK = '9CA3AF';
         var S = {
-          name: 20.5, role: 10.3, contact: 8.7,
-          head: 10.4, body: 9.3, lh: 1.28,
+          name: 22, role: 10.2, contact: 8.8,
+          head: 11, body: 9.3, lh: 1.3,
           entry: 9.9, sub: 9.1, right: 8.9, cell: 9.2
         };
 
-        function spaced(rs) {
-          var out = [];
-          rs.forEach(function (r) {
-            var t = (r.t || '').replace(/\s+/g, ' ');
-            if (/^\s+$/.test(t) && out.length) { out[out.length - 1].t += ' '; return; }
-            if (t) { if (/^\s/.test(t) && out.length) out[out.length - 1].t += t.replace(/^\s+/, ' '); else out.push({ t: t, b: r.b, i: r.i, url: r.url }); }
-          });
-          return out.filter(function (r) { return r.t.trim(); });
+        var FONT_FILES = [
+          ['./fonts/Caladea-Regular.ttf', 'Caladea-Regular.ttf'],
+          ['./fonts/Caladea-Bold.ttf', 'Caladea-Bold.ttf'],
+          ['./fonts/Carlito-Regular.ttf', 'Carlito-Regular.ttf'],
+          ['./fonts/Carlito-Bold.ttf', 'Carlito-Bold.ttf'],
+          ['./fonts/Carlito-Italic.ttf', 'Carlito-Italic.ttf'],
+          ['./fonts/Carlito-BoldItalic.ttf', 'Carlito-BoldItalic.ttf']
+        ];
+
+        function toB64(buf) {
+          var bytes = new Uint8Array(buf), out = '';
+          for (var i = 0; i < bytes.length; i += 8192)
+            out += String.fromCharCode.apply(null, bytes.subarray(i, i + 8192));
+          return btoa(out);
         }
-        function inl(md) {
-          return spaced(runs(md || '')).filter(function (r) { return r.t; }).map(function (r) {
-            var t = r.t;
-            if (r.url) t = t.replace(/\s+/g, '\u00A0');
-            var x = { text: t };
-            if (r.b) x.bold = true;
-            if (r.i) x.italics = true;
-            if (r.url) { x.link = r.url; x.color = LINK; }
-            return x;
-          });
-        }
-        function ulOf(items, size) {
+
+        var robo = { normal: 'Roboto-Regular.ttf', bold: 'Roboto-Medium.ttf', italics: 'Roboto-Italic.ttf', bolditalics: 'Roboto-MediumItalic.ttf' };
+
+        var fontsReady = Promise.all(FONT_FILES.map(function (f) {
+          return fetch(f[0], { cache: 'force-cache' }).then(function (r) {
+            if (!r.ok) throw new Error('missing ' + f[1]);
+            return r.arrayBuffer();
+          }).then(function (buf) { PM.vfs[f[1]] = toB64(buf); });
+        })).then(function () {
           return {
-            ul: items.map(function (it) { return { text: inl(it), margin: [0, 0.9, 0, 0.9] }; }),
-            fontSize: size, color: BODY, lineHeight: S.lh, markerColor: MARK,
-            margin: [1, 0.4, 0, 3.4]
+            Serif: { normal: 'Caladea-Regular.ttf', bold: 'Caladea-Bold.ttf', italics: 'Caladea-Bold.ttf', bolditalics: 'Caladea-Bold.ttf' },
+            Sans: { normal: 'Carlito-Regular.ttf', bold: 'Carlito-Bold.ttf', italics: 'Carlito-Italic.ttf', bolditalics: 'Carlito-BoldItalic.ttf' }
           };
-        }
-        function heading(title) {
-          return {
-            stack: [
-              { text: title.toUpperCase(), fontSize: S.head, bold: true, color: INK, characterSpacing: 0.8 },
-              { canvas: [{ type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 0.8, lineColor: RULE }], margin: [0, 1.5, 0, 0] }
-            ],
-            margin: [0, 9, 0, 3.2]
-          };
-        }
-
-        var content = [];
-        content.push({ stack: [
-          { text: d.header.name, fontSize: S.name, bold: true, color: INK, alignment: 'center', characterSpacing: 0.2 },
-          d.header.role ? { text: d.header.role, fontSize: S.role, bold: true, color: ACCENT, alignment: 'center', margin: [0, 2.5, 0, 3] } : null
-        ].filter(Boolean) });
-
-        if (d.header.contacts.length) {
-          var cks = [];
-          d.header.contacts.forEach(function (c, i) {
-            if (i > 0) cks.push({ text: '\u2002\u2022\u2002', color: 'C7CBD1', fontSize: S.contact });
-            cks.push({ text: c.text, link: c.url || ('mailto:' + c.text), color: c.url ? LINK : MUTED, fontSize: S.contact });
-          });
-          content.push({ text: cks, alignment: 'center' });
-        }
-
-        content.push({ canvas: [{ type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 1, lineColor: INK }], margin: [0, 8, 0, 0] });
-
-        d.sections.forEach(function (s) {
-          content.push(heading(s.title));
-          s.blocks.forEach(function (b) {
-            if (b.type === 'p') {
-              content.push({ text: inl(b.md), fontSize: S.body, color: BODY, lineHeight: S.lh, margin: [0, 0.8, 0, 3.6] });
-            } else if (b.type === 'bullets') {
-              content.push(ulOf(b.items, S.body));
-            } else if (b.type === 'entry' || b.type === 'project') {
-              var right = b.dates || b.tech;
-              var titleRuns = inl(b.title).map(function (t) { t.bold = true; return t; });
-              if (right) {
-                content.push({ unbreakable: true, columns: [
-                  { text: titleRuns, fontSize: S.entry, color: INK },
-                  { text: right, fontSize: S.right, italics: true, color: MUTED, alignment: 'right', noWrap: true }
-                ], widths: ['*', 'auto'], columnGap: 10, margin: [0, 4, 0, 0] });
-              } else {
-                content.push({ text: titleRuns, fontSize: S.entry, color: INK, margin: [0, 4, 0, 0] });
-              }
-              if (b.org || b.detail) {
-                var sub = inl(b.org);
-                if (b.detail) sub.push({ text: '  ' + b.detail, italics: true, color: MUTED, fontSize: S.sub });
-                content.push({ text: sub, fontSize: S.sub, color: MUTED, margin: [0, 1, 0, 0] });
-              }
-              if (b.items && b.items.length) content.push(ulOf(b.items, S.body));
-            } else if (b.type === 'table') {
-              var tbody = b.rows.map(function (row) {
-                return row.map(function (cell) {
-                  return { text: inl(cell), fontSize: S.cell, color: BODY, margin: [0, 1.4, 0, 1.4] };
-                });
-              });
-              content.push({ table: { widths: b.rows[0].map(function () { return '*'; }), body: tbody }, layout: 'noBorders', margin: [0, 2, 0, 4] });
-            }
-          });
+        }).catch(function () {
+          return { Serif: robo, Sans: robo };   /* graceful fallback */
         });
 
-        var dd = {
-          pageSize: 'A4',
-          pageMargins: [MX, MT, MX, MB],
-          defaultStyle: { font: 'Roboto', color: BODY, fontSize: S.body, lineHeight: S.lh },
-          content: content,
-          footer: function (cur, total) {
-            if (total <= 1) return null;
+        return fontsReady.then(function (FONTS) {
+          var SERIF = 'Serif', SANS = 'Sans';
+
+          function spaced(rs) {
+            var out = [];
+            rs.forEach(function (r) {
+              var t = (r.t || '').replace(/\s+/g, ' ');
+              if (/^\s+$/.test(t) && out.length) { out[out.length - 1].t += ' '; return; }
+              if (t) { if (/^\s/.test(t) && out.length) out[out.length - 1].t += t.replace(/^\s+/, ' '); else out.push({ t: t, b: r.b, i: r.i, url: r.url }); }
+            });
+            return out.filter(function (r) { return r.t.trim(); });
+          }
+          function inl(md, font) {
+            return spaced(runs(md || '')).filter(function (r) { return r.t; }).map(function (r) {
+              var t = r.t;
+              if (r.url) t = t.replace(/\s+/g, '\u00A0');
+              var x = { text: t };
+              if (r.b) x.bold = true;
+              if (r.i) x.italics = true;
+              if (font) x.font = font;
+              if (r.url) { x.link = r.url; x.color = LINK; }
+              return x;
+            });
+          }
+          var LINK = '1E3A8A';
+          function ulOf(items, size) {
             return {
-              columns: [
-                { text: d.header.name, fontSize: 7.6, color: '9CA3AF' },
-                { text: 'Page ' + cur + ' of ' + total, fontSize: 7.6, color: '9CA3AF', alignment: 'right' }
-              ],
-              margin: [MX, 16, MX, 0]
+              ul: items.map(function (it) { return { text: inl(it, SANS), margin: [0, 1, 0, 1] }; }),
+              fontSize: size, color: BODY, lineHeight: S.lh, markerColor: MARK,
+              margin: [2, 0.4, 0, 4]
             };
           }
-        };
-        return new Promise(function (resolve, reject) {
-          var vp;
-          try { vp = PM.createPdf(dd); } catch (e) { reject(e); return; }
-          vp.getBlob(function (blob) {
-            saveBlob(blob, 'Zishan-Ahamed-Thandar-Resume.pdf');
-            resolve();
+          function heading(title) {
+            return {
+              stack: [
+                { text: title.toUpperCase(), font: SERIF, fontSize: S.head, bold: true, color: INK, characterSpacing: 1, margin: [0, 0, 0, 0] },
+                { canvas: [{ type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 0.8, lineColor: RULE }], margin: [0, 2, 0, 0] }
+              ],
+              margin: [0, 10.5, 0, 3.8]
+            };
+          }
+
+          var content = [];
+          content.push({ stack: [
+            { text: d.header.name, font: SERIF, fontSize: S.name, bold: true, color: INK, alignment: 'center', characterSpacing: 0.3 },
+            d.header.role ? { text: d.header.role, font: SANS, fontSize: S.role, bold: true, color: ACCENT, alignment: 'center', characterSpacing: 0.4, margin: [0, 3, 0, 3.5] } : null
+          ].filter(Boolean) });
+
+          if (d.header.contacts.length) {
+            var cks = [];
+            d.header.contacts.forEach(function (c, i) {
+              if (i > 0) cks.push({ text: '\u2002\u2022\u2002', color: 'C7CBD1', fontSize: S.contact, font: SANS });
+              cks.push({ text: c.text, link: c.url || ('mailto:' + c.text), color: c.url ? ACCENT : MUTED, fontSize: S.contact, font: SANS });
+            });
+            content.push({ text: cks, alignment: 'center' });
+          }
+          content.push({ canvas: [{ type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 0.8, lineColor: INK }], margin: [0, 8, 0, 0] });
+
+          d.sections.forEach(function (s) {
+            content.push(heading(s.title));
+            s.blocks.forEach(function (b) {
+              if (b.type === 'p') {
+                content.push({ text: inl(b.md, SANS), font: SANS, fontSize: S.body, color: BODY, lineHeight: S.lh, margin: [0, 0.8, 0, 3.8] });
+              } else if (b.type === 'bullets') {
+                content.push(ulOf(b.items, S.body));
+              } else if (b.type === 'entry' || b.type === 'project') {
+                var right = b.dates || b.tech;
+                var titleRuns = inl(b.title, SANS).map(function (t) { t.bold = true; return t; });
+                if (right) {
+                  content.push({ unbreakable: true, columns: [
+                    { text: titleRuns, fontSize: S.entry, color: INK },
+                    { text: right, font: SANS, fontSize: S.right, italics: true, color: MUTED, alignment: 'right', noWrap: true }
+                  ], widths: ['*', 'auto'], columnGap: 10, margin: [0, 4.5, 0, 0] });
+                } else {
+                  content.push({ text: titleRuns, fontSize: S.entry, color: INK, margin: [0, 4.5, 0, 0] });
+                }
+                if (b.org || b.detail) {
+                  var sub = inl(b.org, SANS);
+                  if (b.detail) sub.push({ text: '  ' + b.detail, font: SANS, italics: true, color: MUTED, fontSize: S.sub });
+                  content.push({ text: sub, font: SANS, fontSize: S.sub, color: MUTED, margin: [0, 1, 0, 0] });
+                }
+                if (b.items && b.items.length) content.push(ulOf(b.items, S.body));
+              } else if (b.type === 'table') {
+                var tbody = b.rows.map(function (row) {
+                  return row.map(function (cell) {
+                    return { text: inl(cell, SANS), font: SANS, fontSize: S.cell, color: BODY, margin: [0, 1.4, 0, 1.4] };
+                  });
+                });
+                content.push({ table: { widths: b.rows[0].map(function () { return '*'; }), body: tbody }, layout: 'noBorders', margin: [0, 2, 0, 4] });
+              }
+            });
+          });
+
+          var dd = {
+            pageSize: 'A4',
+            pageMargins: [MX, MT, MX, MB],
+            defaultStyle: { font: SANS, color: BODY, fontSize: S.body, lineHeight: S.lh },
+            content: content,
+            footer: function (cur, total) {
+              if (total <= 1) return null;
+              return {
+                columns: [
+                  { text: d.header.name, font: SANS, fontSize: 7.6, color: '9CA3AF' },
+                  { text: 'Page ' + cur + ' of ' + total, font: SANS, fontSize: 7.6, color: '9CA3AF', alignment: 'right' }
+                ],
+                margin: [MX, 16, MX, 0]
+              };
+            }
+          };
+
+          return new Promise(function (resolve, reject) {
+            var vp;
+            try { vp = PM.createPdf(dd, null, FONTS, PM.vfs); } catch (e) { reject(e); return; }
+            vp.getBlob(function (blob) {
+              saveBlob(blob, 'Zishan-Ahamed-Thandar-Resume.pdf');
+              resolve();
+            });
           });
         });
       });
@@ -701,70 +751,74 @@ DO NOT DELETE IT.
      DOCX GENERATION (docx)
   ============================================================ */
   function genDOCX(data) {
+    data = smartify(data);
     return loadLib('https://cdn.jsdelivr.net/npm/docx@7.8.2/build/index.min.js').then(function () {
       var D = window.docx;
       var TextRun = D.TextRun, Paragraph = D.Paragraph, Hyper = D.ExternalHyperlink;
       var AL = D.AlignmentType, BS = D.BorderStyle, UL = D.UnderlineType;
-      var INK = '111827', BODY = '374151', MUT = '6B7280', RULE = 'D1D5DB',
-          ACC = '4338CA', LINK = '4338CA';
-      var FONT = 'Calibri', TAB = 10178;   /* right tab stop = A4 content width (0.6in margins) */
+      var INK = '1F2937', BODY = '374151', MUT = '6B7280', RULE = 'E5E7EB',
+          ACC = '1E3A8A', LINK = '1E3A8A';
+      var HEADF = 'Cambria', BODYF = 'Calibri', TAB = 10178;
+      var LINE = 264;   /* 1.1 line spacing */
 
-      function run(md) {
+      function run(md, font) {
         return runs(md).map(function (r) {
-          var o = { text: r.t, bold: !!r.b, italics: !!r.i };
+          var o = { text: r.t, bold: !!r.b, italics: !!r.i, font: font || BODYF };
           if (r.url) { o.color = LINK; o.underline = { type: UL.SINGLE }; return new Hyper({ link: r.url, children: [new TextRun(o)] }); }
           return new TextRun(o);
         });
       }
       function para(md) {
-        return new Paragraph({ children: run(md), spacing: { after: 60, line: 264 } });
+        return new Paragraph({ children: run(md), spacing: { after: 60, line: LINE } });
       }
       function heading(t) {
         return new Paragraph({
-          children: [new TextRun({ text: t.toUpperCase(), bold: true, size: 22, color: INK, font: FONT, characterSpacing: 10 })],
-          spacing: { before: 200, after: 60 },
-          border: { bottom: { color: RULE, space: 3, style: BS.SINGLE, size: 6 } }
+          children: [new TextRun({ text: t.toUpperCase(), bold: true, size: 22, color: INK, font: HEADF, characterSpacing: 14 })],
+          spacing: { before: 220, after: 70 },
+          keepNext: true,
+          border: { bottom: { color: RULE, space: 4, style: BS.SINGLE, size: 6 } }
         });
       }
       function bullet(it) {
         return new Paragraph({
           children: run(it), bullet: { level: 0 },
-          indent: { left: 280, hanging: 280 },
-          spacing: { after: 26, line: 264 }
+          indent: { left: 300, hanging: 300 },
+          spacing: { after: 24, line: LINE }
         });
       }
       function entryPara(title, right, org, detail) {
         var t = run(title);
-        if (right) t.push(new TextRun({ text: '\t' + right, italics: true, color: MUT }));
+        if (right) t.push(new TextRun({ text: '\t' + right, italics: true, color: MUT, font: BODYF }));
         var out = [new Paragraph({
           children: t,
           tabStops: [{ type: AL.RIGHT, position: TAB }],
-          spacing: { before: 80, after: 10, line: 264 }
+          spacing: { before: 90, after: 10, line: LINE },
+          keepNext: true
         })];
         if (org || detail) {
           var ok = runs(org).map(function (r) {
-            var o = { text: r.t, italics: !!r.i, color: MUT };
+            var o = { text: r.t, italics: !!r.i, color: MUT, font: BODYF };
             if (r.url) { o.color = LINK; o.underline = { type: UL.SINGLE }; return new Hyper({ link: r.url, children: [new TextRun(o)] }); }
             return new TextRun(o);
           });
-          if (detail) ok.push(new TextRun({ text: '  ' + detail, italics: true, color: MUT }));
-          out.push(new Paragraph({ children: ok, spacing: { after: 20, line: 264 } }));
+          if (detail) ok.push(new TextRun({ text: '  ' + detail, italics: true, color: MUT, font: BODYF }));
+          out.push(new Paragraph({ children: ok, spacing: { after: 20, line: LINE }, keepNext: true }));
         }
         return out;
       }
 
       var children = [];
-      children.push(new Paragraph({ alignment: AL.CENTER, children: [new TextRun({ text: data.header.name, bold: true, size: 44, color: INK, font: FONT })], spacing: { after: 20 } }));
-      if (data.header.role) children.push(new Paragraph({ alignment: AL.CENTER, children: [new TextRun({ text: data.header.role, bold: true, size: 22, color: ACC, font: FONT })], spacing: { after: 30 } }));
+      children.push(new Paragraph({ alignment: AL.CENTER, children: [new TextRun({ text: data.header.name, bold: true, size: 44, color: INK, font: HEADF })], spacing: { after: 20 } }));
+      if (data.header.role) children.push(new Paragraph({ alignment: AL.CENTER, children: [new TextRun({ text: data.header.role, bold: true, size: 21, color: ACC, font: BODYF })], spacing: { after: 30 } }));
       if (data.header.contacts.length) {
         var ckids = [];
         data.header.contacts.forEach(function (c, idx) {
-          if (idx > 0) ckids.push(new TextRun({ text: '\u2003\u2022\u2003', color: 'C7CBD1', size: 18 }));
-          ckids.push(new Hyper({ link: c.url || ('mailto:' + c.text), children: [new TextRun({ text: c.text, color: LINK, size: 18, underline: { type: UL.SINGLE } })] }));
+          if (idx > 0) ckids.push(new TextRun({ text: '\u2003\u2022\u2003', color: 'C7CBD1', size: 18, font: BODYF }));
+          ckids.push(new Hyper({ link: c.url || ('mailto:' + c.text), children: [new TextRun({ text: c.text, color: LINK, size: 18, font: BODYF, underline: { type: UL.SINGLE } })] }));
         });
-        children.push(new Paragraph({ alignment: AL.CENTER, children: ckids, spacing: { after: 20 } }));
+        children.push(new Paragraph({ alignment: AL.CENTER, children: ckids, spacing: { after: 30 } }));
       }
-      children.push(new Paragraph({ children: [], border: { bottom: { color: INK, space: 1, style: BS.SINGLE, size: 6 } }, spacing: { before: 20, after: 140 } }));
+      children.push(new Paragraph({ children: [], border: { bottom: { color: INK, space: 1, style: BS.SINGLE, size: 6 } }, spacing: { before: 10, after: 140 } }));
 
       data.sections.forEach(function (s) {
         children.push(heading(s.title));
@@ -778,7 +832,7 @@ DO NOT DELETE IT.
           } else if (b.type === 'table') {
             var rows = b.rows.map(function (row) {
               return new D.TableRow({ children: row.map(function (cell) {
-                return new D.TableCell({ children: [new Paragraph({ children: run(cell), spacing: { after: 20, line: 264 } })] });
+                return new D.TableCell({ children: [new Paragraph({ children: run(cell), spacing: { after: 20, line: LINE } })] });
               }) });
             });
             var ncol = b.rows[0].length;
@@ -787,10 +841,7 @@ DO NOT DELETE IT.
               rows: rows,
               width: { size: 100, type: D.WidthType.PERCENTAGE },
               columnWidths: colw,
-              borders: {
-                top: { style: BS.NONE }, bottom: { style: BS.NONE }, left: { style: BS.NONE }, right: { style: BS.NONE },
-                insideHorizontal: { style: BS.NONE }, insideVertical: { style: BS.NONE }
-              },
+              borders: { top: { style: BS.NONE }, bottom: { style: BS.NONE }, left: { style: BS.NONE }, right: { style: BS.NONE }, insideHorizontal: { style: BS.NONE }, insideVertical: { style: BS.NONE } },
               cellMargin: { top: 30, bottom: 30, left: 70, right: 70 },
               spacing: { after: 40 }
             }));
@@ -800,11 +851,9 @@ DO NOT DELETE IT.
 
       var doc = new D.Document({
         properties: { title: 'Zishan Ahamed Thandar — Resume', author: 'Zishan Ahamed Thandar' },
-        styles: {
-          default: { document: { run: { font: FONT, size: 21, color: BODY }, paragraph: { spacing: { line: 264, after: 40 } } } }
-        },
+        styles: { default: { document: { run: { font: BODYF, size: 21, color: BODY }, paragraph: { spacing: { line: LINE, after: 40 } } } } },
         sections: [{
-          properties: { page: { size: { width: 11906, height: 16838 }, margin: { top: 720, right: 864, bottom: 720, left: 864 } } },
+          properties: { page: { size: { width: 11906, height: 16838 }, margin: { top: 800, right: 920, bottom: 880, left: 920 } } },
           children: children
         }]
       });
