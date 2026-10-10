@@ -584,11 +584,12 @@ DO NOT DELETE IT.
            Metrics-compatible with Word's Cambria + Calibri so the DOCX matches. */
         var MX = 46, MT = 40, MB = 44;
         var W = 595.28 - MX * 2;
-        var INK = '1F2937', BODY = '374151', MUTED = '6B7280',
-            RULE = 'E5E7EB', ACCENT = '1E3A8A', MARK = '9CA3AF';
+        /* pdfmake/pdfkit only accepts '#'-prefixed hex, otherwise the colour is ignored */
+        var INK = '#1F2937', BODY = '#374151', MUTED = '#6B7280',
+            RULE = '#EDEFF2', ACCENT = '#1E3A8A', MARK = '#9CA3AF';
         var S = {
           name: 22, role: 10.2, contact: 8.8,
-          head: 11, body: 9.3, lh: 1.3,
+          head: 11, body: 9.3, lh: 1.16,
           entry: 9.9, sub: 9.1, right: 8.9, cell: 9.2
         };
 
@@ -648,21 +649,21 @@ DO NOT DELETE IT.
               return x;
             });
           }
-          var LINK = '1E3A8A';
+          var LINK = '#1E3A8A';
           function ulOf(items, size) {
             return {
-              ul: items.map(function (it) { return { text: inl(it, SANS), margin: [0, 1, 0, 1] }; }),
+              ul: items.map(function (it) { return { text: inl(it, SANS), margin: [0, 0.6, 0, 0.6] }; }),
               fontSize: size, color: BODY, lineHeight: S.lh, markerColor: MARK,
-              margin: [2, 0.4, 0, 4]
+              margin: [2, 0.3, 0, 3]
             };
           }
           function heading(title) {
             return {
               stack: [
                 { text: title.toUpperCase(), font: SERIF, fontSize: S.head, bold: true, color: INK, characterSpacing: 1, margin: [0, 0, 0, 0] },
-                { canvas: [{ type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 0.8, lineColor: RULE }], margin: [0, 2, 0, 0] }
+                { canvas: [{ type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 0.5, lineColor: RULE }], margin: [0, 1.6, 0, 0] }
               ],
-              margin: [0, 10.5, 0, 3.8]
+              margin: [0, 7.5, 0, 2.8]
             };
           }
 
@@ -675,18 +676,18 @@ DO NOT DELETE IT.
           if (d.header.contacts.length) {
             var cks = [];
             d.header.contacts.forEach(function (c, i) {
-              if (i > 0) cks.push({ text: '\u2002\u2022\u2002', color: 'C7CBD1', fontSize: S.contact, font: SANS });
-              cks.push({ text: c.text, link: c.url || ('mailto:' + c.text), color: c.url ? ACCENT : MUTED, fontSize: S.contact, font: SANS });
+              if (i > 0) cks.push({ text: '\u2002\u2022\u2002', color: '#C7CBD1', fontSize: S.contact, font: SANS });
+              /* noWrap keeps each contact a single unbroken link annotation */
+              cks.push({ text: c.text, link: c.url || ('mailto:' + c.text), color: c.url ? ACCENT : MUTED, fontSize: S.contact, font: SANS, noWrap: true });
             });
             content.push({ text: cks, alignment: 'center' });
           }
-          content.push({ canvas: [{ type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 0.8, lineColor: INK }], margin: [0, 8, 0, 0] });
 
           d.sections.forEach(function (s) {
             content.push(heading(s.title));
             s.blocks.forEach(function (b) {
               if (b.type === 'p') {
-                content.push({ text: inl(b.md, SANS), font: SANS, fontSize: S.body, color: BODY, lineHeight: S.lh, margin: [0, 0.8, 0, 3.8] });
+                content.push({ text: inl(b.md, SANS), font: SANS, fontSize: S.body, color: BODY, lineHeight: S.lh, margin: [0, 0.6, 0, 3] });
               } else if (b.type === 'bullets') {
                 content.push(ulOf(b.items, S.body));
               } else if (b.type === 'entry' || b.type === 'project') {
@@ -696,9 +697,9 @@ DO NOT DELETE IT.
                   content.push({ unbreakable: true, columns: [
                     { text: titleRuns, fontSize: S.entry, color: INK },
                     { text: right, font: SANS, fontSize: S.right, italics: true, color: MUTED, alignment: 'right', noWrap: true }
-                  ], widths: ['*', 'auto'], columnGap: 10, margin: [0, 4.5, 0, 0] });
+                  ], widths: ['*', 'auto'], columnGap: 10, margin: [0, 3.5, 0, 0] });
                 } else {
-                  content.push({ text: titleRuns, fontSize: S.entry, color: INK, margin: [0, 4.5, 0, 0] });
+                  content.push({ text: titleRuns, fontSize: S.entry, color: INK, margin: [0, 3.5, 0, 0] });
                 }
                 if (b.org || b.detail) {
                   var sub = inl(b.org, SANS);
@@ -712,7 +713,7 @@ DO NOT DELETE IT.
                     return { text: inl(cell, SANS), font: SANS, fontSize: S.cell, color: BODY, margin: [0, 1.4, 0, 1.4] };
                   });
                 });
-                content.push({ table: { widths: b.rows[0].map(function () { return '*'; }), body: tbody }, layout: 'noBorders', margin: [0, 2, 0, 4] });
+                content.push({ table: { widths: b.rows[0].map(function () { return '*'; }), body: tbody }, layout: 'noBorders', margin: [0, 1.5, 0, 3] });
               }
             });
           });
@@ -726,8 +727,8 @@ DO NOT DELETE IT.
               if (total <= 1) return null;
               return {
                 columns: [
-                  { text: d.header.name, font: SANS, fontSize: 7.6, color: '9CA3AF' },
-                  { text: 'Page ' + cur + ' of ' + total, font: SANS, fontSize: 7.6, color: '9CA3AF', alignment: 'right' }
+                  { text: d.header.name, font: SANS, fontSize: 7.6, color: '#9CA3AF' },
+                  { text: 'Page ' + cur + ' of ' + total, font: SANS, fontSize: 7.6, color: '#9CA3AF', alignment: 'right' }
                 ],
                 margin: [MX, 16, MX, 0]
               };
@@ -756,10 +757,10 @@ DO NOT DELETE IT.
       var D = window.docx;
       var TextRun = D.TextRun, Paragraph = D.Paragraph, Hyper = D.ExternalHyperlink;
       var AL = D.AlignmentType, BS = D.BorderStyle, UL = D.UnderlineType;
-      var INK = '1F2937', BODY = '374151', MUT = '6B7280', RULE = 'E5E7EB',
+      var INK = '1F2937', BODY = '374151', MUT = '6B7280', RULE = 'EDEFF2',
           ACC = '1E3A8A', LINK = '1E3A8A';
       var HEADF = 'Cambria', BODYF = 'Calibri', TAB = 10178;
-      var LINE = 264;   /* 1.1 line spacing */
+      var LINE = 240;   /* single line spacing */
 
       function run(md, font) {
         return runs(md).map(function (r) {
@@ -769,21 +770,21 @@ DO NOT DELETE IT.
         });
       }
       function para(md) {
-        return new Paragraph({ children: run(md), spacing: { after: 60, line: LINE } });
+        return new Paragraph({ children: run(md), spacing: { after: 40, line: LINE } });
       }
       function heading(t) {
         return new Paragraph({
           children: [new TextRun({ text: t.toUpperCase(), bold: true, size: 22, color: INK, font: HEADF, characterSpacing: 14 })],
-          spacing: { before: 220, after: 70 },
+          spacing: { before: 150, after: 60 },
           keepNext: true,
-          border: { bottom: { color: RULE, space: 4, style: BS.SINGLE, size: 6 } }
+          border: { bottom: { color: RULE, space: 3, style: BS.SINGLE, size: 4 } }
         });
       }
       function bullet(it) {
         return new Paragraph({
           children: run(it), bullet: { level: 0 },
           indent: { left: 300, hanging: 300 },
-          spacing: { after: 24, line: LINE }
+          spacing: { after: 12, line: LINE }
         });
       }
       function entryPara(title, right, org, detail) {
@@ -792,7 +793,7 @@ DO NOT DELETE IT.
         var out = [new Paragraph({
           children: t,
           tabStops: [{ type: AL.RIGHT, position: TAB }],
-          spacing: { before: 90, after: 10, line: LINE },
+          spacing: { before: 60, after: 8, line: LINE },
           keepNext: true
         })];
         if (org || detail) {
@@ -802,7 +803,7 @@ DO NOT DELETE IT.
             return new TextRun(o);
           });
           if (detail) ok.push(new TextRun({ text: '  ' + detail, italics: true, color: MUT, font: BODYF }));
-          out.push(new Paragraph({ children: ok, spacing: { after: 20, line: LINE }, keepNext: true }));
+          out.push(new Paragraph({ children: ok, spacing: { after: 12, line: LINE }, keepNext: true }));
         }
         return out;
       }
@@ -818,7 +819,6 @@ DO NOT DELETE IT.
         });
         children.push(new Paragraph({ alignment: AL.CENTER, children: ckids, spacing: { after: 30 } }));
       }
-      children.push(new Paragraph({ children: [], border: { bottom: { color: INK, space: 1, style: BS.SINGLE, size: 6 } }, spacing: { before: 10, after: 140 } }));
 
       data.sections.forEach(function (s) {
         children.push(heading(s.title));
@@ -851,7 +851,7 @@ DO NOT DELETE IT.
 
       var doc = new D.Document({
         properties: { title: 'Zishan Ahamed Thandar — Resume', author: 'Zishan Ahamed Thandar' },
-        styles: { default: { document: { run: { font: BODYF, size: 21, color: BODY }, paragraph: { spacing: { line: LINE, after: 40 } } } } },
+        styles: { default: { document: { run: { font: BODYF, size: 21, color: BODY }, paragraph: { spacing: { line: LINE, after: 28 } } } } },
         sections: [{
           properties: { page: { size: { width: 11906, height: 16838 }, margin: { top: 800, right: 920, bottom: 880, left: 920 } } },
           children: children
