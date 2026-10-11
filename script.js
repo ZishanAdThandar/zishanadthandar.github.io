@@ -11,10 +11,10 @@ const PRODUCTS = [
     description: 'Obsidian vault with copy-paste commands for every CPENT zone.',
     price: 34,
     originalPrice: 470,
-    badges: ['New', 'EC Council', 'Copy-Paste Ready'],
+    badges: ['New', 'EC Council', 'Verified'],
     icon: 'fas fa-user-graduate',
     iconColor: '#6366f1',
-    features: ['Active Directory & ADCS', 'Binaries, IoT & Firmware', 'Double Pivoting Workflows', 'Reports & Tool Cheatsheets']
+    features: ['Active Directory & ADCS', 'Binaries, IoT & Firmware', 'Copy Paste Ready', 'Reports & Tool Cheatsheets']
   },
   {
     id: 'oscp_bundle',
@@ -22,7 +22,7 @@ const PRODUCTS = [
     description: 'Complete Obsidian vault plus a curated tools installation guide for OSCP prep.',
     price: 97,
     originalPrice: 970,
-    badges: ['Premium', 'Step-by-Step', 'Offsec'],
+    badges: ['Premium', 'Organized', 'Offsec'],
     icon: 'fas fa-certificate',
     iconColor: '#6366f1',
     features: ['Real World Verified', 'Battle Tested Commands', 'Tools Installation Guide', 'Step by Step Guide']
