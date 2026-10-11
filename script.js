@@ -7,11 +7,11 @@ let userPurchases = {};
 const PRODUCTS = [
   {
     id: 'cpent_vault',
-    name: 'CPENT Exam Vault 2026',
-    description: 'Obsidian vault with copy-paste commands for every CPENT exam zone.',
+    name: 'CPENT Vault 2026',
+    description: 'Obsidian vault with copy-paste commands for every CPENT zone.',
     price: 34,
     originalPrice: 470,
-    badges: ['New', 'Exam Focused', 'Copy-Paste Ready'],
+    badges: ['New', 'Certification Ready', 'Copy-Paste Ready'],
     icon: 'fas fa-user-graduate',
     iconColor: '#6366f1',
     features: ['Active Directory & ADCS', 'Binaries, IoT & Firmware', 'Double Pivoting Workflows', 'Reports & Tool Cheatsheets']
