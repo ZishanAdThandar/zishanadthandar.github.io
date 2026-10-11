@@ -7,7 +7,7 @@ let userPurchases = {};
 const PRODUCTS = [
   {
     id: 'cpent_vault',
-    name: 'CPENT Obsidian Notes Vault',
+    name: 'CPENT Obsidian Notes & Tools Vault',
     description: 'Obsidian vault with copy-paste commands for every CPENT zone.',
     price: 34,
     originalPrice: 470,
@@ -18,7 +18,7 @@ const PRODUCTS = [
   },
   {
     id: 'oscp_bundle',
-    name: 'OSCP+ Obsidian Notes Vault',
+    name: 'OSCP+ Obsidian Notes & Tools Vault',
     description: 'Complete Obsidian vault plus a curated tools installation guide for OSCP prep.',
     price: 97,
     originalPrice: 970,
