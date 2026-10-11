@@ -7,7 +7,7 @@ let userPurchases = {};
 const PRODUCTS = [
   {
     id: 'cpent_vault',
-    name: 'CPENT Vault 2026',
+    name: 'CPENT Obsidian Notes Vault',
     description: 'Obsidian vault with copy-paste commands for every CPENT zone.',
     price: 34,
     originalPrice: 470,
@@ -18,7 +18,7 @@ const PRODUCTS = [
   },
   {
     id: 'oscp_bundle',
-    name: 'OSCP+ Obsidian Notes premium Bundle',
+    name: 'OSCP+ Obsidian Notes Vault',
     description: 'Complete Obsidian vault plus a curated tools installation guide for OSCP prep.',
     price: 97,
     originalPrice: 970,
@@ -52,7 +52,7 @@ const PRODUCTS = [
   {
     id: 'oswp_notes',
     name: 'OSWP Copy Paste Commands eBook',
-    description: 'Wireless pentesting notes and cheatsheet for Offsec OSWP Certification.',
+    description: 'Wireless pentesting notes and cheatsheet for Offsec OSWP.',
     price: 27,
     originalPrice: 270,
     badges: ['New', 'Focused', 'Current'],
