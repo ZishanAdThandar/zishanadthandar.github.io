@@ -824,11 +824,12 @@ section {
 .testimonials-section {
     padding: 60px 0;
     background: #0f172a;
+    width: 100%;
 }}
 
 .testimonials-grid {
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
     gap: 1.5rem !important;
     margin-top: 2rem !important;
     width: 100% !important;
