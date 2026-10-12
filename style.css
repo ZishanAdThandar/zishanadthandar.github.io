@@ -92,7 +92,7 @@ h5, h6 { font-size: var(--fs-sm); }
 }
 
 .hero-gradient {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    background: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #38bdf8 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
