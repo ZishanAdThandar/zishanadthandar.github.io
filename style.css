@@ -2047,3 +2047,9 @@ input:-webkit-autofill:active {
         grid-template-columns: 1fr !important;
     }
 }
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 70px;
+    }
+}
