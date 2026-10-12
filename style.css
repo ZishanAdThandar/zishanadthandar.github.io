@@ -829,7 +829,7 @@ section {
 
 .testimonials-grid {
     display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 1.5rem !important;
     margin-top: 2rem !important;
     width: 100% !important;
