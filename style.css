@@ -370,6 +370,10 @@ h5, h6 { font-size: var(--fs-sm); }
 .hero-title .hero-gradient {
     font-size: 3.5rem !important;
     line-height: 1.05;
+    background: linear-gradient(135deg, #ffffff 0%, #a78bfa 60%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 @media (max-width: 768px) {
