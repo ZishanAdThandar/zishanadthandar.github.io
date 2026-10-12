@@ -2042,12 +2042,7 @@ input:-webkit-autofill:active {
     font-weight: 700;
 }
 @media (max-width: 768px) {
-    .flash-sale {
-        font-size: 0.8rem;
-    }
-}
-
-.resources-section {
+    .resources-section {
     background: var(--background);
     padding: 60px 0;
 }
