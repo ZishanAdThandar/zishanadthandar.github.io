@@ -313,7 +313,7 @@ h5, h6 { font-size: var(--fs-sm); }
 
 /* Hero Section */
 .hero-section {
-    padding: 80px 0 45px;
+    padding: 20px 0 45px;
     background: var(--gradient-dark);
     position: relative;
     overflow: hidden;
