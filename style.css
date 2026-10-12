@@ -125,7 +125,7 @@ h5, h6 { font-size: var(--fs-sm); }
 /* Navigation */
 .header {
     position: fixed;
-    top: 32px; 
+    top: 28px; 
     left: 0;
     right: 0;
     background: rgba(15, 23, 42, 0.95);
@@ -270,7 +270,7 @@ h5, h6 { font-size: var(--fs-sm); }
 }
 
 .dropdown-header {
-    padding: 0.4rem 0;
+    padding: 0.35rem 0;
     margin-bottom: 0.5rem;
     border-bottom: 1px solid var(--border);
 }
@@ -1834,7 +1834,7 @@ input:-webkit-autofill:active {
 @media (max-width: 480px) {
   
     .header {
-        top: 32px; 
+        top: 28px; 
         padding: 6px 0;
     }
     
@@ -2013,7 +2013,7 @@ input:-webkit-autofill:active {
     z-index: 9999;
     background: linear-gradient(90deg, #6366f1, #8b5cf6);
     color: white;
-    padding: 0.4rem 0;
+    padding: 0.35rem 0;
     font-size: 0.9rem;
     font-weight: 600;
     text-align: center;
