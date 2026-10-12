@@ -266,6 +266,22 @@ DO NOT REMOVE THIS COMMENTS.
 -->
 
     
+<div class="flash-sale" id="flashSale">
+  <div class="container">
+    <div class="flash-content">
+      <i class="fas fa-bolt"></i>
+      <span class="flash-text"><strong>FLASH SALE:</strong> 90% OFF ALL RESOURCES</span>
+      <div class="countdown" id="countdown">
+        <span class="time"><span id="hours">00</span>H</span>
+        <span class="separator">:</span>
+        <span class="time"><span id="mins">00</span>M</span>
+        <span class="separator">:</span>
+        <span class="time"><span id="secs">00</span>S</span>
+      </div>
+      <span class="flash-text">ENDS SOON!</span>
+    </div>
+  </div>
+</div>
     <header class="header">
         <div class="container">
             <nav class="navbar">
@@ -331,7 +347,7 @@ DO NOT REMOVE THIS COMMENTS.
                 <div class="hero-cta">
                     <a href="#resources" class="btn btn-premium btn-sparkle">
                         <i class="fas fa-gem"></i>
-                        Browse Resources
+                        VIEW ALL PREMIUM RESOURCES
                         <i class="fas fa-arrow-right"></i>
                     </a>
                     <div class="hero-guarantee">
@@ -563,6 +579,60 @@ DO NOT REMOVE THIS COMMENTS.
                             <i class="fas fa-bolt"></i>
                             View Product - $27
                         </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-star"></i>
+                    CUSTOMER REVIEWS
+                </div>
+                <h2 class="section-title">What Our Customers Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The CPENT vault saved me hours. The copy-paste commands are spot on and the AD notes are incredibly clear. Worth every dollar."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <h4>John Davis</h4>
+                            <p>Security Engineer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Clean, practical notes that actually helped me pass my prep. The OSCP+ vault is well-organized and the tools guide is a huge time saver."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MC</div>
+                        <div class="author-info">
+                            <h4>Michael Carter</h4>
+                            <p>Pentester</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Excellent resource. Everything is structured and easy to follow. The checklist alone is worth it. Highly recommended for serious practitioners."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SR</div>
+                        <div class="author-info">
+                            <h4>Sarah Reynolds</h4>
+                            <p>Red Team Analyst</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -851,6 +921,40 @@ const navMenu = document.getElementById('navMenu');
 navToggle.addEventListener('click', () => {
     navMenu.classList.toggle('show');
 });
+</script>
+
+
+<script>
+(function() {
+  var el = document.getElementById('countdown');
+  if (!el) return;
+  var end = localStorage.getItem('zishanhack_flash_end');
+  if (!end) {
+    var d = new Date();
+    d.setHours(d.getHours() + 12);
+    end = d.getTime();
+    localStorage.setItem('zishanhack_flash_end', end);
+  } else {
+    end = parseInt(end);
+  }
+  function update() {
+    var now = Date.now();
+    var diff = end - now;
+    if (diff <= 0) {
+      el.parentElement.textContent = 'FLASH SALE ENDED';
+      localStorage.removeItem('zishanhack_flash_end');
+      return;
+    }
+    var h = Math.floor(diff / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('hours').textContent = h.toString().padStart(2,'0');
+    document.getElementById('mins').textContent = m.toString().padStart(2,'0');
+    document.getElementById('secs').textContent = s.toString().padStart(2,'0');
+  }
+  update();
+  setInterval(update, 1000);
+})();
 </script>
 
 </body>

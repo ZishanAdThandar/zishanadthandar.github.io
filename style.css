@@ -822,13 +822,14 @@ section {
 
 /* Testimonials */
 .testimonials-section {
-    background: var(--dark);
+    padding: 60px 0;
 }
 
 .testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
 .testimonial-card {
@@ -2000,4 +2001,46 @@ input:-webkit-autofill:active {
 .razorpay-container {
   position: relative;
   z-index: 9999;
+}
+
+/* Flash Sale */
+.flash-sale {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    color: white;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 2px solid #8b5cf6;
+}
+.flash-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.countdown {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: 700;
+}
+.time {
+    background: rgba(0,0,0,0.2);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+.separator {
+    font-weight: 700;
+}
+@media (max-width: 768px) {
+    .flash-sale {
+        font-size: 0.8rem;
+    }
 }
