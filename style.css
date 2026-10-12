@@ -322,7 +322,7 @@ h5, h6 { font-size: var(--fs-sm); }
 .hero-section::before {
     content: '';
     position: absolute;
-    top: 0;
+        top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -1651,7 +1651,7 @@ input:-webkit-autofill:active {
     /* Hero section adjustments - add top padding to account for fixed elements */
     .hero-section {
         padding: 100px 0 50px; /* Increased top padding */
-        margin-top: 28px;
+        margin-top: 0;
     }
     
     .hero-description {
