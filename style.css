@@ -1622,7 +1622,7 @@ input:-webkit-autofill:active {
     /* Mobile menu */
     .nav-menu {
     position: fixed;
-    top: 58px;
+    top: 52px;
     left: 0;
     right: 0;
     background: rgba(15, 23, 42, 0.98);
@@ -1902,7 +1902,7 @@ input:-webkit-autofill:active {
     }
     
     .nav-menu {
-        top: 58px;
+        top: 52px;
     }
     
     .hero-section {
