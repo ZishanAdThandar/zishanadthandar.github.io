@@ -38,7 +38,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 120px;
+    scroll-padding-top: 70px;
 }
 
 body {
@@ -48,7 +48,6 @@ body {
     line-height: 1.7;
     overflow-x: hidden;
     min-height: 100vh;
-    padding-top: 80px;
 }
 
 /* Keyboard navigation focus styles */
