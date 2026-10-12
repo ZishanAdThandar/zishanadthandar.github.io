@@ -125,7 +125,7 @@ h5, h6 { font-size: var(--fs-sm); }
 /* Navigation */
 .header {
     position: fixed;
-    top: 0; 
+    top: 32px; 
     left: 0;
     right: 0;
     background: rgba(15, 23, 42, 0.95);
@@ -312,7 +312,7 @@ h5, h6 { font-size: var(--fs-sm); }
 
 /* Hero Section */
 .hero-section {
-    padding: 80px 0 45px;
+    padding: 120px 0 45px;
     background: var(--gradient-dark);
     position: relative;
     overflow: hidden;
@@ -823,6 +823,7 @@ section {
 /* Testimonials */
 .testimonials-section {
     padding: 60px 0;
+    background: var(--background);
 }
 
 .testimonials-grid {
@@ -1833,12 +1834,12 @@ input:-webkit-autofill:active {
 @media (max-width: 480px) {
   
     .header {
-        top: 0; 
+        top: 32px; 
         padding: 6px 0;
     }
     
     .nav-menu {
-        top: 100%; 
+        top: calc(100% + 28px); 
     }
     
     .hero-section {
@@ -2009,14 +2010,15 @@ input:-webkit-autofill:active {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1001;
+    z-index: 9999;
     background: linear-gradient(90deg, #6366f1, #8b5cf6);
     color: white;
     padding: 0.5rem 0;
     font-size: 0.9rem;
     font-weight: 600;
     text-align: center;
-    border-bottom: 2px solid #8b5cf6;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
 }
 .flash-content {
     display: flex;
