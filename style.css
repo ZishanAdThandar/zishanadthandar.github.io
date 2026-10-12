@@ -1622,7 +1622,7 @@ input:-webkit-autofill:active {
     /* Mobile menu */
     .nav-menu {
     position: fixed;
-    top: calc(28px + 2rem);
+    top: calc(28px + 3rem);
     left: 0;
     right: 0;
     background: rgba(15, 23, 42, 0.98);
@@ -1833,7 +1833,7 @@ input:-webkit-autofill:active {
     }
     
     .nav-menu {
-        top: calc(28px + 2rem); 
+        top: calc(28px + 3rem); 
     }
     
     .hero-section {
@@ -1902,7 +1902,7 @@ input:-webkit-autofill:active {
     }
     
     .nav-menu {
-        top: calc(28px + 2rem);
+        top: calc(28px + 3rem);
     }
     
     .hero-section {
