@@ -823,7 +823,7 @@ section {
 /* Testimonials */
 .testimonials-section {
     padding: 60px 0;
-    background: var(--background);
+    background: #0f172a;
 }
 
 .testimonials-grid {
