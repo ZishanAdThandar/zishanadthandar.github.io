@@ -1596,9 +1596,7 @@ input:-webkit-autofill:active {
         gap: 1.25rem;
     }
     
-    .testimonials-grid {
-        grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-    }
+
 }
 
 @media (max-width: 768px) {
@@ -1766,11 +1764,7 @@ input:-webkit-autofill:active {
     }
     
     /* Testimonial adjustments */
-    .testimonials-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 0 15px;
-    }
+
     
     .testimonial-card {
         padding: 1.5rem;
