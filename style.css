@@ -1902,7 +1902,7 @@ input:-webkit-autofill:active {
     }
     
     .nav-menu {
-        top: 52px;
+        top: calc(28px + 2rem);
     }
     
     .hero-section {
