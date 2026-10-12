@@ -362,6 +362,23 @@ h5, h6 { font-size: var(--fs-sm); }
     margin-bottom: 1rem;
 }
 
+.hero-title .hero-gradient {
+    font-size: 5.5rem !important;
+    line-height: 1.1;
+}
+
+@media (max-width: 768px) {
+    .hero-title .hero-gradient {
+        font-size: 3.5rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title .hero-gradient {
+        font-size: 2.8rem !important;
+    }
+}
+
 .hero-description {
     font-size: 1.05rem;
     color: var(--gray);
