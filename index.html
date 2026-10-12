@@ -266,23 +266,7 @@ DO NOT REMOVE THIS COMMENTS.
 -->
 
     
-<div class="flash-sale" id="flashSale">
-  <div class="container">
-    <div class="flash-content">
-      <i class="fas fa-bolt"></i>
-      <span class="flash-text"><strong>FLASH SALE:</strong> 90% OFF ALL RESOURCES</span>
-      <div class="countdown" id="countdown">
-        <span class="time"><span id="hours">00</span>H</span>
-        <span class="separator">:</span>
-        <span class="time"><span id="mins">00</span>M</span>
-        <span class="separator">:</span>
-        <span class="time"><span id="secs">00</span>S</span>
-      </div>
-      <span class="flash-text">ENDS SOON!</span>
-    </div>
-  </div>
-</div>
-    <header class="header">
+<header class="header">
         <div class="container">
             <nav class="navbar">
                 <div class="nav-brand">
@@ -924,38 +908,7 @@ navToggle.addEventListener('click', () => {
 </script>
 
 
-<script>
-(function() {
-  var el = document.getElementById('countdown');
-  if (!el) return;
-  var end = localStorage.getItem('zishanhack_flash_end');
-  if (!end) {
-    var d = new Date();
-    d.setHours(d.getHours() + 12);
-    end = d.getTime();
-    localStorage.setItem('zishanhack_flash_end', end);
-  } else {
-    end = parseInt(end);
-  }
-  function update() {
-    var now = Date.now();
-    var diff = end - now;
-    if (diff <= 0) {
-      el.parentElement.textContent = 'FLASH SALE ENDED';
-      localStorage.removeItem('zishanhack_flash_end');
-      return;
-    }
-    var h = Math.floor(diff / 3600000);
-    var m = Math.floor((diff % 3600000) / 60000);
-    var s = Math.floor((diff % 60000) / 1000);
-    document.getElementById('hours').textContent = h.toString().padStart(2,'0');
-    document.getElementById('mins').textContent = m.toString().padStart(2,'0');
-    document.getElementById('secs').textContent = s.toString().padStart(2,'0');
-  }
-  update();
-  setInterval(update, 1000);
-})();
-</script>
+
 
 </body>
 </html>
