@@ -48,6 +48,7 @@ body {
     line-height: 1.7;
     overflow-x: hidden;
     min-height: 100vh;
+    padding-top: 60px;
 }
 
 /* Keyboard navigation focus styles */
@@ -312,7 +313,7 @@ h5, h6 { font-size: var(--fs-sm); }
 
 /* Hero Section */
 .hero-section {
-    padding: 140px 0 45px;
+    padding: 80px 0 45px;
     background: var(--gradient-dark);
     position: relative;
     overflow: hidden;
