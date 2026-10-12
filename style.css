@@ -125,7 +125,7 @@ h5, h6 { font-size: var(--fs-sm); }
 /* Navigation */
 .header {
     position: fixed;
-    top: 28px; 
+    top: 32px; 
     left: 0;
     right: 0;
     background: rgba(15, 23, 42, 0.95);
@@ -1623,7 +1623,7 @@ input:-webkit-autofill:active {
     /* Mobile menu */
     .nav-menu {
     position: fixed;
-    top: calc(32px + 3rem);
+    top: calc(36px + 3rem);
     left: 0;
     right: 0;
     background: rgba(15, 23, 42, 0.98);
@@ -1829,12 +1829,12 @@ input:-webkit-autofill:active {
 @media (max-width: 480px) {
   
     .header {
-        top: 28px; 
+        top: 32px; 
         padding: 6px 0;
     }
     
     .nav-menu {
-        top: calc(32px + 3rem); 
+        top: calc(36px + 3rem); 
     }
     
     .hero-section {
@@ -1903,7 +1903,7 @@ input:-webkit-autofill:active {
     }
     
     .nav-menu {
-        top: calc(32px + 3rem);
+        top: calc(36px + 3rem);
     }
     
     .hero-section {
