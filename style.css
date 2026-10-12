@@ -322,7 +322,7 @@ h5, h6 { font-size: var(--fs-sm); }
 .hero-section::before {
     content: '';
     position: absolute;
-        top: 0;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -1606,7 +1606,7 @@ input:-webkit-autofill:active {
     /* Header adjustments - position below trust bar */
     .header {
         position: fixed;
-        top: 0;
+    top: 0;
         left: 0;
         right: 0;
         padding: 8px 0;
@@ -1831,7 +1831,7 @@ input:-webkit-autofill:active {
 @media (max-width: 480px) {
   
     .header {
-        top: 0; 
+    top: 0; 
         padding: 6px 0;
     }
     
@@ -1892,7 +1892,7 @@ input:-webkit-autofill:active {
 @media (max-width: 360px) {
     
     .header {
-        top: 0;
+    top: 0;
         padding: 5px 0;
     }
     
