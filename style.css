@@ -885,7 +885,7 @@ section {
 
 /* FAQ */
 .faq-section {
-    background: var(--dark);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
     border-top: 1px solid var(--border);
 }
 
@@ -2045,4 +2045,9 @@ input:-webkit-autofill:active {
     .flash-sale {
         font-size: 0.8rem;
     }
+}
+
+.resources-section {
+    background: var(--background);
+    padding: 60px 0;
 }
