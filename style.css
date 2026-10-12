@@ -827,11 +827,11 @@ section {
 }}
 
 .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-    width: 100%;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 1.5rem !important;
+    margin-top: 2rem !important;
+    width: 100% !important;
 }
 
 .testimonial-card {
@@ -2044,6 +2044,6 @@ input:-webkit-autofill:active {
 
 @media (max-width: 768px) {
     .testimonials-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
     }
 }
