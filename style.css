@@ -1645,7 +1645,6 @@ input:-webkit-autofill:active {
         display: block;
     }
     
-    /* Hero section adjustments - add top padding to account for fixed elements */
     .hero-section {
         padding: 50px 0 50px;
         margin-top: 0;
