@@ -1624,7 +1624,7 @@ input:-webkit-autofill:active {
     /* Mobile menu */
     .nav-menu {
     position: fixed;
-    top: 80px;
+    top: 100px;
     left: 0;
     right: 0;
     background: rgba(15, 23, 42, 0.98);
@@ -1835,7 +1835,7 @@ input:-webkit-autofill:active {
     }
     
     .nav-menu {
-        top: 80px; 
+        top: 100px; 
     }
     
     .hero-section {
@@ -1904,7 +1904,7 @@ input:-webkit-autofill:active {
     }
     
     .nav-menu {
-        top: 80px;
+        top: 100px;
     }
     
     .hero-section {
@@ -2042,6 +2042,13 @@ input:-webkit-autofill:active {
     background: #0a0e17;
     padding: 60px 0;
 }
+
+@media (max-width: 968px) {
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
 
 @media (max-width: 768px) {
     .testimonials-grid {
