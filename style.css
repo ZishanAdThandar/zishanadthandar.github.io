@@ -1647,7 +1647,7 @@ input:-webkit-autofill:active {
     
     /* Hero section adjustments - add top padding to account for fixed elements */
     .hero-section {
-        padding: 100px 0 50px; /* Increased top padding */
+        padding: 50px 0 50px;
         margin-top: 0;
     }
     
@@ -1837,7 +1837,7 @@ input:-webkit-autofill:active {
     }
     
     .hero-section {
-        padding: 120px 0 50px;
+        padding: 60px 0 50px;
     }
     
     .hero-description {
@@ -1906,7 +1906,7 @@ input:-webkit-autofill:active {
     }
     
     .hero-section {
-        padding: 110px 0 40px;
+        padding: 50px 0 40px;
     }
     
     .stat-number {
