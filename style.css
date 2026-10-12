@@ -313,7 +313,8 @@ h5, h6 { font-size: var(--fs-sm); }
 
 /* Hero Section */
 .hero-section {
-    padding: 40px 0 45px;}
+    padding: 40px 0 45px;
+}
 
 .hero-section::before {
     content: '';
