@@ -206,6 +206,16 @@ function initializeAuth() {
   }
 }
 
+// Escape untrusted text before inserting into innerHTML / attributes.
+function escapeHtml(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function updateAuthUI() {
   const authSection = document.getElementById('authSection');
   if (!authSection) return;
@@ -219,13 +229,13 @@ function updateAuthUI() {
       <div class="user-dropdown">
         <button class="btn btn-outline" id="userDropdown">
           <i class="fas fa-user-shield"></i>
-          <span>${shortEmail}</span>
+          <span>${escapeHtml(shortEmail)}</span>
           <i class="fas fa-chevron-down"></i>
         </button>
         <div class="dropdown-menu">
           <div class="dropdown-header">
             <strong>Premium Account</strong>
-            <div class="dropdown-email">${userEmail}</div>
+            <div class="dropdown-email">${escapeHtml(userEmail)}</div>
           </div>
           <button class="dropdown-item" onclick="viewMyDownloads()">
             <i class="fas fa-download"></i>
@@ -1011,9 +1021,9 @@ function showPostPurchasePrompt(email) {
             To access your purchased resources, please login with:
           </p>
           <div class="form-group">
-            <input type="email" class="form-control" value="${email}" readonly style="text-align: center;">
+            <input type="email" class="form-control" value="${escapeHtml(email)}" readonly style="text-align: center;">
           </div>
-          <button class="btn btn-premium btn-block" onclick="loginAfterPurchase('${email}')">
+          <button class="btn btn-premium btn-block" id="postPurchaseLoginBtn" data-email="${escapeHtml(email)}">
             <i class="fas fa-sign-in-alt"></i>
             LOGIN TO ACCESS RESOURCES
           </button>
@@ -1050,6 +1060,13 @@ function showPostPurchasePrompt(email) {
       }
     }, 500);
   };
+
+  const postPurchaseLoginBtn = modal.querySelector('#postPurchaseLoginBtn');
+  if (postPurchaseLoginBtn) {
+    postPurchaseLoginBtn.addEventListener('click', () =>
+      window.loginAfterPurchase(postPurchaseLoginBtn.dataset.email)
+    );
+  }
 }
 
 // ===== UTILITY FUNCTIONS =====
