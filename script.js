@@ -1,6 +1,5 @@
 const API_BASE = 'https://api.zishanhack.com';
 
-let authToken = null;
 let userEmail = null;
 let userPurchases = {};
 
@@ -62,148 +61,49 @@ const PRODUCTS = [
   }
 ];
 
-// ===== TOKEN MANAGEMENT =====
-function getTokenFromStorage() {
-  try {
-    return localStorage.getItem('zishanhack_token');
-  } catch (e) {
-    console.error('Error reading from localStorage:', e);
-    return null;
-  }
-}
-
-function setTokenToStorage(token) {
-  if (!token) return;
-  try {
-    localStorage.setItem('zishanhack_token', token);
-    authToken = token;
-  } catch (e) {
-    console.error('Error writing to localStorage:', e);
-  }
-}
-
+// ===== SESSION =====
+// Sessions are authenticated by an HttpOnly cookie set by the API. The
+// frontend never stores or reads the JWT, so injected script cannot steal the
+// session. This helper only clears a token left behind by an older version.
 function removeTokenFromStorage() {
   try {
     localStorage.removeItem('zishanhack_token');
-    authToken = null;
   } catch (e) {
-    console.error('Error removing from localStorage:', e);
+    console.error('Error clearing legacy token:', e);
   }
-}
-
-function getTokenFromCookie() {
-  try {
-    const cookies = document.cookie.split(';');
-    for (let cookie of cookies) {
-      const [name, value] = cookie.trim().split('=');
-      if (name === 'auth_token') {
-        try {
-          return decodeURIComponent(value);
-        } catch (e) {
-          return value;
-        }
-      }
-    }
-  } catch (e) {
-    console.error('Error reading cookies:', e);
-  }
-  return null;
-}
-
-function clearAuthCookie() {
-  const domains = ['', '; domain=.zishanhack.com'];
-  const paths = ['/', '; path=/'];
-  
-  domains.forEach(domain => {
-    paths.forEach(path => {
-      document.cookie = `auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC${path}${domain}; Secure; SameSite=Strict`;
-    });
-  });
-}
-
-function getToken() {
-  if (authToken) return authToken;
-  
-  const storedToken = getTokenFromStorage();
-  if (storedToken) {
-    authToken = storedToken;
-    return storedToken;
-  }
-  
-  const cookieToken = getTokenFromCookie();
-  if (cookieToken) {
-    authToken = cookieToken;
-    setTokenToStorage(cookieToken);
-    return cookieToken;
-  }
-  
-  return null;
-}
-
-function decodeTokenPayload(token) {
-  if (!token) return null;
-  
-  try {
-    const parts = token.split('.');
-    
-    if (parts.length === 3) {
-      try {
-        return JSON.parse(atob(parts[1]));
-      } catch (e) {
-        const base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
-        const padded = base64.padEnd(base64.length + (4 - base64.length % 4) % 4, '=');
-        return JSON.parse(atob(padded));
-      }
-    }
-    
-    if (parts.length === 2) {
-      try {
-        return JSON.parse(atob(parts[0]));
-      } catch (e) {}
-    }
-  } catch (e) {}
-  
-  return null;
-}
-
-function isTokenExpired(payload) {
-  if (!payload || !payload.exp) return true;
-  return payload.exp < Math.floor(Date.now() / 1000);
 }
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
-  initializeAuth();
   loadProducts();
-  checkPaymentCallback();
   setupOTPInputs();
+  // checkPaymentCallback reads userEmail, so run it after auth is resolved.
+  initializeAuth().finally(() => checkPaymentCallback());
 });
 
 // ===== AUTH FUNCTIONS =====
-function initializeAuth() {
-  const token = getToken();
+async function initializeAuth() {
+  // Drop any token stored by an older version of the site.
+  removeTokenFromStorage();
   
-  if (token) {
-    try {
-      const payload = decodeTokenPayload(token);
-      
-      if (!payload || !payload.email || isTokenExpired(payload)) {
-        logout();
-        return;
-      }
-      
-      userEmail = payload.email;
-      authToken = token;
-      
+  try {
+    const response = await fetch(`${API_BASE}/auth/status`, {
+      credentials: 'include'
+    });
+    const data = await response.json();
+    
+    if (response.ok && data && data.authenticated && data.email) {
+      userEmail = data.email;
       updateAuthUI();
-      loadPurchases();
-      
-    } catch (error) {
-      logout();
+      await loadPurchases();
+      return;
     }
-  } else {
-    updateAuthUI();
+  } catch (error) {
+    console.error('Auth status check failed:', error);
   }
+  
+  userEmail = null;
+  updateAuthUI();
 }
 
 // Escape untrusted text before inserting into innerHTML / attributes.
@@ -220,7 +120,7 @@ function updateAuthUI() {
   const authSection = document.getElementById('authSection');
   if (!authSection) return;
   
-  if (authToken && userEmail) {
+  if (userEmail) {
     const shortEmail = userEmail.length > 20 
       ? userEmail.substring(0, 17) + '...' 
       : userEmail.split('@')[0];
@@ -274,13 +174,21 @@ function closeDropdown() {
   }
 }
 
-function logout() {
-  authToken = null;
+async function logout() {
+  // End the server session: clears the HttpOnly cookie and denylists the token.
+  try {
+    await fetch(`${API_BASE}/auth/logout`, {
+      method: 'POST',
+      credentials: 'include'
+    });
+  } catch (error) {
+    console.error('Logout request failed:', error);
+  }
+  
   userEmail = null;
   userPurchases = {};
   
   removeTokenFromStorage();
-  clearAuthCookie();
   
   updateAuthUI();
   loadProducts();
@@ -472,11 +380,8 @@ async function verifyOTP() {
     
     const data = await response.json();
     
-    if (response.ok && data.token) {
-      setTokenToStorage(data.token);
-      
-      const payload = decodeTokenPayload(data.token);
-      userEmail = payload?.email || email;
+    if (response.ok && data.success) {
+      userEmail = data.email || email;
       
       showNotification('Welcome to ZishanHack!', 'success');
       updateAuthUI();
@@ -532,19 +437,8 @@ function ensureRazorpaySDK(callback) {
 
 // ===== PRODUCT FUNCTIONS =====
 async function loadPurchases() {
-  const token = getToken();
-  
-  if (!token) {
-    userPurchases = {};
-    loadProducts();
-    return;
-  }
-  
   try {
     const response = await fetch(`${API_BASE}/api/me/purchases`, {
-      headers: { 
-        'Authorization': `Bearer ${token}`
-      },
       credentials: 'include'
     });
     
@@ -575,8 +469,7 @@ function loadProducts() {
   const container = document.getElementById('productsContainer');
   if (!container) return;
   
-  const token = getToken();
-  const isLoggedIn = !!token;
+  const isLoggedIn = !!userEmail;
   
   container.innerHTML = '';
   
@@ -691,13 +584,10 @@ async function executeBuyProduct(productId) {
   showNotification(`Processing payment...`, 'info');
   
   try {
-    const token = getToken();
-    
     const response = await fetch(`${API_BASE}/razorpay/create-order`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        ...(token && { 'Authorization': `Bearer ${token}` })
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({ 
         productId: productId, 
@@ -867,10 +757,6 @@ async function verifyRazorpayPayment(paymentData) {
         userEmail = data.email;
       }
       
-      if (data.token) {
-        setTokenToStorage(data.token);
-      }
-      
       setTimeout(async () => {
         updateAuthUI();
         await loadPurchases();
@@ -889,9 +775,7 @@ async function verifyRazorpayPayment(paymentData) {
 
 // ===== DOWNLOAD FUNCTIONS =====
 async function downloadProduct(productId) {
-  const token = getToken();
-  
-  if (!token) {
+  if (!userEmail) {
     showNotification('Please login to download', 'error');
     openAuthModal();
     return;
@@ -910,9 +794,6 @@ async function downloadProduct(productId) {
   
   try {
     const response = await fetch(`${API_BASE}/api/download/${productId}`, {
-      headers: { 
-        'Authorization': `Bearer ${token}`
-      },
       credentials: 'include'
     });
     
@@ -984,8 +865,7 @@ async function checkOrderStatus(orderId) {
       if (data.status === 'completed' || data.status === 'paid') {
         showNotification('Payment verified! Your purchase is now available.', 'success');
         
-        const token = getToken();
-        if (token && userEmail === data.email) {
+        if (userEmail && userEmail === data.email) {
           setTimeout(async () => {
             await loadPurchases();
           }, 2000);
