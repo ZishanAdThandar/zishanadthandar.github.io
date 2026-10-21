@@ -517,7 +517,7 @@ DO NOT DELETE IT.
       </details>
     </div>
 
-    <div class="scroll-indicator" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <div class="scroll-indicator" id="scrollTop">
       <svg class="icon" aria-hidden="true"><use href="#fa-arrow-up"/></svg>
     </div>
   </div>
@@ -544,40 +544,6 @@ DO NOT DELETE IT.
         </div>
       </div>
     </footer>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Mobile navigation
-      const navToggle = document.getElementById('navToggle');
-      const navMenu = document.getElementById('navMenu');
-
-      if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-          const open = navMenu.classList.toggle('show');
-          navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        });
-
-        navMenu.querySelectorAll('.nav-link').forEach(function(link) {
-          link.addEventListener('click', function() {
-            navMenu.classList.remove('show');
-            navToggle.setAttribute('aria-expanded', 'false');
-          });
-        });
-      }
-
-      // Scroll to top button visibility
-      const scrollBtn = document.getElementById('scrollTop');
-      
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-          scrollBtn.classList.add('visible');
-        } else {
-          scrollBtn.classList.remove('visible');
-        }
-      });
-
-      // Add loading class for animations
-      document.body.classList.add('loaded');
-    });
-  </script>
+  <script src="/js/links.js"></script>
 </body>
 </html>

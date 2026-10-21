@@ -492,7 +492,7 @@ DO NOT DELETE IT.
         <div class="notification-content">
             <i class="notification-icon" id="notificationIcon"></i>
             <span class="notification-text" id="notificationText"></span>
-            <button type="button" class="notification-close" onclick="this.parentElement.parentElement.classList.remove('show')" aria-label="Close notification">
+            <button type="button" class="notification-close" aria-label="Close notification">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -503,52 +503,6 @@ DO NOT DELETE IT.
         <div class="spinner"></div>
     </div>
 
-    <script>
-        // Mobile menu toggle
-        document.getElementById('navToggle').addEventListener('click', function() {
-            document.getElementById('navMenu').classList.toggle('show');
-        });
-
-        // FAQ toggle
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const item = question.parentElement;
-                item.classList.toggle('active');
-                const icon = question.querySelector('i');
-                if (item.classList.contains('active')) {
-                    icon.classList.remove('fa-chevron-down');
-                    icon.classList.add('fa-chevron-up');
-                } else {
-                    icon.classList.remove('fa-chevron-up');
-                    icon.classList.add('fa-chevron-down');
-                }
-            });
-        });
-
-        // Show notification function
-        function showNotification(message, type = 'info') {
-            const notification = document.getElementById('notification');
-            const text = document.getElementById('notificationText');
-            const icon = document.getElementById('notificationIcon');
-
-            notification.className = 'notification';
-            notification.classList.add(`notification-${type}`);
-
-            const icons = {
-                success: 'fas fa-check-circle',
-                error: 'fas fa-exclamation-circle',
-                warning: 'fas fa-exclamation-triangle',
-                info: 'fas fa-info-circle'
-            };
-
-            icon.className = `${icons[type]} notification-icon`;
-            text.textContent = message;
-            notification.classList.add('show');
-
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-    </script>
+    <script src="/js/product.js"></script>
 </body>
 </html>

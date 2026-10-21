@@ -588,8 +588,7 @@ DO NOT DELETE IT.
 </main>
 
 
-<button title="Scroll to top" class="scroll-top-btn"
-        onclick="let interval = setInterval(() => { window.scrollBy(0, -200); if (window.scrollY === 0) clearInterval(interval); }, 4);">
+<button title="Scroll to top" class="scroll-top-btn" id="scrollTopBtn">
   <i class="fa-solid fa-arrow-up-long"></i>
 </button>
 
@@ -616,14 +615,7 @@ DO NOT DELETE IT.
 </footer>
 
 
-<script>
-const navToggle = document.getElementById('navToggle');
-const navMenu = document.getElementById('navMenu');
-
-navToggle.addEventListener('click', () => {
-  navMenu.classList.toggle('show');
-});
-</script>
+<script src="/js/about.js"></script>
 
 </body>
 </html>
