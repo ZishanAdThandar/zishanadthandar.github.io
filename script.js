@@ -137,11 +137,11 @@ function updateAuthUI() {
             <strong>Premium Account</strong>
             <div class="dropdown-email">${escapeHtml(userEmail)}</div>
           </div>
-          <button class="dropdown-item" onclick="viewMyDownloads()">
+          <button class="dropdown-item" data-action="view-downloads">
             <i class="fas fa-download"></i>
             My Downloads
           </button>
-          <button class="dropdown-item" onclick="logout()">
+          <button class="dropdown-item" data-action="logout">
             <i class="fas fa-sign-out-alt"></i>
             Logout
           </button>
@@ -160,7 +160,7 @@ function updateAuthUI() {
     
   } else {
     authSection.innerHTML = `
-      <button class="btn btn-premium" onclick="openAuthModal()">
+      <button class="btn btn-premium" data-action="open-auth">
         <i class="fas fa-sign-in-alt"></i>
         Login
       </button>`;
@@ -537,15 +537,16 @@ function createProductCard(product, isLoggedIn, isPurchased) {
 }
 
 function createProductButton(productId, priceDisplay, isLoggedIn, isPurchased) {
+  const safeId = escapeHtml(productId);
   if (isLoggedIn && isPurchased) {
     return `
-      <button class="btn btn-success" onclick="downloadProduct('${productId}')">
+      <button class="btn btn-success" data-action="download" data-product-id="${safeId}">
         <i class="fas fa-download"></i>
         DOWNLOAD NOW
       </button>`;
   } else {
     return `
-      <button class="btn btn-premium btn-sparkle" onclick="buyProduct('${productId}')">
+      <button class="btn btn-premium btn-sparkle" data-action="buy" data-product-id="${safeId}">
         <i class="fas fa-bolt"></i>
         Access Resources - ${priceDisplay}
       </button>`;
@@ -620,9 +621,9 @@ async function promptForEmail(productName, price) {
   return new Promise((resolve) => {
     const modalHTML = `
       <div class="modal" id="emailModal">
-        <div class="modal-overlay" onclick="closeEmailModal()"></div>
+        <div class="modal-overlay" data-action="close-email-modal"></div>
         <div class="modal-content">
-          <button class="modal-close" onclick="closeEmailModal()">
+          <button class="modal-close" data-action="close-email-modal" aria-label="Close">
             <i class="fas fa-times"></i>
           </button>
           <div class="auth-header">
@@ -647,7 +648,7 @@ async function promptForEmail(productName, price) {
                 <strong>$${price} USD</strong>
               </div>
             </div>
-            <button class="btn btn-premium btn-block" onclick="submitPurchaseEmail()">
+            <button class="btn btn-premium btn-block" data-action="submit-purchase-email">
               <i class="fas fa-lock"></i>
               CONTINUE TO PAYMENT
             </button>
@@ -667,17 +668,17 @@ async function promptForEmail(productName, price) {
     setTimeout(() => {
       document.getElementById('purchaseEmail')?.focus();
     }, 50);
-    
-    window.closeEmailModal = () => {
+
+    const closeModal = () => {
       modal.remove();
       document.body.style.overflow = '';
       resolve(null);
     };
-    
-    window.submitPurchaseEmail = () => {
+
+    const submit = () => {
       const emailInput = document.getElementById('purchaseEmail');
       const email = emailInput?.value.trim();
-      
+
       if (email && validateEmail(email)) {
         modal.remove();
         document.body.style.overflow = '';
@@ -687,6 +688,14 @@ async function promptForEmail(productName, price) {
         emailInput?.focus();
       }
     };
+
+    modal.querySelectorAll('[data-action="close-email-modal"]').forEach(el => {
+      el.addEventListener('click', closeModal);
+    });
+    const submitBtn = modal.querySelector('[data-action="submit-purchase-email"]');
+    if (submitBtn) {
+      submitBtn.addEventListener('click', submit);
+    }
   });
 }
 
@@ -884,9 +893,9 @@ async function checkOrderStatus(orderId) {
 function showPostPurchasePrompt(email) {
   const modalHTML = `
     <div class="modal" id="postPurchaseModal">
-      <div class="modal-overlay" onclick="closePostPurchaseModal()"></div>
+      <div class="modal-overlay" data-action="close-post-purchase-modal"></div>
       <div class="modal-content">
-        <button class="modal-close" onclick="closePostPurchaseModal()">
+        <button class="modal-close" data-action="close-post-purchase-modal" aria-label="Close">
           <i class="fas fa-times"></i>
         </button>
         <div class="auth-header">
@@ -920,20 +929,20 @@ function showPostPurchasePrompt(email) {
   modal.classList.add('show');
   document.body.style.overflow = 'hidden';
   
-  window.closePostPurchaseModal = () => {
+  const closeModal = () => {
     modal.remove();
     document.body.style.overflow = '';
   };
-  
-  window.loginAfterPurchase = (email) => {
+
+  const loginAfterPurchase = (email) => {
     modal.remove();
     document.body.style.overflow = '';
-    
+
     const authEmail = document.getElementById('authEmail');
     if (authEmail) authEmail.value = email;
-    
+
     openAuthModal();
-    
+
     setTimeout(() => {
       if (document.getElementById('sendOtpBtn')) {
         sendOTP();
@@ -941,10 +950,14 @@ function showPostPurchasePrompt(email) {
     }, 500);
   };
 
+  modal.querySelectorAll('[data-action="close-post-purchase-modal"]').forEach(el => {
+    el.addEventListener('click', closeModal);
+  });
+
   const postPurchaseLoginBtn = modal.querySelector('#postPurchaseLoginBtn');
   if (postPurchaseLoginBtn) {
     postPurchaseLoginBtn.addEventListener('click', () =>
-      window.loginAfterPurchase(postPurchaseLoginBtn.dataset.email)
+      loginAfterPurchase(postPurchaseLoginBtn.dataset.email)
     );
   }
 }
@@ -1027,6 +1040,35 @@ function viewMyDownloads() {
   document.getElementById('resources').scrollIntoView({ behavior: 'smooth' });
   closeDropdown();
 }
+
+// ===== DELEGATED ACTIONS =====
+// Buttons rendered by JS (auth dropdown, product cards) used to carry
+// onclick="..." attributes. Those are inline event handlers, which the
+// Content-Security-Policy blocks unless script-src allows 'unsafe-inline'.
+// They now carry data-action="..." instead and are handled here with a
+// single delegated listener, so dynamically injected markup stays CSP-safe.
+document.addEventListener('click', function (e) {
+  const el = e.target.closest ? e.target.closest('[data-action]') : null;
+  if (!el) return;
+
+  switch (el.dataset.action) {
+    case 'view-downloads':
+      viewMyDownloads();
+      break;
+    case 'logout':
+      logout();
+      break;
+    case 'open-auth':
+      openAuthModal();
+      break;
+    case 'buy':
+      buyProduct(el.dataset.productId);
+      break;
+    case 'download':
+      downloadProduct(el.dataset.productId);
+      break;
+  }
+});
 
 // ===== EXPORT FUNCTIONS TO GLOBAL SCOPE =====
 window.openAuthModal = openAuthModal;
